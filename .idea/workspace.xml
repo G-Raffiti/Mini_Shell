@@ -3,6 +3,16 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="Mini_Shell" targetName="all" />
+      <config projectName="Mini_Shell" targetName="fclean" />
+      <config projectName="Mini_Shell" targetName="cleanlib" />
+      <config projectName="Mini_Shell" targetName="re" />
+      <config projectName="Mini_Shell" targetName="fcleanlib" />
+      <config projectName="Mini_Shell" targetName="mini_shell" />
+    </generated>
+  </component>
   <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
@@ -10,15 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fae14677-ff82-4b35-80b1-44c750f7e310" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/incs/mini_shell.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/exit.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/free_struct.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/initialize.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/list_cmd_utils.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/main.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/new_struct.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Mini_Shell.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/main.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,10 +34,35 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MakefileLocalSettings">
+    <option name="availableProjects">
+      <map>
+        <entry>
+          <key>
+            <ExternalProjectPojo>
+              <option name="name" value="Mini_Shell" />
+              <option name="path" value="$PROJECT_DIR$" />
+            </ExternalProjectPojo>
+          </key>
+          <value>
+            <list>
+              <ExternalProjectPojo>
+                <option name="name" value="Mini_Shell" />
+                <option name="path" value="$PROJECT_DIR$" />
+              </ExternalProjectPojo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="projectSyncType">
       <map>
         <entry key="$PROJECT_DIR$" value="RE_IMPORT" />
@@ -47,7 +78,7 @@
     <option name="minorVersion" value="3.2" />
   </component>
   <component name="ProjectId" id="2Kj92i7vwandCl80tLFYa68e1Ut" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -60,17 +91,64 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Mini_Shell_Files/incs" />
       <recent name="$PROJECT_DIR$/Mini_Shell_Files/srcs" />
     </key>
+  </component>
+  <component name="RunManager" selected="Makefile Application.all">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Mini_Shell" TARGET_NAME="all" CONFIG_NAME="all" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cleanlib" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Mini_Shell" TARGET_NAME="cleanlib" CONFIG_NAME="cleanlib" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="fclean" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Mini_Shell" TARGET_NAME="fclean" CONFIG_NAME="fclean" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="fcleanlib" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Mini_Shell" TARGET_NAME="fcleanlib" CONFIG_NAME="fcleanlib" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="mini_shell" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Mini_Shell" TARGET_NAME="mini_shell" CONFIG_NAME="mini_shell" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="re" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Mini_Shell" TARGET_NAME="re" CONFIG_NAME="re" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Makefile Application.all" />
+      <item itemvalue="Makefile Application.cleanlib" />
+      <item itemvalue="Makefile Application.fclean" />
+      <item itemvalue="Makefile Application.fcleanlib" />
+      <item itemvalue="Makefile Application.re" />
+      <item itemvalue="Makefile Application.mini_shell" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -81,7 +159,8 @@
       <option name="presentableId" value="Default" />
       <updated>1674476920282</updated>
       <workItem from="1674476923658" duration="1630000" />
-      <workItem from="1674483033814" duration="11164000" />
+      <workItem from="1674483033814" duration="11200000" />
+      <workItem from="1674559664554" duration="1378000" />
     </task>
     <servers />
   </component>
