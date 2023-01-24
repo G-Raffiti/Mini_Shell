@@ -1,18 +1,12 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   list_cmd_utils.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 20:09:59 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/01/23 20:11:37 by rbonneva         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../incs/mini_shell.h"
 
 t_cmd	*get(t_lstd *lst)
 {
 	return ((t_cmd *)(lst->content));
+}
+
+t_arg_env	*get_arg_env(void *content)
+{
+	return ((t_arg_env *)(content));
 }

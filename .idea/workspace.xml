@@ -20,11 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fae14677-ff82-4b35-80b1-44c750f7e310" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/exec.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/read_line.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/incs/mini_shell.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/incs/mini_shell.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/free_struct.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/free_struct.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/initialize.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/initialize.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/list_cmd_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/list_cmd_utils.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/new_struct.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/new_struct.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +47,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/test_bash/out3.txt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/test_bash/out2.txt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/main.c" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/test_bash/out1.txt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/new_struct.c" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/incs/mini_shell.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/free_struct.c" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/initialize.c" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/list_cmd_utils.c" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing.c" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MakefileLocalSettings">
     <option name="availableProjects">
@@ -160,7 +179,7 @@
       <updated>1674476920282</updated>
       <workItem from="1674476923658" duration="1630000" />
       <workItem from="1674483033814" duration="11200000" />
-      <workItem from="1674559664554" duration="1378000" />
+      <workItem from="1674559664554" duration="16973000" />
     </task>
     <servers />
   </component>
