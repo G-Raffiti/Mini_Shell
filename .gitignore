@@ -1,5 +1,6 @@
 # CLION
 *.xml
+.idea
 
 # Prerequisites
 *.d
