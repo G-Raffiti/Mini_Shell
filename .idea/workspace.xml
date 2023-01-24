@@ -20,10 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fae14677-ff82-4b35-80b1-44c750f7e310" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/exec.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/exec.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/initialize.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/env.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/get_cmd.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/get_raw_cmd.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lib_List_Double/srcs/ft_lstd_new.c" beforeDir="false" afterPath="$PROJECT_DIR$/Lib_List_Double/srcs/ft_lstd_new.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/incs/mini_shell.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/incs/mini_shell.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/env.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/env.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/free_struct.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/free_struct.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/list_cmd_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/list_cmd_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/new_struct.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/new_struct.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/read_line.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/read_line.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +47,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
@@ -176,7 +191,7 @@
       <updated>1674476920282</updated>
       <workItem from="1674476923658" duration="1630000" />
       <workItem from="1674483033814" duration="11200000" />
-      <workItem from="1674559664554" duration="18051000" />
+      <workItem from="1674559664554" duration="31825000" />
     </task>
     <servers />
   </component>

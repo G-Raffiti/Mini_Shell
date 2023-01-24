@@ -2,11 +2,6 @@
 #include <stdio.h>
 #include "../incs/mini_shell.h"
 
-int g_exit_code;
-
-//t_error
-
-
 static void	loop(t_mini_shell *mini_shell)
 {
 	char	*line;
@@ -23,7 +18,7 @@ static void	loop(t_mini_shell *mini_shell)
 		is_parent = fork();
 		if (!is_parent)
 			exec_cmds(mini_shell);
-		ft_lstd_clear(&mini_shell->cmds, (void (*)(void *))free_cmd);
+		clear_cmds(&mini_shell->cmds);
 		line = ft_free(line);
 	}
 }

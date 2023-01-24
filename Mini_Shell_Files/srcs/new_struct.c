@@ -37,7 +37,7 @@ t_error	new_mini_shell(t_mini_shell *mini_shell)
 	if (!mini_shell)
 		return (MALLOC_ERROR);
 	mini_shell->env = NULL;
-	mini_shell->env_lst = NULL;
+	mini_shell->env_dict = NULL;
 	mini_shell->paths = NULL;
 	mini_shell->cmds = NULL;
 	mini_shell->pipe[0] = 0;
