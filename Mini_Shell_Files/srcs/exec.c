@@ -7,7 +7,8 @@
 
 void	exec_cmd_child(t_mini_shell *mini_shell, t_lstd *current)
 {
-	//  TODO : faire comme pipex
+	//  TODO [Aurel]: faire comme pipex
+	//  Attention aux fd in et out
 }
 
 void	make_child(t_mini_shell *mini_shell, t_lstd *current)
@@ -15,7 +16,7 @@ void	make_child(t_mini_shell *mini_shell, t_lstd *current)
 	get(current)->pid = fork();
 	if (get(current)->pid == -1)
 	{
-		exit (0); // TODO: exit Fork failed
+		exit (0); // TODO [Raffi]: exit Fork failed
 	}
 	if (get(current)->pid == 0)
 		exec_cmd_child(mini_shell, current);
@@ -33,21 +34,21 @@ t_error	exec_cmds(t_mini_shell *mini_shell)
 			if (mini_shell->pipe[0] != -1
 				&& dup2(mini_shell->pipe[0], STDIN_FILENO) == -1)
 			{
-				exit(0); // TODO: exit status error dup 2
+				exit(0); // TODO [Raffi]: exit status error dup 2
 			}
 		}
 		else if (get(current)->input->fd != 0)
 		{
 			if (dup2(get(current)->input->fd, STDIN_FILENO) == -1)
 			{
-				exit(0); //TODO exit dup2 failed
+				exit(0); //TODO [Raffi]: exit dup2 failed
 			}
 			close(get(current)->input->fd);
 		}
 		close(mini_shell->pipe[0]);
 		if (current->next && pipe(mini_shell->pipe) == -1)
 		{
-			exit(0); // TODO: exit Pipe failed
+			exit(0); // TODO [Raffi]: exit Pipe failed
 		}
 		make_child(mini_shell, current);
 		if (current->next)

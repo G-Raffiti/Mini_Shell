@@ -11,7 +11,7 @@ t_error	parse_line(t_mini_shell *mini_shell, char *line)
 	t_lstd *current;
 	t_cmd *cmd;
 
-	// TODO : quote error check
+	// TODO [Raffi]: quote error check
 	raw_cmds = split_pipe(line);
 	i = 0;
 	while(raw_cmds[i])
@@ -26,12 +26,11 @@ t_error	parse_line(t_mini_shell *mini_shell, char *line)
 	raw_cmds = free_split(raw_cmds);
 
 	// in the list
-	// TODO :
-	// TODO : find and replace $ARG with env_lst key/value
-	// TODO : open all fds t_cmd + chevron
-	// TODO : get_cmd() -> char** + get_args_cmd()
-	// TODO : get_path() + access
-	// TODO : set_is_builtin() strcmp cmd[0] -> builtin lst
+	// TODO [Aurel]: find and replace $ARG with env_lst key/value
+	// TODO [Raffi]: open all fds t_cmd + chevron
+	// TODO [Raffi]: get_cmd() -> char** + get_args_cmd()
+	// TODO [Raffi]: get_path() + access
+	// TODO [Raffi]: set_is_builtin() strcmp cmd[0] -> builtin lst
 
 	return (SUCCESS);
 }
@@ -39,7 +38,7 @@ t_error	parse_line(t_mini_shell *mini_shell, char *line)
 ///Split the line whenre the pipes are;
 char **split_pipe(char *line)
 {
-	// TODO : Call the quote state func
+	// TODO []: Call the quote state func
 	char	**split;
 	t_bool	in_quote;
 	int cmd_nb;
