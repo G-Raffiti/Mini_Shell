@@ -2,6 +2,7 @@
 // Created by Raphael Bonneval on 1/24/23.
 //
 
+#include <sys/fcntl.h>
 #include "../incs/mini_shell.h"
 t_bool	is_empty_line(char *line)
 {
@@ -133,13 +134,17 @@ void	set_builtin(t_lstd *current)
 t_error	fill_cmds(t_mini_shell *mini_shell)
 {
 	t_lstd	*current;
+	t_error	status;
 
 	current = ft_lstd_first(mini_shell->cmds);
 	while (current)
 	{
 		// TODO [Aurel]: find and replace $ARG with env_lst key/value
-		// TODO [Raffi]: open all fds t_cmd + chevron
-		// TODO [Raffi]: get_cmd() -> char** + get_args_cmd()
+		status = open_files(current);
+		if (status == MALLOC_ERROR)
+			return (MALLOC_ERROR);
+		else if (status == ERROR)
+			get(current)->is_valid = FALSE;
 		if (get_cmd(current) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		if (get_path(current, mini_shell->env_dict) == MALLOC_ERROR)
@@ -187,33 +192,9 @@ int	set_quote_state(char c, char *quote)
 	if (c == *quote && *quote != 0)
 		*quote = 0;
 	else if (*quote == 0 && c == '\'')
-		*quote = 1;
+		*quote = '\'';
 	else if (*quote == 0 && c == '\"')
-		*quote = 2;
+		*quote = '\"';
 	return (*quote);
 }
 
-
-///open file and create t_fd
-t_fd	*chevron(t_lstd *current, char *file_path, char *chevron_type)
-{
-	if (ft_str_cmp("<", chevron_type) == 0)
-	{
-
-	}
-
-	if (ft_str_cmp("<<", chevron_type) == 0)
-	{
-
-	}
-
-	if (ft_str_cmp(">", chevron_type) == 0)
-	{
-
-	}
-
-	if (ft_str_cmp(">>", chevron_type) == 0)
-	{
-
-	}
-}

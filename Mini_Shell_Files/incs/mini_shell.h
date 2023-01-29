@@ -20,7 +20,7 @@ typedef enum e_bool
 {
 	FALSE,
 	TRUE,
-}	t_bool;
+}				t_bool;
 
 typedef struct s_fd
 {
@@ -30,9 +30,9 @@ typedef struct s_fd
 
 typedef struct s_env_arg
 {
-	char	*key;
-	char	**value;
-}	t_env_arg;
+	char			*key;
+	char			**value;
+}					t_env_arg;
 
 typedef struct s_cmd
 {
@@ -43,6 +43,7 @@ typedef struct s_cmd
 	t_fd			*input;
 	t_fd			*output;
 	t_bool			is_builtin;
+	t_bool			is_valid;
 }					t_cmd;
 
 typedef struct s_mini_shell
@@ -53,6 +54,14 @@ typedef struct s_mini_shell
 	t_lstd			*cmds;
 	int				pipe[2];
 }					t_mini_shell;
+
+typedef enum e_chevron
+{
+	IN_CHT,
+	HERE_DOC_CHT,
+	OUT_CHT,
+	APPEND_CHT,
+}	t_chevron;
 
 int	g_exit_code;
 
@@ -88,10 +97,15 @@ t_error		parse_line(t_mini_shell *mini_shell, char *line);
 int			find(void *content, void *ref);
 char		*get_env_value(char *key, t_lstd *env_dict);
 int			set_quote_state(char c, char *quote);
-t_fd		*chevron(t_lstd *current, char *file_path, char *chevron_type);
 
 // PARSING - RAW CMD ///////////////////////////////////////////////////////////
 char		**split_pipe(char *line);
+
+// PARSING - CMD ///////////////////////////////////////////////////////////////
+char		**split_cmd(char *raw_cmd);
+
+// PARSING - OPEN FILES ////////////////////////////////////////////////////////
+t_error		open_files(t_lstd *current);
 
 // EXEC ////////////////////////////////////////////////////////////////////////
 void		exec_cmd_child(t_mini_shell *mini_shell, t_lstd *current);

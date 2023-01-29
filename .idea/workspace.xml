@@ -20,17 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fae14677-ff82-4b35-80b1-44c750f7e310" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/get_cmd.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/get_raw_cmd.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lib_List_Double/srcs/ft_lstd_new.c" beforeDir="false" afterPath="$PROJECT_DIR$/Lib_List_Double/srcs/ft_lstd_new.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/incs/mini_shell.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/incs/mini_shell.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/env.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/env.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/free_struct.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/free_struct.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/list_cmd_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/list_cmd_utils.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/get_cmd.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/get_raw_cmd.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/new_struct.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/new_struct.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_bash/in1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test_bash/in1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_bash/out1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test_bash/out1.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +60,7 @@
     <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/new_struct.c" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/free_struct.c" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/env.c" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing_get_cmd.c" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/list_cmd_utils.c" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/exit.c" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/exec.c" root0="FORCE_HIGHLIGHTING" />
@@ -70,6 +69,9 @@
     <setting file="file://$PROJECT_DIR$/test_bash/out2.txt" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/test_bash/out1.txt" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/test_bash/in2.txt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Lib_FT/srcs/ft_split.c" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Makefile" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing_get_raw_cmd.c" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/incs/mini_shell.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing.c" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -137,11 +139,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Makefile Application.all">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Mini_Shell" TARGET_NAME="all" CONFIG_NAME="all" version="1">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
@@ -191,7 +188,11 @@
       <updated>1674476920282</updated>
       <workItem from="1674476923658" duration="1630000" />
       <workItem from="1674483033814" duration="11200000" />
-      <workItem from="1674559664554" duration="31825000" />
+      <workItem from="1674559664554" duration="32000000" />
+      <workItem from="1674652764310" duration="2000" />
+      <workItem from="1674660853687" duration="1200000" />
+      <workItem from="1674923978882" duration="691000" />
+      <workItem from="1674964409829" duration="6473000" />
     </task>
     <servers />
   </component>

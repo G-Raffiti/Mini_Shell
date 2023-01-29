@@ -4,29 +4,32 @@
 
 #include "../incs/mini_shell.h"
 
-int	count_blocks(char *line)
+static int	count_blocks(char *line)
 {
 	char	quote;
-	char	is_file;
-	int		cmd_nb;
+	int		len;
+	int		cmd;
 
 	quote = 0;
-	cmd_nb = 0;
+	cmd = 1;
 	while (*line)
 	{
-		if (ft_contain(*line, )
-		set_quote_state(*line, &quote);
-		if (*line == ' ' && quote == 0)
-			cmd_nb++;
-		if (*line)
-		{
-			while (*line && !(*line == ' ' && quote == 0))
-		}
+		while (*line && !set_quote_state(*line, &quote) && ft_contain("| ",
+																	  *line))
+			line++;
+		if (!*line)
+			break ;
+		len = 0;
+		while (line[len]
+			   && (set_quote_state(line[len], &quote) || line[len] != '|'))
+			len++;
+		line += len;
+		cmd++;
 	}
-	return (cmd_nb + 1);
+	return (cmd);
 }
 
-t_error	fill_split(char **split, char *line, int cmd_nb)
+static t_error	fill_split(char **split, char *line, int cmd_nb)
 {
 	char	quote;
 	int		len;
