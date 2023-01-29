@@ -40,8 +40,6 @@ void	*free_cmd(t_cmd *cmd)
 		cmd->path = ft_free(cmd->path);
 	if (cmd->cmd)
 		cmd->cmd = free_split(cmd->cmd);
-	if (cmd->args_cmd)
-		cmd->args_cmd = free_split(cmd->args_cmd);
 	if (cmd->input)
 		cmd->input = free_fd(cmd->input);
 	if (cmd->output)

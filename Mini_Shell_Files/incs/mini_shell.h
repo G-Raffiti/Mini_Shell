@@ -17,11 +17,16 @@ typedef enum e_error
 
 # endif
 
+#ifndef T_BOOL
+# define T_BOOL
+
 typedef enum e_bool
 {
-	FALSE,
-	TRUE,
-}				t_bool;
+	FALSE = 0,
+	TRUE = 1,
+}	t_bool;
+
+# endif
 
 typedef struct s_fd
 {
