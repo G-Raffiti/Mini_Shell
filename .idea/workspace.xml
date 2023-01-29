@@ -20,15 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fae14677-ff82-4b35-80b1-44c750f7e310" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/safe_functions.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/incs/mini_shell.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/incs/mini_shell.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/get_cmd.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/get_raw_cmd.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/new_struct.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/new_struct.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_bash/in1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test_bash/in1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_bash/out1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test_bash/out1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/exit.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/exit.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing_get_cmd.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing_get_cmd.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +188,7 @@
       <workItem from="1674652764310" duration="2000" />
       <workItem from="1674660853687" duration="1200000" />
       <workItem from="1674923978882" duration="691000" />
-      <workItem from="1674964409829" duration="6473000" />
+      <workItem from="1674964409829" duration="9940000" />
     </task>
     <servers />
   </component>

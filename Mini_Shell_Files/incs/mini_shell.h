@@ -3,6 +3,7 @@
 # define MINI_SHELL_H
 # include "../../Lib_List_Double/incs/ft_lstd.h"
 # include "../../Lib_FT/incs/libft.h"
+# define PROMPT "mini_shell> "
 
 # ifndef T_ERROR
 #  define T_ERROR
@@ -80,6 +81,7 @@ void		*free_mini_shell(t_mini_shell *mini_shell);
 // EXIT ////////////////////////////////////////////////////////////////////////
 t_error		exit_malloc(t_mini_shell *mini_shell);
 t_error		exit_end_program(t_mini_shell *mini_shell);
+void	exit_error(t_mini_shell *mini_shell, int error_code, char *msg);
 
 // INITIALIZE //////////////////////////////////////////////////////////////////
 void		set_env(t_mini_shell *mini_shell, char **env);
@@ -106,6 +108,12 @@ char		**split_cmd(char *raw_cmd);
 
 // PARSING - OPEN FILES ////////////////////////////////////////////////////////
 t_error		open_files(t_lstd *current);
+
+// SAFE FUNC ///////////////////////////////////////////////////////////////////
+void	safe_fork(t_mini_shell *ms, t_lstd *cmd, char *msg);
+void	safe_pipe(t_mini_shell *ms, char *msg);
+void	safe_close(t_mini_shell *ms, int fd, char *msg);
+void	safe_dup2(t_mini_shell *ms, int fd1, int std, char *msg);
 
 // EXEC ////////////////////////////////////////////////////////////////////////
 void		exec_cmd_child(t_mini_shell *mini_shell, t_lstd *current);

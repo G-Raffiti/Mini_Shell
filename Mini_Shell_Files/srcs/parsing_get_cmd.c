@@ -7,68 +7,91 @@
 static int	count_blocks(char *line)
 {
 	char	quote;
-	int		len;
-	int		cmd;
+	int		block;
 
 	quote = 0;
-	cmd = 1;
+	block = 1;
 	while (*line)
 	{
-		while (*line && !set_quote_state(*line, &quote) && ft_contain("| ",
-																	  *line))
+		while (*line && *line == ' ')
 			line++;
 		if (!*line)
 			break ;
-		len = 0;
-		while (line[len]
-			   && (set_quote_state(line[len], &quote) || line[len] != '|'))
-			len++;
-		line += len;
-		cmd++;
+		set_quote_state(*line, &quote);
+		block++;
+		if (quote)
+			while (*line && *line != quote)
+				line++;
+		else
+			while (*line && !set_quote_state(*line, &quote) && *line != ' ')
+				line++;
 	}
-	return (cmd);
+	return (block);
+}
+
+static int	count_len(char *line, char quote)
+{
+	int		len;
+
+	len = 0;
+	if (quote)
+	{
+		line++;
+		len++;
+		while (*line && *line != quote)
+		{
+			line++;
+			len++;
+		}
+	}
+	else
+	{
+		while (*line && !set_quote_state(*line, &quote) && *line != ' ')
+		{
+			line++;
+			len++;
+		}
+	}
+	return (len);
 }
 
 static t_error	fill_split(char **split, char *line, int cmd_nb)
 {
 	char	quote;
 	int		len;
-	int		cmd;
+	int		block;
 
 	quote = 0;
-	cmd = 0;
+	block = 0;
 	while (*line)
 	{
-		while (*line && !set_quote_state(*line, &quote) && ft_contain("| ",
-																	  *line))
+		while (*line && *line == ' ')
 			line++;
 		if (!*line)
-			return (SUCCESS);
-		len = 0;
-		while (line[len]
-			   && (set_quote_state(line[len], &quote) || line[len] != '|'))
-			len++;
-		split[cmd] = ft_substr(line, 0, len);
-		if (!split[cmd])
+			break ;
+		set_quote_state(*line, &quote);
+		len = count_len(line, quote);
+		split[block] = ft_substr(line, 0, len);
+		if (!split[block])
 			return (MALLOC_ERROR);
 		line += len;
-		cmd++;
+		block++;
 	}
 	return (SUCCESS);
 }
 
-///Split the line where the pipes are;
-char	**split_pipe(char *line)
+///Split the raw_cmd on the quote and spaces
+char	**split_cmd(char *raw_cmd)
 {
 	char	**split;
 	int		cmd_nb;
 
-	cmd_nb = count_blocks(line);
+	cmd_nb = count_blocks(raw_cmd);
 	split = malloc(sizeof(char *) * (cmd_nb + 1));
 	if (!split)
 		return (NULL);
 	split[cmd_nb] = 0;
-	if (fill_split(split, line, cmd_nb) == MALLOC_ERROR)
+	if (fill_split(split, raw_cmd, cmd_nb) == MALLOC_ERROR)
 		return (free_split(split), NULL);
 	return (split);
 }
