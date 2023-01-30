@@ -40,5 +40,5 @@ void	safe_dup2(t_mini_shell *ms, int fd1, int std, char *msg)
 		ms = free_mini_shell(ms);
 		exit_error(ms, errno, msg);
 	}
-	safe_close(fd1, ms, msg);
+	safe_close(ms, fd1, msg);
 }

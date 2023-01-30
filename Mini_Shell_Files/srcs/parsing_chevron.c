@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing_chevron.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/29 06:06:58 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/01/29 06:06:58 by rbonneva         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 
 #include <sys/fcntl.h>
 #include "../incs/mini_shell.h"
@@ -28,11 +16,13 @@ static void	chevron_in(t_lstd *current, t_chevron type, char *file_name)
 	if (type == IN_CHT)
 	{
 		get(current)->input->fd = open(file_name, O_RDONLY);
+		get(current)->input->type = type;
 	}
 	else if (type == HERE_DOC_CHT)
 	{
-		// TODO [Raffi] : find the here_doc open mod
-		get(current)->input->fd = open(file_name, O_RDONLY);
+		get(current)->input->fd = open(file_name, O_CREAT | O_TRUNC |
+		O_WRONLY, 0644);
+		get(current)->input->type = type;
 	}
 	if (get(current)->input->fd == -1)
 	{
@@ -45,16 +35,18 @@ static void	chevron_in(t_lstd *current, t_chevron type, char *file_name)
 static void	chevron_out(t_lstd *current, t_chevron type, char *file_name)
 {
 	if (get(current)->output->fd != -1)
-		close(get(current)->output->fd);
+		safe_close(get(current)->output);
 	if (type == OUT_CHT)
 	{
 		get(current)->output->fd = open(file_name, O_CREAT | O_WRONLY
 												   | O_TRUNC, 0644);
+		get(current)->output->type = type;
 	}
 	else if (type == APPEND_CHT)
 	{
 		get(current)->output->fd = open(file_name, O_CREAT | O_WRONLY
 												   | O_APPEND, 0644);
+		get(current)->output->type = type;
 	}
 	if (get(current)->input->fd == -1)
 	{

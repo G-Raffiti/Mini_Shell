@@ -5,7 +5,6 @@
 static void	loop(t_mini_shell *mini_shell)
 {
 	char	*line;
-	int		is_parent;
 
 	while (TRUE)
 	{
@@ -15,9 +14,8 @@ static void	loop(t_mini_shell *mini_shell)
 			return ;
 		if (parse_line(mini_shell, line) == ERROR)
 			return ;
-		is_parent = fork();
-		if (!is_parent)
-			exec_cmds(mini_shell);
+		print_debug_cmds(mini_shell);
+		//exec_cmds(mini_shell);
 		clear_cmds(&mini_shell->cmds);
 		line = ft_free(line);
 	}

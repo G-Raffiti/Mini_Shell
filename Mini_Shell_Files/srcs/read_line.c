@@ -4,11 +4,18 @@
 
 // TODO [Raphael] : install brew & Readline
 // TODO [Raphael] : ingnore leaks
+
+#include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include <stdio.h>
+#include "../../Lib_FT/incs/libft.h"
 
-char	*read_line()
+char	*read_line(void)
 {
-	// c'est facile Aurel ratatouille toi
+	char	*line;
+
+	line = readline("ms_>");
+	if (ft_strlen(line) > 0)
+		add_history(line);
+	return (line);
 }
