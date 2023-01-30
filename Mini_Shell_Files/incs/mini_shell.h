@@ -24,14 +24,27 @@ typedef enum e_bool
 {
 	FALSE = 0,
 	TRUE = 1,
+<<<<<<< Updated upstream
 }	t_bool;
 
 # endif
+=======
+}				t_bool;
+>>>>>>> Stashed changes
+
+typedef enum e_chevron
+{
+	IN_CHT,
+	HERE_DOC_CHT,
+	OUT_CHT,
+	APPEND_CHT,
+}	t_chevron;
 
 typedef struct s_fd
 {
 	int				fd;
 	int				open_mode;
+	t_chevron		type;
 }					t_fd;
 
 typedef struct s_env_arg
@@ -61,13 +74,6 @@ typedef struct s_mini_shell
 	int				pipe[2];
 }					t_mini_shell;
 
-typedef enum e_chevron
-{
-	IN_CHT,
-	HERE_DOC_CHT,
-	OUT_CHT,
-	APPEND_CHT,
-}	t_chevron;
 
 int	g_exit_code;
 
@@ -105,6 +111,9 @@ int			find(void *content, void *ref);
 char		*get_env_value(char *key, t_lstd *env_dict);
 int			set_quote_state(char c, char *quote);
 
+// PARSING - READ_LINE /////////////////////////////////////////////////////////
+char	*read_line(void);
+
 // PARSING - RAW CMD ///////////////////////////////////////////////////////////
 char		**split_pipe(char *line);
 
@@ -122,7 +131,10 @@ void	safe_dup2(t_mini_shell *ms, int fd1, int std, char *msg);
 
 // EXEC ////////////////////////////////////////////////////////////////////////
 void		exec_cmd_child(t_mini_shell *mini_shell, t_lstd *current);
-void		make_child(t_mini_shell *mini_shell, t_lstd *current);
+void		make_child(t_mini_shell *ms, t_lstd *current);
 t_error		exec_cmds(t_mini_shell *mini_shell);
+
+// TEST ////////////////////////////////////////////////////////////////////////
+void	print_debug_cmds(t_mini_shell *ms);
 
 #endif
