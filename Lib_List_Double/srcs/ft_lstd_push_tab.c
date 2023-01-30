@@ -12,7 +12,7 @@
 
 #include "../incs/ft_lstd.h"
 
-t_lstd	*ft_lst_push_tab(int size, void **data)
+t_lstd	*ft_lstd_push_tab(int size, void **data)
 {
 	t_lstd	*lst;
 

@@ -9,5 +9,10 @@ void	get_env(t_mini_shell *mini_shell, char **env)
 	// ATTENTION garde les / a la fin des PATH
 }
 
+void	set_env(t_mini_shell *ms, char **env)
+{
+	(void)ms;
+	(void)env;
+}
 // TODO [Aurel]: synchro list env to char** env
 // TODO [Aurel]: synchro char** env to list env

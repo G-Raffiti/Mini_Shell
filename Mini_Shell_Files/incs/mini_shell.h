@@ -71,19 +71,23 @@ typedef struct s_mini_shell
 	int				pipe[2];
 }					t_mini_shell;
 
+#ifndef G_EXIT_CODE
+#define G_EXIT_CODE
 
-int	g_exit_code;
+//int	g_exit_code;
+
+#endif
 
 // NEW STRUCT //////////////////////////////////////////////////////////////////
 t_error		new_fd(t_fd **fd);
 t_error		new_cmd(t_cmd **cmd);
-t_error		new_mini_shell(t_mini_shell *ms);
+t_error		new_mini_shell(t_mini_shell **ms);
 
 // FREE STRUCT /////////////////////////////////////////////////////////////////
 void		*ft_free(void *pt);
 void		*free_split(char **split);
 void		*free_fd(t_fd *fd);
-void		*free_cmd(void *cmd);
+void		*free_cmd(t_cmd *cmd);
 void		*free_mini_shell(t_mini_shell *ms);
 
 // EXIT ////////////////////////////////////////////////////////////////////////
@@ -97,7 +101,7 @@ void		set_env(t_mini_shell *ms, char **env);
 // LIST UTILS //////////////////////////////////////////////////////////////////
 t_cmd		*get(t_lstd *lst);
 t_env_arg	*get_env_dict(void *content);
-void		clear_cmds(t_lstd **cmds);
+void		clear_cmds(t_lstd **lst, void *(*free_fct)(t_cmd *));
 
 // PARSING /////////////////////////////////////////////////////////////////////
 t_bool		is_quote_error(char *line);
@@ -111,14 +115,20 @@ int			set_quote_state(char c, char *quote);
 // PARSING - READ_LINE /////////////////////////////////////////////////////////
 char		*read_line(void);
 
-// PARSING - RAW CMD ///////////////////////////////////////////////////////////
+// PARSING - CHECK LINE ////////////////////////////////////////////////////////
+t_error		check_line(char *line);
+
+// PARSING - GET RAW CMD ///////////////////////////////////////////////////////
 char		**split_pipe(char *line);
 
-// PARSING - CMD ///////////////////////////////////////////////////////////////
-char		**split_cmd(char *raw_cmd);
+// PARSING - GET CMD ///////////////////////////////////////////////////////////
+t_error		get_cmd(t_lstd *current);
 
 // PARSING - OPEN FILES ////////////////////////////////////////////////////////
 t_error		open_files(t_mini_shell *ms, t_lstd *current);
+
+// PARSING - GET PATH //////////////////////////////////////////////////////////
+t_error		get_path(t_lstd *current, t_lstd *env_dict);
 
 // SAFE FUNC ///////////////////////////////////////////////////////////////////
 void		safe_fork(t_mini_shell *ms, t_lstd *cmd, char *msg);

@@ -3,57 +3,7 @@
 //
 
 #include <sys/fcntl.h>
-#include "../incs/mini_shell.h"
-t_bool	is_empty_line(char *line)
-{
-	while (*line)
-	{
-		if (*line != ' ')
-			return (TRUE);
-		line++;
-	}
-	return (FALSE);
-}
-
-t_bool	is_quote_error(char *line)
-{
-	char	quote_state;
-
-	quote_state = 0;
-	while (*line)
-	{
-		set_quote_state(*line, &quote_state);
-		line++;
-	}
-	if (quote_state > 0)
-		return (FALSE);
-	return (TRUE);
-}
-
-t_bool	is_chevron_error(char *line)
-{
-	t_bool	is_chevron_last;
-	char	is_in_quote;
-
-	is_in_quote = 0;
-	while (*line)
-	{
-		set_quote_state(*line, &is_in_quote);
-		if (!is_chevron_last && !is_in_quote && ft_contain("<>", *line))
-			is_chevron_last = TRUE;
-		else if (is_chevron_last && *line != ' ')
-			is_chevron_last = FALSE;
-		line++;
-	}
-	return (!is_chevron_last);
-}
-
-t_error	parse_error(char *error_msg, int error_code)
-{
-	g_exit_code = error_code;
-	printf("%s", error_msg);
-	return (ERROR);
-}
+#include "../../incs/mini_shell.h"
 
 t_error	create_cmds(t_mini_shell *mini_shell, char *line)
 {
@@ -69,53 +19,20 @@ t_error	create_cmds(t_mini_shell *mini_shell, char *line)
 	while(raw_cmds[i])
 	{
 		if(new_cmd(&cmd) == MALLOC_ERROR)
-			return (free_split(raw_cmds), clear_cmds(&mini_shell->cmds),
+			return (free_split(raw_cmds), clear_cmds(&mini_shell->cmds, free_cmd),
 					MALLOC_ERROR);
 		cmd->raw_cmd = ft_strdup(raw_cmds[i]);
 		if (!cmd->raw_cmd)
-			return (free_split(raw_cmds), clear_cmds(&mini_shell->cmds),
+			return (free_split(raw_cmds), clear_cmds(&mini_shell->cmds, free_cmd),
 					MALLOC_ERROR);
 		current = ft_lstd_new(cmd);
 		if (!current)
-			return (free_split(raw_cmds), clear_cmds(&mini_shell->cmds),
+			return (free_split(raw_cmds), clear_cmds(&mini_shell->cmds, free_cmd),
 					MALLOC_ERROR);
 		ft_lstd_push_back_elem(&mini_shell->cmds, current);
 		i++;
 	}
 	raw_cmds = free_split(raw_cmds);
-	return (SUCCESS);
-}
-
-t_error	get_path(t_lstd *current, t_lstd *env_dict)
-{
-	char **paths;
-
-	if (access(get(current)->cmd[0], X_OK) == 0)
-	{
-		get(current)->path = ft_strdup(get(current)->cmd[0]);
-		if (!get(current)->path)
-			return (MALLOC_ERROR);
-		return (SUCCESS);
-	}
-	paths = get_env_dict(ft_lstd_find(env_dict, "PATH", find)->content)->value;
-	while (paths)
-	{
-		get(current)->path = ft_strjoin(paths[0], get(current)->cmd[0]);
-		if (!get(current)->path)
-			return (MALLOC_ERROR);
-		if (access(get(current)->path, X_OK) == 0)
-			return (SUCCESS);
-		get(current)->path = ft_free(get(current)->path);
-		paths++;
-	}
-	return (SUCCESS);
-}
-
-t_error	get_cmd(t_lstd *current)
-{
-	get(current)->cmd = split_cmd(get(current)->raw_cmd);
-	if (!get(current)->cmd)
-		return (MALLOC_ERROR);
 	return (SUCCESS);
 }
 
@@ -137,18 +54,22 @@ t_error	fill_cmds(t_mini_shell *ms)
 	t_error	status;
 
 	current = ft_lstd_first(ms->cmds);
+	dprintf(1, "get_first DONE | ");
 	while (current)
 	{
 		// TODO [Aurel]: find and replace $ARG with env_lst key/value
 		status = open_files(ms, current);
+		dprintf(1, "open_Files DONE | ");
 		if (status == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		else if (status == ERROR)
 			get(current)->is_valid = FALSE;
 		if (get_cmd(current) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
+		dprintf(1, "get_cmd DONE | ");
 		if (get_path(current, ms->env_dict) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
+		dprintf(1, "get_path DONE | ");
 		set_builtin(current);
 		current = current->next;
 	}
@@ -157,17 +78,15 @@ t_error	fill_cmds(t_mini_shell *ms)
 
 t_error	parse_line(t_mini_shell *mini_shell, char *line)
 {
-	if (is_empty_line(line))
-		return (parse_error("", 127));
-	if (is_quote_error(line))
-		return (parse_error("command not parsed due to quotes\n", 0));
-	if (is_chevron_error(line))
-		return (parse_error("syntax error near unexpected token `newline'\n",
-							258));
+	if (check_line(line) == ERROR)
+		return (ERROR);
+	dprintf(1, "check DONE | ");
 	if (create_cmds(mini_shell, line) == MALLOC_ERROR)
 		return (free(line), exit_malloc(mini_shell));
+	dprintf(1, "crete cmds DONE | ");
 	if (fill_cmds(mini_shell) == MALLOC_ERROR)
 		return (free(line), exit_malloc(mini_shell));
+	dprintf(1, "fill cmds DONE\n");
 	return (SUCCESS);
 }
 

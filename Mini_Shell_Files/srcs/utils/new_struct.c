@@ -23,7 +23,7 @@ t_error	new_cmd(t_cmd **cmd)
 	if (new_fd(&((*cmd)->input)) == MALLOC_ERROR
 		|| new_fd(&((*cmd)->output)) == MALLOC_ERROR)
 	{
-		cmd = free_cmd(cmd);
+		*cmd = free_cmd(*cmd);
 		return (MALLOC_ERROR);
 	}
 	(*cmd)->is_builtin = FALSE;
@@ -31,16 +31,16 @@ t_error	new_cmd(t_cmd **cmd)
 	return (SUCCESS);
 }
 
-t_error	new_mini_shell(t_mini_shell *mini_shell)
+t_error	new_mini_shell(t_mini_shell **mini_shell)
 {
-	mini_shell = malloc(sizeof(t_mini_shell));
-	if (!mini_shell)
+	*mini_shell = malloc(sizeof(t_mini_shell));
+	if (!*mini_shell)
 		return (MALLOC_ERROR);
-	mini_shell->env = NULL;
-	mini_shell->env_dict = NULL;
-	mini_shell->paths = NULL;
-	mini_shell->cmds = NULL;
-	mini_shell->pipe[0] = 0;
-	mini_shell->pipe[1] = 1;
+	(*mini_shell)->env = NULL;
+	(*mini_shell)->env_dict = NULL;
+	(*mini_shell)->paths = NULL;
+	(*mini_shell)->cmds = NULL;
+	(*mini_shell)->pipe[0] = 0;
+	(*mini_shell)->pipe[1] = 1;
 	return (SUCCESS);
 }

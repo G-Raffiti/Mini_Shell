@@ -2,7 +2,7 @@
 // Created by Raphael Bonneval on 1/24/23.
 //
 
-#include "../incs/mini_shell.h"
+#include "../../incs/mini_shell.h"
 
 int	count_blocks(char *line)
 {
@@ -16,6 +16,7 @@ int	count_blocks(char *line)
 		set_quote_state(*line, &quote);
 		if (*line == '|' && quote == 0)
 			cmd_nb++;
+		line++;
 	}
 	return (cmd_nb + 1);
 }

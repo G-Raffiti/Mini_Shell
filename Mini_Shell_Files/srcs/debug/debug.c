@@ -22,15 +22,17 @@ void	print_debug_cmds(t_mini_shell *ms)
 		printf("PATH: %s | FDS: in(%d) out(%d) | ",
 			cmd->path, cmd->input->fd, cmd->output->fd);
 		is_valid = cmd->is_valid ? "Yes" : "No";
-		printf("IS_VALID? %s\n", is_valid);
-		printf("RAW_CMD: %s | ", cmd->raw_cmd);
+		printf("IS_VALID? %s | ", is_valid);
+		printf("RAW_CMD: [%s] | ", cmd->raw_cmd);
 		printf("PARSED_CMD: ");
 		i = 0;
 		while (cmd->cmd[i])
 		{
-			printf("%s / ", cmd->cmd[i]);
+			printf("[%s] ", cmd->cmd[i]);
 			i++;
 		}
 		current = current->next;
+		printf("\n");
 	}
+	printf("\n");
 }

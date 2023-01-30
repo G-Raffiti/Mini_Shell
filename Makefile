@@ -15,26 +15,34 @@ PATH_INC =		./Mini_Shell_Files/incs/
 LINK_LIB =		-L ./Lib_FT \
 				-L ./Lib_List_Double
 ADD_LIB =		-lft \
-				-llstd
+				-llstd \
+				-lreadline
 INC_LIB =		-I ./Lib_FT/incs/ \
 				-I ./Lib_List_Double/incs/
 FILE_LIB =		./Lib_FT/incs/libft.h \
 				./Lib_List_Double/incs/ft_lstd.h
 
 FILES =			\
-				debug \
-				env \
+				debug/debug \
+				\
+				env/env \
+				\
+				parsing/check_line \
+				parsing/chevron \
+				parsing/get_cmd \
+				parsing/get_path \
+				parsing/get_raw_cmd \
+				parsing/parsing \
+				parsing/read_line \
+				\
+				utils/free_struct \
+				utils/list_cmd_utils \
+				utils/new_struct \
+				utils/safe_functions \
+				\
 				exit \
-				free_struct \
-				list_cmd_utils \
-				main \
-				new_struct \
-				parsing \
-				parsing_chevron \
-				parsing_get_cmd \
-				parsing_get_raw_cmd \
-				read_line \
-				safe_fuctions
+				main
+
 
 INC =			mini_shell.h
 
@@ -64,6 +72,11 @@ $(PATH_OBJ)%.o:	$(PATH_SRC)%.c $(FILES_INC) $(FILE_LIB)
 
 $(PATH_OBJ):
 				@mkdir $@
+				@mkdir $(PATH_OBJ)/debug
+				@mkdir $(PATH_OBJ)/env
+				@mkdir $(PATH_OBJ)/exec
+				@mkdir $(PATH_OBJ)/parsing
+				@mkdir $(PATH_OBJ)/utils
 
 clean:
 				@rm -rf $(PATH_OBJ)

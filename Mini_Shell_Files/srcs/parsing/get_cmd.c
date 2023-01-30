@@ -2,7 +2,7 @@
 // Created by Raphael Bonneval on 1/24/23.
 //
 
-#include "../incs/mini_shell.h"
+#include "../../incs/mini_shell.h"
 
 static int	count_blocks(char *line)
 {
@@ -81,17 +81,25 @@ static t_error	fill_split(char **split, char *line)
 }
 
 ///Split the raw_cmd on the quote and spaces
-char	**split_cmd(char *raw_cmd)
+static char	**split_cmd(char *raw_cmd)
 {
 	char	**split;
 	int		cmd_nb;
 
 	cmd_nb = count_blocks(raw_cmd);
-	split = malloc(sizeof(char *) * (cmd_nb + 1));
+	split = ft_calloc(cmd_nb + 1, sizeof(char *));
 	if (!split)
 		return (NULL);
-	split[cmd_nb] = 0;
 	if (fill_split(split, raw_cmd) == MALLOC_ERROR)
 		return (free_split(split), NULL);
+	split[cmd_nb] = NULL;
 	return (split);
+}
+
+t_error	get_cmd(t_lstd *current)
+{
+	get(current)->cmd = split_cmd(get(current)->raw_cmd);
+	if (!get(current)->cmd)
+		return (MALLOC_ERROR);
+	return (SUCCESS);
 }

@@ -30,11 +30,8 @@ void	*free_fd(t_fd *fd)
 	return (NULL);
 }
 
-void	*free_cmd(void *cmd_pt)
+void	*free_cmd(t_cmd *cmd)
 {
-	t_cmd	*cmd;
-
-	cmd = (t_cmd *)cmd_pt;
 	if (!cmd)
 		return (NULL);
 	if (cmd->raw_cmd)
@@ -55,12 +52,12 @@ void	*free_mini_shell(t_mini_shell *mini_shell)
 {
 	if (!mini_shell)
 		return (NULL);
-	if (mini_shell->env)
-		mini_shell->env = free_split(mini_shell->env);
-	ft_lstd_clear(&mini_shell->env_dict, free_cmd);
+	//if (mini_shell->env)
+	//	mini_shell->env = free_split(mini_shell->env);
+	clear_cmds(&mini_shell->env_dict, free_cmd);
 	if (mini_shell->paths)
 		mini_shell->paths = free_split(mini_shell->paths);
-	ft_lstd_clear(&mini_shell->cmds, free_cmd);
+	clear_cmds(&mini_shell->cmds, free_cmd);
 	mini_shell = ft_free(mini_shell);
 	return (NULL);
 }
