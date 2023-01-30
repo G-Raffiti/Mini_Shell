@@ -20,10 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fae14677-ff82-4b35-80b1-44c750f7e310" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/exec.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/exec.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/initialize.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/env.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/parsing.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mini_Shell_Files/srcs/read_line.c" beforeDir="false" afterPath="$PROJECT_DIR$/Mini_Shell_Files/srcs/read_line.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,11 +119,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Makefile Application.all">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Mini_Shell" TARGET_NAME="all" CONFIG_NAME="all" version="1">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
@@ -157,6 +149,11 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Makefile Application.all" />
       <item itemvalue="Makefile Application.cleanlib" />
@@ -177,6 +174,7 @@
       <workItem from="1674476923658" duration="1630000" />
       <workItem from="1674483033814" duration="11200000" />
       <workItem from="1674559664554" duration="18051000" />
+      <workItem from="1675097754361" duration="5000" />
     </task>
     <servers />
   </component>
