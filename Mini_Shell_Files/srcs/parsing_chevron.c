@@ -1,41 +1,13 @@
 
 #include <sys/fcntl.h>
 #include "../incs/mini_shell.h"
-static void	chevron_in(t_lstd *current, t_chevron type, char *file_name);
-static void	chevron_out(t_lstd *current, t_chevron type, char *file_name);
 
 ///open file and create t_fd
-static void	chevron_in(t_lstd *current, t_chevron type, char *file_name)
-{
-	if (!get(current)->is_valid)
-		return ;
-	if (type == OUT_CHT || type == APPEND_CHT)
-		chevron_out(current, type, file_name);
-	if (get(current)->input->fd != -1)
-		close(get(current)->input->fd);
-	if (type == IN_CHT)
-	{
-		get(current)->input->fd = open(file_name, O_RDONLY);
-		get(current)->input->type = type;
-	}
-	else if (type == HERE_DOC_CHT)
-	{
-		get(current)->input->fd = open(file_name, O_CREAT | O_TRUNC |
-		O_WRONLY, 0644);
-		get(current)->input->type = type;
-	}
-	if (get(current)->input->fd == -1)
-	{
-		perror(file_name);
-		get(current)->is_valid = FALSE;
-	}
-}
-
-///open file and create t_fd
-static void	chevron_out(t_lstd *current, t_chevron type, char *file_name)
+static void	chevron_out(t_mini_shell *ms, t_lstd *current, t_chevron type, char
+*file_name)
 {
 	if (get(current)->output->fd != -1)
-		safe_close(get(current)->output);
+		safe_close(ms, get(current)->output, "chevron_out");
 	if (type == OUT_CHT)
 	{
 		get(current)->output->fd = open(file_name, O_CREAT | O_WRONLY
@@ -55,10 +27,39 @@ static void	chevron_out(t_lstd *current, t_chevron type, char *file_name)
 	}
 }
 
+///open file and create t_fd
+static void	chevron_in(t_mini_shell *ms, t_lstd *current, t_chevron type, char
+*file_name)
+{
+	if (!get(current)->is_valid)
+		return ;
+	if (type == OUT_CHT || type == APPEND_CHT)
+		chevron_out(ms, current, type, file_name);
+	safe_close(ms, get(current)->input, "chevron_in");
+	if (type == IN_CHT)
+	{
+		get(current)->input->fd = open(file_name, O_RDONLY);
+		get(current)->input->type = type;
+	}
+	else if (type == HERE_DOC_CHT)
+	{
+		get(current)->input->fd = open(file_name, O_CREAT | O_TRUNC |
+		O_WRONLY, 0644);
+		get(current)->input->type = type;
+	}
+	if (get(current)->input->fd == -1)
+	{
+		perror(file_name);
+		get(current)->is_valid = FALSE;
+	}
+}
+
+
 static t_chevron get_chevron_type(char **str)
 {
 	t_chevron	type;
 
+	type = -1;
 	if (**str == '<' && **(str + 1) != '<')
 		type = IN_CHT;
 	else if (**str == '>' && **(str + 1) != '>')
@@ -68,7 +69,7 @@ static t_chevron get_chevron_type(char **str)
 		type = HERE_DOC_CHT;
 		(*str)++;
 	}
-	else if (**str == '>' && **(str + 1) != '>')
+	else if (**str == '>' && **(str + 1) == '>')
 	{
 		type = APPEND_CHT;
 		(*str)++;
@@ -82,20 +83,20 @@ static t_error extract_file_name(char **str, char *quote, char **file_name)
 	char	*start;
 
 	while (**str == ' ')
-		*str++;
+		(*str)++;
 	if (set_quote_state(**str, quote))
-		*str++;
+		(*str)++;
 	start = *str;
 	if (**str == '<' || **str == '>')
 		return (ERROR);
 	while (**str && (!ft_contain(" <>\"\'", **str)
-					|| quote && ft_contain("<>", **str)))
-		*str++;
+					|| (quote && ft_contain("<>", **str))))
+		(*str)++;
 	*file_name = ft_substr(start, 0, *str - start);
 	if (!*file_name)
 		return (MALLOC_ERROR);
 	if (**str && **str == *quote)
-		*str++;
+		(*str)++;
 	while (*start && start != *str)
 	{
 		*start = ' ';
@@ -104,7 +105,7 @@ static t_error extract_file_name(char **str, char *quote, char **file_name)
 	return (SUCCESS);
 }
 
-t_error	open_files(t_lstd *current)
+t_error	open_files(t_mini_shell *ms, t_lstd *current)
 {
 	char		*str;
 	char		quote;
@@ -123,7 +124,7 @@ t_error	open_files(t_lstd *current)
 			error = extract_file_name(&str, &quote, &file_name);
 			if (error != SUCCESS)
 				return (error);
-			chevron_in(current, chevron_type, file_name);
+			chevron_in(ms, current, chevron_type, file_name);
 			file_name = ft_free(file_name);
 		}
 	}

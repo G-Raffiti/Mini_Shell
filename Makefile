@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/23 18:22:26 by rbonneva          #+#    #+#              #
-#    Updated: 2023/01/29 20:07:50 by rbonneva         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 .PHONY:			all clean fclean re cleanlib fcleanlib
 
 #***********************************************************************#
@@ -34,8 +22,8 @@ FILE_LIB =		./Lib_FT/incs/libft.h \
 				./Lib_List_Double/incs/ft_lstd.h
 
 FILES =			\
+				debug \
 				env \
-				exec \
 				exit \
 				free_struct \
 				list_cmd_utils \

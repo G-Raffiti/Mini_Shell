@@ -68,7 +68,7 @@ t_error	create_cmds(t_mini_shell *mini_shell, char *line)
 	i = 0;
 	while(raw_cmds[i])
 	{
-		if(new_cmd(cmd) == MALLOC_ERROR)
+		if(new_cmd(&cmd) == MALLOC_ERROR)
 			return (free_split(raw_cmds), clear_cmds(&mini_shell->cmds),
 					MALLOC_ERROR);
 		cmd->raw_cmd = ft_strdup(raw_cmds[i]);
@@ -131,23 +131,23 @@ void	set_builtin(t_lstd *current)
 		get(current)->is_builtin = TRUE;
 }
 
-t_error	fill_cmds(t_mini_shell *mini_shell)
+t_error	fill_cmds(t_mini_shell *ms)
 {
 	t_lstd	*current;
 	t_error	status;
 
-	current = ft_lstd_first(mini_shell->cmds);
+	current = ft_lstd_first(ms->cmds);
 	while (current)
 	{
 		// TODO [Aurel]: find and replace $ARG with env_lst key/value
-		status = open_files(current);
+		status = open_files(ms, current);
 		if (status == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		else if (status == ERROR)
 			get(current)->is_valid = FALSE;
 		if (get_cmd(current) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
-		if (get_path(current, mini_shell->env_dict) == MALLOC_ERROR)
+		if (get_path(current, ms->env_dict) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		set_builtin(current);
 		current = current->next;

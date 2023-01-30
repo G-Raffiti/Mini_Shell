@@ -20,7 +20,7 @@ int	count_blocks(char *line)
 	return (cmd_nb + 1);
 }
 
-t_error	fill_split(char **split, char *line, int cmd_nb)
+t_error	fill_split(char **split, char *line)
 {
 	char	quote;
 	int		len;
@@ -59,7 +59,7 @@ char	**split_pipe(char *line)
 	if (!split)
 		return (NULL);
 	split[cmd_nb] = 0;
-	if (fill_split(split, line, cmd_nb) == MALLOC_ERROR)
+	if (fill_split(split, line) == MALLOC_ERROR)
 		return (free_split(split), NULL);
 	return (split);
 }

@@ -55,7 +55,7 @@ static int	count_len(char *line, char quote)
 	return (len);
 }
 
-static t_error	fill_split(char **split, char *line, int cmd_nb)
+static t_error	fill_split(char **split, char *line)
 {
 	char	quote;
 	int		len;
@@ -91,7 +91,7 @@ char	**split_cmd(char *raw_cmd)
 	if (!split)
 		return (NULL);
 	split[cmd_nb] = 0;
-	if (fill_split(split, raw_cmd, cmd_nb) == MALLOC_ERROR)
+	if (fill_split(split, raw_cmd) == MALLOC_ERROR)
 		return (free_split(split), NULL);
 	return (split);
 }

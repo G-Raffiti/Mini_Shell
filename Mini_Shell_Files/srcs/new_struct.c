@@ -2,32 +2,32 @@
 #include "../incs/mini_shell.h"
 #include <stdlib.h>
 
-t_error	new_fd(t_fd *fd)
+t_error	new_fd(t_fd **fd)
 {
-	fd = malloc(sizeof(t_fd));
-	if (!fd)
+	*fd = malloc(sizeof(t_fd));
+	if (!*fd)
 		return (MALLOC_ERROR);
-	fd->fd = 0;
-	fd->open_mode = -1;
+	(*fd)->fd = 0;
+	(*fd)->open_mode = -1;
 	return (SUCCESS);
 }
 
-t_error	new_cmd(t_cmd *cmd)
+t_error	new_cmd(t_cmd **cmd)
 {
-	cmd = malloc(sizeof(t_cmd));
-	if (!cmd)
+	*cmd = malloc(sizeof(t_cmd));
+	if (!*cmd)
 		return (MALLOC_ERROR);
-	cmd->raw_cmd = NULL;
-	cmd->path = NULL;
-	cmd->cmd = NULL;
-	if (new_fd(cmd->input) == MALLOC_ERROR
-		|| new_fd(cmd->output) == MALLOC_ERROR)
+	(*cmd)->raw_cmd = NULL;
+	(*cmd)->path = NULL;
+	(*cmd)->cmd = NULL;
+	if (new_fd(&((*cmd)->input)) == MALLOC_ERROR
+		|| new_fd(&((*cmd)->output)) == MALLOC_ERROR)
 	{
 		cmd = free_cmd(cmd);
 		return (MALLOC_ERROR);
 	}
-	cmd->is_builtin = FALSE;
-	cmd->is_valid = TRUE;
+	(*cmd)->is_builtin = FALSE;
+	(*cmd)->is_valid = TRUE;
 	return (SUCCESS);
 }
 

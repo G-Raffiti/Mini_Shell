@@ -3,7 +3,7 @@
 
 void	clear_cmds(t_lstd **cmds)
 {
-	ft_lstd_clear(cmds, (void (*)(void *))free_cmd);
+	ft_lstd_clear(cmds, free_cmd);
 }
 
 t_cmd	*get(t_lstd *lst)
