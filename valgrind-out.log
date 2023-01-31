@@ -1,0 +1,668 @@
+==14693== Memcheck, a memory error detector
+==14693== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==14693== Using Valgrind-3.20.0-5147d671e4-20221024 and LibVEX; rerun with -h for copyright info
+==14693== Command: ./mini_shell
+==14693== Parent PID: 14692
+==14693== 
+--14693-- 
+--14693-- Valgrind options:
+--14693--    --show-leak-kinds=all
+--14693--    --leak-check=full
+--14693--    --track-fds=yes
+--14693--    --verbose
+--14693--    --show-mismatched-frees=yes
+--14693--    --read-var-info=yes
+--14693--    --suppressions=valgrind_ignore_leaks.txt
+--14693--    --log-file=valgrind-out.log
+--14693-- Contents of /proc/version:
+--14693--   Linux version 6.1.6-200.fc37.x86_64 (mockbuild@bkernel01.iad2.fedoraproject.org) (gcc (GCC) 12.2.1 20221121 (Red Hat 12.2.1-4), GNU ld version 2.38-25.fc37) #1 SMP PREEMPT_DYNAMIC Sat Jan 14 16:55:06 UTC 2023
+--14693-- 
+--14693-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--14693-- Page sizes: currently 4096, max supported 4096
+--14693-- Valgrind library directory: /snap/valgrind/142/usr/libexec/valgrind
+--14693-- Reading syms from /home/aurel/Documents/CLionProjects/Mini_Shell/mini_shell
+--14693-- Reading syms from /usr/lib64/ld-linux-x86-64.so.2
+--14693-- Warning: cross-CU LIMITATION: some inlined fn names
+--14693-- might be shown as UnknownInlinedFun
+--14693-- warning: addVar: unknown size (buf)
+--14693-- warning: addVar: unknown size (buf)
+--14693-- warning: addVar: unknown size (loadcmds)
+--14693-- warning: addVar: unknown size (loadcmds)
+--14693-- warning: addVar: unknown size (loadcmds)
+--14693-- warning: addVar: unknown size (loadcmds)
+--14693-- warning: addVar: unknown size (loadcmds)
+--14693-- warning: addVar: unknown size (loadcmds)
+--14693-- warning: addVar: unknown size (loadcmds)
+--14693-- warning: addVar: unknown size (loadcmds)
+--14693-- Reading syms from /var/lib/snapd/snap/valgrind/142/usr/libexec/valgrind/memcheck-amd64-linux
+--14693--    object doesn't have a dynamic symbol table
+--14693-- Warning: inlined fn name without absori
+--14693-- is shown as UnknownInlinedFun
+--14693-- Scheduler: using generic scheduler lock implementation.
+--14693-- Reading suppressions file: valgrind_ignore_leaks.txt
+--14693-- Reading suppressions file: /snap/valgrind/142/usr/libexec/valgrind/default.supp
+==14693== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-14693-by-aurel-on-fedora-37
+==14693== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-14693-by-aurel-on-fedora-37
+==14693== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-14693-by-aurel-on-fedora-37
+==14693== 
+==14693== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==14693== don't want to do, unless you know exactly what you're doing,
+==14693== or are doing some strange experiment):
+==14693==   /snap/valgrind/142/usr/libexec/valgrind/../../bin/vgdb --pid=14693 ...command...
+==14693== 
+==14693== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==14693==   /path/to/gdb ./mini_shell
+==14693== and then give GDB the following command
+==14693==   target remote | /snap/valgrind/142/usr/libexec/valgrind/../../bin/vgdb --pid=14693
+==14693== --pid is optional if only one valgrind process is running
+==14693== 
+--14693-- REDIR: 0x4024a50 (ld-linux-x86-64.so.2:strlen) redirected to 0x581eb5de (vgPlain_amd64_linux_REDIR_FOR_strlen)
+--14693-- REDIR: 0x4023200 (ld-linux-x86-64.so.2:index) redirected to 0x581eb5f8 (vgPlain_amd64_linux_REDIR_FOR_index)
+--14693-- Reading syms from /var/lib/snapd/snap/valgrind/142/usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--14693-- Reading syms from /var/lib/snapd/snap/valgrind/142/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+==14693== WARNING: new redirection conflicts with existing -- ignoring it
+--14693--     old: 0x04024a50 (strlen              ) R-> (0000.0) 0x581eb5de vgPlain_amd64_linux_REDIR_FOR_strlen
+--14693--     new: 0x04024a50 (strlen              ) R-> (2007.0) 0x04e0afb0 strlen
+--14693-- REDIR: 0x4023430 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4e0c1e0 (strcmp)
+--14693-- REDIR: 0x4022650 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4e10400 (mempcpy)
+--14693-- Reading syms from /usr/lib64/libreadline.so.8.2
+==14693== Downloading debug info for /usr/lib64/libreadline.so.8.2...
+--14693--   Considering /home/aurel/.cache/debuginfod_client/7a2fe3f0fdf59c9969b6fc975d45dc8c5bafce75/debuginfo ..
+--14693--   .. CRC is valid
+==14693== Successfully downloaded debug file for /usr/lib64/libreadline.so.8.2
+==14693== Downloading debug info for /home/aurel/.cache/debuginfod_client/7a2fe3f0fdf59c9969b6fc975d45dc8c5bafce75/debuginfo...
+--14693--   Considering /home/aurel/.cache/debuginfod_client/adca371d74b343ee7c7336ed32b79413c5e760fd/debuginfo ..
+--14693--   .. build-id is valid
+==14693== Successfully downloaded debug file for /home/aurel/.cache/debuginfod_client/7a2fe3f0fdf59c9969b6fc975d45dc8c5bafce75/debuginfo
+--14693-- Reading syms from /usr/lib64/libc.so.6
+==14693== Downloading debug info for /usr/lib64/libc.so.6...
+--14693--   Considering /home/aurel/.cache/debuginfod_client/81daba31ee66dbd63efdc4252a872949d874d136/debuginfo ..
+--14693--   .. CRC is valid
+==14693== Successfully downloaded debug file for /usr/lib64/libc.so.6
+==14693== WARNING: new redirection conflicts with existing -- ignoring it
+--14693--     old: 0x04c9da30 (memalign            ) R-> (1011.0) 0x04e0a1f5 memalign
+--14693--     new: 0x04c9da30 (memalign            ) R-> (1017.0) 0x04e0a1cb aligned_alloc
+==14693== WARNING: new redirection conflicts with existing -- ignoring it
+--14693--     old: 0x04c9da30 (memalign            ) R-> (1011.0) 0x04e0a1f5 memalign
+--14693--     new: 0x04c9da30 (memalign            ) R-> (1017.0) 0x04e0a1a1 aligned_alloc
+==14693== WARNING: new redirection conflicts with existing -- ignoring it
+--14693--     old: 0x04c9da30 (memalign            ) R-> (1011.0) 0x04e0a1f5 memalign
+--14693--     new: 0x04c9da30 (memalign            ) R-> (1017.0) 0x04e0a1cb aligned_alloc
+==14693== WARNING: new redirection conflicts with existing -- ignoring it
+--14693--     old: 0x04c9da30 (memalign            ) R-> (1011.0) 0x04e0a1f5 memalign
+--14693--     new: 0x04c9da30 (memalign            ) R-> (1017.0) 0x04e0a1a1 aligned_alloc
+--14693-- Reading syms from /usr/lib64/libtinfo.so.6.3
+==14693== Downloading debug info for /usr/lib64/libtinfo.so.6.3...
+--14693--   Considering /home/aurel/.cache/debuginfod_client/698cae6b13b3a224051b6646b50e00a6d62f83fe/debuginfo ..
+--14693--   .. CRC is valid
+==14693== Successfully downloaded debug file for /usr/lib64/libtinfo.so.6.3
+==14693== Downloading debug info for /home/aurel/.cache/debuginfod_client/698cae6b13b3a224051b6646b50e00a6d62f83fe/debuginfo...
+--14693--   Considering /home/aurel/.cache/debuginfod_client/73935a68039cfaf2a6d3d2d2868c0a35234b5990/debuginfo ..
+--14693--   .. build-id is valid
+==14693== Successfully downloaded debug file for /home/aurel/.cache/debuginfod_client/698cae6b13b3a224051b6646b50e00a6d62f83fe/debuginfo
+--14693-- REDIR: 0x4024bf0 (ld-linux-x86-64.so.2:strncmp) redirected to 0x4e0b870 (strncmp)
+--14693-- REDIR: 0x4ca3b90 (libc.so.6:strnlen) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca3c20 (libc.so.6:strpbrk) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca1cd0 (libc.so.6:strcmp) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4cb6e30 (libc.so.6:wcsnlen) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca0df0 (libc.so.6:memset) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4cb56b0 (libc.so.6:wcslen) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca03e0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4cb54c0 (libc.so.6:wcschr) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca1bc0 (libc.so.6:index) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca3c50 (libc.so.6:rindex) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4cb5550 (libc.so.6:wcscmp) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca1040 (libc.so.6:stpncpy) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4cb5b00 (libc.so.6:wmemchr) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca3a30 (libc.so.6:strncmp) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca10b0 (libc.so.6:strcasecmp) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca2f40 (libc.so.6:strcspn) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4cb55e0 (libc.so.6:wcscpy) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca1b40 (libc.so.6:strcat) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca3920 (libc.so.6:strncasecmp_l) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca02e0 (libc.so.6:bcmp) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca0d60 (libc.so.6:memrchr) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca1c40 (libc.so.6:strchrnul) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca2ec0 (libc.so.6:strcpy) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca1150 (libc.so.6:strcasecmp_l) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca37f0 (libc.so.6:strlen) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca3ad0 (libc.so.6:strncpy) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca0fc0 (libc.so.6:stpcpy) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca0b20 (libc.so.6:memmove) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+==14693== Preferring higher priority redirection:
+--14693--     old: 0x04d54880 (__memcpy_avx_unalign) R-> (2018.0) 0x04e0d720 __memcpy_avx_unaligned_erms
+--14693--     new: 0x04d54880 (__memcpy_avx_unalign) R-> (2018.1) 0x04e0f3e0 memmove
+--14693-- REDIR: 0x4ca0250 (libc.so.6:memchr) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca3e10 (libc.so.6:strspn) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca0c40 (libc.so.6:mempcpy) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca3880 (libc.so.6:strncasecmp) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca0ef0 (libc.so.6:rawmemchr) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca39c0 (libc.so.6:strncat) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4d1b780 (libc.so.6:__memcpy_chk) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4ca45b0 (libc.so.6:strstr) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--14693-- REDIR: 0x4d1b8a0 (libc.so.6:__memmove_chk) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+==14693== WARNING: new redirection conflicts with existing -- ignoring it
+--14693--     old: 0x04d54850 (__memcpy_chk_avx_una) R-> (2030.0) 0x04e104f0 __memcpy_chk
+--14693--     new: 0x04d54850 (__memcpy_chk_avx_una) R-> (2024.0) 0x04e0feb0 __memmove_chk
+--14693-- REDIR: 0x4d5a970 (libc.so.6:__strrchr_avx2) redirected to 0x4e0a930 (rindex)
+--14693-- REDIR: 0x4d58020 (libc.so.6:__strlen_avx2) redirected to 0x4e0aef0 (strlen)
+--14693-- REDIR: 0x4c9cd50 (libc.so.6:malloc) redirected to 0x4e05053 (malloc)
+--14693-- REDIR: 0x4c9d2f0 (libc.so.6:free) redirected to 0x4e07941 (free)
+--14693-- REDIR: 0x4d57540 (libc.so.6:__strchrnul_avx2) redirected to 0x4e0ff30 (strchrnul)
+--14693-- REDIR: 0x4d54840 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4e10040 (mempcpy)
+==14693== Invalid read of size 1
+==14693==    at 0x4E0AEF2: strlen (vg_replace_strmem.c:499)
+==14693==    by 0x4C61827: __vfprintf_internal (vfprintf-process-arg.c:397)
+==14693==    by 0x4C558FE: printf (printf.c:33)
+==14693==    by 0x403289: debug_mini_shell (main.c:35)
+==14693==    by 0x403439: main (main.c:70)
+==14693==  Address 0x5016790 is 0 bytes inside a block of size 15 free'd
+==14693==    at 0x4E079AF: free (vg_replace_malloc.c:884)
+==14693==    by 0x4014D7: get_value (env.c:38)
+==14693==    by 0x4016EF: get_env (env.c:79)
+==14693==    by 0x40341A: main (main.c:68)
+==14693==  Block was alloc'd at
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4038A4: ft_strdup (ft_strdup.c:20)
+==14693==    by 0x4015CD: dup_env (env.c:56)
+==14693==    by 0x40165B: get_env (env.c:71)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== Invalid read of size 1
+==14693==    at 0x4E0AF04: strlen (vg_replace_strmem.c:499)
+==14693==    by 0x4C61827: __vfprintf_internal (vfprintf-process-arg.c:397)
+==14693==    by 0x4C558FE: printf (printf.c:33)
+==14693==    by 0x403289: debug_mini_shell (main.c:35)
+==14693==    by 0x403439: main (main.c:70)
+==14693==  Address 0x5016791 is 1 bytes inside a block of size 15 free'd
+==14693==    at 0x4E079AF: free (vg_replace_malloc.c:884)
+==14693==    by 0x4014D7: get_value (env.c:38)
+==14693==    by 0x4016EF: get_env (env.c:79)
+==14693==    by 0x40341A: main (main.c:68)
+==14693==  Block was alloc'd at
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4038A4: ft_strdup (ft_strdup.c:20)
+==14693==    by 0x4015CD: dup_env (env.c:56)
+==14693==    by 0x40165B: get_env (env.c:71)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== Invalid read of size 1
+==14693==    at 0x4C852F9: _IO_new_file_xsputn (fileops.c:1218)
+==14693==    by 0x4C852F9: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==14693==    by 0x4C616CE: outstring_func (vfprintf-internal.c:239)
+==14693==    by 0x4C616CE: __vfprintf_internal (vfprintf-process-arg.c:421)
+==14693==    by 0x4C558FE: printf (printf.c:33)
+==14693==    by 0x403289: debug_mini_shell (main.c:35)
+==14693==    by 0x403439: main (main.c:70)
+==14693==  Address 0x501679d is 13 bytes inside a block of size 15 free'd
+==14693==    at 0x4E079AF: free (vg_replace_malloc.c:884)
+==14693==    by 0x4014D7: get_value (env.c:38)
+==14693==    by 0x4016EF: get_env (env.c:79)
+==14693==    by 0x40341A: main (main.c:68)
+==14693==  Block was alloc'd at
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4038A4: ft_strdup (ft_strdup.c:20)
+==14693==    by 0x4015CD: dup_env (env.c:56)
+==14693==    by 0x40165B: get_env (env.c:71)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== Invalid read of size 1
+==14693==    at 0x4E100C8: mempcpy (vg_replace_strmem.c:1684)
+==14693==    by 0x4C852AF: _IO_new_file_xsputn (fileops.c:1235)
+==14693==    by 0x4C852AF: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==14693==    by 0x4C616CE: outstring_func (vfprintf-internal.c:239)
+==14693==    by 0x4C616CE: __vfprintf_internal (vfprintf-process-arg.c:421)
+==14693==    by 0x4C558FE: printf (printf.c:33)
+==14693==    by 0x403289: debug_mini_shell (main.c:35)
+==14693==    by 0x403439: main (main.c:70)
+==14693==  Address 0x5016790 is 0 bytes inside a block of size 15 free'd
+==14693==    at 0x4E079AF: free (vg_replace_malloc.c:884)
+==14693==    by 0x4014D7: get_value (env.c:38)
+==14693==    by 0x4016EF: get_env (env.c:79)
+==14693==    by 0x40341A: main (main.c:68)
+==14693==  Block was alloc'd at
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4038A4: ft_strdup (ft_strdup.c:20)
+==14693==    by 0x4015CD: dup_env (env.c:56)
+==14693==    by 0x40165B: get_env (env.c:71)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== Invalid read of size 1
+==14693==    at 0x4E100D6: mempcpy (vg_replace_strmem.c:1684)
+==14693==    by 0x4C852AF: _IO_new_file_xsputn (fileops.c:1235)
+==14693==    by 0x4C852AF: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==14693==    by 0x4C616CE: outstring_func (vfprintf-internal.c:239)
+==14693==    by 0x4C616CE: __vfprintf_internal (vfprintf-process-arg.c:421)
+==14693==    by 0x4C558FE: printf (printf.c:33)
+==14693==    by 0x403289: debug_mini_shell (main.c:35)
+==14693==    by 0x403439: main (main.c:70)
+==14693==  Address 0x5016792 is 2 bytes inside a block of size 15 free'd
+==14693==    at 0x4E079AF: free (vg_replace_malloc.c:884)
+==14693==    by 0x4014D7: get_value (env.c:38)
+==14693==    by 0x4016EF: get_env (env.c:79)
+==14693==    by 0x40341A: main (main.c:68)
+==14693==  Block was alloc'd at
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4038A4: ft_strdup (ft_strdup.c:20)
+==14693==    by 0x4015CD: dup_env (env.c:56)
+==14693==    by 0x40165B: get_env (env.c:71)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== Invalid read of size 1
+==14693==    at 0x4C86F73: _IO_default_xsputn (genops.c:399)
+==14693==    by 0x4C86F73: _IO_default_xsputn (genops.c:370)
+==14693==    by 0x4C853A4: _IO_new_file_xsputn (fileops.c:1264)
+==14693==    by 0x4C853A4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==14693==    by 0x4C616CE: outstring_func (vfprintf-internal.c:239)
+==14693==    by 0x4C616CE: __vfprintf_internal (vfprintf-process-arg.c:421)
+==14693==    by 0x4C558FE: printf (printf.c:33)
+==14693==    by 0x403289: debug_mini_shell (main.c:35)
+==14693==    by 0x403439: main (main.c:70)
+==14693==  Address 0x50179cf is 1,007 bytes inside a block of size 1,770 free'd
+==14693==    at 0x4E079AF: free (vg_replace_malloc.c:884)
+==14693==    by 0x4014D7: get_value (env.c:38)
+==14693==    by 0x4016EF: get_env (env.c:79)
+==14693==    by 0x40341A: main (main.c:68)
+==14693==  Block was alloc'd at
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4038A4: ft_strdup (ft_strdup.c:20)
+==14693==    by 0x4015CD: dup_env (env.c:56)
+==14693==    by 0x40165B: get_env (env.c:71)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+--14693-- REDIR: 0x4d5a6a0 (libc.so.6:__strnlen_avx2) redirected to 0x4e0ae90 (strnlen)
+--14693-- REDIR: 0x4d57c90 (libc.so.6:__strcpy_avx2) redirected to 0x4e0afd0 (strcpy)
+--14693-- REDIR: 0x4c44210 (libc.so.6:setenv) redirected to 0x4e10e40 (setenv)
+--14693-- REDIR: 0x4d57300 (libc.so.6:__strchr_avx2) redirected to 0x4e0ab50 (index)
+--14693-- REDIR: 0x4d596f0 (libc.so.6:__strncmp_avx2) redirected to 0x4e0b5f0 (strncmp)
+--14693-- REDIR: 0x4c9d530 (libc.so.6:realloc) redirected to 0x4e09e39 (realloc)
+--14693-- REDIR: 0x4d54880 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4e0f3e0 (memmove)
+--14693-- REDIR: 0x4d57730 (libc.so.6:__strcmp_avx2) redirected to 0x4e0c0a0 (strcmp)
+--14693-- REDIR: 0x4c9db00 (libc.so.6:calloc) redirected to 0x4e09bf7 (calloc)
+--14693-- REDIR: 0x4d54850 (libc.so.6:__memcpy_chk_avx_unaligned_erms) redirected to 0x4e104f0 (__memcpy_chk)
+--14693-- REDIR: 0x4d55280 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x4e0f2d0 (memset)
+--14693-- REDIR: 0x4d59d40 (libc.so.6:__strncpy_avx2) redirected to 0x4e0b1b0 (strncpy)
+--14693-- REDIR: 0x4d53e80 (libc.so.6:__memchr_avx2) redirected to 0x4e0c280 (memchr)
+--14693-- REDIR: 0x4d55530 (libc.so.6:__stpcpy_avx2) redirected to 0x4e0eb80 (stpcpy)
+--14693-- REDIR: 0x4d56270 (libc.so.6:__strcasecmp_avx2) redirected to 0x4e0b8f0 (strcasecmp)
+--14693-- REDIR: 0x4d581a0 (libc.so.6:__strncasecmp_avx2) redirected to 0x4e0b9d0 (strncasecmp)
+--14693-- REDIR: 0x4d54120 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x4e0ea20 (bcmp)
+==14693== Invalid read of size 8
+==14693==    at 0x402BBB: free_cmd (free_struct.c:39)
+==14693==    by 0x402D5A: clear_cmds (list_cmd_utils.c:24)
+==14693==    by 0x402C90: free_mini_shell (free_struct.c:57)
+==14693==    by 0x403167: exit_end_program (exit.c:27)
+==14693==    by 0x403451: main (main.c:72)
+==14693==  Address 0x5018e70 is 0 bytes after a block of size 16 alloc'd
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4036EE: ft_calloc (ft_calloc.c:21)
+==14693==    by 0x4013CA: new_env_args (env.c:6)
+==14693==    by 0x401681: get_env (env.c:75)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== Invalid read of size 8
+==14693==    at 0x402BE0: free_cmd (free_struct.c:41)
+==14693==    by 0x402D5A: clear_cmds (list_cmd_utils.c:24)
+==14693==    by 0x402C90: free_mini_shell (free_struct.c:57)
+==14693==    by 0x403167: exit_end_program (exit.c:27)
+==14693==    by 0x403451: main (main.c:72)
+==14693==  Address 0x5018e78 is 8 bytes after a block of size 16 alloc'd
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4036EE: ft_calloc (ft_calloc.c:21)
+==14693==    by 0x4013CA: new_env_args (env.c:6)
+==14693==    by 0x401681: get_env (env.c:75)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== Invalid read of size 8
+==14693==    at 0x402C05: free_cmd (free_struct.c:43)
+==14693==    by 0x402D5A: clear_cmds (list_cmd_utils.c:24)
+==14693==    by 0x402C90: free_mini_shell (free_struct.c:57)
+==14693==    by 0x403167: exit_end_program (exit.c:27)
+==14693==    by 0x403451: main (main.c:72)
+==14693==  Address 0x5018e80 is 16 bytes after a block of size 16 alloc'd
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4036EE: ft_calloc (ft_calloc.c:21)
+==14693==    by 0x4013CA: new_env_args (env.c:6)
+==14693==    by 0x401681: get_env (env.c:75)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+==14693== Invalid read of size 8
+==14693==    at 0x402C2A: free_cmd (free_struct.c:45)
+==14693==    by 0x402D5A: clear_cmds (list_cmd_utils.c:24)
+==14693==    by 0x402C90: free_mini_shell (free_struct.c:57)
+==14693==    by 0x403167: exit_end_program (exit.c:27)
+==14693==    by 0x403451: main (main.c:72)
+==14693==  Address 0x5018e88 is 24 bytes after a block of size 16 in arena "client"
+==14693== 
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+==14693== Invalid read of size 8
+==14693==    at 0x402C37: free_cmd (free_struct.c:46)
+==14693==    by 0x402D5A: clear_cmds (list_cmd_utils.c:24)
+==14693==    by 0x402C90: free_mini_shell (free_struct.c:57)
+==14693==    by 0x403167: exit_end_program (exit.c:27)
+==14693==    by 0x403451: main (main.c:72)
+==14693==  Address 0x5018e88 is 24 bytes after a block of size 16 in arena "client"
+==14693== 
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+==14693== Invalid free() / delete / delete[] / realloc()
+==14693==    at 0x4E079AF: free (vg_replace_malloc.c:884)
+==14693==    by 0x402B6D: free_fd (free_struct.c:29)
+==14693==    by 0x402C42: free_cmd (free_struct.c:46)
+==14693==    by 0x402D5A: clear_cmds (list_cmd_utils.c:24)
+==14693==    by 0x402C90: free_mini_shell (free_struct.c:57)
+==14693==    by 0x403167: exit_end_program (exit.c:27)
+==14693==    by 0x403451: main (main.c:72)
+==14693==  Address 0x50 is not stack'd, malloc'd or (recently) free'd
+==14693== 
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+--14693-- warning: evaluate_Dwarf3_Expr: unhandled DW_OP_ 0x9b
+==14693== Invalid write of size 8
+==14693==    at 0x402C47: free_cmd (free_struct.c:46)
+==14693==    by 0x402D5A: clear_cmds (list_cmd_utils.c:24)
+==14693==    by 0x402C90: free_mini_shell (free_struct.c:57)
+==14693==    by 0x403167: exit_end_program (exit.c:27)
+==14693==    by 0x403451: main (main.c:72)
+==14693==  Address 0x5018e88 is 24 bytes after a block of size 16 in arena "client"
+==14693== 
+==14693== 
+==14693== FILE DESCRIPTORS: 4 open (3 std) at exit.
+==14693== Open file descriptor 3: /home/aurel/Documents/CLionProjects/Mini_Shell/valgrind-out.log
+==14693==    <inherited from parent>
+==14693== 
+==14693== 
+==14693== HEAP SUMMARY:
+==14693==     in use at exit: 224,818 bytes in 308 blocks
+==14693==   total heap usage: 913 allocs, 680 frees, 260,170 bytes allocated
+==14693== 
+==14693== Searching for pointers to 308 not-freed blocks
+==14693== Checked 238,328 bytes
+==14693== 
+==14693== 608 bytes in 1 blocks are definitely lost in loss record 29 of 75
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4036EE: ft_calloc (ft_calloc.c:21)
+==14693==    by 0x401562: dup_env (env.c:51)
+==14693==    by 0x40165B: get_env (env.c:71)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== 936 bytes in 75 blocks are definitely lost in loss record 31 of 75
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4037F9: ft_substr (ft_substr.c:30)
+==14693==    by 0x40143B: get_keys (env.c:19)
+==14693==    by 0x4016B8: get_env (env.c:77)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== LEAK SUMMARY:
+==14693==    definitely lost: 1,544 bytes in 76 blocks
+==14693==    indirectly lost: 0 bytes in 0 blocks
+==14693==      possibly lost: 0 bytes in 0 blocks
+==14693==    still reachable: 0 bytes in 0 blocks
+==14693==         suppressed: 223,274 bytes in 232 blocks
+==14693== 
+==14693== ERROR SUMMARY: 12144 errors from 15 contexts (suppressed: 0 from 0)
+==14693== 
+==14693== 75 errors in context 1 of 15:
+==14693== Invalid write of size 8
+==14693==    at 0x402C47: free_cmd (free_struct.c:46)
+==14693==    by 0x402D5A: clear_cmds (list_cmd_utils.c:24)
+==14693==    by 0x402C90: free_mini_shell (free_struct.c:57)
+==14693==    by 0x403167: exit_end_program (exit.c:27)
+==14693==    by 0x403451: main (main.c:72)
+==14693==  Address 0x5018e88 is 24 bytes after a block of size 16 in arena "client"
+==14693== 
+==14693== 
+==14693== 75 errors in context 2 of 15:
+==14693== Invalid free() / delete / delete[] / realloc()
+==14693==    at 0x4E079AF: free (vg_replace_malloc.c:884)
+==14693==    by 0x402B6D: free_fd (free_struct.c:29)
+==14693==    by 0x402C42: free_cmd (free_struct.c:46)
+==14693==    by 0x402D5A: clear_cmds (list_cmd_utils.c:24)
+==14693==    by 0x402C90: free_mini_shell (free_struct.c:57)
+==14693==    by 0x403167: exit_end_program (exit.c:27)
+==14693==    by 0x403451: main (main.c:72)
+==14693==  Address 0x50 is not stack'd, malloc'd or (recently) free'd
+==14693== 
+==14693== 
+==14693== 75 errors in context 3 of 15:
+==14693== Invalid read of size 8
+==14693==    at 0x402C37: free_cmd (free_struct.c:46)
+==14693==    by 0x402D5A: clear_cmds (list_cmd_utils.c:24)
+==14693==    by 0x402C90: free_mini_shell (free_struct.c:57)
+==14693==    by 0x403167: exit_end_program (exit.c:27)
+==14693==    by 0x403451: main (main.c:72)
+==14693==  Address 0x5018e88 is 24 bytes after a block of size 16 in arena "client"
+==14693== 
+==14693== 
+==14693== 75 errors in context 4 of 15:
+==14693== Invalid read of size 8
+==14693==    at 0x402C2A: free_cmd (free_struct.c:45)
+==14693==    by 0x402D5A: clear_cmds (list_cmd_utils.c:24)
+==14693==    by 0x402C90: free_mini_shell (free_struct.c:57)
+==14693==    by 0x403167: exit_end_program (exit.c:27)
+==14693==    by 0x403451: main (main.c:72)
+==14693==  Address 0x5018e88 is 24 bytes after a block of size 16 in arena "client"
+==14693== 
+==14693== 
+==14693== 75 errors in context 5 of 15:
+==14693== Invalid read of size 8
+==14693==    at 0x402C05: free_cmd (free_struct.c:43)
+==14693==    by 0x402D5A: clear_cmds (list_cmd_utils.c:24)
+==14693==    by 0x402C90: free_mini_shell (free_struct.c:57)
+==14693==    by 0x403167: exit_end_program (exit.c:27)
+==14693==    by 0x403451: main (main.c:72)
+==14693==  Address 0x5018e80 is 16 bytes after a block of size 16 alloc'd
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4036EE: ft_calloc (ft_calloc.c:21)
+==14693==    by 0x4013CA: new_env_args (env.c:6)
+==14693==    by 0x401681: get_env (env.c:75)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== 
+==14693== 75 errors in context 6 of 15:
+==14693== Invalid read of size 8
+==14693==    at 0x402BE0: free_cmd (free_struct.c:41)
+==14693==    by 0x402D5A: clear_cmds (list_cmd_utils.c:24)
+==14693==    by 0x402C90: free_mini_shell (free_struct.c:57)
+==14693==    by 0x403167: exit_end_program (exit.c:27)
+==14693==    by 0x403451: main (main.c:72)
+==14693==  Address 0x5018e78 is 8 bytes after a block of size 16 alloc'd
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4036EE: ft_calloc (ft_calloc.c:21)
+==14693==    by 0x4013CA: new_env_args (env.c:6)
+==14693==    by 0x401681: get_env (env.c:75)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== 
+==14693== 75 errors in context 7 of 15:
+==14693== Invalid read of size 8
+==14693==    at 0x402BBB: free_cmd (free_struct.c:39)
+==14693==    by 0x402D5A: clear_cmds (list_cmd_utils.c:24)
+==14693==    by 0x402C90: free_mini_shell (free_struct.c:57)
+==14693==    by 0x403167: exit_end_program (exit.c:27)
+==14693==    by 0x403451: main (main.c:72)
+==14693==  Address 0x5018e70 is 0 bytes after a block of size 16 alloc'd
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4036EE: ft_calloc (ft_calloc.c:21)
+==14693==    by 0x4013CA: new_env_args (env.c:6)
+==14693==    by 0x401681: get_env (env.c:75)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== 
+==14693== 75 errors in context 8 of 15:
+==14693== Invalid read of size 1
+==14693==    at 0x4E0AEF2: strlen (vg_replace_strmem.c:499)
+==14693==    by 0x4C61827: __vfprintf_internal (vfprintf-process-arg.c:397)
+==14693==    by 0x4C558FE: printf (printf.c:33)
+==14693==    by 0x403289: debug_mini_shell (main.c:35)
+==14693==    by 0x403439: main (main.c:70)
+==14693==  Address 0x5016790 is 0 bytes inside a block of size 15 free'd
+==14693==    at 0x4E079AF: free (vg_replace_malloc.c:884)
+==14693==    by 0x4014D7: get_value (env.c:38)
+==14693==    by 0x4016EF: get_env (env.c:79)
+==14693==    by 0x40341A: main (main.c:68)
+==14693==  Block was alloc'd at
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4038A4: ft_strdup (ft_strdup.c:20)
+==14693==    by 0x4015CD: dup_env (env.c:56)
+==14693==    by 0x40165B: get_env (env.c:71)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== 
+==14693== 762 errors in context 9 of 15:
+==14693== Invalid read of size 1
+==14693==    at 0x4C86F73: _IO_default_xsputn (genops.c:399)
+==14693==    by 0x4C86F73: _IO_default_xsputn (genops.c:370)
+==14693==    by 0x4C853A4: _IO_new_file_xsputn (fileops.c:1264)
+==14693==    by 0x4C853A4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==14693==    by 0x4C616CE: outstring_func (vfprintf-internal.c:239)
+==14693==    by 0x4C616CE: __vfprintf_internal (vfprintf-process-arg.c:421)
+==14693==    by 0x4C558FE: printf (printf.c:33)
+==14693==    by 0x403289: debug_mini_shell (main.c:35)
+==14693==    by 0x403439: main (main.c:70)
+==14693==  Address 0x50179cf is 1,007 bytes inside a block of size 1,770 free'd
+==14693==    at 0x4E079AF: free (vg_replace_malloc.c:884)
+==14693==    by 0x4014D7: get_value (env.c:38)
+==14693==    by 0x4016EF: get_env (env.c:79)
+==14693==    by 0x40341A: main (main.c:68)
+==14693==  Block was alloc'd at
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4038A4: ft_strdup (ft_strdup.c:20)
+==14693==    by 0x4015CD: dup_env (env.c:56)
+==14693==    by 0x40165B: get_env (env.c:71)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== 
+==14693== 1776 errors in context 10 of 15:
+==14693== Invalid read of size 1
+==14693==    at 0x4E100D6: mempcpy (vg_replace_strmem.c:1684)
+==14693==    by 0x4C852AF: _IO_new_file_xsputn (fileops.c:1235)
+==14693==    by 0x4C852AF: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==14693==    by 0x4C616CE: outstring_func (vfprintf-internal.c:239)
+==14693==    by 0x4C616CE: __vfprintf_internal (vfprintf-process-arg.c:421)
+==14693==    by 0x4C558FE: printf (printf.c:33)
+==14693==    by 0x403289: debug_mini_shell (main.c:35)
+==14693==    by 0x403439: main (main.c:70)
+==14693==  Address 0x5016792 is 2 bytes inside a block of size 15 free'd
+==14693==    at 0x4E079AF: free (vg_replace_malloc.c:884)
+==14693==    by 0x4014D7: get_value (env.c:38)
+==14693==    by 0x4016EF: get_env (env.c:79)
+==14693==    by 0x40341A: main (main.c:68)
+==14693==  Block was alloc'd at
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4038A4: ft_strdup (ft_strdup.c:20)
+==14693==    by 0x4015CD: dup_env (env.c:56)
+==14693==    by 0x40165B: get_env (env.c:71)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== 
+==14693== 1899 errors in context 11 of 15:
+==14693== Invalid read of size 1
+==14693==    at 0x4E100C8: mempcpy (vg_replace_strmem.c:1684)
+==14693==    by 0x4C852AF: _IO_new_file_xsputn (fileops.c:1235)
+==14693==    by 0x4C852AF: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==14693==    by 0x4C616CE: outstring_func (vfprintf-internal.c:239)
+==14693==    by 0x4C616CE: __vfprintf_internal (vfprintf-process-arg.c:421)
+==14693==    by 0x4C558FE: printf (printf.c:33)
+==14693==    by 0x403289: debug_mini_shell (main.c:35)
+==14693==    by 0x403439: main (main.c:70)
+==14693==  Address 0x5016790 is 0 bytes inside a block of size 15 free'd
+==14693==    at 0x4E079AF: free (vg_replace_malloc.c:884)
+==14693==    by 0x4014D7: get_value (env.c:38)
+==14693==    by 0x4016EF: get_env (env.c:79)
+==14693==    by 0x40341A: main (main.c:68)
+==14693==  Block was alloc'd at
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4038A4: ft_strdup (ft_strdup.c:20)
+==14693==    by 0x4015CD: dup_env (env.c:56)
+==14693==    by 0x40165B: get_env (env.c:71)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== 
+==14693== 2668 errors in context 12 of 15:
+==14693== Invalid read of size 1
+==14693==    at 0x4C852F9: _IO_new_file_xsputn (fileops.c:1218)
+==14693==    by 0x4C852F9: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==14693==    by 0x4C616CE: outstring_func (vfprintf-internal.c:239)
+==14693==    by 0x4C616CE: __vfprintf_internal (vfprintf-process-arg.c:421)
+==14693==    by 0x4C558FE: printf (printf.c:33)
+==14693==    by 0x403289: debug_mini_shell (main.c:35)
+==14693==    by 0x403439: main (main.c:70)
+==14693==  Address 0x501679d is 13 bytes inside a block of size 15 free'd
+==14693==    at 0x4E079AF: free (vg_replace_malloc.c:884)
+==14693==    by 0x4014D7: get_value (env.c:38)
+==14693==    by 0x4016EF: get_env (env.c:79)
+==14693==    by 0x40341A: main (main.c:68)
+==14693==  Block was alloc'd at
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4038A4: ft_strdup (ft_strdup.c:20)
+==14693==    by 0x4015CD: dup_env (env.c:56)
+==14693==    by 0x40165B: get_env (env.c:71)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+==14693== 
+==14693== 4437 errors in context 13 of 15:
+==14693== Invalid read of size 1
+==14693==    at 0x4E0AF04: strlen (vg_replace_strmem.c:499)
+==14693==    by 0x4C61827: __vfprintf_internal (vfprintf-process-arg.c:397)
+==14693==    by 0x4C558FE: printf (printf.c:33)
+==14693==    by 0x403289: debug_mini_shell (main.c:35)
+==14693==    by 0x403439: main (main.c:70)
+==14693==  Address 0x5016791 is 1 bytes inside a block of size 15 free'd
+==14693==    at 0x4E079AF: free (vg_replace_malloc.c:884)
+==14693==    by 0x4014D7: get_value (env.c:38)
+==14693==    by 0x4016EF: get_env (env.c:79)
+==14693==    by 0x40341A: main (main.c:68)
+==14693==  Block was alloc'd at
+==14693==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==14693==    by 0x4038A4: ft_strdup (ft_strdup.c:20)
+==14693==    by 0x4015CD: dup_env (env.c:56)
+==14693==    by 0x40165B: get_env (env.c:71)
+==14693==    by 0x40341A: main (main.c:68)
+==14693== 
+--14693-- 
+--14693-- used_suppression:     73 leak readline valgrind_ignore_leaks.txt:2 suppressed: 223,274 bytes in 232 blocks
+==14693== 
+==14693== ERROR SUMMARY: 12144 errors from 15 contexts (suppressed: 0 from 0)

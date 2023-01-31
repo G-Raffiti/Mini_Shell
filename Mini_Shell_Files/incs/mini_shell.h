@@ -111,8 +111,9 @@ int			find_in_dict(void *content, void *ref);
 int			set_quote_state(char c, char *quote);
 t_error 	dup_env(t_mini_shell *ms, char **env);//TODO : check when get_env ok
 void		get_env(t_mini_shell *mini_shell, char **env);//TODO : check when get_env ok
-t_error		get_keys(t_env_arg **env_dict); // TODO : same
+t_error		get_keys(t_env_arg **env_dict, char *env); // TODO : same
 t_error		new_env_args(t_env_arg **env_dict); //TODO : same
+t_error		get_value(t_env_arg **env_dict, char *env);
 // PARSING - READ_LINE /////////////////////////////////////////////////////////
 char		*read_line(void);
 
