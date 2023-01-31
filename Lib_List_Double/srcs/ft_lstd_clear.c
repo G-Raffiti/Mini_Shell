@@ -12,7 +12,7 @@
 
 #include "../incs/ft_lstd.h"
 
-void	ft_lstd_clear(t_lstd **lst, void (*free_fct)(void *))
+void	ft_lstd_clear(t_lstd **lst, void *(*free_fct)(void *))
 {
 	t_lstd	*temp;
 	t_lstd	*tmp;

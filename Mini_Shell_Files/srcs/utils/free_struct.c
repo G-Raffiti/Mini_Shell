@@ -40,8 +40,6 @@ void	*free_cmd(t_cmd *cmd)
 		cmd->path = ft_free(cmd->path);
 	if (cmd->cmd)
 		cmd->cmd = free_split(cmd->cmd);
-	if (cmd->args_cmd)
-		cmd->args_cmd = free_split(cmd->args_cmd);
 	if (cmd->input)
 		cmd->input = free_fd(cmd->input);
 	if (cmd->output)
@@ -54,12 +52,12 @@ void	*free_mini_shell(t_mini_shell *mini_shell)
 {
 	if (!mini_shell)
 		return (NULL);
-	if (mini_shell->env)
-		mini_shell->env = free_split(mini_shell->env);
-	ft_lstd_clear(&mini_shell->env_lst, (void (*)(void *))free_cmd);
+	//if (mini_shell->env)
+	//	mini_shell->env = free_split(mini_shell->env);
+	clear_cmds(&mini_shell->env_dict, free_cmd);
 	if (mini_shell->paths)
 		mini_shell->paths = free_split(mini_shell->paths);
-	ft_lstd_clear(&mini_shell->cmds, (void (*)(void *))free_cmd);
+	clear_cmds(&mini_shell->cmds, free_cmd);
 	mini_shell = ft_free(mini_shell);
 	return (NULL);
 }

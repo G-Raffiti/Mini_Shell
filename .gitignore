@@ -1,6 +1,9 @@
-# CLION
-*.xml
+# CLion
 .idea
+*.xml
+
+# Mac OS
+.DS_Store
 
 # Prerequisites
 *.d

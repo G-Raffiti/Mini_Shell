@@ -9,10 +9,10 @@ NAME =			liblstd.a
 CC =			gcc
 CC_FLAGS =		-Wall -Wextra -Werror
 PATH_OBJ =		./objs/
+PATH_INC =		./incs/
 PATH_SRC =		./srcs/
 
-FILES_INC =		./incs/ft_lstd.h \
-				../Mini_Shell_Files/incs/mini_shell.h
+FILES_INC =		./incs/ft_lstd.h
 
 FILES =			ft_lstd_at \
 				ft_lstd_clear \

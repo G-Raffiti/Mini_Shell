@@ -34,7 +34,7 @@ typedef struct s_lstd
 }	t_lstd;
 
 t_lstd	*ft_lstd_at(t_lstd *lst, unsigned int nbr);
-void	ft_lstd_clear(t_lstd **lst, void (*free_fct)(void *));
+void	ft_lstd_clear(t_lstd **lst, void *(*free_fct)(void *));
 int		ft_lstd_contain(t_lstd *lst, void *content);
 void	ft_lstd_del(t_lstd *elem, void (*free_fct)(void *));
 t_lstd	*ft_lstd_first(t_lstd *lst);

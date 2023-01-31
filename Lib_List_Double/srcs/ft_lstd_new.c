@@ -12,7 +12,7 @@
 
 #include "../incs/ft_lstd.h"
 
-t_lstd	*ft_lstd_new_elem(void *content)
+t_lstd	*ft_lstd_new(void *content)
 {
 	t_lstd	*elem;
 

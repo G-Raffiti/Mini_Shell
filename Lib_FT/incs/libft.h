@@ -6,7 +6,7 @@
 /*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:33:22 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/01/19 20:23:09 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/01/29 20:01:16 by rbonneva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@
 # include <stdio.h>
 # include <unistd.h>
 
-# ifndef BOOL
-#  define BOOL
-#  define TRUE 1
-#  define FALSE 0
+#ifndef T_BOOL
+# define T_BOOL
+
+typedef enum e_bool
+{
+	FALSE = 0,
+	TRUE = 1,
+}	t_bool;
+
 # endif
 
 void	ft_bzero(void *s, size_t n);

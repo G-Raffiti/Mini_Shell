@@ -31,7 +31,7 @@ void	ft_lst_push_front(t_lstd **lst, void *data)
 
 ///WARNING by using thin function you will lose the next and previous
 /// elements of elem
-void	ft_lst_push_front_elem(t_lstd **begin, t_lstd *elem)
+void	ft_lstd_push_front_elem(t_lstd **begin, t_lstd *elem)
 {
 	if (elem)
 	{

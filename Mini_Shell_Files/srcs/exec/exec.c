@@ -11,15 +11,11 @@ void	exec_cmd_child(t_mini_shell *mini_shell, t_lstd *current)
 	//  Attention aux fd in et out
 }
 
-void	make_child(t_mini_shell *mini_shell, t_lstd *current)
+void	make_child(t_mini_shell *ms, t_lstd *current)
 {
-	get(current)->pid = fork();
-	if (get(current)->pid == -1)
-	{
-		exit (0); // TODO [Raffi]: exit Fork failed
-	}
+	safe_fork(ms, current, " exec - make child");
 	if (get(current)->pid == 0)
-		exec_cmd_child(mini_shell, current);
+		exec_cmd_child(ms, current);
 }
 
 t_error	exec_cmds(t_mini_shell *mini_shell)
