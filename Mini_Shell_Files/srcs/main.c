@@ -40,14 +40,8 @@ void	debug_mini_shell(t_mini_shell *ms)
 		t_lstd *current = ms->env_dict;
 		while (current)
 		{
-			printf("env_dict: key: %s", get_env_dict(current->content)
-			->key);
-			if (get_env_dict(current->content)->value)
-			{
-				int i = -1;
-				while (get_env_dict(current->content)->value[++i])
-					printf("%s | ", get_env_dict(current->content)->value[i]);
-			}
+			printf("env_dict: key: %s = %s", get_env_dict(current)->key,
+				get_env_dict(current)->value);
 			printf("\n");
 			current = current->next;
 		}

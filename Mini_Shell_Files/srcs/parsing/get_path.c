@@ -4,9 +4,9 @@
 
 #include "../../incs/mini_shell.h"
 
-t_error	get_path(t_cmd *cmd, t_lstd *env_dict)
+t_error	get_path(t_mini_shell *ms, t_cmd *cmd)
 {
-	char **paths;
+	int i;
 
 	if (access(cmd->cmd[0], X_OK) == 0)
 	{
@@ -15,18 +15,18 @@ t_error	get_path(t_cmd *cmd, t_lstd *env_dict)
 			return (MALLOC_ERROR);
 		return (SUCCESS);
 	}
-	return (SUCCESS);
-	//TODO [Aurel] set env as a dictionary before
-	paths = get_env_dict(ft_lstd_find(env_dict, "PATH", find)->content)->value;
-	while (paths)
+	i = -1;
+	if (!ms->paths)
+		return (SUCCESS);
+	while (ms->paths[++i])
 	{
-		cmd->path = ft_strjoin(paths[0], cmd->cmd[0]);
+		cmd->path = ft_strjoin(ms->paths[i], cmd->cmd[i]);
 		if (!cmd->path)
 			return (MALLOC_ERROR);
 		if (access(cmd->path, X_OK) == 0)
 			return (SUCCESS);
 		cmd->path = ft_free(cmd->path);
-		paths++;
+		i++;
 	}
 	return (SUCCESS);
 }

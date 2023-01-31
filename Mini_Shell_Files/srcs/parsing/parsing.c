@@ -57,17 +57,17 @@ t_error	fill_cmds(t_mini_shell *ms)
 	dprintf(1, "get_first DONE | ");
 	while (current)
 	{
-		// TODO [Aurel]: find and replace $ARG with env_lst key/value
 		status = open_files(ms, get(current));
 		dprintf(1, "open_Files DONE | ");
 		if (status == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		else if (status == ERROR)
-			get(current)->is_valid = FALSE;
+			return (ERROR);
+		// TODO [Aurel]: find_in_dict and replace $ARG with env_lst key/value
 		if (get_cmd(get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		dprintf(1, "get_cmd DONE | ");
-		if (get_path(get(current), ms->env_dict) == MALLOC_ERROR)
+		if (get_path(ms, get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		dprintf(1, "get_path DONE | ");
 		set_builtin(current);
@@ -78,31 +78,28 @@ t_error	fill_cmds(t_mini_shell *ms)
 
 t_error	parse_line(t_mini_shell *mini_shell, char *line)
 {
+	t_error status;
 	if (check_line(line) == ERROR)
 		return (ERROR);
 	dprintf(1, "check DONE | ");
 	if (create_cmds(mini_shell, line) == MALLOC_ERROR)
 		return (free(line), exit_malloc(mini_shell));
 	dprintf(1, "crete cmds DONE | ");
-	if (fill_cmds(mini_shell) == MALLOC_ERROR)
+	status = fill_cmds(mini_shell);
+	if (status == MALLOC_ERROR)
 		return (free(line), exit_malloc(mini_shell));
+	else if (status == ERROR)
+		return (parse_error("syntax error near unexpected token `<'", 2));
 	dprintf(1, "fill cmds DONE\n");
 	return (SUCCESS);
 }
 
 /// cmp func to not use exept in get_env_value
-int find(void *content, void *ref)
+int find_in_dict(void *content, void *ref)
 {
 	if (ft_str_cmp(get_env_dict(content)->key, (char *)ref) == 0)
 		return (1);
 	return (0);
-}
-
-/// interpret the string after $ sign
-char *get_env_value(char *key, t_lstd *env_dict)
-{
-	return (get_env_dict(ft_lstd_find(env_dict, key, find)->content)
-		->value[0]);
 }
 
 /// TO use every where

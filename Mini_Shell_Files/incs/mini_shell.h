@@ -47,8 +47,7 @@ typedef struct s_fd
 typedef struct s_env_arg
 {
 	char			*key;
-	char			**value; //TODO : why char ** --> go char * and t_cmd->path**
-	char 			*value_test;
+	char 			*value;
 }					t_env_arg;
 
 typedef struct s_cmd
@@ -101,16 +100,14 @@ void		set_env(t_mini_shell *ms, char **env);
 
 // LIST UTILS //////////////////////////////////////////////////////////////////
 t_cmd		*get(t_lstd *lst);
-t_env_arg	*get_env_dict(void *content);
+t_env_arg	*get_env_dict(t_lstd *current);
 void		clear_cmds(t_lstd **lst, void *(*free_fct)(t_cmd *));
 
 // PARSING /////////////////////////////////////////////////////////////////////
 t_bool		is_quote_error(char *line);
 t_bool		is_chevron_error(char *line);
-t_error		parse_error(char *error_msg, int error_code);
 t_error		parse_line(t_mini_shell *ms, char *line);
-int			find(void *content, void *ref);
-char		*get_env_value(char *key, t_lstd *env_dict);
+int			find_in_dict(void *content, void *ref);
 int			set_quote_state(char c, char *quote);
 t_error 	dup_env(t_mini_shell *ms, char **env);//TODO : check when get_env ok
 void		get_env(t_mini_shell *mini_shell, char **env);//TODO : check when get_env ok
@@ -121,6 +118,7 @@ char		*read_line(void);
 
 // PARSING - CHECK LINE ////////////////////////////////////////////////////////
 t_error		check_line(char *line);
+t_error		parse_error(char *error_msg, int error_code);
 
 // PARSING - GET RAW CMD ///////////////////////////////////////////////////////
 char		**split_pipe(char *line);
@@ -132,7 +130,7 @@ t_error		get_cmd(t_cmd *cmd);
 t_error		open_files(t_mini_shell *ms, t_cmd *cmd);
 
 // PARSING - GET PATH //////////////////////////////////////////////////////////
-t_error		get_path(t_cmd *cmd, t_lstd *env_dict);
+t_error		get_path(t_mini_shell *ms, t_cmd *cmd);
 
 // SAFE FUNC ///////////////////////////////////////////////////////////////////
 void		safe_fork(t_mini_shell *ms, t_lstd *cmd, char *msg);
