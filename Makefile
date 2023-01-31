@@ -6,7 +6,7 @@
 
 NAME =			mini_shell
 CC =			gcc
-CC_FLAGS =		-Wall -Wextra -Werror -fsanitize=address -g3
+CC_FLAGS =		-Wall -Wextra -Werror -g3
 
 PATH_OBJ =		./Mini_Shell_Files/objs/
 PATH_SRC =		./Mini_Shell_Files/srcs/

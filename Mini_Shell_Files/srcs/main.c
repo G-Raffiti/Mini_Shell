@@ -27,20 +27,20 @@ static void	loop(t_mini_shell *mini_shell)
 
 void	debug_mini_shell(t_mini_shell *ms)
 {
-	printf("env %p\n", ms->env);
+	printf("------KEYS------\n\n env %p\n", ms->env);
 	if (ms->env)
 	{
 		int i = -1;
 		while (ms->env[++i])
 			printf("env line %d: %s\n", i, ms->env[i]);
 	}
-	printf("env_dict %p\n", ms->env_dict);
+	printf("env_dict %p\n\n\n ------KEYS------\n\n\n", ms->env_dict);
 	if (ms->env_dict)
 	{
 		t_lstd *current = ms->env_dict;
 		while (current)
 		{
-			printf("env_dict: key: %s value:", get_env_dict(current->content)
+			printf("env_dict: key: %s", get_env_dict(current->content)
 			->key);
 			if (get_env_dict(current->content)->value)
 			{
@@ -71,6 +71,7 @@ int	main(int argc, char **argv, char **env)
 	printf("Hello Hell !\n");
 	if (new_mini_shell(&mini_shell) == MALLOC_ERROR)
 		exit_malloc(mini_shell);
+	get_env(mini_shell, env);
 	set_env(mini_shell, env);
 	debug_mini_shell(mini_shell);
 	loop(mini_shell);

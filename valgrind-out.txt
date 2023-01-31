@@ -1,0 +1,268 @@
+==99271== Memcheck, a memory error detector
+==99271== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==99271== Using Valgrind-3.20.0-5147d671e4-20221024 and LibVEX; rerun with -h for copyright info
+==99271== Command: ./mini_shell
+==99271== Parent PID: 99270
+==99271== 
+--99271-- 
+--99271-- Valgrind options:
+--99271--    --show-leak-kinds=all
+--99271--    --leak-check=full
+--99271--    --track-fds=yes
+--99271--    --verbose
+--99271--    --show-mismatched-frees=yes
+--99271--    --read-var-info=yes
+--99271--    --suppressions=valgrind_ignore_leaks.txt
+--99271--    --log-file=valgrind-out.txt
+--99271-- Contents of /proc/version:
+--99271--   Linux version 6.1.6-200.fc37.x86_64 (mockbuild@bkernel01.iad2.fedoraproject.org) (gcc (GCC) 12.2.1 20221121 (Red Hat 12.2.1-4), GNU ld version 2.38-25.fc37) #1 SMP PREEMPT_DYNAMIC Sat Jan 14 16:55:06 UTC 2023
+--99271-- 
+--99271-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--99271-- Page sizes: currently 4096, max supported 4096
+--99271-- Valgrind library directory: /snap/valgrind/142/usr/libexec/valgrind
+--99271-- Reading syms from /home/aurel/Documents/CLionProjects/Mini_Shell/mini_shell
+--99271-- Reading syms from /usr/lib64/ld-linux-x86-64.so.2
+--99271-- Warning: cross-CU LIMITATION: some inlined fn names
+--99271-- might be shown as UnknownInlinedFun
+--99271-- warning: addVar: unknown size (buf)
+--99271-- warning: addVar: unknown size (buf)
+--99271-- warning: addVar: unknown size (loadcmds)
+--99271-- warning: addVar: unknown size (loadcmds)
+--99271-- warning: addVar: unknown size (loadcmds)
+--99271-- warning: addVar: unknown size (loadcmds)
+--99271-- warning: addVar: unknown size (loadcmds)
+--99271-- warning: addVar: unknown size (loadcmds)
+--99271-- warning: addVar: unknown size (loadcmds)
+--99271-- warning: addVar: unknown size (loadcmds)
+--99271-- Reading syms from /var/lib/snapd/snap/valgrind/142/usr/libexec/valgrind/memcheck-amd64-linux
+--99271--    object doesn't have a dynamic symbol table
+--99271-- Warning: inlined fn name without absori
+--99271-- is shown as UnknownInlinedFun
+--99271-- Scheduler: using generic scheduler lock implementation.
+--99271-- Reading suppressions file: valgrind_ignore_leaks.txt
+--99271-- Reading suppressions file: /snap/valgrind/142/usr/libexec/valgrind/default.supp
+==99271== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-99271-by-aurel-on-fedora-37
+==99271== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-99271-by-aurel-on-fedora-37
+==99271== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-99271-by-aurel-on-fedora-37
+==99271== 
+==99271== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==99271== don't want to do, unless you know exactly what you're doing,
+==99271== or are doing some strange experiment):
+==99271==   /snap/valgrind/142/usr/libexec/valgrind/../../bin/vgdb --pid=99271 ...command...
+==99271== 
+==99271== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==99271==   /path/to/gdb ./mini_shell
+==99271== and then give GDB the following command
+==99271==   target remote | /snap/valgrind/142/usr/libexec/valgrind/../../bin/vgdb --pid=99271
+==99271== --pid is optional if only one valgrind process is running
+==99271== 
+--99271-- REDIR: 0x4024a50 (ld-linux-x86-64.so.2:strlen) redirected to 0x581eb5de (vgPlain_amd64_linux_REDIR_FOR_strlen)
+--99271-- REDIR: 0x4023200 (ld-linux-x86-64.so.2:index) redirected to 0x581eb5f8 (vgPlain_amd64_linux_REDIR_FOR_index)
+--99271-- Reading syms from /var/lib/snapd/snap/valgrind/142/usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--99271-- Reading syms from /var/lib/snapd/snap/valgrind/142/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+==99271== WARNING: new redirection conflicts with existing -- ignoring it
+--99271--     old: 0x04024a50 (strlen              ) R-> (0000.0) 0x581eb5de vgPlain_amd64_linux_REDIR_FOR_strlen
+--99271--     new: 0x04024a50 (strlen              ) R-> (2007.0) 0x04e0afb0 strlen
+--99271-- REDIR: 0x4023430 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4e0c1e0 (strcmp)
+--99271-- REDIR: 0x4022650 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4e10400 (mempcpy)
+--99271-- Reading syms from /usr/lib64/libreadline.so.8.2
+==99271== Downloading debug info for /usr/lib64/libreadline.so.8.2...
+--99271--   Considering /home/aurel/.cache/debuginfod_client/7a2fe3f0fdf59c9969b6fc975d45dc8c5bafce75/debuginfo ..
+--99271--   .. CRC is valid
+==99271== Successfully downloaded debug file for /usr/lib64/libreadline.so.8.2
+==99271== Downloading debug info for /home/aurel/.cache/debuginfod_client/7a2fe3f0fdf59c9969b6fc975d45dc8c5bafce75/debuginfo...
+--99271--   Considering /home/aurel/.cache/debuginfod_client/adca371d74b343ee7c7336ed32b79413c5e760fd/debuginfo ..
+--99271--   .. build-id is valid
+==99271== Successfully downloaded debug file for /home/aurel/.cache/debuginfod_client/7a2fe3f0fdf59c9969b6fc975d45dc8c5bafce75/debuginfo
+--99271-- Reading syms from /usr/lib64/libc.so.6
+==99271== Downloading debug info for /usr/lib64/libc.so.6...
+--99271--   Considering /home/aurel/.cache/debuginfod_client/81daba31ee66dbd63efdc4252a872949d874d136/debuginfo ..
+--99271--   .. CRC is valid
+==99271== Successfully downloaded debug file for /usr/lib64/libc.so.6
+==99271== WARNING: new redirection conflicts with existing -- ignoring it
+--99271--     old: 0x04c9da30 (memalign            ) R-> (1011.0) 0x04e0a1f5 memalign
+--99271--     new: 0x04c9da30 (memalign            ) R-> (1017.0) 0x04e0a1cb aligned_alloc
+==99271== WARNING: new redirection conflicts with existing -- ignoring it
+--99271--     old: 0x04c9da30 (memalign            ) R-> (1011.0) 0x04e0a1f5 memalign
+--99271--     new: 0x04c9da30 (memalign            ) R-> (1017.0) 0x04e0a1a1 aligned_alloc
+==99271== WARNING: new redirection conflicts with existing -- ignoring it
+--99271--     old: 0x04c9da30 (memalign            ) R-> (1011.0) 0x04e0a1f5 memalign
+--99271--     new: 0x04c9da30 (memalign            ) R-> (1017.0) 0x04e0a1cb aligned_alloc
+==99271== WARNING: new redirection conflicts with existing -- ignoring it
+--99271--     old: 0x04c9da30 (memalign            ) R-> (1011.0) 0x04e0a1f5 memalign
+--99271--     new: 0x04c9da30 (memalign            ) R-> (1017.0) 0x04e0a1a1 aligned_alloc
+--99271-- Reading syms from /usr/lib64/libtinfo.so.6.3
+==99271== Downloading debug info for /usr/lib64/libtinfo.so.6.3...
+--99271--   Considering /home/aurel/.cache/debuginfod_client/698cae6b13b3a224051b6646b50e00a6d62f83fe/debuginfo ..
+--99271--   .. CRC is valid
+==99271== Successfully downloaded debug file for /usr/lib64/libtinfo.so.6.3
+==99271== Downloading debug info for /home/aurel/.cache/debuginfod_client/698cae6b13b3a224051b6646b50e00a6d62f83fe/debuginfo...
+--99271--   Considering /home/aurel/.cache/debuginfod_client/73935a68039cfaf2a6d3d2d2868c0a35234b5990/debuginfo ..
+--99271--   .. build-id is valid
+==99271== Successfully downloaded debug file for /home/aurel/.cache/debuginfod_client/698cae6b13b3a224051b6646b50e00a6d62f83fe/debuginfo
+--99271-- REDIR: 0x4024bf0 (ld-linux-x86-64.so.2:strncmp) redirected to 0x4e0b870 (strncmp)
+--99271-- REDIR: 0x4ca3b90 (libc.so.6:strnlen) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca3c20 (libc.so.6:strpbrk) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca1cd0 (libc.so.6:strcmp) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4cb6e30 (libc.so.6:wcsnlen) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca0df0 (libc.so.6:memset) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4cb56b0 (libc.so.6:wcslen) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca03e0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4cb54c0 (libc.so.6:wcschr) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca1bc0 (libc.so.6:index) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca3c50 (libc.so.6:rindex) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4cb5550 (libc.so.6:wcscmp) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca1040 (libc.so.6:stpncpy) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4cb5b00 (libc.so.6:wmemchr) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca3a30 (libc.so.6:strncmp) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca10b0 (libc.so.6:strcasecmp) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca2f40 (libc.so.6:strcspn) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4cb55e0 (libc.so.6:wcscpy) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca1b40 (libc.so.6:strcat) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca3920 (libc.so.6:strncasecmp_l) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca02e0 (libc.so.6:bcmp) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca0d60 (libc.so.6:memrchr) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca1c40 (libc.so.6:strchrnul) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca2ec0 (libc.so.6:strcpy) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca1150 (libc.so.6:strcasecmp_l) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca37f0 (libc.so.6:strlen) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca3ad0 (libc.so.6:strncpy) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca0fc0 (libc.so.6:stpcpy) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca0b20 (libc.so.6:memmove) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+==99271== Preferring higher priority redirection:
+--99271--     old: 0x04d54880 (__memcpy_avx_unalign) R-> (2018.0) 0x04e0d720 __memcpy_avx_unaligned_erms
+--99271--     new: 0x04d54880 (__memcpy_avx_unalign) R-> (2018.1) 0x04e0f3e0 memmove
+--99271-- REDIR: 0x4ca0250 (libc.so.6:memchr) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca3e10 (libc.so.6:strspn) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca0c40 (libc.so.6:mempcpy) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca3880 (libc.so.6:strncasecmp) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca0ef0 (libc.so.6:rawmemchr) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca39c0 (libc.so.6:strncat) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4d1b780 (libc.so.6:__memcpy_chk) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4ca45b0 (libc.so.6:strstr) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+--99271-- REDIR: 0x4d1b8a0 (libc.so.6:__memmove_chk) redirected to 0x4a006e8 (_vgnU_ifunc_wrapper)
+==99271== WARNING: new redirection conflicts with existing -- ignoring it
+--99271--     old: 0x04d54850 (__memcpy_chk_avx_una) R-> (2030.0) 0x04e104f0 __memcpy_chk
+--99271--     new: 0x04d54850 (__memcpy_chk_avx_una) R-> (2024.0) 0x04e0feb0 __memmove_chk
+--99271-- REDIR: 0x4d5a970 (libc.so.6:__strrchr_avx2) redirected to 0x4e0a930 (rindex)
+--99271-- REDIR: 0x4d58020 (libc.so.6:__strlen_avx2) redirected to 0x4e0aef0 (strlen)
+--99271-- REDIR: 0x4c9cd50 (libc.so.6:malloc) redirected to 0x4e05053 (malloc)
+--99271-- REDIR: 0x4d57540 (libc.so.6:__strchrnul_avx2) redirected to 0x4e0ff30 (strchrnul)
+--99271-- REDIR: 0x4d54840 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4e10040 (mempcpy)
+==99271== Conditional jump or move depends on uninitialised value(s)
+==99271==    at 0x4032CC: debug_mini_shell (main.c:45)
+==99271==    by 0x40345E: main (main.c:76)
+==99271== 
+--99271-- REDIR: 0x4d5a6a0 (libc.so.6:__strnlen_avx2) redirected to 0x4e0ae90 (strnlen)
+--99271-- REDIR: 0x4d57c90 (libc.so.6:__strcpy_avx2) redirected to 0x4e0afd0 (strcpy)
+--99271-- REDIR: 0x4d596f0 (libc.so.6:__strncmp_avx2) redirected to 0x4e0b5f0 (strncmp)
+--99271-- REDIR: 0x4d54880 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4e0f3e0 (memmove)
+--99271-- REDIR: 0x4c9db00 (libc.so.6:calloc) redirected to 0x4e09bf7 (calloc)
+--99271-- REDIR: 0x4d57300 (libc.so.6:__strchr_avx2) redirected to 0x4e0ab50 (index)
+--99271-- REDIR: 0x4c9d2f0 (libc.so.6:free) redirected to 0x4e07941 (free)
+--99271-- REDIR: 0x4d57730 (libc.so.6:__strcmp_avx2) redirected to 0x4e0c0a0 (strcmp)
+--99271-- REDIR: 0x4d54850 (libc.so.6:__memcpy_chk_avx_unaligned_erms) redirected to 0x4e104f0 (__memcpy_chk)
+--99271-- REDIR: 0x4c9d530 (libc.so.6:realloc) redirected to 0x4e09e39 (realloc)
+--99271-- REDIR: 0x4d55280 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x4e0f2d0 (memset)
+--99271-- REDIR: 0x4d59d40 (libc.so.6:__strncpy_avx2) redirected to 0x4e0b1b0 (strncpy)
+--99271-- REDIR: 0x4c44210 (libc.so.6:setenv) redirected to 0x4e10e40 (setenv)
+--99271-- REDIR: 0x4d53e80 (libc.so.6:__memchr_avx2) redirected to 0x4e0c280 (memchr)
+--99271-- REDIR: 0x4d55530 (libc.so.6:__stpcpy_avx2) redirected to 0x4e0eb80 (stpcpy)
+--99271-- REDIR: 0x4d56270 (libc.so.6:__strcasecmp_avx2) redirected to 0x4e0b8f0 (strcasecmp)
+--99271-- REDIR: 0x4d581a0 (libc.so.6:__strncasecmp_avx2) redirected to 0x4e0b9d0 (strncasecmp)
+--99271-- REDIR: 0x4d54120 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x4e0ea20 (bcmp)
+==99271== 
+==99271== Process terminating with default action of signal 2 (SIGINT)
+==99271==    at 0x4C3ED5B: kill (syscall-template.S:120)
+==99271==    by 0x48900A9: UnknownInlinedFun (signals.c:290)
+==99271==    by 0x48900A9: _rl_signal_handler (signals.c:149)
+==99271==    by 0x4890E14: rl_getc (input.c:918)
+==99271==    by 0x48906AC: rl_read_key (input.c:793)
+==99271==    by 0x4874711: readline_internal_char (readline.c:614)
+==99271==    by 0x487D7E4: UnknownInlinedFun (readline.c:721)
+==99271==    by 0x487D7E4: UnknownInlinedFun (readline.c:733)
+==99271==    by 0x487D7E4: readline (readline.c:387)
+==99271==    by 0x40299A: read_line (read_line.c:19)
+==99271==    by 0x40312F: loop (main.c:11)
+==99271==    by 0x40346A: main (main.c:77)
+==99271== 
+==99271== FILE DESCRIPTORS: 4 open (3 std) at exit.
+==99271== Open file descriptor 3: /home/aurel/Documents/CLionProjects/Mini_Shell/valgrind-out.txt
+==99271==    <inherited from parent>
+==99271== 
+==99271== 
+==99271== HEAP SUMMARY:
+==99271==     in use at exit: 238,899 bytes in 558 blocks
+==99271==   total heap usage: 762 allocs, 204 frees, 252,483 bytes allocated
+==99271== 
+==99271== Searching for pointers to 558 not-freed blocks
+==99271== Checked 253,768 bytes
+==99271== 
+==99271== 40 bytes in 1 blocks are still reachable in loss record 20 of 89
+==99271==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==99271==    by 0x402E59: new_mini_shell (new_struct.c:36)
+==99271==    by 0x40341B: main (main.c:72)
+==99271== 
+==99271== 616 bytes in 1 blocks are still reachable in loss record 36 of 89
+==99271==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==99271==    by 0x40370E: ft_calloc (ft_calloc.c:21)
+==99271==    by 0x4014C8: dup_env (env.c:32)
+==99271==    by 0x4015BA: get_env (env.c:52)
+==99271==    by 0x40343F: main (main.c:74)
+==99271== 
+==99271== 940 bytes in 76 blocks are still reachable in loss record 41 of 89
+==99271==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==99271==    by 0x403819: ft_substr (ft_substr.c:30)
+==99271==    by 0x40145F: get_keys (env.c:21)
+==99271==    by 0x401613: get_env (env.c:59)
+==99271==    by 0x40343F: main (main.c:74)
+==99271== 
+==99271== 1,024 bytes in 1 blocks are still reachable in loss record 42 of 89
+==99271==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==99271==    by 0x4C79203: _IO_file_doallocate (filedoalloc.c:101)
+==99271==    by 0x4C86E2F: _IO_doallocbuf (genops.c:347)
+==99271==    by 0x4C86E2F: _IO_doallocbuf (genops.c:342)
+==99271==    by 0x4C861C7: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+==99271==    by 0x4C8536D: _IO_new_file_xsputn (fileops.c:1243)
+==99271==    by 0x4C8536D: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==99271==    by 0x4C7B45B: puts (ioputs.c:40)
+==99271==    by 0x40340F: main (main.c:71)
+==99271== 
+==99271== 1,824 bytes in 76 blocks are still reachable in loss record 53 of 89
+==99271==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==99271==    by 0x4013C5: new_env_args (env.c:6)
+==99271==    by 0x4015D9: get_env (env.c:56)
+==99271==    by 0x40343F: main (main.c:74)
+==99271== 
+==99271== 1,824 bytes in 76 blocks are still reachable in loss record 54 of 89
+==99271==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==99271==    by 0x403BD4: ft_lstd_new (in /home/aurel/Documents/CLionProjects/Mini_Shell/mini_shell)
+==99271==    by 0x40162E: get_env (env.c:61)
+==99271==    by 0x40343F: main (main.c:74)
+==99271== 
+==99271== 4,704 bytes in 76 blocks are still reachable in loss record 75 of 89
+==99271==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==99271==    by 0x4038C4: ft_strdup (ft_strdup.c:20)
+==99271==    by 0x40152C: dup_env (env.c:37)
+==99271==    by 0x4015BA: get_env (env.c:52)
+==99271==    by 0x40343F: main (main.c:74)
+==99271== 
+==99271== LEAK SUMMARY:
+==99271==    definitely lost: 0 bytes in 0 blocks
+==99271==    indirectly lost: 0 bytes in 0 blocks
+==99271==      possibly lost: 0 bytes in 0 blocks
+==99271==    still reachable: 10,972 bytes in 307 blocks
+==99271==         suppressed: 227,927 bytes in 251 blocks
+==99271== 
+==99271== Use --track-origins=yes to see where uninitialised values come from
+==99271== ERROR SUMMARY: 76 errors from 1 contexts (suppressed: 0 from 0)
+==99271== 
+==99271== 76 errors in context 1 of 1:
+==99271== Conditional jump or move depends on uninitialised value(s)
+==99271==    at 0x4032CC: debug_mini_shell (main.c:45)
+==99271==    by 0x40345E: main (main.c:76)
+==99271== 
+--99271-- 
+--99271-- used_suppression:     82 leak readline valgrind_ignore_leaks.txt:2 suppressed: 227,927 bytes in 251 blocks
+==99271== 
+==99271== ERROR SUMMARY: 76 errors from 1 contexts (suppressed: 0 from 0)
