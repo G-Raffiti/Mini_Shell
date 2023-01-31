@@ -47,7 +47,8 @@ FILES =			ft_contain \
 				ft_strnstr \
 				ft_strrchr \
 				ft_strtrim \
-				ft_split
+				ft_split\
+				ft_strlen_tab
 OBJS =			$(addprefix $(PATH_OBJ), $(addsuffix .o, $(FILES)))
 BONUSOBJS =		$(addprefix $(PATH_OBJ), $(addsuffix .o, $(BONUSES)))
 SRCS =			$(addprefix $(PATH_SRC), $(addsuffix .c, $(FILES)))

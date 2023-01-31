@@ -39,10 +39,11 @@ static void	chevron_in(t_mini_shell *ms, t_lstd *current, t_chevron type, char
 		chevron_out(ms, current, type, file_name);
 		return ;
 	}
-	safe_close(ms, get(current)->input, "chevron_in");
+	safe_close(ms, get(current)->input, "chevron_in");//TODO casseur de open
 	if (type == IN_CHT)
 	{
 		get(current)->input->fd = open(file_name, O_RDONLY);
+		//dprintf(2,"ok %d-%s\n", get(current)->input->fd, file_name);
 		get(current)->input->type = type;
 	}
 	else if (type == HERE_DOC_CHT)

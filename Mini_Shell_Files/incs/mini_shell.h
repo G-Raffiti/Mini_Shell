@@ -47,7 +47,8 @@ typedef struct s_fd
 typedef struct s_env_arg
 {
 	char			*key;
-	char			**value;
+	char			**value; //TODO : why char ** --> go char * and t_cmd->path**
+	char 			*value_test;
 }					t_env_arg;
 
 typedef struct s_cmd
@@ -111,7 +112,10 @@ t_error		parse_line(t_mini_shell *ms, char *line);
 int			find(void *content, void *ref);
 char		*get_env_value(char *key, t_lstd *env_dict);
 int			set_quote_state(char c, char *quote);
-
+t_error 	dup_env(t_mini_shell *ms, char **env);//TODO : check when get_env ok
+void		get_env(t_mini_shell *mini_shell, char **env);//TODO : check when get_env ok
+t_error		get_keys(t_env_arg **env_dict); // TODO : same
+t_error		new_env_args(t_env_arg **env_dict); //TODO : same
 // PARSING - READ_LINE /////////////////////////////////////////////////////////
 char		*read_line(void);
 
