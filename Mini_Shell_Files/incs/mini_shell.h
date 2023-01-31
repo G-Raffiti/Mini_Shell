@@ -122,13 +122,13 @@ t_error		check_line(char *line);
 char		**split_pipe(char *line);
 
 // PARSING - GET CMD ///////////////////////////////////////////////////////////
-t_error		get_cmd(t_lstd *current);
+t_error		get_cmd(t_cmd *cmd);
 
 // PARSING - OPEN FILES ////////////////////////////////////////////////////////
-t_error		open_files(t_mini_shell *ms, t_lstd *current);
+t_error		open_files(t_mini_shell *ms, t_cmd *cmd);
 
 // PARSING - GET PATH //////////////////////////////////////////////////////////
-t_error		get_path(t_lstd *current, t_lstd *env_dict);
+t_error		get_path(t_cmd *cmd, t_lstd *env_dict);
 
 // SAFE FUNC ///////////////////////////////////////////////////////////////////
 void		safe_fork(t_mini_shell *ms, t_lstd *cmd, char *msg);

@@ -58,16 +58,16 @@ t_error	fill_cmds(t_mini_shell *ms)
 	while (current)
 	{
 		// TODO [Aurel]: find and replace $ARG with env_lst key/value
-		status = open_files(ms, current);
+		status = open_files(ms, get(current));
 		dprintf(1, "open_Files DONE | ");
 		if (status == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		else if (status == ERROR)
 			get(current)->is_valid = FALSE;
-		if (get_cmd(current) == MALLOC_ERROR)
+		if (get_cmd(get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		dprintf(1, "get_cmd DONE | ");
-		if (get_path(current, ms->env_dict) == MALLOC_ERROR)
+		if (get_path(get(current), ms->env_dict) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		dprintf(1, "get_path DONE | ");
 		set_builtin(current);

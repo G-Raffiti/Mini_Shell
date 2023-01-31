@@ -26,8 +26,6 @@ void	safe_pipe(t_mini_shell *ms, char *msg)
 
 void	safe_close(t_mini_shell *ms, t_fd *fd, char *msg)
 {
-	if (fd->fd == -1)
-		return ;
 	if (close(fd->fd) == -1)
 	{
 		ms = free_mini_shell(ms);

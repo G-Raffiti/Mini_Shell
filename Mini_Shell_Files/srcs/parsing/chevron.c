@@ -3,59 +3,59 @@
 #include "../../incs/mini_shell.h"
 
 ///open file and create t_fd
-static void	chevron_out(t_mini_shell *ms, t_lstd *current, t_chevron type, char
+static void	chevron_out(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 *file_name)
 {
-	if (get(current)->output->fd != -1)
-		safe_close(ms, get(current)->output, "chevron_out");
+	if (cmd->output->fd > 0)
+		safe_close(ms, cmd->output, "chevron_out");
 	if (type == OUT_CHT)
 	{
-		get(current)->output->fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		get(current)->output->type = type;
+		cmd->output->fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		cmd->output->type = type;
 	}
 	else // if (type == APPEND_CHT)
 	{
-		get(current)->output->fd = open(file_name, O_CREAT | O_WRONLY
-												   | O_APPEND, 0644);
-		get(current)->output->type = type;
+		cmd->output->fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
+		cmd->output->type = type;
 	}
-	printf("{out: %d-%s} ", get(current)->output->fd, file_name);
-	if (get(current)->output->fd == -1)
+	printf("{out: %d-%s} ", cmd->output->fd, file_name);
+	if (cmd->output->fd == -1)
 	{
 		perror(file_name);
-		get(current)->is_valid = FALSE;
+		cmd->is_valid = FALSE;
 	}
 
 }
 
 ///open file and create t_fd
-static void	chevron_in(t_mini_shell *ms, t_lstd *current, t_chevron type, char
+static void	chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 *file_name)
 {
-	if (!get(current)->is_valid)
+	if (!cmd->is_valid)
 		return ;
 	if (type == OUT_CHT || type == APPEND_CHT)
 	{
-		chevron_out(ms, current, type, file_name);
+		chevron_out(ms, cmd, type, file_name);
 		return ;
 	}
-	safe_close(ms, get(current)->input, "chevron_in");
+	if (cmd->input->fd > 0)
+		safe_close(ms, cmd->input, "chevron_in");
 	if (type == IN_CHT)
 	{
-		get(current)->input->fd = open(file_name, O_RDONLY);
-		get(current)->input->type = type;
+		cmd->input->fd = open(file_name, O_RDONLY);
+		cmd->input->type = type;
 	}
 	else if (type == HERE_DOC_CHT)
 	{
-		get(current)->input->fd = open(file_name, O_CREAT | O_TRUNC |
+		cmd->input->fd = open(file_name, O_CREAT | O_TRUNC |
 		O_WRONLY, 0644);
-		get(current)->input->type = type;
+		cmd->input->type = type;
 	}
-	printf("{in: %d-%s} ", get(current)->input->fd, file_name);
-	if (get(current)->input->fd == -1)
+	printf("{in: %d-%s} ", cmd->input->fd, file_name);
+	if (cmd->input->fd == -1)
 	{
 		perror(file_name);
-		get(current)->is_valid = FALSE;
+		cmd->is_valid = FALSE;
 	}
 }
 
@@ -112,7 +112,7 @@ static t_error extract_file_name(char *str, char *quote, char **file_name)
 	return (SUCCESS);
 }
 
-t_error	open_files(t_mini_shell *ms, t_lstd *current)
+t_error	open_files(t_mini_shell *ms, t_cmd *cmd)
 {
 	char		*str;
 	char		quote;
@@ -121,7 +121,7 @@ t_error	open_files(t_mini_shell *ms, t_lstd *current)
 	t_error		error;
 
 	error = SUCCESS;
-	str = get(current)->raw_cmd;
+	str = cmd->raw_cmd;
 	quote = 0;
 	while (*str)
 	{
@@ -130,7 +130,7 @@ t_error	open_files(t_mini_shell *ms, t_lstd *current)
 			chevron_type = get_chevron_type(str);
 			if (extract_file_name(str, &quote, &file_name) != SUCCESS)
 				return (error);
-			chevron_in(ms, current, chevron_type, file_name);
+			chevron_in(ms, cmd, chevron_type, file_name);
 			file_name = ft_free(file_name);
 		}
 		str++;

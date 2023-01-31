@@ -96,10 +96,10 @@ static char	**split_cmd(char *raw_cmd)
 	return (split);
 }
 
-t_error	get_cmd(t_lstd *current)
+t_error	get_cmd(t_cmd *cmd)
 {
-	get(current)->cmd = split_cmd(get(current)->raw_cmd);
-	if (!get(current)->cmd)
+	cmd->cmd = split_cmd(cmd->raw_cmd);
+	if (!cmd->cmd)
 		return (MALLOC_ERROR);
 	return (SUCCESS);
 }
