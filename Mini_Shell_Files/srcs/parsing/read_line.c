@@ -2,9 +2,6 @@
 // Created by Raphael Bonneval on 1/24/23.
 //
 
-// TODO [Raphael] : install brew & Readline
-// TODO [Raphael] : ingnore leaks
-
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
