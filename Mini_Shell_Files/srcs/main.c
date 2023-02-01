@@ -25,7 +25,7 @@ static void	loop(t_mini_shell *ms)
 			clear_cmds(&(ms->cmds), free_cmd);
 			exit_end_program(ms);
 		}
-		exec_cmds(ms);
+		//exec_cmds(ms);
 		clear_cmds(&(ms->cmds), free_cmd);
 		line = ft_free(line);
 	}
