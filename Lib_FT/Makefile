@@ -7,7 +7,7 @@
 
 NAME =			libft.a
 CC =			clang
-CC_FLAGS =		-Wall -Wextra -Werror -g3
+CC_FLAGS =		-Wall -Wextra -Werror -gdwarf-4 -g3
 PATH_OBJ =		./objs/
 PATH_SRC =		./srcs/
 PATH_INC =		./incs/

@@ -36,6 +36,7 @@ t_bool	is_chevron_error(char *line)
 	char	is_in_quote;
 
 	is_in_quote = 0;
+	is_chevron_last = FALSE;
 	while (*line)
 	{
 		set_quote_state(*line, &is_in_quote);

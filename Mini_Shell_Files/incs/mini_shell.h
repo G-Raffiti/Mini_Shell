@@ -145,5 +145,6 @@ t_error		exec_cmds(t_mini_shell *ms);
 
 // TEST ////////////////////////////////////////////////////////////////////////
 void		print_debug_cmds(t_mini_shell *ms);
+void		debug_mini_shell(t_mini_shell *ms);
 
 #endif
