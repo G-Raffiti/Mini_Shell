@@ -1,0 +1,12 @@
+PID=0PID=0PID=53022PID=0PID=530211
+2
+3
+5
+6
++
+this is in1
+{cmd: cat | files: pipe=(3-5) | fds=(3-5)}
+{cmd: cat | files: pipe=(3-5) | fds=(3-5)}
+{cmd: cat | files: pipe=(3-5) | fds=(3-4)}PID=53023
+{cmd: cat | files: pipe=(3-5) | fds=(3-4)}
+ms_$> Error: Bad file descriptor: exec: close_pipeline 2

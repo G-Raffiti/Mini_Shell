@@ -4,9 +4,9 @@
 #								FILES									#
 #***********************************************************************#
 
-NAME =			mini_shell
+NAME =			ms.out
 CC =			gcc
-CC_FLAGS =		-Wall -Wextra -Werror -g3#-fsanitize=address
+CC_FLAGS =		-Wall -Wextra -Werror -gdwarf-4 -g3#-fsanitize=address
 
 PATH_OBJ =		./Mini_Shell_Files/objs/
 PATH_SRC =		./Mini_Shell_Files/srcs/
@@ -27,6 +27,8 @@ FILES =			\
 				\
 				env/env \
 				\
+				exec/exec \
+				\
 				parsing/check_line \
 				parsing/chevron \
 				parsing/get_cmd \
@@ -35,6 +37,7 @@ FILES =			\
 				parsing/parsing \
 				parsing/read_line \
 				parsing/replace_dollars \
+				parsing/set_builtin \
 				\
 				utils/free_struct \
 				utils/list_cmd_utils \

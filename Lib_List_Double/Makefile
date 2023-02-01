@@ -7,7 +7,7 @@
 
 NAME =			liblstd.a
 CC =			gcc
-CC_FLAGS =		-Wall -Wextra -Werror
+CC_FLAGS =		-Wall -Wextra -Werror -gdwarf-4 -g3
 PATH_OBJ =		./objs/
 PATH_INC =		./incs/
 PATH_SRC =		./srcs/

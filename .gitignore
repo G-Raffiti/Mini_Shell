@@ -1,7 +1,5 @@
-#proj
-*.log
-valgrind-out.txt
-mini_shell
+#projet
+valgrind*
 
 # CLion
 .idea
@@ -62,3 +60,4 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+mini_shell

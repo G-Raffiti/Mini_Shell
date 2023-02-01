@@ -5,6 +5,18 @@
 #include <sys/fcntl.h>
 #include "../../incs/mini_shell.h"
 
+/// TO use every where
+int	set_quote_state(char c, char *quote)
+{
+	if (c == *quote && *quote != 0)
+		*quote = 0;
+	else if (*quote == 0 && c == '\'')
+		*quote = '\'';
+	else if (*quote == 0 && c == '\"')
+		*quote = '\"';
+	return (*quote);
+}
+
 t_error	create_cmds(t_mini_shell *mini_shell, char *line)
 {
 	int		i;
@@ -34,18 +46,6 @@ t_error	create_cmds(t_mini_shell *mini_shell, char *line)
 	}
 	raw_cmds = free_split(raw_cmds);
 	return (SUCCESS);
-}
-
-void	set_builtin(t_lstd *current)
-{
-	if (ft_str_cmp(get(current)->cmd[0], "echo")
-		|| ft_str_cmp(get(current)->cmd[0], "cd")
-		|| ft_str_cmp(get(current)->cmd[0], "pwd")
-		|| ft_str_cmp(get(current)->cmd[0], "export")
-		|| ft_str_cmp(get(current)->cmd[0], "unset")
-		|| ft_str_cmp(get(current)->cmd[0], "env")
-		|| ft_str_cmp(get(current)->cmd[0], "exit"))
-		get(current)->is_builtin = TRUE;
 }
 
 t_error	fill_cmds(t_mini_shell *ms)
@@ -95,24 +95,3 @@ t_error	parse_line(t_mini_shell *mini_shell, char *line)
 	dprintf(1, "fill cmds DONE\n");
 	return (SUCCESS);
 }
-
-/// cmp func to not use exept in get_env_value
-int find_in_dict(void *content, void *ref)
-{
-	if (ft_str_cmp(get_env_dict(content)->key, (char *)ref) == 0)
-		return (1);
-	return (0);
-}
-
-/// TO use every where
-int	set_quote_state(char c, char *quote)
-{
-	if (c == *quote && *quote != 0)
-		*quote = 0;
-	else if (*quote == 0 && c == '\'')
-		*quote = '\'';
-	else if (*quote == 0 && c == '\"')
-		*quote = '\"';
-	return (*quote);
-}
-

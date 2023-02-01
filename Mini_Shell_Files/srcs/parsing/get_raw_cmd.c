@@ -7,44 +7,50 @@
 int	count_blocks(char *line)
 {
 	char	quote;
-	int		cmd_nb;
+	int		block;
 
 	quote = 0;
-	cmd_nb = 0;
+	block = 0;
+	while (*line && *line == ' ')
+		line++;
 	while (*line)
 	{
-		set_quote_state(*line, &quote);
-		if (*line == '|' && quote == 0)
-			cmd_nb++;
-		line++;
+		while (*line && !(!set_quote_state(*line, &quote) && *line == '|'))
+			line++;
+		if (*line)
+			line++;
+		while (*line && *line == ' ')
+			line++;
+		block++;
 	}
-	return (cmd_nb + 1);
+	return (block);
 }
 
 t_error	fill_split(char **split, char *line)
 {
 	char	quote;
 	int		len;
-	int		cmd;
+	int		block;
 
 	quote = 0;
-	cmd = 0;
+	block = 0;
+	while (*line && *line == ' ')
+		line++;
 	while (*line)
 	{
-		while (*line && !set_quote_state(*line, &quote) && ft_contain("| ",
-																	*line))
-			line++;
-		if (!*line)
-			return (SUCCESS);
 		len = 0;
-		while (line[len]
-			&& (set_quote_state(line[len], &quote) || line[len] != '|'))
+		while (line[len] && !(!set_quote_state(line[len], &quote) && line[len]
+																	 == '|'))
 			len++;
-		split[cmd] = ft_substr(line, 0, len);
-		if (!split[cmd])
+		split[block] = ft_substr(line, 0, len);
+		if (!split[block])
 			return (MALLOC_ERROR);
 		line += len;
-		cmd++;
+		if (*line)
+			line++;
+		while (*line && *line == ' ')
+			line++;
+		block++;
 	}
 	return (SUCCESS);
 }
@@ -56,6 +62,7 @@ char	**split_pipe(char *line)
 	int		cmd_nb;
 
 	cmd_nb = count_blocks(line);
+
 	split = malloc(sizeof(char *) * (cmd_nb + 1));
 	if (!split)
 		return (NULL);

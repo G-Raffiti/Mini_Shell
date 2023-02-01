@@ -7,24 +7,23 @@ static void	chevron_out(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 *file_name)
 {
 	if (cmd->output->fd > 0)
-		safe_close(ms, cmd->output, "chevron_out");
+	{
+		safe_close(ms, cmd->output->fd, "chevron_out");
+		cmd->output->name = ft_free(cmd->input->name);
+	}
 	if (type == OUT_CHT)
-	{
 		cmd->output->fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		cmd->output->type = type;
-	}
 	else // if (type == APPEND_CHT)
-	{
 		cmd->output->fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
-		cmd->output->type = type;
-	}
-	printf("{out: %d-%s} ", cmd->output->fd, file_name);
+	cmd->output->type = type;
+	cmd->output->name = file_name;
 	if (cmd->output->fd == -1)
 	{
 		perror(file_name);
+		ft_free(file_name);
 		cmd->is_valid = FALSE;
 	}
-
+	printf("{out: %d-%s} ", cmd->output->fd, file_name);
 }
 
 ///open file and create t_fd
@@ -39,24 +38,24 @@ static void	chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 		return ;
 	}
 	if (cmd->input->fd > 0)
-		safe_close(ms, cmd->input, "chevron_in");
-	if (type == IN_CHT)
 	{
-		cmd->input->fd = open(file_name, O_RDONLY);
-		cmd->input->type = type;
+		safe_close(ms, cmd->input->fd, "chevron_in");
+		cmd->input->name = ft_free(cmd->input->name);
 	}
+	if (type == IN_CHT)
+		cmd->input->fd = open(file_name, O_RDONLY);
 	else if (type == HERE_DOC_CHT)
-	{
 		cmd->input->fd = open(file_name, O_CREAT | O_TRUNC |
 		O_WRONLY, 0644);
-		cmd->input->type = type;
-	}
-	printf("{in: %d-%s} ", cmd->input->fd, file_name);
+	cmd->input->type = type;
+	cmd->input->name = file_name;
 	if (cmd->input->fd == -1)
 	{
 		perror(file_name);
+		ft_free(file_name);
 		cmd->is_valid = FALSE;
 	}
+	printf("{in: %d-%s} ", cmd->input->fd, file_name);
 }
 
 
@@ -131,7 +130,6 @@ t_error	open_files(t_mini_shell *ms, t_cmd *cmd)
 			if (extract_file_name(str, &quote, &file_name) != SUCCESS)
 				return (error);
 			chevron_in(ms, cmd, chevron_type, file_name);
-			file_name = ft_free(file_name);
 		}
 		str++;
 	}

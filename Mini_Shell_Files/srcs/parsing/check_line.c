@@ -36,6 +36,7 @@ t_bool	is_chevron_error(char *line)
 	char	is_in_quote;
 
 	is_in_quote = 0;
+	is_chevron_last = FALSE;
 	while (*line)
 	{
 		set_quote_state(*line, &is_in_quote);
@@ -50,16 +51,13 @@ t_bool	is_chevron_error(char *line)
 
 t_error	parse_error(char *error_msg, int error_code)
 {
-	(void)error_code;
-	// TODO : found the global error of the dead "multiple definition of `__odr_asan.g_exit_code';"
-	//g_exit_code = error_code;
+	set_exit_code(error_code);
 	printf("%s", error_msg);
 	return (ERROR);
 }
 
 t_error	check_line(char *line)
 {
-	// TODO do not terminate the check
 	if (is_empty_line(line))
 		return (parse_error("empty line\n", 127));
 	if (is_quote_error(line))
