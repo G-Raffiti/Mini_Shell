@@ -1,6 +1,7 @@
 #proj
 *.log
 valgrind-out.txt
+mini_shell
 
 # CLion
 .idea
