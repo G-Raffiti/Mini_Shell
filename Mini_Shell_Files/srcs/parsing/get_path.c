@@ -10,7 +10,6 @@ t_error	fill_paths(t_mini_shell *ms, char *full_path)
 	char	*trunc_path;
 	int		start;
 	int 	nbr_path;
-	int		i;//TODO : ERASE (DEBUG)
 
 	char_pos = -1;
 	nbr_path = 0;
@@ -25,14 +24,6 @@ t_error	fill_paths(t_mini_shell *ms, char *full_path)
 		ms->paths[nbr_path++] = ft_strjoin(trunc_path, "/");
 		if (!ms->paths)
 			return (free(trunc_path), MALLOC_ERROR);
-	}
-	//TODO : ERASE (DEBUG)
-	i = 0;
-	dprintf(2, "--DEBUG 'fill_path' end function--\n\n");
-	while (ms->paths[i])
-	{
-		dprintf(2, "PATH[%i] = %s\n",i, ms->paths[i]);
-		i++;
 	}
 	return (SUCCESS);
 }

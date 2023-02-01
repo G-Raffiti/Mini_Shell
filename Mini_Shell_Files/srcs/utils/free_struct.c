@@ -54,7 +54,7 @@ void	*free_mini_shell(t_mini_shell *mini_shell)
 		return (NULL);
 	//if (mini_shell->env)
 	//	mini_shell->env = free_split(mini_shell->env);
-	clear_cmds(&mini_shell->env_dict, free_cmd);
+	ft_lstd_clear(&mini_shell->env_dict, ft_free);
 	if (mini_shell->paths)
 		mini_shell->paths = free_split(mini_shell->paths);
 	clear_cmds(&mini_shell->cmds, free_cmd);

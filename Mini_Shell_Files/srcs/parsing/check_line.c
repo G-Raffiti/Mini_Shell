@@ -60,7 +60,6 @@ t_error	parse_error(char *error_msg, int error_code)
 
 t_error	check_line(char *line)
 {
-	// TODO do not terminate the check
 	if (is_empty_line(line))
 		return (parse_error("empty line\n", 127));
 	if (is_quote_error(line))

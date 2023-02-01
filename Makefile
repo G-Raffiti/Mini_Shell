@@ -4,7 +4,7 @@
 #								FILES									#
 #***********************************************************************#
 
-NAME =			mini_shell
+NAME =			ms.out
 CC =			gcc
 CC_FLAGS =		-Wall -Wextra -Werror -gdwarf-4 -g3#-fsanitize=address
 
@@ -35,6 +35,7 @@ FILES =			\
 				parsing/parsing \
 				parsing/read_line \
 				parsing/replace_dollars \
+				parsing/set_builtin \
 				\
 				utils/free_struct \
 				utils/list_cmd_utils \

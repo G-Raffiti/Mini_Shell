@@ -104,18 +104,14 @@ t_env_arg	*get_env_dict(t_lstd *current);
 void		clear_cmds(t_lstd **lst, void *(*free_fct)(t_cmd *));
 
 // PARSING /////////////////////////////////////////////////////////////////////
-t_bool		is_quote_error(char *line);
-t_bool		is_chevron_error(char *line);
-t_error		parse_line(t_mini_shell *ms, char *line);
-int			find_in_dict(void *content, void *ref);
 int			set_quote_state(char c, char *quote);
-t_error 	dup_env(t_mini_shell *ms, char **env);
-void		get_env(t_mini_shell *mini_shell, char **env);
-t_error		get_keys(t_env_arg **env_dict, char *env);
-t_error		get_value(t_env_arg **env_dict, char *env);
+t_error		parse_line(t_mini_shell *mini_shell, char *line);
+
+// ENV /////////////////////////////////////////////////////////////////////////
+int			find_in_dict(void *content, void *ref);
+void		get_env(t_mini_shell *ms, char **env);
 t_error		get_all_paths(t_mini_shell *ms, t_lstd *env_dict);
-t_error		create_ms_path(t_mini_shell *ms, char *full_path);
-t_error		fill_paths(t_mini_shell *ms, char *full_path);
+
 // PARSING - READ_LINE /////////////////////////////////////////////////////////
 char		*read_line(void);
 
@@ -134,6 +130,9 @@ t_error		open_files(t_mini_shell *ms, t_cmd *cmd);
 
 // PARSING - GET PATH //////////////////////////////////////////////////////////
 t_error		get_path(t_mini_shell *ms, t_cmd *cmd);
+
+// PARSING - SET BUILTIN ///////////////////////////////////////////////////////
+void		set_builtin(t_lstd *current);
 
 // SAFE FUNC ///////////////////////////////////////////////////////////////////
 void		safe_fork(t_mini_shell *ms, t_lstd *cmd, char *msg);

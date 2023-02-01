@@ -6,7 +6,7 @@
 /*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 04:41:42 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/01/23 15:35:45 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:57:46 by rbonneva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_lstd_clear(t_lstd **lst, void *(*free_fct)(void *))
 
 	if (!free_fct || !lst)
 		return ;
-	tmp = *lst;
+	tmp = (*lst)->previous;
 	while (*lst)
 	{
 		free_fct((*lst)->content);

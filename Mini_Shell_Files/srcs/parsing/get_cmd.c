@@ -51,7 +51,7 @@ char	*str_dup_no_quote(char *line, int len)
 	int		i;
 
 	len = block_len(line, len);
-	dup = ft_calloc(len, sizeof(char));
+	dup = ft_calloc(len + 1, sizeof(char));
 	if (!dup)
 		return (NULL);
 	i = 0;
@@ -105,7 +105,6 @@ static char	**split_cmd(char *raw_cmd)
 	int		cmd_nb;
 
 	cmd_nb = count_blocks(raw_cmd);
-	dprintf(1, "<{block=%d}> ", cmd_nb);
 	split = ft_calloc(cmd_nb + 1, sizeof(char *));
 	if (!split)
 		return (NULL);

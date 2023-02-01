@@ -45,7 +45,7 @@ void	debug_mini_shell(t_mini_shell *ms)
 	{
 		int i = -1;
 		while (ms->env[++i])
-			printf("env line %d: - %s\n", i, ms->env[i]);
+			printf("ms->env line %d: - %s\n", i, ms->env[i]);
 	}
 	printf("\nenv_dict %p\n", ms->env_dict);
 	if (ms->env_dict)
@@ -53,18 +53,18 @@ void	debug_mini_shell(t_mini_shell *ms)
 		t_lstd *current = ms->env_dict;
 		while (current)
 		{
-			printf("env_dict: key: %s = %s\n", get_env_dict(current)->key,
+			printf("env_dict: key: {%s} value: {%s}\n", get_env_dict(current)
+			->key,
 				get_env_dict(current)->value);
-			printf("\n");
 			current = current->next;
 		}
 	}
-	printf("paths %p\n", ms->paths);
+	printf("\npaths %p\n", ms->paths);
 	if (ms->paths)
 	{
 		int i = -1;
 		while (ms->paths[++i])
-			printf("env line %d: %s\n", i, ms->paths[i]);
+			printf("PATH[%d]: %s\n", i, ms->paths[i]);
 	}
 	printf("cmds %p\n\n", ms->cmds);
 }

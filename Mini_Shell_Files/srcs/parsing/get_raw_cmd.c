@@ -17,7 +17,8 @@ int	count_blocks(char *line)
 	{
 		while (*line && !(!set_quote_state(*line, &quote) && *line == '|'))
 			line++;
-		line++;
+		if (*line)
+			line++;
 		while (*line && *line == ' ')
 			line++;
 		block++;
@@ -44,7 +45,9 @@ t_error	fill_split(char **split, char *line)
 		split[block] = ft_substr(line, 0, len);
 		if (!split[block])
 			return (MALLOC_ERROR);
-		line += len + 1;
+		line += len;
+		if (*line)
+			line++;
 		while (*line && *line == ' ')
 			line++;
 		block++;
@@ -59,6 +62,7 @@ char	**split_pipe(char *line)
 	int		cmd_nb;
 
 	cmd_nb = count_blocks(line);
+
 	split = malloc(sizeof(char *) * (cmd_nb + 1));
 	if (!split)
 		return (NULL);
