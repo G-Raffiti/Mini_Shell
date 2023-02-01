@@ -76,8 +76,6 @@ void	get_env(t_mini_shell *mini_shell, char **env)
 						ft_lstd_clear(&mini_shell->env_dict, (void*)free));
 		ft_lstd_push_back_elem(&mini_shell->env_dict, current);
 	}
-	// TODO [Aurel]: create list of env_args (char* key / char** value)
-	// ATTENTION garder les / a la fin des PATH
 }
 
 void	set_env(t_mini_shell *ms, char **env)
