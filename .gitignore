@@ -1,3 +1,7 @@
+#proj
+*.log
+valgrind-out.txt
+
 # CLion
 .idea
 *.xml
