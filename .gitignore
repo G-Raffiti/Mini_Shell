@@ -1,3 +1,6 @@
+#projet
+valgrind*
+
 # CLion
 .idea
 *.xml
