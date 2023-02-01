@@ -34,7 +34,7 @@ FILES =			\
 				parsing/get_raw_cmd \
 				parsing/parsing \
 				parsing/read_line \
-				paprsing/replace_dollars \
+				parsing/replace_dollars \
 				\
 				utils/free_struct \
 				utils/list_cmd_utils \
