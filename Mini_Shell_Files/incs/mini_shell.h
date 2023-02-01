@@ -8,6 +8,8 @@
 # ifndef T_ERROR
 #  define T_ERROR
 
+
+
 typedef enum e_error
 {
 	MALLOC_ERROR = -1,
@@ -28,6 +30,11 @@ typedef enum e_bool
 
 # endif
 
+/////		IDIENTIFIER EXPORT /////
+
+# define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~"
+
+/////////////////////////////////////
 typedef enum e_chevron
 {
 	ERROR_CHT,
@@ -36,6 +43,13 @@ typedef enum e_chevron
 	OUT_CHT,
 	APPEND_CHT,
 }	t_chevron;
+
+typedef struct s_token
+{
+	char c;
+	t_bool	dollar;
+	char	quote;
+}	t_token;
 
 typedef struct s_fd
 {
@@ -54,6 +68,7 @@ typedef struct s_cmd
 {
 	int				pid;
 	char			*raw_cmd;
+	t_token 		*token;
 	char			*path;
 	char			**cmd;
 	t_fd			*input;
@@ -135,6 +150,8 @@ t_error		open_files(t_mini_shell *ms, t_cmd *cmd);
 // PARSING - GET PATH //////////////////////////////////////////////////////////
 t_error		get_path(t_mini_shell *ms, t_cmd *cmd);
 
+// PARSING - REPLACE_DOLLARS
+t_error		replace_dollars(t_mini_shell *ms, t_cmd *cmds);
 // SAFE FUNC ///////////////////////////////////////////////////////////////////
 void		safe_fork(t_mini_shell *ms, t_lstd *cmd, char *msg);
 void		safe_pipe(t_mini_shell *ms, char *msg);

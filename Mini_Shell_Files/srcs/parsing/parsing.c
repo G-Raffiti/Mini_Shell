@@ -63,6 +63,8 @@ t_error	fill_cmds(t_mini_shell *ms)
 			return (MALLOC_ERROR);
 		else if (status == ERROR)
 			return (ERROR);
+		if (replace_dollars(ms, get(current)) == MALLOC_ERROR)
+			return (MALLOC_ERROR);
 		// TODO [Aurel]: find_in_dict and replace $ARG with env_lst key/value
 		if (get_cmd(get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
