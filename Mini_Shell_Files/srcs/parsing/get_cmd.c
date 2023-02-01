@@ -10,49 +10,65 @@ static int	count_blocks(char *line)
 	int		block;
 
 	quote = 0;
-	block = 1;
+	block = 0;
+	while (*line && *line == ' ')
+		line++;
 	while (*line)
 	{
+		while (*line && !(!set_quote_state(*line, &quote) && *line == ' '))
+				line++;
 		while (*line && *line == ' ')
 			line++;
-		if (!*line)
-			break ;
-		set_quote_state(*line, &quote);
 		block++;
-		if (quote)
-			while (*line && *line != quote)
-				line++;
-		else
-			while (*line && !set_quote_state(*line, &quote) && *line != ' ')
-				line++;
 	}
 	return (block);
 }
 
-static int	count_len(char *line, char quote)
+int block_len(char *line, int len)
 {
-	int		len;
+	int	i;
+	char quote;
+	int	count;
 
-	len = 0;
-	if (quote)
+	i = 0;
+	quote = 0;
+	count = 0;
+	while(i < len)
 	{
-		line++;
-		len++;
-		while (*line && *line != quote)
-		{
+		set_quote_state(line[i], &quote);
+		if (line[i] == quote || (!quote && (line[i] == '\"' || line[i] ==
+		'\'')))
+			count++;
+		i++;
+	}
+	return (i - count);
+}
+
+char	*str_dup_no_quote(char *line, int len)
+{
+	char	*dup;
+	char	quote;
+	int		i;
+
+	len = block_len(line, len);
+	dup = ft_calloc(len, sizeof(char));
+	if (!dup)
+		return (NULL);
+	i = 0;
+	quote = 0;
+	while (i < len)
+	{
+		set_quote_state(line[i], &quote);
+		if (line[i] == quote || (!quote && (line[i] == '\"' || line[i] ==
+															'\'')))
 			line++;
-			len++;
+		else
+		{
+			dup[i] = line[i];
+			i++;
 		}
 	}
-	else
-	{
-		while (*line && !set_quote_state(*line, &quote) && *line != ' ')
-		{
-			line++;
-			len++;
-		}
-	}
-	return (len);
+	return (dup);
 }
 
 static t_error	fill_split(char **split, char *line)
@@ -63,18 +79,20 @@ static t_error	fill_split(char **split, char *line)
 
 	quote = 0;
 	block = 0;
+	while (*line && *line == ' ')
+		line++;
 	while (*line)
 	{
-		while (*line && *line == ' ')
-			line++;
-		if (!*line)
-			break ;
-		set_quote_state(*line, &quote);
-		len = count_len(line, quote);
-		split[block] = ft_substr(line, 0, len);
+		len = 0;
+		while (line[len] && !(!set_quote_state(line[len], &quote) && line[len]
+		== ' '))
+			len++;
+		split[block] = str_dup_no_quote(line, len);
 		if (!split[block])
 			return (MALLOC_ERROR);
 		line += len;
+		while (*line && *line == ' ')
+			line++;
 		block++;
 	}
 	return (SUCCESS);
@@ -87,6 +105,7 @@ static char	**split_cmd(char *raw_cmd)
 	int		cmd_nb;
 
 	cmd_nb = count_blocks(raw_cmd);
+	dprintf(1, "<{block=%d}> ", cmd_nb);
 	split = ft_calloc(cmd_nb + 1, sizeof(char *));
 	if (!split)
 		return (NULL);
