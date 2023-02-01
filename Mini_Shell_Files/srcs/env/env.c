@@ -1,14 +1,6 @@
 
 #include "../../incs/mini_shell.h"
 
-t_error	new_env_args(t_env_arg **env_dict)
-{
-	*env_dict = ft_calloc(1, sizeof(t_env_arg));
-	if (!*env_dict)
-		return (MALLOC_ERROR);
-	return (SUCCESS);
-}
-
 t_error get_keys(t_env_arg **env_dict, char *env)
 {
 	int		i;

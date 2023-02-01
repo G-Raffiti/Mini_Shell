@@ -4,6 +4,46 @@
 
 #include "../../incs/mini_shell.h"
 
+t_error	fill_paths(t_mini_shell *ms, char *full_path)
+{
+
+}
+
+t_error	create_ms_path(t_mini_shell *ms, char *full_path)
+{
+	int	char_pos;
+	int nbr_of_paths;
+
+	char_pos = 0;
+	nbr_of_paths = 1;
+	while (full_path[char_pos])
+	{
+		if (full_path[char_pos] != ':')
+			nbr_of_paths++;
+		char_pos++;
+	}
+	ms->paths = ft_calloc(nbr_of_paths + 1, sizeof(char *));
+	if (!ms->paths)
+		return (MALLOC_ERROR);
+	return (SUCCESS);
+}
+
+t_error	get_all_paths(t_mini_shell *ms, t_lstd *env_dict)
+{
+	t_env_arg	*current;
+	int 		char_pos;
+
+	char_pos = 0;
+	current = get_env_dict(env_dict);
+	while (env_dict && ft_str_cmp(current->key, "PATH") != 0)
+		current = get_env_dict(env_dict->next);
+	if (create_ms_path(ms, current->value) == MALLOC_ERROR)
+		exit_malloc(ms);
+	if (fill_paths(ms, current->value) == MALLOC_ERROR)
+		exit_malloc(ms);
+	return (SUCCESS);
+}
+
 t_error	get_path(t_mini_shell *ms, t_cmd *cmd)
 {
 	int i;
