@@ -27,6 +27,8 @@ FILES =			\
 				\
 				env/env \
 				\
+				exec/exec \
+				\
 				parsing/check_line \
 				parsing/chevron \
 				parsing/get_cmd \

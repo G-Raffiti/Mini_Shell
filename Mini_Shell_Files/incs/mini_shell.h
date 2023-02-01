@@ -3,7 +3,7 @@
 # define MINI_SHELL_H
 # include "../../Lib_List_Double/incs/ft_lstd.h"
 # include "../../Lib_FT/incs/libft.h"
-# define PROMPT "mini_shell> "
+# define PROMPT "ms_$> "
 
 # ifndef T_ERROR
 #  define T_ERROR
@@ -42,6 +42,7 @@ typedef struct s_fd
 	int				fd;
 	int				open_mode;
 	t_chevron		type;
+	char			*name;
 }					t_fd;
 
 typedef struct s_env_arg
@@ -96,9 +97,7 @@ void		set_exit_code(int value);
 t_error		exit_malloc(t_mini_shell *ms);
 t_error		exit_end_program(t_mini_shell *ms);
 void		exit_error(t_mini_shell *ms, int error_code, char *msg);
-
-// INITIALIZE //////////////////////////////////////////////////////////////////
-void		set_env(t_mini_shell *ms, char **env);
+void		exit_child(t_cmd *cmd, int error_code, char *msg);
 
 // LIST UTILS //////////////////////////////////////////////////////////////////
 t_cmd		*get(t_lstd *lst);
@@ -137,18 +136,17 @@ t_error		get_path(t_mini_shell *ms, t_cmd *cmd);
 void		set_builtin(t_lstd *current);
 
 // SAFE FUNC ///////////////////////////////////////////////////////////////////
-void		safe_fork(t_mini_shell *ms, t_lstd *cmd, char *msg);
+void		safe_fork(t_mini_shell *ms, t_cmd *cmd, char *msg);
 void		safe_pipe(t_mini_shell *ms, char *msg);
-void		safe_close(t_mini_shell *ms, t_fd *fd, char *msg);
-void		safe_dup2(t_mini_shell *ms, t_fd *fd1, int std, char *msg);
+void		safe_close(t_mini_shell *ms, int fd, char *msg);
+void		safe_dup2(t_mini_shell *ms, int fd, int std, char *msg);
 
 // EXEC ////////////////////////////////////////////////////////////////////////
-void		exec_cmd_child(t_mini_shell *ms, t_lstd *current);
-void		make_child(t_mini_shell *ms, t_lstd *current);
 t_error		exec_cmds(t_mini_shell *ms);
 
 // TEST ////////////////////////////////////////////////////////////////////////
 void		print_debug_cmds(t_mini_shell *ms);
 void		debug_mini_shell(t_mini_shell *ms);
+void		debug_fd(t_mini_shell *ms, t_cmd *cmd);
 
 #endif

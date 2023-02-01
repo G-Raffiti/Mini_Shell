@@ -12,11 +12,19 @@ void	set_exit_code(int value)
 	g_exit_code = value;
 }
 
+void	exit_child(t_cmd *cmd, int error_code, char *msg)
+{
+	set_exit_code(error_code);
+	printf("%s: %s\n", cmd->cmd[0], msg);
+	exit(0);
+}
+
 void	exit_error(t_mini_shell *mini_shell, int error_code, char *msg)
 {
-	printf("%sError: %s: %s\n", PROMPT, strerror(error_code), msg);
+	set_exit_code(error_code);
+	printf("\n%sError: %s: %s\n", PROMPT, strerror(error_code), msg);
 	free_mini_shell(mini_shell);
-	exit(0);
+	exit(error_code);
 }
 
 t_error	exit_malloc(t_mini_shell *mini_shell)

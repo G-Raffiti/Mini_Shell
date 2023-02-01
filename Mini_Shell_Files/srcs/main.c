@@ -11,7 +11,7 @@ static void	loop(t_mini_shell *ms)
 		line = read_line();
 		if (!line)
 			return ;
-		dprintf(1, "line = \"%s\" | ", line);
+		dprintf(1, "line = [%s] | ", line);
 		if (parse_line(ms, line) == ERROR)
 		{
 			clear_cmds(&(ms->cmds), free_cmd);
@@ -25,7 +25,7 @@ static void	loop(t_mini_shell *ms)
 			clear_cmds(&(ms->cmds), free_cmd);
 			exit_end_program(ms);
 		}
-		//exec_cmds(ms);
+		exec_cmds(ms);
 		clear_cmds(&(ms->cmds), free_cmd);
 		line = ft_free(line);
 	}

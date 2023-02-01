@@ -19,8 +19,9 @@ void	print_debug_cmds(t_mini_shell *ms)
 			printf("CMD: %s | ", cmd->cmd[0]);
 		else
 			printf("NO_COMMAND | ");
-		printf("PATH: %s | FDS: in(%d) out(%d) | ",
-			cmd->path, cmd->input->fd, cmd->output->fd);
+		printf("PATH: %s | FDS: <%s (%d) >%s (%d) | ",
+			cmd->path, cmd->input->name, cmd->input->fd,cmd->output->name,
+			cmd->output->fd);
 		is_valid = cmd->is_valid ? "Yes" : "No";
 		printf("IS_VALID? %s | ", is_valid);
 		printf("RAW_CMD: [%s] | ", cmd->raw_cmd);
@@ -67,4 +68,12 @@ void	debug_mini_shell(t_mini_shell *ms)
 			printf("PATH[%d]: %s\n", i, ms->paths[i]);
 	}
 	printf("cmds %p\n\n", ms->cmds);
+}
+
+void debug_fd(t_mini_shell *ms, t_cmd *cmd)
+{
+	dprintf(1, "\n{cmd: %s | files: pipe=(%d-%d) | fds=(%d-%d)}",cmd->cmd[0],
+	ms->pipe[0],
+			ms->pipe[1],
+			cmd->input->fd, cmd->output->fd);
 }
