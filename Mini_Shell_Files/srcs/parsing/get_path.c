@@ -6,7 +6,27 @@
 
 t_error	fill_paths(t_mini_shell *ms, char *full_path)
 {
+	int		char_pos;
+	char	*trunc_path;
+	int		start;
+	int 	nbr_path;
 
+	char_pos = -1;
+	nbr_path = 0;
+	while (full_path[++char_pos])
+	{
+		start = char_pos;
+		while (full_path[char_pos] && full_path[char_pos] != ':')
+			char_pos++;
+		trunc_path = ft_substr(full_path, start, char_pos - start);
+		if (!trunc_path)
+			return (MALLOC_ERROR);
+		ms->paths[nbr_path++] = ft_strjoin(trunc_path, "/");
+		if (!ms->paths)
+			return (free(trunc_path), MALLOC_ERROR);
+	}
+
+	return (SUCCESS);
 }
 
 t_error	create_ms_path(t_mini_shell *ms, char *full_path)
@@ -25,15 +45,14 @@ t_error	create_ms_path(t_mini_shell *ms, char *full_path)
 	ms->paths = ft_calloc(nbr_of_paths + 1, sizeof(char *));
 	if (!ms->paths)
 		return (MALLOC_ERROR);
+	ms->paths[nbr_of_paths] = NULL;
 	return (SUCCESS);
 }
 
 t_error	get_all_paths(t_mini_shell *ms, t_lstd *env_dict)
 {
 	t_env_arg	*current;
-	int 		char_pos;
 
-	char_pos = 0;
 	current = get_env_dict(env_dict);
 	while (env_dict && ft_str_cmp(current->key, "PATH") != 0)
 		current = get_env_dict(env_dict->next);
