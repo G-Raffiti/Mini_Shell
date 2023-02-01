@@ -35,8 +35,9 @@ int	main(int argc, char **argv, char **env)
 	if (new_mini_shell(&mini_shell) == MALLOC_ERROR)
 		exit_malloc(mini_shell);
 	get_env(mini_shell, env);
+	get_all_paths(mini_shell, mini_shell->env_dict);
 	set_env(mini_shell, env);
-	debug_mini_shell(mini_shell);
+	//debug_mini_shell(mini_shell);
 	loop(mini_shell);
 	exit_end_program(mini_shell);
 }

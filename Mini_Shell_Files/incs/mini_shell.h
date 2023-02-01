@@ -82,7 +82,7 @@ typedef struct s_mini_shell
 t_error		new_fd(t_fd **fd);
 t_error		new_cmd(t_cmd **cmd);
 t_error		new_mini_shell(t_mini_shell **ms);
-
+t_error		new_env_args(t_env_arg **env_dict);
 // FREE STRUCT /////////////////////////////////////////////////////////////////
 void		*ft_free(void *pt);
 void		*free_split(char **split);
@@ -109,10 +109,13 @@ t_bool		is_chevron_error(char *line);
 t_error		parse_line(t_mini_shell *ms, char *line);
 int			find_in_dict(void *content, void *ref);
 int			set_quote_state(char c, char *quote);
-t_error 	dup_env(t_mini_shell *ms, char **env);//TODO : check when get_env ok
-void		get_env(t_mini_shell *mini_shell, char **env);//TODO : check when get_env ok
-t_error		get_keys(t_env_arg **env_dict); // TODO : same
-t_error		new_env_args(t_env_arg **env_dict); //TODO : same
+t_error 	dup_env(t_mini_shell *ms, char **env);
+void		get_env(t_mini_shell *mini_shell, char **env);
+t_error		get_keys(t_env_arg **env_dict, char *env);
+t_error		get_value(t_env_arg **env_dict, char *env);
+t_error		get_all_paths(t_mini_shell *ms, t_lstd *env_dict);
+t_error		create_ms_path(t_mini_shell *ms, char *full_path);
+t_error		fill_paths(t_mini_shell *ms, char *full_path);
 // PARSING - READ_LINE /////////////////////////////////////////////////////////
 char		*read_line(void);
 

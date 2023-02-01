@@ -2,6 +2,14 @@
 #include "../incs/mini_shell.h"
 #include <stdlib.h>
 
+t_error	new_env_args(t_env_arg **env_dict)
+{
+	*env_dict = ft_calloc(1, sizeof(t_env_arg));
+	if (!*env_dict)
+		return (MALLOC_ERROR);
+	return (SUCCESS);
+}
+
 t_error	new_fd(t_fd **fd)
 {
 	*fd = ft_calloc(1, sizeof(t_fd));
