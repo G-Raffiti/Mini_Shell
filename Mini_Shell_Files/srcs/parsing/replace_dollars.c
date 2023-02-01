@@ -11,6 +11,7 @@ int 	valid_id(char c)
 	return (1);
 }
 
+//void	count_and_next_arg(t_cmd *cmds, int *i, )
 t_error	split_count(t_cmd *cmds, int *split_len)
 {
 	int		i;
@@ -27,9 +28,7 @@ t_error	split_count(t_cmd *cmds, int *split_len)
 		if (set_quote_state(raw_cmd[i], &quote) != '\'' && raw_cmd[i] == '$')
 		{
 			if (i != 0 && raw_cmd[i + 1] && valid_id(raw_cmd[i + 1]) && prev_is_arg == 0)
-			{
 				*split_len += 2;
-			}
 			else if (raw_cmd[i + 1] && valid_id(raw_cmd[i + 1]))
 				*split_len += 1;
 			else
@@ -44,7 +43,9 @@ t_error	split_count(t_cmd *cmds, int *split_len)
 		else
 			prev_is_arg = 0;
 	}
-	if ((*split_len) != 0)
+	if (prev_is_arg == 0)
+		(*split_len)++;
+	if ((*split_len) != 1)
 	{
 		(*split_len)++;
 		dprintf(2, "SPLIT_LEN : %d\n\n", *split_len);
@@ -67,7 +68,8 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 	splited_raw = ft_calloc(sizeof(char *), split_len);
 	if (!splited_raw)
 		return (MALLOC_ERROR);
-	exit(0);
+
+
 	return(0);
 
 
