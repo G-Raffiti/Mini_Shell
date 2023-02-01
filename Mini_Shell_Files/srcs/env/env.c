@@ -27,7 +27,6 @@ t_error get_value(t_env_arg **env_dict, char *env)
 		return (MALLOC_ERROR);
 	while (dup_line[i] != '=')
 		i++;
-	free(env);
 	(*env_dict)->value = ft_substr(dup_line, i + 1, len_line);
 	free(dup_line);
 	if (!(*env_dict)->value)
@@ -42,7 +41,7 @@ t_error	dup_env(t_mini_shell *ms, char **env)
 	i = 0;
 	ms->env = ft_calloc(sizeof(char *), ft_strlen_tab(env) + 1);
 	if (!ms->env)
-		return(ms->env = free_split(ms->env), MALLOC_ERROR);
+		return(MALLOC_ERROR);
 	while (env[i])
 	{
 		ms->env[i] = ft_strdup(env[i]);
@@ -66,9 +65,9 @@ void	get_env(t_mini_shell *mini_shell, char **env)
 	{
 		if (new_env_args(&env_dict) == MALLOC_ERROR)
 			exit_malloc(mini_shell);
-		if (get_keys(&env_dict, mini_shell->env[key_index]) == MALLOC_ERROR)
+		if (get_keys(&env_dict, env[key_index]) == MALLOC_ERROR)
 			exit_malloc(mini_shell);
-		if (get_value(&env_dict, mini_shell->env[key_index]) == MALLOC_ERROR)
+		if (get_value(&env_dict, env[key_index]) == MALLOC_ERROR)
 			exit_malloc(mini_shell);
 		current = ft_lstd_new(env_dict);
 		if (!current)
