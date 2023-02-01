@@ -74,7 +74,7 @@ typedef struct s_mini_shell
 #ifndef G_EXIT_CODE
 #define G_EXIT_CODE
 
-//int	g_exit_code;
+extern int	g_exit_code;
 
 #endif
 
@@ -83,6 +83,7 @@ t_error		new_fd(t_fd **fd);
 t_error		new_cmd(t_cmd **cmd);
 t_error		new_mini_shell(t_mini_shell **ms);
 t_error		new_env_args(t_env_arg **env_dict);
+
 // FREE STRUCT /////////////////////////////////////////////////////////////////
 void		*ft_free(void *pt);
 void		*free_split(char **split);
@@ -91,6 +92,7 @@ void		*free_cmd(t_cmd *cmd);
 void		*free_mini_shell(t_mini_shell *ms);
 
 // EXIT ////////////////////////////////////////////////////////////////////////
+void		set_exit_code(int value);
 t_error		exit_malloc(t_mini_shell *ms);
 t_error		exit_end_program(t_mini_shell *ms);
 void		exit_error(t_mini_shell *ms, int error_code, char *msg);

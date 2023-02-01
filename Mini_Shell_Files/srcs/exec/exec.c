@@ -2,8 +2,8 @@
 // Created by Raphael Bonneval on 1/24/23.
 //
 
-#include "../../Lib_List_Double/incs/ft_lstd.h"
-#include "../incs/mini_shell.h"
+#include "../../../Lib_List_Double/incs/ft_lstd.h"
+#include "../../incs/mini_shell.h"
 
 void	exec_cmd_child(t_mini_shell *mini_shell, t_lstd *current)
 {

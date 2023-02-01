@@ -51,9 +51,7 @@ t_bool	is_chevron_error(char *line)
 
 t_error	parse_error(char *error_msg, int error_code)
 {
-	(void)error_code;
-	// TODO : found the global error of the dead "multiple definition of `__odr_asan.g_exit_code';"
-	//g_exit_code = error_code;
+	set_exit_code(error_code);
 	printf("%s", error_msg);
 	return (ERROR);
 }
