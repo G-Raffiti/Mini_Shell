@@ -65,7 +65,7 @@ void	close_pipeline(t_mini_shell *ms)
 		ms = free_mini_shell(ms);
 		exit_error(ms, errno, "last_fork");
 	}
-	close(ms->)
+	close(ms->pipe[1]);
 	execve(cmd[0], cmd, ms->env);
 	exit(0);
 }
