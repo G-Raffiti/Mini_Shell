@@ -26,6 +26,7 @@ void	*free_fd(t_fd *fd)
 {
 	if (!fd)
 		return (NULL);
+	fd->name = ft_free(fd->name);
 	free(fd);
 	return (NULL);
 }
@@ -52,8 +53,8 @@ void	*free_mini_shell(t_mini_shell *mini_shell)
 {
 	if (!mini_shell)
 		return (NULL);
-	//if (mini_shell->env)
-	//	mini_shell->env = free_split(mini_shell->env);
+	if (mini_shell->env)
+		mini_shell->env = free_split(mini_shell->env);
 	ft_lstd_clear(&mini_shell->env_dict, ft_free);
 	if (mini_shell->paths)
 		mini_shell->paths = free_split(mini_shell->paths);
