@@ -1,5 +1,7 @@
 
 #include <sys/fcntl.h>
+#include <string.h>
+#include <errno.h>
 #include "../../incs/mini_shell.h"
 
 ///open file and create t_fd
@@ -13,17 +15,14 @@ static void	chevron_out(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 	}
 	if (type == OUT_CHT)
 		cmd->output->fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	else // if (type == APPEND_CHT)
+	else
 		cmd->output->fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
-	cmd->output->type = type;
 	cmd->output->name = file_name;
 	if (cmd->output->fd == -1)
 	{
-		perror(file_name);
-		ft_free(file_name);
+		cmd->output->error = errno;
 		cmd->is_valid = FALSE;
 	}
-	printf("{out: %d-%s} ", cmd->output->fd, file_name);
 }
 
 ///open file and create t_fd
@@ -47,15 +46,12 @@ static void	chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 	else if (type == HERE_DOC_CHT)
 		cmd->input->fd = open(file_name, O_CREAT | O_TRUNC |
 		O_WRONLY, 0644);
-	cmd->input->type = type;
 	cmd->input->name = file_name;
 	if (cmd->input->fd == -1)
 	{
-		perror(file_name);
-		ft_free(file_name);
+		cmd->input->error = errno;
 		cmd->is_valid = FALSE;
 	}
-	printf("{in: %d-%s} ", cmd->input->fd, file_name);
 }
 
 

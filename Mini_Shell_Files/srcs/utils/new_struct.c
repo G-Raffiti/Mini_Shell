@@ -16,7 +16,6 @@ t_error	new_fd(t_fd **fd)
 	if (!*fd)
 		return (MALLOC_ERROR);
 	(*fd)->fd = -2;
-	(*fd)->open_mode = 0;
 	return (SUCCESS);
 }
 

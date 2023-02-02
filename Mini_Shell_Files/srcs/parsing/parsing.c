@@ -78,18 +78,18 @@ t_error	fill_cmds(t_mini_shell *ms)
 	return (SUCCESS);
 }
 
-t_error	parse_line(t_mini_shell *mini_shell, char *line)
+t_error	parse_line(t_mini_shell *ms, char *line)
 {
 	t_error status;
 	if (check_line(line) == ERROR)
 		return (ERROR);
 	dprintf(1, "check DONE | ");
-	if (create_cmds(mini_shell, line) == MALLOC_ERROR)
-		return (free(line), exit_malloc(mini_shell));
+	if (create_cmds(ms, line) == MALLOC_ERROR)
+		return (free(line), exit_malloc(ms, "parsing: crete_cmds"));
 	dprintf(1, "crete cmds DONE | ");
-	status = fill_cmds(mini_shell);
+	status = fill_cmds(ms);
 	if (status == MALLOC_ERROR)
-		return (free(line), exit_malloc(mini_shell));
+		return (free(line), exit_malloc(ms, "parsing: fill_cmds"));
 	else if (status == ERROR)
 		return (parse_error("syntax error near unexpected token `<'", 2));
 	dprintf(1, "fill cmds DONE\n");

@@ -3,7 +3,9 @@
 # define MINI_SHELL_H
 # include "../../Lib_List_Double/incs/ft_lstd.h"
 # include "../../Lib_FT/incs/libft.h"
-# define PROMPT "ms_$> "
+# define PROMPT "ms_$"
+/////		IDIENTIFIER EXPORT /////
+# define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~"
 
 # ifndef T_ERROR
 #  define T_ERROR
@@ -19,7 +21,7 @@ typedef enum e_error
 
 # endif
 
-#ifndef T_BOOL
+# ifndef T_BOOL
 # define T_BOOL
 
 typedef enum e_bool
@@ -30,9 +32,7 @@ typedef enum e_bool
 
 # endif
 
-/////		IDIENTIFIER EXPORT /////
 
-# define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~"
 
 /////////////////////////////////////
 typedef enum e_chevron
@@ -54,9 +54,8 @@ typedef struct s_token
 typedef struct s_fd
 {
 	int				fd;
-	int				open_mode;
-	t_chevron		type;
 	char			*name;
+	int				error;
 }					t_fd;
 
 typedef struct s_env_arg
@@ -108,8 +107,9 @@ void		*free_cmd(t_cmd *cmd);
 void		*free_mini_shell(t_mini_shell *ms);
 
 // EXIT ////////////////////////////////////////////////////////////////////////
+int			get_exit_code(void);
 void		set_exit_code(int value);
-t_error		exit_malloc(t_mini_shell *ms);
+t_error		exit_malloc(t_mini_shell *mini_shell, char *msg);
 t_error		exit_end_program(t_mini_shell *ms);
 void		exit_error(t_mini_shell *ms, int error_code, char *msg);
 void		exit_child(t_cmd *cmd, int error_code, char *msg);
@@ -121,7 +121,7 @@ void		clear_cmds(t_lstd **lst, void *(*free_fct)(t_cmd *));
 
 // PARSING /////////////////////////////////////////////////////////////////////
 int			set_quote_state(char c, char *quote);
-t_error		parse_line(t_mini_shell *mini_shell, char *line);
+t_error		parse_line(t_mini_shell *ms, char *line);
 
 // ENV /////////////////////////////////////////////////////////////////////////
 int			find_in_dict(void *content, void *ref);
@@ -163,8 +163,9 @@ void		safe_rev_dup2(t_mini_shell *ms, int std, int fd, char *msg);
 t_error		exec_cmds(t_mini_shell *ms);
 
 // TEST ////////////////////////////////////////////////////////////////////////
-void		print_debug_cmds(t_mini_shell *ms);
-void		debug_mini_shell(t_mini_shell *ms);
-void		debug_fd(t_mini_shell *ms, t_cmd *cmd);
+void	debug_cmd(t_cmd *cmd);
+void	debug_all_cmds(t_mini_shell *ms);
+void	debug_mini_shell(t_mini_shell *ms);
+void	debug_fd(t_mini_shell *ms, t_cmd *cmd);
 
 #endif

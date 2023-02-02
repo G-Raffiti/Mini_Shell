@@ -68,15 +68,15 @@ void	get_env(t_mini_shell *ms, char **env)
 
 	key_index = -1;
 	if (dup_env(ms, env) == MALLOC_ERROR)
-		exit_malloc(ms);
+		exit_malloc(ms, "env: dup_env");
 	while (++key_index < ft_strlen_tab(env))
 	{
 		if (new_env_args(&env_dict) == MALLOC_ERROR)
-			exit_malloc(ms);
+			exit_malloc(ms, "env: new_env_args");
 		if (get_keys(&env_dict, env[key_index]) == MALLOC_ERROR)
-			exit_malloc(ms);
+			exit_malloc(ms, "env: get_keys");
 		if (get_values(&env_dict, env[key_index]) == MALLOC_ERROR)
-			exit_malloc(ms);
+			exit_malloc(ms, "env: get_values");
 		current = ft_lstd_new(env_dict);
 		if (!current)
 			return (free_split(ms->env), \

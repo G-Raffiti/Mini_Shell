@@ -59,9 +59,9 @@ t_error	get_all_paths(t_mini_shell *ms, t_lstd *env_dict)
 		current = get_env_dict(env_dict);
 	}
 	if (create_ms_path(ms, current->value) == MALLOC_ERROR)
-		exit_malloc(ms);
+		exit_malloc(ms, "get_path: create_ms_path");
 	if (fill_paths(ms, current->value) == MALLOC_ERROR)
-		exit_malloc(ms);
+		exit_malloc(ms, "get_path: fill_paths");
 	return (SUCCESS);
 }
 
