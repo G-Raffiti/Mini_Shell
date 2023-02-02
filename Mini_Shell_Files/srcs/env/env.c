@@ -47,6 +47,8 @@ t_error	dup_env(t_mini_shell *ms, char **env)
 	int	i;
 
 	i = 0;
+	if (!env)
+		return (ERROR);//TODO : check redir
 	ms->env = ft_calloc(sizeof(char *), ft_strlen_tab(env) + 1);
 	if (!ms->env)
 		return(MALLOC_ERROR);
