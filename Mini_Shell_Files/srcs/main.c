@@ -10,7 +10,10 @@ static void	loop(t_mini_shell *ms)
 	{
 		line = read_line();
 		if (!line)
-			return ;
+		{
+			dprintf(2, "readLine END\n");
+			return;
+		}
 		dprintf(1, "line = [%s] | ", line);
 		if (parse_line(ms, line) == ERROR)
 		{
