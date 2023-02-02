@@ -17,11 +17,6 @@ void	safe_fork(t_mini_shell *ms, t_cmd *cmd, char *msg)
 
 void	safe_pipe(t_mini_shell *ms, char *msg)
 {
-	if (pipe((ms->pipe_retour)) == -1)
-	{
-		ms = free_mini_shell(ms);
-		exit_error(ms, errno, msg);
-	}
 	if (pipe((ms->pipe)) == -1)
 	{
 		ms = free_mini_shell(ms);

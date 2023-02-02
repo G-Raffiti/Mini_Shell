@@ -72,9 +72,9 @@ void	debug_mini_shell(t_mini_shell *ms)
 
 void debug_fd(t_mini_shell *ms, t_cmd *cmd)
 {
-	dprintf(2, "{cmd: %s | files: pipe=(%d-%d) ret=(%d-%d) | fds=(%d-%d)}\n",
+	dprintf(2, "{cmd: %s | files: pipe=(%d-%d) | fds=(%d-%d)}\n",
 			cmd->cmd[0],
 	ms->pipe[0],
-			ms->pipe[1], ms->pipe_retour[0], ms->pipe_retour[1],
+			ms->pipe[1],
 			cmd->input->fd, cmd->output->fd);
 }

@@ -85,7 +85,6 @@ typedef struct s_mini_shell
 	char			**paths;
 	t_lstd			*cmds;
 	int				pipe[2];
-	int				pipe_retour[2];
 }					t_mini_shell;
 
 #ifndef G_EXIT_CODE
