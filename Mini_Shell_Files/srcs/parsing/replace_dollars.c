@@ -120,13 +120,13 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 				(*splited_raw)[nbr++] = ft_substr(raw_cmd, start_dol - len_prev, len_prev);
 				if ((!*splited_raw))
 					return (MALLOC_ERROR);
-				dprintf(2, "%s\n", (*splited_raw)[nbr - 1]);
+				dprintf(2, "Splited[%d] : %s\n",nbr - 1, (*splited_raw)[nbr - 1]);
 				len_prev = 0;
 			}
 			(*splited_raw)[nbr++] = ft_substr(raw_cmd, start_dol, i - start_dol + 1);
 			if ((!*splited_raw))
 				return (MALLOC_ERROR);
-			dprintf(2, "%s\n", (*splited_raw)[nbr - 1]);
+			dprintf(2, "Splited[%d] : %s\n",nbr - 1, (*splited_raw)[nbr - 1]);
 
 		}
 		else
@@ -138,19 +138,56 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 	if (prev_is_arg == 0)
 	{
 		(*splited_raw)[nbr++] = ft_substr(raw_cmd, ft_strlen(raw_cmd) - len_prev, len_prev);
-		dprintf(2, "%s\n", (*splited_raw)[nbr - 1]);
+		dprintf(2, "Splited[%d] : %s\n",nbr - 1, (*splited_raw)[nbr - 1]);
 	}
 	return (SUCCESS);
 }
 
-//t_error	create_final_raw(cahr ***splited_raw, int *final_len)
-//{
-//	i = 0;
-//	while (splited_raw[i])
-//	{
-//		if ()
-//	}
-//}
+void	get_pair_key_value(t_mini_shell  *ms, t_lstd *dict, t_env_arg **key_value, char *key)
+{
+	dict = ft_lstd_find(ms->env_dict, key, find_in_dict);
+	if (dict)
+		*key_value = get_env_dict(dict);
+	else
+		*key_value = NULL;
+}
+
+t_error	get_key_and_replace(char **raw, char *, char *key_value, int *final_len)
+{
+
+	free(raw);
+	if (key_value)
+	{
+		raw = ft_strdup(key_value->value);
+		if (!raw)
+			return (MALLOC_ERROR);
+	}
+}
+t_error	create_final_raw(t_mini_shell *ms, char **splited_raw, int *final_len)
+{
+	t_lstd		*dict;
+	t_env_arg	*key_value;
+	char		*key;
+	int			str_pos;
+	int 		c_pos;
+
+	key_value = NULL;
+	str_pos = -1;
+	c_pos = 0;
+	dict = NULL;
+	while (splited_raw[++str_pos])
+	{
+		if (splited_raw[str_pos][c_pos + 1] && (splited_raw)[str_pos][c_pos] == '$' && \
+											valid_id(splited_raw[str_pos][c_pos + 1]))
+		{
+			key = (&splited_raw[str_pos][c_pos]) + 1;
+			get_pair_key_value(ms, dict, &key_value, key);
+			get_key_and_replace(splited_raw[str_pos], splited_raw[c_pos], key_value, final_len);
+		}
+		final_len += ft_strlen(splited_raw[str_pos]);
+	}
+	return  (SUCCESS);
+}
 
 t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 {
@@ -158,11 +195,11 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 //	char	*raw_cmd;
 	char	**splited_raw;
 	int		split_len;
-//	int		final_len;
+	int		final_len;
 
 	(void)ms;
 	split_len  = 0;
-//	final_len = 0;
+	final_len = 0;
 	if (!cmds->raw_cmd || split_count(cmds, &split_len) == 0)
 		return (SUCCESS);
 	splited_raw = ft_calloc(sizeof(char *), split_len);
@@ -170,8 +207,8 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 		return (MALLOC_ERROR);
 	if (fill_split_args(cmds, &splited_raw) == MALLOC_ERROR)
 		return (free_split(splited_raw), MALLOC_ERROR);
-//	if (create_final_raw(splited_raw, &final_len) == MALLOC_ERROR)
-//		return (MALLOC_ERROR);
+	if (create_final_raw(ms, splited_raw, &final_len) == MALLOC_ERROR)
+		return (free_split(splited_raw), MALLOC_ERROR);
 
 	exit(0);
 	return(0);

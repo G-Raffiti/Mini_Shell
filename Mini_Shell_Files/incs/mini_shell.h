@@ -116,7 +116,7 @@ void		exit_child(t_cmd *cmd, int error_code, char *msg);
 
 // LIST UTILS //////////////////////////////////////////////////////////////////
 t_cmd		*get(t_lstd *lst);
-t_env_arg	*get_env_dict(t_lstd *current);
+t_env_arg	*get_env_dict(void *content);
 void		clear_cmds(t_lstd **lst, void *(*free_fct)(t_cmd *));
 
 // PARSING /////////////////////////////////////////////////////////////////////
