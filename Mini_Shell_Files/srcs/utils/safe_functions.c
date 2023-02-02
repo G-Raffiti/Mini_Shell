@@ -17,6 +17,11 @@ void	safe_fork(t_mini_shell *ms, t_cmd *cmd, char *msg)
 
 void	safe_pipe(t_mini_shell *ms, char *msg)
 {
+	if (pipe((ms->pipe_retour)) == -1)
+	{
+		ms = free_mini_shell(ms);
+		exit_error(ms, errno, msg);
+	}
 	if (pipe((ms->pipe)) == -1)
 	{
 		ms = free_mini_shell(ms);
@@ -36,6 +41,16 @@ void	safe_close(t_mini_shell *ms, int fd, char *msg)
 void	safe_dup2(t_mini_shell *ms, int fd, int std, char *msg)
 {
 	if (dup2(fd, std) == -1)
+	{
+		ms = free_mini_shell(ms);
+		exit_error(ms, errno, msg);
+	}
+	safe_close(ms, fd, msg);
+}
+
+void	safe_rev_dup2(t_mini_shell *ms, int std, int fd, char *msg)
+{
+	if (dup2(std, fd) == -1)
 	{
 		ms = free_mini_shell(ms);
 		exit_error(ms, errno, msg);

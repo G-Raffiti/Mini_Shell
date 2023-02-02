@@ -85,6 +85,7 @@ typedef struct s_mini_shell
 	char			**paths;
 	t_lstd			*cmds;
 	int				pipe[2];
+	int				pipe_retour[2];
 }					t_mini_shell;
 
 #ifndef G_EXIT_CODE
@@ -157,6 +158,7 @@ void		safe_fork(t_mini_shell *ms, t_cmd *cmd, char *msg);
 void		safe_pipe(t_mini_shell *ms, char *msg);
 void		safe_close(t_mini_shell *ms, int fd, char *msg);
 void		safe_dup2(t_mini_shell *ms, int fd, int std, char *msg);
+void		safe_rev_dup2(t_mini_shell *ms, int std, int fd, char *msg);
 
 // EXEC ////////////////////////////////////////////////////////////////////////
 t_error		exec_cmds(t_mini_shell *ms);
