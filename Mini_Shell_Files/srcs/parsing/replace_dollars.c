@@ -68,7 +68,8 @@ t_error	split_count(t_cmd *cmds, int *split_len)
 	if ((*split_len) == 1 && prev_is_arg == 0)
 		return (ERROR);
 	(*split_len)++;
-	dprintf(2, "SPLIT_LEN : %d\n\n", *split_len);
+	if (debug_mod())
+		dprintf(2, "SPLIT_LEN : %d\n\n", *split_len);
 	return (SUCCESS);
 }
 
@@ -120,13 +121,15 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 				(*splited_raw)[nbr++] = ft_substr(raw_cmd, start_dol - len_prev, len_prev);
 				if ((!*splited_raw))
 					return (MALLOC_ERROR);
-				dprintf(2, "%s\n", (*splited_raw)[nbr - 1]);
+				if (debug_mod())
+					dprintf(2, "%s\n", (*splited_raw)[nbr - 1]);
 				len_prev = 0;
 			}
 			(*splited_raw)[nbr++] = ft_substr(raw_cmd, start_dol, i - start_dol + 1);
 			if ((!*splited_raw))
 				return (MALLOC_ERROR);
-			dprintf(2, "%s\n", (*splited_raw)[nbr - 1]);
+			if (debug_mod())
+				dprintf(2, "%s\n", (*splited_raw)[nbr - 1]);
 
 		}
 		else
@@ -138,7 +141,8 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 	if (prev_is_arg == 0)
 	{
 		(*splited_raw)[nbr++] = ft_substr(raw_cmd, ft_strlen(raw_cmd) - len_prev, len_prev);
-		dprintf(2, "%s\n", (*splited_raw)[nbr - 1]);
+		if (debug_mod())
+			dprintf(2, "%s\n", (*splited_raw)[nbr - 1]);
 	}
 	return (SUCCESS);
 }
