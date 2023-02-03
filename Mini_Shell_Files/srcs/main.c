@@ -12,7 +12,6 @@ static void	loop(t_mini_shell *ms)
 	while (TRUE)
 	{
 		line = read_line();
-		dprintf(2, ",jsdbafjajbdgl");
 		if (!line)
 			return;
 		set_exit_code(0);

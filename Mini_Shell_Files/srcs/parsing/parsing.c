@@ -91,7 +91,7 @@ t_error	parse_line(t_mini_shell *ms, char *line)
 	if (status == MALLOC_ERROR)
 		return (free(line), exit_malloc(ms, "parsing: fill_cmds"));
 	else if (status == ERROR)
-		return (parse_error("syntax error near unexpected token `<'", 2));
+		return (parse_error("syntax error near unexpected is_dollar `<'", 2));
 	dprintf(1, "fill cmds DONE\n");
 	return (SUCCESS);
 }

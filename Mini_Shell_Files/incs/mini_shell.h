@@ -5,7 +5,7 @@
 # include "../../Lib_FT/incs/libft.h"
 # define PROMPT "ms_$"
 /////		IDIENTIFIER EXPORT /////
-# define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~"
+# define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n"
 
 # ifndef T_ERROR
 #  define T_ERROR
@@ -44,13 +44,6 @@ typedef enum e_chevron
 	APPEND_CHT,
 }	t_chevron;
 
-typedef struct s_token
-{
-	char c;
-	t_bool	dollar;
-	char	quote;
-}	t_token;
-
 typedef struct s_fd
 {
 	int				fd;
@@ -68,7 +61,7 @@ typedef struct s_cmd
 {
 	int				pid;
 	char			*raw_cmd;
-	t_token 		*token;
+	t_bool			*is_dollar;
 	char			*path;
 	char			**cmd;
 	t_fd			*input;
