@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstd_find.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aurel <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 04:41:51 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/01/23 15:35:46 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/02/02 19:49:27 by aurel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_lstd	*ft_lstd_find(t_lstd *lst, void *ref, int (*cmp)())
 {
 	t_lstd	*tmp;
 
-	tmp = lst;
+	tmp = lst->previous;
 	while (lst)
 	{
 		if (cmp(lst->content, ref))

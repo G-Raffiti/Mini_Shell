@@ -63,7 +63,7 @@ t_error	check_line(char *line)
 	if (is_quote_error(line))
 		return (parse_error("quotes error\n", 0));
 	if (is_chevron_error(line))
-		return (parse_error("syntax error near unexpected token `newline'\n",
+		return (parse_error("syntax error near unexpected is_dollar `newline'\n",
 							258));
 	return (SUCCESS);
 }

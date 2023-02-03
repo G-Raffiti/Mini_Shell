@@ -6,7 +6,7 @@
 # include "debug.h"
 # define PROMPT "ms "
 /////		IDIENTIFIER EXPORT /////
-# define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~"
+# define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n"
 
 # ifndef T_ERROR
 #  define T_ERROR
@@ -45,13 +45,6 @@ typedef enum e_chevron
 	APPEND_CHT,
 }	t_chevron;
 
-typedef struct s_token
-{
-	char c;
-	t_bool	dollar;
-	char	quote;
-}	t_token;
-
 typedef struct s_fd
 {
 	int				fd;
@@ -69,7 +62,7 @@ typedef struct s_cmd
 {
 	int				pid;
 	char			*raw_cmd;
-	t_token 		*token;
+	t_bool			*is_dollar;
 	char			*path;
 	char			**cmd;
 	t_fd			*input;
@@ -117,7 +110,7 @@ void		exit_child(t_cmd *cmd, int error_code, char *msg);
 
 // LIST UTILS //////////////////////////////////////////////////////////////////
 t_cmd		*get(t_lstd *lst);
-t_env_arg	*get_env_dict(t_lstd *current);
+t_env_arg	*get_env_dict(void *content);
 void		clear_cmds(t_lstd **lst, void *(*free_fct)(t_cmd *));
 
 // PARSING /////////////////////////////////////////////////////////////////////
@@ -133,6 +126,7 @@ t_error		get_all_paths(t_mini_shell *ms, t_lstd *env_dict);
 char		*read_line(void);
 
 // PARSING - CHECK LINE ////////////////////////////////////////////////////////
+t_bool		is_empty_line(char *line);
 t_error		check_line(char *line);
 t_error		parse_error(char *error_msg, int error_code);
 

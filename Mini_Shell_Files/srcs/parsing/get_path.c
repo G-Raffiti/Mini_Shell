@@ -52,11 +52,11 @@ t_error	get_all_paths(t_mini_shell *ms, t_lstd *env_dict)
 {
 	t_env_arg	*current;
 
-	current = get_env_dict(env_dict);
+	current = get_env_dict(env_dict->content);
 	while (current && ft_str_cmp(current->key, "PATH") != 0)
 	{
 		env_dict = env_dict->next;
-		current = get_env_dict(env_dict);
+		current = get_env_dict(env_dict->content);
 	}
 	if (create_ms_path(ms, current->value) == MALLOC_ERROR)
 		exit_malloc(ms, "get_path: create_ms_path");
