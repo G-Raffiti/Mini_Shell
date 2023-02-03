@@ -155,8 +155,7 @@ void	get_pair_key_value(t_mini_shell  *ms, t_lstd *dict, t_env_arg **key_value, 
 t_error	get_key_and_replace(char **raw, t_env_arg **key_value)
 {
 
-	free(*raw);
-	*raw = NULL;
+	*raw = ft_free(*raw);
 	if (*key_value)
 	{
 		*raw = ft_strdup((*key_value)->value);
@@ -209,7 +208,7 @@ char	**ft_strtab_dup(char **tab_to_dup)
 	int		i;
 
 	i = -1;
-	tab = ft_calloc(sizeof(char *), ft_strlen_tab(tab_to_dup));
+	tab = ft_calloc(sizeof(char *), ft_strlen_tab(tab_to_dup) + 1);
 	if (!tab)
 		return (NULL);
 	while (tab_to_dup[++i])
@@ -227,7 +226,7 @@ t_error	create_token_and_final_raw(t_cmd **cmd, int final_len)
 	(*cmd)->is_dollar = ft_calloc(sizeof(t_bool), final_len);
 	if (!(*cmd)->is_dollar)
 		return (MALLOC_ERROR);
-	free((*cmd)->raw_cmd);
+	(*cmd)->raw_cmd = ft_free((*cmd)->raw_cmd);
 	(*cmd)->raw_cmd = ft_calloc(sizeof(char), final_len);
 	if (!(*cmd)->raw_cmd)
 		return (MALLOC_ERROR);
@@ -255,30 +254,28 @@ t_error	fill_final_raw(t_cmd *cmds, char **splited_raw)
 {
 	int		i;
 	char 	*tmp;
-	char	**raw_cmd;
 
-	raw_cmd = &cmds->raw_cmd;
 	i = 0;
 	dprintf(2, "SPLITEDRAW : %s\n ", splited_raw[i]);
 	tmp = ft_strdup(splited_raw[i]);
 	dprintf(2, "HERE\n");
 	if (!tmp)
 		return (MALLOC_ERROR);
-	*raw_cmd = ft_strdup(tmp);
-	if (!*raw_cmd)
+	cmds->raw_cmd = ft_strdup(tmp);
+	if (!cmds->raw_cmd)
 		return (MALLOC_ERROR);
-	dprintf(2, "RAW_CMD FOR ONE %s\n", *raw_cmd);
+	dprintf(2, "RAW_CMD FOR ONE %s\n", cmds->raw_cmd);
 	dprintf(2, "TMP FIRST %s\n", tmp);
 	dprintf(2, "SPLITED after tmp %s\n", splited_raw[i]);
 	while (splited_raw[++i])
 	{
-		free(*raw_cmd);
-		*raw_cmd = ft_strjoin(tmp, splited_raw[i]);
-		dprintf(2, "RAW_CMD FOR MULT%s\n", *raw_cmd);
-		if (!*raw_cmd)
-			return (free(*raw_cmd), free(tmp), MALLOC_ERROR);
-		free(tmp);
-		tmp = ft_strdup(*raw_cmd);
+		cmds->raw_cmd = ft_free(cmds->raw_cmd);
+		cmds->raw_cmd = ft_strjoin(tmp, splited_raw[i]);
+		dprintf(2, "RAW_CMD FOR MULT%s\n", cmds->raw_cmd);
+		if (!cmds->raw_cmd)
+			return (free(tmp), MALLOC_ERROR);
+		tmp = ft_free(tmp);
+		tmp = ft_strdup(cmds->raw_cmd);
 		if (!tmp)
 			return (MALLOC_ERROR);
 	}
@@ -341,6 +338,5 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 	dprintf(2, "FINAL_LEN = %d\n", final_len);
 //TODO : ERASE debug
 	dprintf(2, "RAW_CMD[] == > %s\n", cmds->raw_cmd);
-	exit(0);
 	return(0);
 }

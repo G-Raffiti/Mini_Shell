@@ -66,6 +66,8 @@ t_error	fill_cmds(t_mini_shell *ms)
 		if (replace_dollars(ms, get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		// TODO [Aurel]: find_in_dict and replace $ARG with env_lst key/value
+		if (is_empty_line(get(current)->raw_cmd))
+			return (ERROR);
 		if (get_cmd(get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		dprintf(1, "get_cmd DONE | ");
@@ -91,7 +93,7 @@ t_error	parse_line(t_mini_shell *ms, char *line)
 	if (status == MALLOC_ERROR)
 		return (free(line), exit_malloc(ms, "parsing: fill_cmds"));
 	else if (status == ERROR)
-		return (parse_error("syntax error near unexpected is_dollar `<'", 2));
+		return (parse_error("syntax error near unexpected token `<'\n", 2));
 	dprintf(1, "fill cmds DONE\n");
 	return (SUCCESS);
 }

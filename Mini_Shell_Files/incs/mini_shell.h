@@ -125,6 +125,7 @@ t_error		get_all_paths(t_mini_shell *ms, t_lstd *env_dict);
 char		*read_line(void);
 
 // PARSING - CHECK LINE ////////////////////////////////////////////////////////
+t_bool		is_empty_line(char *line);
 t_error		check_line(char *line);
 t_error		parse_error(char *error_msg, int error_code);
 
