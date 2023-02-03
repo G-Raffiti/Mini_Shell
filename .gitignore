@@ -1,6 +1,11 @@
 #projet
 valgrind*
 
+# Cmake
+
+CMakeLists.txt
+cmake-build-debug
+cmake*
 # CLion
 .idea
 *.xml
