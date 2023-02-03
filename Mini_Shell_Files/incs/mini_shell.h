@@ -144,6 +144,7 @@ t_error		get_path(t_mini_shell *ms, t_cmd *cmd);
 
 // PARSING - REPLACE_DOLLARS
 t_error		replace_dollars(t_mini_shell *ms, t_cmd *cmds);
+void		replace_dollar_before_quotes(t_cmd *cmd);
 // PARSING - SET BUILTIN ///////////////////////////////////////////////////////
 void		set_builtin(t_lstd *current);
 

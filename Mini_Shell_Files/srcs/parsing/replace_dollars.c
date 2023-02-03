@@ -153,9 +153,16 @@ void	get_pair_key_value(t_mini_shell  *ms, t_lstd *dict, t_env_arg **key_value, 
 		*key_value = NULL;
 }
 
-t_error	get_key_and_replace(char **raw, t_env_arg **key_value)
+t_error	get_key_and_replace(char **raw, t_env_arg **key_value, char *key)
 {
-
+	if (ft_str_cmp(key, "?") == 0)
+	{
+		*raw = ft_free(*raw);
+		*raw = ft_itoa(get_exit_code());
+		if (!*raw)
+			return (MALLOC_ERROR);
+		return (SUCCESS);
+	}
 	*raw = ft_free(*raw);
 	if (*key_value)
 	{
@@ -172,6 +179,7 @@ t_error	get_key_and_replace(char **raw, t_env_arg **key_value)
 	}
 	return (SUCCESS);
 }
+
 t_error	replace_in_split(t_mini_shell *ms, char **splited_raw, int *final_len)
 {
 	t_lstd		*dict;
@@ -189,15 +197,15 @@ t_error	replace_in_split(t_mini_shell *ms, char **splited_raw, int *final_len)
 		if (splited_raw[str_pos][c_pos + 1] && (splited_raw)[str_pos][c_pos] == '$' &&
 											valid_id(splited_raw[str_pos][c_pos + 1]))
 		{
-			dprintf(2, "raw[%d] BEFORE replaced : %s\n", str_pos, splited_raw[str_pos]);
+//			dprintf(2, "raw[%d] BEFORE replaced : %s\n", str_pos, splited_raw[str_pos]);
 			key = (&splited_raw[str_pos][c_pos]) + 1;
 			get_pair_key_value(ms, dict, &key_value, key);
-			if (get_key_and_replace(&splited_raw[str_pos], &key_value) == MALLOC_ERROR)
+			if (get_key_and_replace(&splited_raw[str_pos], &key_value, key) == MALLOC_ERROR)
 				return (MALLOC_ERROR);
-			dprintf(2, "raw[%d] replaced : %s | len = %ld\n", str_pos, splited_raw[str_pos], ft_strlen(splited_raw[str_pos]));
+//			dprintf(2, "raw[%d] replaced : %s | len = %ld\n", str_pos, splited_raw[str_pos], ft_strlen(splited_raw[str_pos]));
 		}
 		else
-			dprintf(2, "raw[%d] NOT replaced : %s | len = %ld\n", str_pos, splited_raw[str_pos], ft_strlen(splited_raw[str_pos]));
+//			dprintf(2, "raw[%d] NOT replaced : %s | len = %ld\n", str_pos, splited_raw[str_pos], ft_strlen(splited_raw[str_pos]));
 		*final_len += ft_strlen(splited_raw[str_pos]);
 	}
 	return  (SUCCESS);
@@ -257,22 +265,16 @@ t_error	fill_final_raw(t_cmd *cmds, char **splited_raw)
 	char 	*tmp;
 
 	i = 0;
-	dprintf(2, "SPLITEDRAW : %s\n ", splited_raw[i]);
 	tmp = ft_strdup(splited_raw[i]);
-	dprintf(2, "HERE\n");
 	if (!tmp)
 		return (MALLOC_ERROR);
 	cmds->raw_cmd = ft_strdup(tmp);
 	if (!cmds->raw_cmd)
 		return (MALLOC_ERROR);
-	dprintf(2, "RAW_CMD FOR ONE %s\n", cmds->raw_cmd);
-	dprintf(2, "TMP FIRST %s\n", tmp);
-	dprintf(2, "SPLITED after tmp %s\n", splited_raw[i]);
 	while (splited_raw[++i])
 	{
 		cmds->raw_cmd = ft_free(cmds->raw_cmd);
 		cmds->raw_cmd = ft_strjoin(tmp, splited_raw[i]);
-		dprintf(2, "RAW_CMD FOR MULT%s\n", cmds->raw_cmd);
 		if (!cmds->raw_cmd)
 			return (free(tmp), MALLOC_ERROR);
 		tmp = ft_free(tmp);
@@ -281,7 +283,6 @@ t_error	fill_final_raw(t_cmd *cmds, char **splited_raw)
 			return (MALLOC_ERROR);
 	}
 	free(tmp);
-	dprintf(2, "OK\n");
 	return (SUCCESS);
 }
 
@@ -298,15 +299,13 @@ t_error	fill_token_and_final_raw(t_cmd *cmds, char **dup_splited_raw, \
 	while (dup_splited_raw[++str_pos])
 	{
 		if (str_pos != 0)
-			start_token += ft_strlen(splited_raw[str_pos]);
+			start_token += (int)ft_strlen(splited_raw[str_pos]);
 		if ((dup_splited_raw)[str_pos][c_pos] == '$' && dup_splited_raw[str_pos][c_pos + 1] && \
 			valid_id(dup_splited_raw[str_pos][c_pos + 1]))
 			fill_token(cmds, splited_raw, start_token, str_pos);
 	}
 	if (fill_final_raw(cmds, splited_raw) == MALLOC_ERROR)
 		return (MALLOC_ERROR);
-	dprintf(2, "FIXED\n");
-	dprintf(2, "RAW line 306 : %s\n", cmds->raw_cmd);
 	return  (SUCCESS);
 }
 
@@ -336,8 +335,27 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 	if (fill_token_and_final_raw(cmds, dup_splited_raw, splited_raw) \
 											== MALLOC_ERROR)
 		return (free_split(splited_raw), free_split(dup_splited_raw), MALLOC_ERROR);
-	dprintf(2, "FINAL_LEN = %d\n", final_len);
 //TODO : ERASE debug
 	dprintf(2, "RAW_CMD[] == > %s\n", cmds->raw_cmd);
 	return(0);
+}
+
+void	replace_dollar_before_quotes(t_cmd *cmd)
+{
+	int		i;
+	char 	quote;
+	char 	*raw;
+
+	i = -1;
+	quote = 0;
+	raw = cmd->raw_cmd;
+	while (raw[++i])
+	{
+		if (set_quote_state(raw[i], &quote) == 0 && raw[i] == '$' \
+					&& (raw[i + 1] == '\'' || raw[i + 1] == '\"'))
+		{
+			raw[i] = ' ';
+		}
+	}
+	dprintf(2, "RAW: %s\n", raw);
 }
