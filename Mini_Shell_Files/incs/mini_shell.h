@@ -3,7 +3,8 @@
 # define MINI_SHELL_H
 # include "../../Lib_List_Double/incs/ft_lstd.h"
 # include "../../Lib_FT/incs/libft.h"
-# define PROMPT "ms_$"
+# include "debug.h"
+# define PROMPT "ms "
 /////		IDIENTIFIER EXPORT /////
 # define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n"
 
@@ -157,9 +158,12 @@ void		safe_rev_dup2(t_mini_shell *ms, int std, int fd, char *msg);
 t_error		exec_cmds(t_mini_shell *ms);
 
 // TEST ////////////////////////////////////////////////////////////////////////
-void	debug_cmd(t_cmd *cmd);
-void	debug_all_cmds(t_mini_shell *ms);
-void	debug_mini_shell(t_mini_shell *ms);
-void	debug_fd(t_mini_shell *ms, t_cmd *cmd);
+t_bool		debug_mod(void);
+void		enable_debug(void);
+void		debug(int ac, ...);
+void		debug_cmd(t_cmd *cmd);
+void		debug_all_cmds(t_mini_shell *ms);
+void		debug_mini_shell(t_mini_shell *ms);
+void		debug_fd(t_mini_shell *ms, t_cmd *cmd);
 
 #endif

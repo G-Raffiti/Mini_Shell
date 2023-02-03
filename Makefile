@@ -45,6 +45,7 @@ FILES =			\
 				utils/safe_functions \
 				\
 				exit \
+				exit_code \
 				main
 
 

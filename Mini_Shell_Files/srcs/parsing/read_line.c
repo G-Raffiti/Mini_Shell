@@ -11,9 +11,9 @@ char	*read_line(void)
 {
 	char	*line;
 	if (get_exit_code() == 0)
-		line = readline(PROMPT""GREEN"> "WHITE);
+		line = readline(PROMPT""GREEN"-▶ "WHITE);
 	else
-		line = readline(PROMPT""RED"> "WHITE);
+		line = readline(PROMPT""RED"-▶ "WHITE);
 	if (line && ft_strlen(line) > 0)
 		add_history(line);
 	return (line);

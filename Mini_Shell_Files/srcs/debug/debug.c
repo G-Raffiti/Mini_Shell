@@ -2,11 +2,44 @@
 // Created by rbonneva on 30/01/23.
 //
 
+#include <stdarg.h>
 #include "../../incs/mini_shell.h"
 #include "../../incs/debug.h"
 
+int g_debug = 0;
+
+t_bool	debug_mod(void)
+{
+	if (g_debug)
+		return (TRUE);
+	return (FALSE);
+}
+
+void	enable_debug(void)
+{
+	g_debug = 1;
+}
+
+void	debug(int ac, ...)
+{
+	if (!g_debug)
+		return ;
+	va_list ap;
+	va_start(ap, ac);
+	while (ac > 0)
+	{
+		dprintf(2, "%s", va_arg(ap, char *));
+		ac--;
+	}
+	va_end(ap);
+
+
+}
+
 void	debug_cmd(t_cmd *cmd)
 {
+	if (!g_debug)
+		return ;
 	char	*is_valid;
 	int		i;
 	if (cmd->cmd)
@@ -34,6 +67,8 @@ void	debug_cmd(t_cmd *cmd)
 
 void	debug_all_cmds(t_mini_shell *ms)
 {
+	if (!g_debug)
+		return ;
 	t_lstd	*current;
 	t_cmd	*cmd;
 
@@ -50,6 +85,8 @@ void	debug_all_cmds(t_mini_shell *ms)
 
 void	debug_mini_shell(t_mini_shell *ms)
 {
+	if (!g_debug)
+		return ;
 	printf("env %p\n", ms->env);
 	if (ms->env)
 	{
@@ -81,6 +118,8 @@ void	debug_mini_shell(t_mini_shell *ms)
 
 void debug_fd(t_mini_shell *ms, t_cmd *cmd)
 {
+	if (!g_debug)
+		return ;
 	printf(WHITE"CMD: "YELLOW"%s"WHITE" FD: input"GREY"["YELLOW"%s"GREY"="YELLOW"%d"GREY"] "
 			WHITE"output"GREY"["YELLOW"%s"GREY"="YELLOW"%d"GREY"] | "
 			WHITE"PATH"GREY"["YELLOW"0"GREY"]="YELLOW"%d "

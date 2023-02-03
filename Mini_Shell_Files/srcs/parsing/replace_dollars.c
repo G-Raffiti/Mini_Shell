@@ -68,7 +68,8 @@ t_error	split_count(t_cmd *cmds, int *split_len)
 	if ((*split_len) == 1 && prev_is_arg == 0)
 		return (ERROR);
 	(*split_len)++;
-	dprintf(2, "SPLIT_LEN : %d\n\n", *split_len);
+	if (debug_mod())
+		dprintf(2, "SPLIT_LEN : %d\n\n", *split_len);
 	return (SUCCESS);
 }
 

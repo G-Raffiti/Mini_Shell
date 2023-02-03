@@ -3,7 +3,6 @@
 #include <errno.h>
 #include <string.h>
 #include "../incs/mini_shell.h"
-#include "debug.h"
 
 static void	loop(t_mini_shell *ms)
 {
@@ -15,7 +14,7 @@ static void	loop(t_mini_shell *ms)
 		if (!line)
 			return;
 		set_exit_code(0);
-		dprintf(1, "line = [%s] | ", line);
+		debug(3, WHITE"line"GREY" = ["WHITE, line,GREY"] | "WHITE);
 		if (parse_line(ms, line) == ERROR)
 		{
 			clear_cmds(&(ms->cmds), free_cmd);
@@ -30,10 +29,6 @@ static void	loop(t_mini_shell *ms)
 			exit_end_program(ms);
 		}
 		exec_cmds(ms);
-		//if (errno != 10)
-		//	set_exit_code(errno);
-		//printf(RED"ERROR="WHITE" %d -> %s\n", get_exit_code(), strerror
-		//(get_exit_code()));
 		clear_cmds(&(ms->cmds), free_cmd);
 		line = ft_free(line);
 	}
@@ -43,9 +38,9 @@ int	main(int argc, char **argv, char **env)
 {
 	t_mini_shell	*ms;
 
-	(void) argc;
-	(void) argv;
-	printf("Hello Hell !\n");
+	if (argc == 2 && ft_str_cmp(argv[1], "debug") == 0)
+		enable_debug();
+	printf("☠  ---Welcome to mini Hell--- ☠ \n");
 	if (new_mini_shell(&ms) == MALLOC_ERROR)
 		exit_malloc(ms, "main: new_mini_shell");
 	get_env(ms, env);

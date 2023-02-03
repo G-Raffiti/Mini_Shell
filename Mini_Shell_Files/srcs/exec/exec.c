@@ -6,6 +6,7 @@
 #include <string.h>
 #include "../../../Lib_List_Double/incs/ft_lstd.h"
 #include "../../incs/mini_shell.h"
+#include "debug.h"
 
 static t_error permission_denied(t_mini_shell *ms, t_cmd *cmd)
 {
@@ -120,6 +121,27 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 	execve_cmd(ms, last);
 }
 
+void	wait_exit_status(t_lstd *current)
+{
+	int		wstatus;
+	int		exit_status;
+
+	current = ft_lstd_first(current);
+	while (current)
+	{
+		waitpid(get(current)->pid, &wstatus, 0);
+		if (WIFEXITED(wstatus))
+			exit_status = WEXITSTATUS(wstatus);
+		else if (WIFSIGNALED(wstatus))
+			exit_status = WTERMSIG(wstatus);
+		current = current->next;
+	}
+	set_exit_code(exit_status);
+	if (debug_mod())
+		dprintf(2, YELLOW"-▶ %s%d"YELLOW" ◀-"WHITE"\n", get_exit_code() == 0 ?
+			GREEN : RED,get_exit_code());
+}
+
 t_error	exec_cmds(t_mini_shell *ms)
 {
 	t_lstd	*current;
@@ -142,8 +164,7 @@ t_error	exec_cmds(t_mini_shell *ms)
 		}
 		exec_last(ms, get(current));
 	}
-	while (waitpid(-1, NULL, 0) > 0)
-		;
+	wait_exit_status(current);
 	dup2(save_in, STDIN_FILENO);
 	dup2(save_out, STDOUT_FILENO);
 	return (SUCCESS);
