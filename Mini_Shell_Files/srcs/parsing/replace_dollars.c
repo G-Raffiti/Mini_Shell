@@ -259,6 +259,7 @@ t_error	fill_final_raw(t_cmd *cmds, char **splited_raw)
 
 	raw_cmd = &cmds->raw_cmd;
 	i = 0;
+	dprintf(2, "SPLITEDRAW : %s\n ", splited_raw[i]);
 	tmp = ft_strdup(splited_raw[i]);
 	dprintf(2, "HERE\n");
 	if (!tmp)
