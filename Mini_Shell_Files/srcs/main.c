@@ -41,6 +41,11 @@ int	main(int argc, char **argv, char **env)
 	if (argc == 2 && ft_str_cmp(argv[1], "debug") == 0)
 		enable_debug();
 	printf("☠  ---Welcome to mini Hell--- ☠ \n");
+//	if (env == NULL)
+//	{
+//		if (generate_minimal_env(&env) == MALLOC_ERROR)
+//			return (exit_malloc(NULL, "main: generate_minimal_env"));
+//	}
 	if (new_mini_shell(&ms) == MALLOC_ERROR)
 		exit_malloc(ms, "main: new_mini_shell");
 	get_env(ms, env);

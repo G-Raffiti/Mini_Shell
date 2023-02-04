@@ -75,6 +75,7 @@ typedef struct s_mini_shell
 {
 	char			**env;
 	t_lstd			*env_dict;
+	t_lstd			*env_sort_dict;
 	char			**paths;
 	t_lstd			*cmds;
 	int				pipe[2];
@@ -112,6 +113,12 @@ void		exit_child(t_cmd *cmd, int error_code, char *msg);
 t_cmd		*get(t_lstd *lst);
 t_env_arg	*get_env_dict(void *content);
 void		clear_cmds(t_lstd **lst, void *(*free_fct)(t_cmd *));
+
+// CHECK_UTILS /////////////////////////////////////////////////////////////////
+
+int		valid_id_dollars(char c);
+int		valid_id_export(char c);
+int		is_not_alpha(char c);
 
 // PARSING /////////////////////////////////////////////////////////////////////
 int			set_quote_state(char c, char *quote);
@@ -157,7 +164,11 @@ void		safe_rev_dup2(t_mini_shell *ms, int std, int fd, char *msg);
 
 // EXEC ////////////////////////////////////////////////////////////////////////
 t_error		exec_cmds(t_mini_shell *ms);
+t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd);
 
+// EXPORT //////////////////////////////////////////////////////////////////////
+
+t_error	export(t_mini_shell *ms, t_cmd *cmd);
 // TEST ////////////////////////////////////////////////////////////////////////
 t_bool		debug_mod(void);
 void		enable_debug(void);

@@ -9,6 +9,11 @@ int find_in_dict(void *content, void *ref)
 	return (0);
 }
 
+//t_error	get_sort_env(t_mini_shell *ms)
+//{
+//
+//}
+
 t_error get_keys(t_env_arg **env_dict, char *env)
 {
 	int		i;
@@ -85,6 +90,8 @@ void	get_env(t_mini_shell *ms, char **env)
 						ft_lstd_clear(&ms->env_dict, ft_free));
 		ft_lstd_push_back_elem(&ms->env_dict, current);
 	}
+//	if (get_sort_env(ms) == MALLOC_ERROR)
+//		exit_malloc(ms, "env: get_sort_env");
 }
 
 // TODO [Aurel]: synchro list env to char** env

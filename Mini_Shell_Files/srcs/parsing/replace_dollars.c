@@ -4,26 +4,6 @@
 
 #include "../../incs/mini_shell.h"
 
-int 	valid_id(char c)
-{
-	if (ft_contain(INV_ID, c) || c >= 127 || c == ' ')
-		return (0);
-	return (1);
-}
-
-int	is_not_alpha(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (0);
-	return (1);
-}
-
-//void	count_arg(char *raw_cmd, int *split_len, int *prev_is_arg, char quote)
-//{
-//
-//
-//}
-
 t_error	split_count(t_cmd *cmds, int *split_len)
 {
 	char	quote;
@@ -41,16 +21,16 @@ t_error	split_count(t_cmd *cmds, int *split_len)
 		if (set_quote_state(raw_cmd[i], &quote) != '\'' && raw_cmd[i] == '$' &&
 			is_not_alpha(raw_cmd[i + 1]))
 		{
-			if (i != 0 && raw_cmd[i + 1] && valid_id(raw_cmd[i + 1]) && prev_is_arg == 0)
+			if (i != 0 && raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]) && prev_is_arg == 0)
 				*split_len += 2;
-			else if (raw_cmd[i + 1] && valid_id(raw_cmd[i + 1]))
+			else if (raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]))
 				*split_len += 1;
 			else
 			{
 				prev_is_arg = 0;
 				continue;
 			}
-			while (raw_cmd[i + 1] && valid_id(raw_cmd[i + 1]))
+			while (raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]))
 			{
 				prev_is_arg = 1;
 				set_quote_state(raw_cmd[i], &quote);
@@ -97,9 +77,9 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 			is_not_alpha(raw_cmd[i + 1]))
 		{
 			start_dol = i;
-			if (i != 0 && raw_cmd[i + 1] && valid_id(raw_cmd[i + 1]) && prev_is_arg == 0)
+			if (i != 0 && raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]) && prev_is_arg == 0)
 				start_dol = i;
-			else if (raw_cmd[i + 1] && valid_id(raw_cmd[i + 1]))
+			else if (raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]))
 				start_dol = i;
 			else
 			{
@@ -107,7 +87,7 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 				len_prev++;
 				continue;
 			}
-			while (raw_cmd[i + 1] && valid_id(raw_cmd[i + 1]))
+			while (raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]))
 			{
 				prev_is_arg = 1;
 
@@ -195,7 +175,7 @@ t_error	replace_in_split(t_mini_shell *ms, char **splited_raw, int *final_len)
 	while (splited_raw[++str_pos])
 	{
 		if (splited_raw[str_pos][c_pos + 1] && (splited_raw)[str_pos][c_pos] == '$' &&
-											valid_id(splited_raw[str_pos][c_pos + 1]))
+				valid_id_dollars(splited_raw[str_pos][c_pos + 1]))
 		{
 //			dprintf(2, "raw[%d] BEFORE replaced : %s\n", str_pos, splited_raw[str_pos]);
 			key = (&splited_raw[str_pos][c_pos]) + 1;
@@ -301,7 +281,7 @@ t_error	fill_token_and_final_raw(t_cmd *cmds, char **dup_splited_raw, \
 		if (str_pos != 0)
 			start_token += (int)ft_strlen(splited_raw[str_pos]);
 		if ((dup_splited_raw)[str_pos][c_pos] == '$' && dup_splited_raw[str_pos][c_pos + 1] && \
-			valid_id(dup_splited_raw[str_pos][c_pos + 1]))
+            valid_id_dollars(dup_splited_raw[str_pos][c_pos + 1]))
 			fill_token(cmds, splited_raw, start_token, str_pos);
 	}
 	if (fill_final_raw(cmds, splited_raw) == MALLOC_ERROR)
