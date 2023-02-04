@@ -6,7 +6,7 @@
 # include "debug.h"
 # define PROMPT "ms "
 /////		IDIENTIFIER EXPORT /////
-# define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n"
+# define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n _"
 # define INV_ID_EXPORT	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n ?"
 
 # ifndef T_ERROR
