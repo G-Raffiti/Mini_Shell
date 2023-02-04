@@ -7,6 +7,7 @@
 # define PROMPT "ms "
 /////		IDIENTIFIER EXPORT /////
 # define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n"
+# define INV_ID_EXPORT	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n ?"
 
 # ifndef T_ERROR
 #  define T_ERROR
@@ -166,9 +167,12 @@ void		safe_rev_dup2(t_mini_shell *ms, int std, int fd, char *msg);
 t_error		exec_cmds(t_mini_shell *ms);
 t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd);
 
-// EXPORT //////////////////////////////////////////////////////////////////////
+// EXEC - EXPORT_BUILTIN ///////////////////////////////////////////////////////
+t_error		export(t_mini_shell *ms, t_cmd *cmd);
 
-t_error	export(t_mini_shell *ms, t_cmd *cmd);
+// EXEC - ENV - BUILTIN ////////////////////////////////////////////////////////
+void		env(t_mini_shell *ms, t_cmd *cmd);
+
 // TEST ////////////////////////////////////////////////////////////////////////
 t_bool		debug_mod(void);
 void		enable_debug(void);

@@ -13,7 +13,7 @@ int	valid_id_dollars(char c)
 
 int	valid_id_export(char c)
 {
-	if (ft_contain(INV_ID, c) || c >= 127 || c == ' ')
+	if (ft_contain(INV_ID_EXPORT, c) || c >= 127 || c == ' ')
 		return (0);
 	return (1);
 }

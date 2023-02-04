@@ -28,7 +28,8 @@ FILES =			\
 				env/env \
 				\
 				exec/exec \
-				exec/export \
+				exec/export_builtin \
+				exec/env_builtin \
 				\
 				parsing/check_line \
 				parsing/chevron \
