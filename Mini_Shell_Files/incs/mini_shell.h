@@ -5,6 +5,7 @@
 # include "../../Lib_FT/incs/libft.h"
 # include "error.h"
 # include "debug.h"
+# include <errno.h>
 # define PROMPT "ms "
 /////		IDIENTIFIER EXPORT /////
 # define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n _"
@@ -76,6 +77,7 @@ typedef struct s_cmd
 typedef struct s_mini_shell
 {
 	char			**env;
+	char			**env_sort;
 	t_lstd			*env_dict;
 	t_lstd			*env_sort_dict;
 	char			**paths;
@@ -111,10 +113,14 @@ t_error		exit_end_program(t_mini_shell *ms);
 void		exit_error(t_mini_shell *ms, int error_code, char *msg);
 void		exit_child(t_cmd *cmd, int error_code, char *msg);
 
+// BUILTIN ERRORS //////////////////////////////////////////////////////////////
+void	builtin_error_env(char *arg, int error_code, char *msg);
+
 // LIST UTILS //////////////////////////////////////////////////////////////////
 t_cmd		*get(t_lstd *lst);
 t_env_arg	*get_env_dict(void *content);
 void		clear_cmds(t_lstd **lst, void *(*free_fct)(t_cmd *));
+void		sort_dict(t_lstd **lst, int (*cmp)());
 
 // CHECK_UTILS /////////////////////////////////////////////////////////////////
 
@@ -126,10 +132,13 @@ int		is_not_alpha(char c);
 int			set_quote_state(char c, char *quote);
 t_error		parse_line(t_mini_shell *ms, char *line);
 
-// ENV /////////////////////////////////////////////////////////////////////////
+// PARSING - ENV /////////////////////////////////////////////////////////////////////////
 int			find_in_dict(void *content, void *ref);
-void		get_env(t_mini_shell *ms, char **env);
+t_error		get_env(t_mini_shell *ms, char **env);
 t_error		get_all_paths(t_mini_shell *ms, t_lstd *env_dict);
+t_error		sort_export_and_fill_export_env(t_mini_shell *ms);
+t_error		get_export_type(t_mini_shell *ms);
+t_error		create_export_env(t_mini_shell *ms);
 
 // PARSING - READ_LINE /////////////////////////////////////////////////////////
 char		*read_line(void);
@@ -182,5 +191,8 @@ void		debug_cmd(t_cmd *cmd);
 void		debug_all_cmds(t_mini_shell *ms);
 void		debug_mini_shell(t_mini_shell *ms);
 void		debug_fd(t_mini_shell *ms, t_cmd *cmd);
+
+// OTHER
+char		**ft_strtab_dup(char **tab_to_dup);
 
 #endif

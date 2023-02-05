@@ -48,6 +48,8 @@ FILES =			\
 				utils/builtin_utils \
 				utils/check_functions \
 				\
+				builtin_errors \
+				\
 				exit \
 				exit_code \
 				main
