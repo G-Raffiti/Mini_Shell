@@ -43,12 +43,15 @@ void	safe_dup2(t_mini_shell *ms, int fd, int std, char *msg)
 	safe_close(ms, fd, msg);
 }
 
-void	safe_rev_dup2(t_mini_shell *ms, int std, int fd, char *msg)
+int	safe_dup(t_mini_shell *ms, int std, char *msg)
 {
-	if (dup2(std, fd) == -1)
+	int	fd;
+
+	fd = dup(std);
+	if (fd == -1)
 	{
 		ms = free_mini_shell(ms);
 		exit_error(ms, errno, msg);
 	}
-	safe_close(ms, fd, msg);
+	return (fd);
 }
