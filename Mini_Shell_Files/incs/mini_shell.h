@@ -115,6 +115,9 @@ void		exit_child(t_cmd *cmd, int error_code, char *msg);
 // BUILTIN ERRORS //////////////////////////////////////////////////////////////
 void	builtin_error_env(char *arg, int error_code, char *msg);
 
+// BUILTIN - UTILS
+t_error	exec_builtin(t_mini_shell *ms, t_cmd *cmd);
+
 // LIST UTILS //////////////////////////////////////////////////////////////////
 t_cmd		*get(t_lstd *lst);
 t_env_arg	*get_env_dict(void *content);
@@ -177,7 +180,7 @@ t_error		exec_cmds(t_mini_shell *ms);
 t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd);
 
 // EXEC - EXPORT_BUILTIN ///////////////////////////////////////////////////////
-t_error		export(t_mini_shell *ms, t_cmd *cmd);
+t_error		ft_export(t_mini_shell *ms, t_cmd *cmd);
 
 // EXEC - ENV - BUILTIN ////////////////////////////////////////////////////////
 void		env(t_mini_shell *ms, t_cmd *cmd);
