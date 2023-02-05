@@ -191,7 +191,6 @@ t_error fill_env_sort(t_lstd *current, char **str)
 	*str = ft_strjoin(key, value);
 	if (!*str)
 		return (MALLOC_ERROR);
-	dprintf(2, "LINE : %s\n", *str);
 	return (SUCCESS);
 }
 
