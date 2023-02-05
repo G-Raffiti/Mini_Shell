@@ -4,6 +4,7 @@
 # include "../../Lib_List_Double/incs/ft_lstd.h"
 # include "../../Lib_FT/incs/libft.h"
 # include "debug.h"
+# include <errno.h>
 # define PROMPT "ms "
 /////		IDIENTIFIER EXPORT /////
 # define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n _"
@@ -109,6 +110,9 @@ t_error		exit_malloc(t_mini_shell *mini_shell, char *msg);
 t_error		exit_end_program(t_mini_shell *ms);
 void		exit_error(t_mini_shell *ms, int error_code, char *msg);
 void		exit_child(t_cmd *cmd, int error_code, char *msg);
+
+// BUILTIN ERRORS //////////////////////////////////////////////////////////////
+void	builtin_error_env(char *arg, int error_code, char *msg);
 
 // LIST UTILS //////////////////////////////////////////////////////////////////
 t_cmd		*get(t_lstd *lst);
