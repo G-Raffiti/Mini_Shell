@@ -31,22 +31,11 @@ static t_error permission_denied(t_mini_shell *ms, t_cmd *cmd)
 
 static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 {
-<<<<<<< HEAD
-	//if (!cmd->is_builtin)
-		execve(cmd->path, cmd->cmd, ms->env);
-	//else
-	//	exec_builtin(ms, cmd);
-	exit_child(cmd, 127, COMMAND_NOT_FOUND);
-=======
 	if (!cmd->is_builtin)
 		execve(cmd->path, cmd->cmd, ms->env);
 	else
-	{
 		exec_builtin(ms, cmd);
-		exit(1);
-	}
-	exit_child(cmd, 127, "command not found");
->>>>>>> main
+	exit_child(cmd, 127, COMMAND_NOT_FOUND);
 }
 
 static void	exec_one(t_mini_shell *ms, t_cmd *one)

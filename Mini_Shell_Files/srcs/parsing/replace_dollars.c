@@ -315,8 +315,7 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 	if (fill_token_and_final_raw(cmds, dup_splited_raw, splited_raw) \
 											== MALLOC_ERROR)
 		return (free_split(splited_raw), free_split(dup_splited_raw), MALLOC_ERROR);
-//TODO : ERASE debug
-	dprintf(2, "RAW_CMD[] == > %s\n", cmds->raw_cmd);
+	debug(3, "RAW_CMD[] == > ", cmds->raw_cmd, "\n");
 	return(0);
 }
 
@@ -337,5 +336,5 @@ void	replace_dollar_before_quotes(t_cmd *cmd)
 			raw[i] = ' ';
 		}
 	}
-	dprintf(2, "RAW: %s\n", raw);
+	debug(3, "RAW: ", raw, "\n");
 }
