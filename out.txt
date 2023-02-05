@@ -1,3 +1,0 @@
-AFTER MAKECHILD : PID=0
-efsdfsfzxfds
-sfsdfsdaf
