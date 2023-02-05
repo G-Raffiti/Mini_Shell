@@ -3,6 +3,7 @@
 # define MINI_SHELL_H
 # include "../../Lib_List_Double/incs/ft_lstd.h"
 # include "../../Lib_FT/incs/libft.h"
+# include "error.h"
 # include "debug.h"
 # define PROMPT "ms "
 /////		IDIENTIFIER EXPORT /////
@@ -145,7 +146,7 @@ t_error		get_path(t_mini_shell *ms, t_cmd *cmd);
 // PARSING - REPLACE_DOLLARS
 t_error		replace_dollars(t_mini_shell *ms, t_cmd *cmds);
 // PARSING - SET BUILTIN ///////////////////////////////////////////////////////
-void		set_builtin(t_lstd *current);
+void		set_builtin(t_cmd *cmd);
 
 // SAFE FUNC ///////////////////////////////////////////////////////////////////
 void		safe_fork(t_mini_shell *ms, t_cmd *cmd, char *msg);

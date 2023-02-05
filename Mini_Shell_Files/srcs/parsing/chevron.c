@@ -123,7 +123,8 @@ t_error	open_files(t_mini_shell *ms, t_cmd *cmd)
 		if (!set_quote_state(*str, &quote) && ft_contain("<>", *str))
 		{
 			chevron_type = get_chevron_type(str);
-			if (extract_file_name(str, &quote, &file_name) != SUCCESS)
+			error = extract_file_name(str, &quote, &file_name);
+			if (error != SUCCESS)
 				return (error);
 			chevron_in(ms, cmd, chevron_type, file_name);
 		}

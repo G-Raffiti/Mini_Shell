@@ -9,7 +9,7 @@
 void	exit_child(t_cmd *cmd, int error_code, char *msg)
 {
 	set_exit_code(error_code);
-	printf("%d %s: %s\n", get_exit_code(), cmd->cmd[0], msg);
+	printf("%s: %s\n", cmd->cmd[0], msg);
 	exit(error_code);
 }
 
