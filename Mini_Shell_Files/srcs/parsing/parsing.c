@@ -65,7 +65,6 @@ t_error	fill_cmds(t_mini_shell *ms)
 		replace_dollar_before_quotes(get(current));
 		if (replace_dollars(ms, get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
-		// TODO [Aurel]: find_in_dict and replace $ARG with env_lst key/value
 		if (is_empty_line(get(current)->raw_cmd))
 			return (ERROR);
 		if (get_cmd(get(current)) == MALLOC_ERROR)

@@ -35,3 +35,31 @@ void	clear_cmds(t_lstd **lst, void *(*free_fct)(t_cmd *))
 	}
 	*lst = NULL;
 }
+
+void	sort_dict(t_lstd **lst, int (*cmp)())
+{
+	t_lstd	*a;
+	t_lstd	*b;
+	void	*tmp;
+
+	if (!lst)
+		return ;
+	*lst = ft_lstd_first(*lst);
+	a = *lst;
+	while (a->next)
+	{
+
+		b = a->next;
+		while (b)
+		{
+			if (cmp(get_env_dict(a->content)->key, get_env_dict(b->content)->key) > 0)
+			{
+				tmp = a->content;
+				a->content = b->content;
+				b->content = tmp;
+			}
+			b = b->next;
+		}
+		a = a->next;
+	}
+}

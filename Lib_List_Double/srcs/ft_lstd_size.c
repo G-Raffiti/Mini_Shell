@@ -12,7 +12,7 @@
 
 #include "../incs/ft_lstd.h"
 
-int	ft_lst_size(t_lstd *lst)
+int	ft_lstd_size(t_lstd *lst)
 {
 	int		i;
 	t_lstd	*tmp;
