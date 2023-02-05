@@ -65,7 +65,11 @@ t_error	fill_cmds(t_mini_shell *ms, char **error_msg, int *code_error)
 			*error_msg = SYNTAX_NEWLINE;
 			*code_error = 2;
 			return (ERROR);
+<<<<<<< HEAD
 		}
+=======
+		replace_dollar_before_quotes(get(current));
+>>>>>>> main
 		if (replace_dollars(ms, get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		if (is_empty_line(get(current)->raw_cmd))

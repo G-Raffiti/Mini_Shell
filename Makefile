@@ -28,6 +28,8 @@ FILES =			\
 				env/env \
 				\
 				exec/exec \
+				exec/export_builtin \
+				exec/env_builtin \
 				\
 				parsing/check_line \
 				parsing/chevron \
@@ -43,6 +45,8 @@ FILES =			\
 				utils/list_cmd_utils \
 				utils/new_struct \
 				utils/safe_functions \
+				utils/builtin_utils \
+				utils/check_functions \
 				\
 				exit \
 				exit_code \

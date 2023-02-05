@@ -67,5 +67,6 @@ char	*ft_strrchr(const char *str, int c);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 int		ft_strlen_tab(char **s);
+char	*ft_strjoin_sep(int size, char **strs, char *sep);
 
 #endif
