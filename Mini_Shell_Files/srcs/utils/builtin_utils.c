@@ -2,7 +2,7 @@
 // Created by aurel on 2/4/23.
 //
 
-#include "../incs/mini_shell.h"
+#include "../../incs/mini_shell.h"
 
 t_error	exec_builtin(t_mini_shell *ms, t_cmd *cmd)
 {

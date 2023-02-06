@@ -1,5 +1,5 @@
 
-#include "../incs/mini_shell.h"
+#include "../../incs/mini_shell.h"
 
 t_cmd	*get(t_lstd *lst)
 {

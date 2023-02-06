@@ -1,5 +1,5 @@
 
-#include "../incs/mini_shell.h"
+#include "../../incs/mini_shell.h"
 #include <stdlib.h>
 
 void	*ft_free(void *pt)

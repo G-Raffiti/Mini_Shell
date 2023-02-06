@@ -2,7 +2,7 @@
 // Created by aurel on 2/4/23.
 //
 
-#include "../incs/mini_shell.h"
+#include "../../incs/mini_shell.h"
 
 int	valid_id_dollars(char c)
 {

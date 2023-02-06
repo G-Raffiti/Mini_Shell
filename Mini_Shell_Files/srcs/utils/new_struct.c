@@ -1,5 +1,5 @@
 
-#include "../incs/mini_shell.h"
+#include "../../incs/mini_shell.h"
 #include <stdlib.h>
 
 t_error	new_env_args(t_env_arg **env_dict)

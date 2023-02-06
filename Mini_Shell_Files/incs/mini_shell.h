@@ -82,6 +82,7 @@ typedef struct s_mini_shell
 	char			**paths;
 	t_lstd			*cmds;
 	int				pipe[2];
+	t_bool 			exported;
 }					t_mini_shell;
 
 #ifndef G_EXIT_CODE
@@ -136,9 +137,10 @@ t_error		parse_line(t_mini_shell *ms, char *line);
 
 // PARSING - ENV /////////////////////////////////////////////////////////////////////////
 int			find_in_dict(void *content, void *ref);
+int			find_in_dict_sorted(void *content, void *ref);
 t_error		get_env(t_mini_shell *ms, char **env);
 t_error		get_all_paths(t_mini_shell *ms, t_lstd *env_dict);
-t_error		sort_export_and_fill_export_env(t_mini_shell *ms);
+t_error		fill_export_env(t_mini_shell *ms);
 t_error		get_export_type(t_mini_shell *ms);
 t_error		create_export_env(t_mini_shell *ms);
 

@@ -3,7 +3,7 @@
 //
 
 #include <errno.h>
-#include "../incs/mini_shell.h"
+#include "../../incs/mini_shell.h"
 
 void	safe_fork(t_mini_shell *ms, t_cmd *cmd, char *msg)
 {

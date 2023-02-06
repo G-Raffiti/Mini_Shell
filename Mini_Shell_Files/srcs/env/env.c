@@ -73,10 +73,12 @@ int find_in_dict(void *content, void *ref)
 	return (0);
 }
 
-//t_error	get_sort_env(t_mini_shell *ms)
-//{
-//
-//}
+int find_in_dict_sorted(void *content, void *ref)
+{
+	if (ft_str_cmp((get_env_dict(content)->key + 11), (char *)ref) == 0)
+		return (1);
+	return (0);
+}
 
 t_error get_keys(t_env_arg **env_dict, char *env)
 {
@@ -194,20 +196,29 @@ t_error fill_env_sort(t_lstd *current, char **str)
 	return (SUCCESS);
 }
 
-t_error	sort_export_and_fill_export_env(t_mini_shell *ms)
+t_error	refresh_export_env(t_mini_shell *ms)
 {
-	t_lstd		*current;
 	int			size_sorted_dict;
-	int 		i;
 
-	i = 0;
-	sort_dict(&ms->env_sort_dict, ft_str_cmp);
 	ms->env_sort = ft_free(ms->env_sort);
-	size_sorted_dict = ft_lstd_size(ms->env_dict);
+	if (ms->exported)
+		size_sorted_dict = ft_lstd_size(ms->env_sort_dict);
+	else
+		size_sorted_dict = ft_lstd_size(ms->env_dict);
 	ms->env_sort = ft_calloc(size_sorted_dict, sizeof(char *));
 	if (!ms->env_sort)
 		return (MALLOC_ERROR);
 	ms->env_sort[size_sorted_dict - 1] = NULL;
+	return (SUCCESS);
+}
+
+t_error	fill_export_env(t_mini_shell *ms)
+{
+	t_lstd		*current;
+	int 		i;
+
+	i = 0;
+	refresh_export_env(ms);
 	current = ms->env_sort_dict;
 	while (current)
 	{
@@ -219,6 +230,12 @@ t_error	sort_export_and_fill_export_env(t_mini_shell *ms)
 		}
 		current = current->next;
 	}
+	i = 0;
+//	while (ms->env_sort[i])
+//	{
+//		dprintf(2, "%s\n", ms->env_sort[i]);
+//		i++;
+//	}
 	return (SUCCESS);
 }
 

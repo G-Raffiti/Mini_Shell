@@ -1,5 +1,5 @@
 
-#include "../incs/mini_shell.h"
+#include "../../incs/mini_shell.h"
 
 int print_error_env(char *first_arg)
 {
