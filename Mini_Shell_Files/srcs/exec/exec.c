@@ -34,11 +34,8 @@ static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 	if (!cmd->is_builtin)
 		execve(cmd->path, cmd->cmd, ms->env);
 	else
-	{
 		exec_builtin(ms, cmd);
-		exit(1);
-	}
-	exit_child(cmd, 127, "command not found");
+	exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
 }
 
 static void	exec_one(t_mini_shell *ms, t_cmd *one)
@@ -154,8 +151,8 @@ t_error	exec_cmds(t_mini_shell *ms)
 	int		save_in;
 	int		save_out;
 
-	save_in = dup(STDIN_FILENO);
-	save_out = dup(STDOUT_FILENO);
+	save_in = safe_dup(ms, STDIN_FILENO, "exec: exec");
+	save_out = safe_dup(ms, STDOUT_FILENO, "exec: exec");
 	current = ft_lstd_first(ms->cmds);
 	if (!current->previous && !current->next)
 		exec_one(ms, get(current));
@@ -170,8 +167,9 @@ t_error	exec_cmds(t_mini_shell *ms)
 		}
 		exec_last(ms, get(current));
 	}
+	close(STDIN_FILENO);
 	wait_exit_status(current);
-	dup2(save_in, STDIN_FILENO);
-	dup2(save_out, STDOUT_FILENO);
+	safe_dup2(ms, save_in, STDIN_FILENO, "exec: exec");
+	safe_dup2(ms, save_out, STDOUT_FILENO, "exec: exec");
 	return (SUCCESS);
 }

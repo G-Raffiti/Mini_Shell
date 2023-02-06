@@ -101,13 +101,15 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 				(*splited_raw)[nbr++] = ft_substr(raw_cmd, start_dol - len_prev, len_prev);
 				if ((!*splited_raw))
 					return (MALLOC_ERROR);
-				dprintf(2, "Splited[%d] : %s\n",nbr - 1, (*splited_raw)[nbr - 1]);
+				if (debug_mod())
+					dprintf(2, "Splited[%d] : %s\n",nbr - 1, (*splited_raw)[nbr - 1]);
 				len_prev = 0;
 			}
 			(*splited_raw)[nbr++] = ft_substr(raw_cmd, start_dol, i - start_dol + 1);
 			if ((!*splited_raw))
 				return (MALLOC_ERROR);
-			dprintf(2, "Splited[%d] : %s\n",nbr - 1, (*splited_raw)[nbr - 1]);
+			if (debug_mod())
+				dprintf(2, "Splited[%d] : %s\n",nbr - 1, (*splited_raw)[nbr - 1]);
 
 		}
 		else
@@ -119,7 +121,8 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 	if (prev_is_arg == 0)
 	{
 		(*splited_raw)[nbr++] = ft_substr(raw_cmd, ft_strlen(raw_cmd) - len_prev, len_prev);
-		dprintf(2, "Splited[%d] : %s\n",nbr - 1, (*splited_raw)[nbr - 1]);
+		if (debug_mod())
+			dprintf(2, "Splited[%d] : %s\n",nbr - 1, (*splited_raw)[nbr - 1]);
 	}
 	return (SUCCESS);
 }
@@ -315,8 +318,7 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 	if (fill_token_and_final_raw(cmds, dup_splited_raw, splited_raw) \
 											== MALLOC_ERROR)
 		return (free_split(splited_raw), free_split(dup_splited_raw), MALLOC_ERROR);
-//TODO : ERASE debug
-	dprintf(2, "RAW_CMD[] == > %s\n", cmds->raw_cmd);
+	debug(3, "RAW_CMD[] == > ", cmds->raw_cmd, "\n");
 	return(0);
 }
 
@@ -337,5 +339,5 @@ void	replace_dollar_before_quotes(t_cmd *cmd)
 			raw[i] = ' ';
 		}
 	}
-	dprintf(2, "RAW: %s\n", raw);
+	debug(3, "RAW: ", raw, "\n");
 }

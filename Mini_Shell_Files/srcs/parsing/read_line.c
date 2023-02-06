@@ -14,7 +14,7 @@ char	*read_line(void)
 		line = readline(PROMPT""GREEN"-▶ "WHITE);
 	else
 		line = readline(PROMPT""RED"-▶ "WHITE);
-	if (line && ft_strlen(line) > 0)
+	if (line && ft_strlen(line) > 0 && !is_empty_line(line))
 		add_history(line);
 	return (line);
 }

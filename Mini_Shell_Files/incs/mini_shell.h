@@ -3,6 +3,7 @@
 # define MINI_SHELL_H
 # include "../../Lib_List_Double/incs/ft_lstd.h"
 # include "../../Lib_FT/incs/libft.h"
+# include "error.h"
 # include "debug.h"
 # include <errno.h>
 # define PROMPT "ms "
@@ -111,10 +112,10 @@ void		set_exit_code(int value);
 t_error		exit_malloc(t_mini_shell *mini_shell, char *msg);
 t_error		exit_end_program(t_mini_shell *ms);
 void		exit_error(t_mini_shell *ms, int error_code, char *msg);
-void		exit_child(t_cmd *cmd, int error_code, char *msg);
+void		exit_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg);
 
 // BUILTIN ERRORS //////////////////////////////////////////////////////////////
-void	builtin_error_env(char *arg, int error_code, char *msg);
+void		builtin_error_env(char *arg, int error_code, char *msg);
 
 // BUILTIN - UTILS
 t_error	exec_builtin(t_mini_shell *ms, t_cmd *cmd);
@@ -126,10 +127,9 @@ void		clear_cmds(t_lstd **lst, void *(*free_fct)(t_cmd *));
 void		sort_dict(t_lstd **lst, int (*cmp)());
 
 // CHECK_UTILS /////////////////////////////////////////////////////////////////
-
-int		valid_id_dollars(char c);
-int		valid_id_export(char c);
-int		is_not_alpha(char c);
+int			valid_id_dollars(char c);
+int			valid_id_export(char c);
+int			is_not_alpha(char c);
 
 // PARSING /////////////////////////////////////////////////////////////////////
 int			set_quote_state(char c, char *quote);
@@ -168,14 +168,14 @@ t_error		get_path(t_mini_shell *ms, t_cmd *cmd);
 t_error		replace_dollars(t_mini_shell *ms, t_cmd *cmds);
 void		replace_dollar_before_quotes(t_cmd *cmd);
 // PARSING - SET BUILTIN ///////////////////////////////////////////////////////
-void		set_builtin(t_lstd *current);
+void		set_builtin(t_cmd *cmd);
 
 // SAFE FUNC ///////////////////////////////////////////////////////////////////
 void		safe_fork(t_mini_shell *ms, t_cmd *cmd, char *msg);
 void		safe_pipe(t_mini_shell *ms, char *msg);
 void		safe_close(t_mini_shell *ms, int fd, char *msg);
 void		safe_dup2(t_mini_shell *ms, int fd, int std, char *msg);
-void		safe_rev_dup2(t_mini_shell *ms, int std, int fd, char *msg);
+int			safe_dup(t_mini_shell *ms, int std, char *msg);
 
 // EXEC ////////////////////////////////////////////////////////////////////////
 t_error		exec_cmds(t_mini_shell *ms);

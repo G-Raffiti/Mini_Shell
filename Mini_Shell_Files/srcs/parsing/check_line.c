@@ -30,6 +30,29 @@ t_bool	is_quote_error(char *line)
 	return (FALSE);
 }
 
+t_bool	is_pipe_error(char *line)
+{
+	t_bool	is_pipe_last;
+	char	is_in_quote;
+
+	is_in_quote = 0;
+	is_pipe_last = FALSE;
+	while (*line && *line == ' ')
+		line++;
+	if (*line == '|')
+		return (TRUE);
+	while (*line)
+	{
+		set_quote_state(*line, &is_in_quote);
+		if (!is_pipe_last && !is_in_quote && *line == '|')
+			is_pipe_last = TRUE;
+		else if (is_pipe_last && *line != ' ')
+			is_pipe_last = FALSE;
+		line++;
+	}
+	return (is_pipe_last);
+}
+
 t_bool	is_chevron_error(char *line)
 {
 	t_bool	is_chevron_last;
@@ -58,12 +81,11 @@ t_error	parse_error(char *error_msg, int error_code)
 
 t_error	check_line(char *line)
 {
-	if (is_empty_line(line))
-		return (parse_error("empty line\n", 127));
+	if (is_pipe_error(line))
+		return (parse_error(SYNTAX_PIPE, 2));
 	if (is_quote_error(line))
-		return (parse_error("quotes error\n", 0));
+		return (parse_error(QUOTE_ERROR, 0));
 	if (is_chevron_error(line))
-		return (parse_error("syntax error near unexpected is_dollar `newline'\n",
-							258));
+		return (parse_error(SYNTAX_NEWLINE,2));
 	return (SUCCESS);
 }

@@ -55,7 +55,9 @@ FILES =			\
 				main
 
 
-INC =			mini_shell.h
+INC =			mini_shell.h \
+				error.h \
+				debug.h
 
 FILES_INC =		$(addprefix $(PATH_INC), $(INC))
 OBJS =			$(addprefix $(PATH_OBJ), $(addsuffix .o, $(FILES)))

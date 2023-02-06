@@ -13,6 +13,11 @@ static void	loop(t_mini_shell *ms)
 		line = read_line();
 		if (!line)
 			return;
+		if (is_empty_line(line))
+		{
+			line = ft_free(line);
+			continue;
+		}
 		debug(3, WHITE"line"GREY" = ["WHITE, line,GREY"] | "WHITE);
 		if (parse_line(ms, line) == ERROR)
 		{
