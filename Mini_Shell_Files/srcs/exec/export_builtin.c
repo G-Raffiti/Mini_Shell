@@ -38,7 +38,7 @@ int export_name_valid(char *arg)
 	return (i);
 }
 
-t_error	replace_in_envs(t_mini_shell *ms, t_env_arg *content, char *arg, int pos)
+t_error	replace_in_envs(t_mini_shell *ms, t_lstd *current, char *arg, int pos)
 {
 	if (pos == 0)
 	{
@@ -47,9 +47,8 @@ t_error	replace_in_envs(t_mini_shell *ms, t_env_arg *content, char *arg, int pos
 	}
 	else if (!*arg)
 	{
-		content->value = ft_free(content->value);
-		content->value = ft_calloc(sizeof(char), 3);
-		content->value = "=\"\"\0";//TODO : PROBLEME, on est dans un child, voir dans fill_export => arg bien remplacer mais seulement in child
+		//TODO : Modify in envs
+		replace_in_chosen_env(ms, get_env_dict(current->content), "\"\"", 1);
 		fill_export_env(ms);
 	}
 	return (SUCCESS);
@@ -67,7 +66,7 @@ t_error	export_arg(t_mini_shell *ms, char *arg, int pos)
 		if (pos != 0)
 			arg = (arg + pos + 1);
 		//dprintf(2, "ARG='%s'", arg);
-		replace_in_envs(ms, get_env_dict(current_sorted->content), arg, pos);
+		replace_in_envs(ms, current_sorted, arg, pos);
 	}
 //	else
 //		add_in_envs(ms, arg);

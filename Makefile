@@ -26,6 +26,7 @@ FILES =			\
 				debug/debug \
 				\
 				env/env \
+				env/modify_envs \
 				\
 				exec/exec \
 				exec/export_builtin \

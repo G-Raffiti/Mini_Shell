@@ -34,7 +34,10 @@ static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 	if (!cmd->is_builtin)
 		execve(cmd->path, cmd->cmd, ms->env);
 	else
+	{
 		exec_builtin(ms, cmd);
+		exit(1);
+	}
 	exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
 }
 
