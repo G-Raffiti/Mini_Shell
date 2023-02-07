@@ -52,6 +52,7 @@ t_error	get_value_env_type(t_env_arg *content)
 	if (!content->value)
 		return (MALLOC_ERROR);
 	tmp = ft_free(tmp);
+//	dprintf(2, "value in get : %s\n", content->value);
 	return (SUCCESS);
 }
 

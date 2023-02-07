@@ -66,17 +66,22 @@ t_error	replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int 
 
 	if (which_env == 0)
 	{
-		change_value_envs(get_env_dict(current->content), new_value, which_env);
+		if (change_value_envs(get_env_dict(current->content), \
+										new_value, which_env) == MALLOC_ERROR)
+			return (MALLOC_ERROR);
 		if (fill_env(ms) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 	}
 	else
 	{
-		change_value_envs(get_env_dict(current_export->content), new_value, which_env);
+		if (change_value_envs(get_env_dict(current_export->content), \
+										new_value, which_env) == MALLOC_ERROR)
+			return (MALLOC_ERROR);
 		if (fill_export_env(ms) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
-		if (get_value_env_type(get_env_dict(current_export->content)) == MALLOC_ERROR)
+		if (get_export_type(ms) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
+//		dprintf(2, "%s", get_env_dict(current_export->content)->value);
 	}
 	return (SUCCESS);
 }
