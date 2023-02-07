@@ -26,7 +26,7 @@ FILES =			\
 				debug/debug \
 				\
 				env/env \
-				env/modify_envs \
+				env/modif_env \
 				\
 				exec/exec \
 				exec/export_builtin \
@@ -42,11 +42,13 @@ FILES =			\
 				parsing/replace_dollars \
 				parsing/set_builtin \
 				\
+				utils/export \
+				utils/env \
 				utils/free_struct \
 				utils/list_cmd_utils \
 				utils/new_struct \
 				utils/safe_functions \
-				utils/builtin_utils \
+				utils/builtin \
 				utils/check_functions \
 				\
 				builtin_errors \

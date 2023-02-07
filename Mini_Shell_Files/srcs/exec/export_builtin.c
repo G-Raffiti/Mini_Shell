@@ -22,7 +22,7 @@ void	display_export(t_mini_shell *ms)
 	}
 }
 
-int export_name_valid(char *arg)
+int	export_name_valid(char *arg)
 {
 	int i;
 
@@ -71,15 +71,6 @@ t_error	export_arg(t_mini_shell *ms, char *arg, int pos)
 //	else
 //		add_in_envs(ms, arg);
 	return (SUCCESS);
-}
-
-void	get_equal_char_pos(char *arg, int *pos)
-{
-	*pos = 0;
-	while (arg[*pos] && arg[*pos] != '=')
-		(*pos)++;
-	if (*pos == (int)ft_strlen(arg))
-		*pos = 0;
 }
 
 t_error	ft_export(t_mini_shell *ms, t_cmd *cmd)

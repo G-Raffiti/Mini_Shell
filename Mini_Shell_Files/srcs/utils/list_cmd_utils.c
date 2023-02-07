@@ -63,3 +63,11 @@ void	sort_dict(t_lstd **lst, int (*cmp)())
 		a = a->next;
 	}
 }
+
+t_error	create_new_list_element(t_lstd **element, t_env_arg *dict)
+{
+	*element = ft_lstd_new(dict);
+	if (!*element)
+		return (MALLOC_ERROR);
+	return (SUCCESS);
+}

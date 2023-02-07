@@ -1,4 +1,6 @@
-
+//TODO : RECAP env : doc in file 'modif_env.c' so RTFM , kiss
+//TODO : PS ===> Tu peux pas remove dans l'env, seulement remplacer/add.
+//TODO : PS2 ===> Pour regenerer un env en cas de env -i pour l'instant le plus simple c'est de cree un char ** avant le get_env() dna le main et de lui balancer. ca marchera toujours apres mon refacto de cette partie mais ca sera peut etre pas le mieux. Aller cette fois j'y vais , tchaooooo (pense a redecaler vers la gauche la petite barre mobile en bas, meme si ce coin la est plus sympa)
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
@@ -46,11 +48,6 @@ int	main(int argc, char **argv, char **env)
 	if (argc == 2 && ft_str_cmp(argv[1], "debug") == 0)
 		enable_debug();
 	printf("☠  ---Welcome to mini Hell--- ☠ \n");
-//	if (env -i)
-//	{
-//		if (generate_minimal_env(&env) == MALLOC_ERROR)
-//			return (exit_malloc(NULL, "main: generate_minimal_env"));
-//	}
 	if (new_mini_shell(&ms) == MALLOC_ERROR)
 		exit_malloc(ms, "main: new_mini_shell");
 	if (get_env(ms, env) == MALLOC_ERROR)
@@ -62,9 +59,6 @@ int	main(int argc, char **argv, char **env)
 	sort_dict(&ms->env_sort_dict, ft_str_cmp);
 	if (fill_export_env(ms) == MALLOC_ERROR)
 		exit_malloc(ms, "main: sort_export_and_fill_export_env");
-	if (add_or_replace_in_chosen_env(ms, "ARG", "SALUUUUUUUU", 2) == MALLOC_ERROR)
-		return (MALLOC_ERROR);
-
 	get_all_paths(ms, ms->env_dict);
 	loop(ms);
 	exit_end_program(ms);

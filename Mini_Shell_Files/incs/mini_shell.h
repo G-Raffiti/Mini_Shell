@@ -118,13 +118,21 @@ void		exit_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg);
 void		builtin_error_env(char *arg, int error_code, char *msg);
 
 // BUILTIN - UTILS
-t_error	exec_builtin(t_mini_shell *ms, t_cmd *cmd);
+t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd);
 
+// ENV  - UTILS ////////////////////////////////////////////////////////////////
+t_error		change_value_envs(t_env_arg *content, char *new_value, int which_env);
+int			find_in_dict(void *content, void *ref);
+int			find_in_dict_sorted(void *content, void *ref);
+
+// EXPORT - UTILS //////////////////////////////////////////////////////////////
+void		get_equal_char_pos(char *arg, int *pos);
 // LIST UTILS //////////////////////////////////////////////////////////////////
 t_cmd		*get(t_lstd *lst);
 t_env_arg	*get_env_dict(void *content);
 void		clear_cmds(t_lstd **lst, void *(*free_fct)(t_cmd *));
 void		sort_dict(t_lstd **lst, int (*cmp)());
+t_error		create_new_list_element(t_lstd **element, t_env_arg *dict);
 
 // CHECK_UTILS /////////////////////////////////////////////////////////////////
 int			valid_id_dollars(char c);
@@ -136,15 +144,12 @@ int			set_quote_state(char c, char *quote);
 t_error		parse_line(t_mini_shell *ms, char *line);
 
 // PARSING - ENV /////////////////////////////////////////////////////////////////////////
-int			find_in_dict(void *content, void *ref);
-int			find_in_dict_sorted(void *content, void *ref);
 t_error		get_env(t_mini_shell *ms, char **env);
 t_error		get_all_paths(t_mini_shell *ms, t_lstd *env_dict);
 t_error		fill_export_env(t_mini_shell *ms);
 t_error		get_export_type(t_mini_shell *ms);
 t_error		create_export_env(t_mini_shell *ms);
-t_error		add_in_chosen_env(t_mini_shell *ms, char *key, char *value, int which_env);
-t_error		add_or_replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env);
+t_error		fill_dict_element(t_env_arg **dict, char *key, char *value);
 
 // PARSING - READ_LINE /////////////////////////////////////////////////////////
 char		*read_line(void);
@@ -183,15 +188,18 @@ int			safe_dup(t_mini_shell *ms, int std, char *msg);
 t_error		exec_cmds(t_mini_shell *ms);
 t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd);
 
-// EXEC - EXPORT_BUILTIN ///////////////////////////////////////////////////////
+// EXEC - EXPORT - BUILTIN ///////////////////////////////////////////////////////
 t_error		ft_export(t_mini_shell *ms, t_cmd *cmd);
 
 // EXEC - ENV - BUILTIN ////////////////////////////////////////////////////////
 void		env(t_mini_shell *ms, t_cmd *cmd);
 t_error		fill_env(t_mini_shell *ms);
 t_error		fill_export_env(t_mini_shell *ms);
-//modify env //TODO: check
-t_error	replace_in_chosen_env(t_mini_shell *ms, t_env_arg *content, char *new_value, int which_env);
+
+// EXEC - MODIF_ENV //////////////////////////////////////////////////////////
+t_error		add_or_replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env);
+t_error		replace_in_chosen_env(t_mini_shell *ms, t_env_arg *content, char *new_value, int which_env);
+t_error		add_in_chosen_env(t_mini_shell *ms, char *key, char *value, int which_env);
 t_error	get_value_env_type(t_env_arg *content);
 t_error	get_key_env_type(t_env_arg *content);
 // TEST ////////////////////////////////////////////////////////////////////////
