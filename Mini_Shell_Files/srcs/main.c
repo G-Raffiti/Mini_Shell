@@ -1,6 +1,5 @@
 //TODO : RECAP env : doc in file 'modif_env.c' so RTFM , kiss
 //TODO : PS ===> Tu peux pas remove dans l'env, seulement remplacer/add.
-//TODO : PS2 ===> Pour regenerer un env en cas de env -i pour l'instant le plus simple c'est de cree un char ** avant le get_env() dna le main et de lui balancer. ca marchera toujours apres mon refacto de cette partie mais ca sera peut etre pas le mieux. Aller cette fois j'y vais , tchaooooo (pense a redecaler vers la gauche la petite barre mobile en bas, meme si ce coin la est plus sympa)
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
