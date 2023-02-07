@@ -35,7 +35,7 @@ static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 		execve(cmd->path, cmd->cmd, ms->env);
 	else
 	{
-		exec_builtin(ms, cmd);
+		exec_builtin(ms, cmd, 1);
 		exit(1);
 	}
 	exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
@@ -47,6 +47,11 @@ static void	exec_one(t_mini_shell *ms, t_cmd *one)
 		return ;
 	if (one->input->fd > 0)
 		safe_dup2(ms, one->input->fd, STDIN_FILENO, "exec_one");
+	if (one->is_builtin)
+	{
+		exec_builtin(ms, one, 0);
+		return ;//TODO : check exit properly
+	}
 	safe_fork(ms, one, "exec_one");
 	if (one->pid)
 	{

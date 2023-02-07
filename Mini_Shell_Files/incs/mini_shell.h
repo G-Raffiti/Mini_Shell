@@ -118,7 +118,7 @@ void		exit_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg);
 void		builtin_error_env(char *arg, int error_code, char *msg);
 
 // BUILTIN - UTILS
-t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd);
+t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 
 // ENV  - UTILS ////////////////////////////////////////////////////////////////
 t_error		change_value_envs(t_env_arg *content, char *new_value, int which_env);
@@ -186,22 +186,22 @@ int			safe_dup(t_mini_shell *ms, int std, char *msg);
 
 // EXEC ////////////////////////////////////////////////////////////////////////
 t_error		exec_cmds(t_mini_shell *ms);
-t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd);
+t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 
 // EXEC - EXPORT - BUILTIN ///////////////////////////////////////////////////////
-t_error		ft_export(t_mini_shell *ms, t_cmd *cmd);
+t_error		ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 
 // EXEC - ENV - BUILTIN ////////////////////////////////////////////////////////
-void		env(t_mini_shell *ms, t_cmd *cmd);
+void		env(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 t_error		fill_env(t_mini_shell *ms);
 t_error		fill_export_env(t_mini_shell *ms);
 
 // EXEC - MODIF_ENV //////////////////////////////////////////////////////////
 t_error		add_or_replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env);
-t_error		replace_in_chosen_env(t_mini_shell *ms, t_env_arg *content, char *new_value, int which_env);
+t_error		replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env);
 t_error		add_in_chosen_env(t_mini_shell *ms, char *key, char *value, int which_env);
-t_error	get_value_env_type(t_env_arg *content);
-t_error	get_key_env_type(t_env_arg *content);
+t_error		get_value_env_type(t_env_arg *content);
+t_error		get_key_env_type(t_env_arg *content);
 // TEST ////////////////////////////////////////////////////////////////////////
 t_bool		debug_mod(void);
 void		enable_debug(void);

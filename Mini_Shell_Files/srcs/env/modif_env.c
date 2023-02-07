@@ -27,16 +27,20 @@ t_error	add_or_replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_valu
 	current_export = ft_lstd_find(ms->env_sort_dict, key, find_in_dict_sorted);
 	if ((current && which_env == 0) || (current && which_env == 2))
 	{
-		if (replace_in_chosen_env(ms, get_env_dict(current), new_value, 0) == MALLOC_ERROR)
+		if (replace_in_chosen_env(ms, key, new_value, 0) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
+		if (which_env == 2 && !current_export)
+			which_env = 1;
 		if (which_env == 0)
 			return (SUCCESS);
 	}
 	if ((current_export && which_env == 1) || (current_export && which_env == 2))
 	{
-		if (replace_in_chosen_env(ms, get_env_dict(current_export), new_value, 1) == MALLOC_ERROR)
+		if (replace_in_chosen_env(ms, key, new_value, 1) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
-		if (which_env == 1 || (which_env == 2 && current))
+		if (which_env == 2 && !current)
+			which_env = 0;
+		if (which_env == 1 || (which_env == 2))
 			return (SUCCESS);
 	}
 	return (add_in_chosen_env(ms, key, new_value, which_env), SUCCESS);
@@ -44,27 +48,34 @@ t_error	add_or_replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_valu
 
 /**
  * \n Replace value by 'new_value in chosen env \n
- * You have to set right content (get_env_dict(current->content)).\n
- * No both replacement is possible, do it again
+ * You have to know if the key exist already
+ * No both replacement is possible, do it again >>O>>
  * @param ms
  * @param content\\ dict here
  * @param new_value
  * @param which_env \n env : 0 \n export_env : 1
  * @return t_error
  */
-t_error	replace_in_chosen_env(t_mini_shell *ms, t_env_arg *content, char *new_value, int which_env)
+t_error	replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env)
 {
-	change_value_envs(content, new_value, which_env);
+	t_lstd			*current;
+	t_lstd			*current_export;
+
+	current = ft_lstd_find(ms->env_dict, key, find_in_dict);
+	current_export = ft_lstd_find(ms->env_sort_dict, key, find_in_dict_sorted);
+
 	if (which_env == 0)
 	{
+		change_value_envs(get_env_dict(current->content), new_value, which_env);
 		if (fill_env(ms) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 	}
 	else
 	{
+		change_value_envs(get_env_dict(current_export->content), new_value, which_env);
 		if (fill_export_env(ms) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
-		if (get_value_env_type(content) == MALLOC_ERROR)
+		if (get_value_env_type(get_env_dict(current_export->content)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 	}
 	return (SUCCESS);

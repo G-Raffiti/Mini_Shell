@@ -22,7 +22,7 @@ void	display_export(t_mini_shell *ms)
 	}
 }
 
-int	export_name_valid(char *arg)
+int	export_name_is_valid(char *arg)
 {
 	int i;
 
@@ -38,45 +38,51 @@ int	export_name_valid(char *arg)
 	return (i);
 }
 
-t_error	replace_in_envs(t_mini_shell *ms, t_lstd *current, char *arg, int pos)
+t_error	export_in_envs(t_mini_shell *ms, char **extracted)
 {
-	if (pos == 0)
+	if (extracted[1][0] == '\0')
 	{
 		dprintf(2, "no_arg/no_equal");
 		return(SUCCESS);
 	}
-	else if (!*arg)
+	else if (ft_str_cmp(extracted[0], "_") != 0)
 	{
 		//TODO : Modify in envs
-		replace_in_chosen_env(ms, get_env_dict(current->content), "\"\"", 1);
-		fill_export_env(ms);
+		add_or_replace_in_chosen_env(ms, extracted[0], extracted[2], 2);
 	}
 	return (SUCCESS);
 }
 
-t_error	export_arg(t_mini_shell *ms, char *arg, int pos)
+t_error	extract_key_value(char *cmd, char ***extracted)
 {
-	t_lstd	*current_sorted;
+	int i;
+	int j;
 
-	if (pos != 0)
-		arg[pos] = '\0';
-	current_sorted = ft_lstd_find(ms->env_sort_dict, arg, find_in_dict_sorted);
-	if (current_sorted)
+	i = -1;
+	j = -1;
+	*extracted = ft_calloc(sizeof(char *), 4);
+	if (!*extracted)
+		return (MALLOC_ERROR);
+	while (++i < 3)
 	{
-		if (pos != 0)
-			arg = (arg + pos + 1);
-		//dprintf(2, "ARG='%s'", arg);
-		replace_in_envs(ms, current_sorted, arg, pos);
+		(*extracted)[i] = ft_calloc(sizeof(char), ft_strlen(cmd));
+		if (!*extracted)
+			return (MALLOC_ERROR);
 	}
-//	else
-//		add_in_envs(ms, arg);
+	i = 0;
+	while (cmd [++j] && cmd[j] != '=')
+		(*extracted)[0][j] = cmd[j];
+	if (cmd[j++] == '=')
+		(*extracted)[1][0] = '=';
+	while (cmd[j])
+		(*extracted)[2][i++] = cmd[j++];
 	return (SUCCESS);
 }
 
-t_error	ft_export(t_mini_shell *ms, t_cmd *cmd)
+t_error	ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 {
 	int		i;
-	int 	pos;
+	char	**extracted;
 
 	i = 0;
 	ms->exported = TRUE;
@@ -85,17 +91,16 @@ t_error	ft_export(t_mini_shell *ms, t_cmd *cmd)
 		display_export(ms);
 		return(SUCCESS);//TODO : afficher env_export
 	}
-	else
+	else if (!in_pipe)
 	{
 		while (cmd->cmd[++i])
 		{
-			if (!export_name_valid(cmd->cmd[i]))
+			if (!export_name_is_valid(cmd->cmd[i]))
 				dprintf(2, "(%d)[%s] :not a valid arg export\n", i, cmd->cmd[i]);//TODO : return msg_error
 			else
 			{
-				get_equal_char_pos(cmd->cmd[i], &pos);
-				if (export_arg(ms, cmd->cmd[i], pos) == MALLOC_ERROR)
-					return (MALLOC_ERROR);
+				extract_key_value(cmd->cmd[i], &extracted);
+				export_in_envs(ms, extracted);
 			}
 		}
 	}

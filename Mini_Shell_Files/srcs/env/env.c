@@ -183,7 +183,7 @@ t_error fill_new_envs(t_lstd *current, char **str, int which_env)
 	char 		*key;
 
 	content = current->content;
-	if ((which_env == 0 || which_env == 2))
+	if (which_env == 0)
 		value = ft_strjoin("=", get_env_dict(content)->value);
 	else
 		value = get_env_dict(content)->value;
