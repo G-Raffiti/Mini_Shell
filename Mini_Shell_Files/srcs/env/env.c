@@ -190,14 +190,17 @@ t_error	get_env(t_mini_shell *ms, char **env)
 	return (SUCCESS);
 }
 
-t_error fill_new_envs(t_lstd *current, char **str)
+t_error fill_new_envs(t_lstd *current, char **str, int which_env)
 {
 	t_lstd		*content;
 	char		*value;
 	char 		*key;
 
 	content = current->content;
-	value = get_env_dict(content)->value;
+	if ((which_env == 0 || which_env == 2))
+		value = ft_strjoin("=", get_env_dict(content)->value);
+	else
+		value = get_env_dict(content)->value;
 	key = get_env_dict(content)->key;
 	*str = ft_strjoin(key, value);
 	if (!*str)
@@ -246,7 +249,7 @@ t_error	fill_export_env(t_mini_shell *ms)
 	{
 		if (ft_str_cmp(get_env_dict(current->content)->key, "_") != 0)
 		{
-			if (fill_new_envs(current, &(ms->env_sort)[i]) == MALLOC_ERROR)
+			if (fill_new_envs(current, &(ms->env_sort)[i], 1) == MALLOC_ERROR)
 				return (MALLOC_ERROR);
 			i++;
 		}
@@ -272,7 +275,7 @@ t_error	fill_env(t_mini_shell *ms)
 	current = ms->env_dict;
 	while (current)
 	{
-		if (fill_new_envs(current, &(ms->env)[i]) == MALLOC_ERROR)
+		if (fill_new_envs(current, &(ms->env)[i], 0) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		i++;
 		current = current->next;

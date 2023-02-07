@@ -143,6 +143,8 @@ t_error		get_all_paths(t_mini_shell *ms, t_lstd *env_dict);
 t_error		fill_export_env(t_mini_shell *ms);
 t_error		get_export_type(t_mini_shell *ms);
 t_error		create_export_env(t_mini_shell *ms);
+t_error		add_in_chosen_env(t_mini_shell *ms, char *key, char *value, int which_env);
+t_error		add_or_replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env);
 
 // PARSING - READ_LINE /////////////////////////////////////////////////////////
 char		*read_line(void);

@@ -62,6 +62,9 @@ int	main(int argc, char **argv, char **env)
 	sort_dict(&ms->env_sort_dict, ft_str_cmp);
 	if (fill_export_env(ms) == MALLOC_ERROR)
 		exit_malloc(ms, "main: sort_export_and_fill_export_env");
+	if (add_or_replace_in_chosen_env(ms, "ARG", "SALUUUUUUUU", 2) == MALLOC_ERROR)
+		return (MALLOC_ERROR);
+
 	get_all_paths(ms, ms->env_dict);
 	loop(ms);
 	exit_end_program(ms);
