@@ -1,5 +1,6 @@
 //TODO : RECAP env : doc in file 'modif_env.c' so RTFM , kiss
-//TODO : PS ===> Tu peux pas remove dans l'env, seulement remplacer/add.
+//TODO : PS ===> Tu peux pas remove dans l'env, seulement remplacer/add. (enfin sinon il suffit de faire un remove list)
+//TODO : PS2 ===> si tu regenere l'env en creant un char ** pour je ne sais quelle raison, il te suffit de le balance dans get_env au debut du main la suite se fait toute seule)
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>

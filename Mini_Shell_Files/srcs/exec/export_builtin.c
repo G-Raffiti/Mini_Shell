@@ -42,13 +42,20 @@ t_error	export_in_envs(t_mini_shell *ms, char **extracted)
 {
 	if (extracted[1][0] == '\0')
 	{
-		dprintf(2, "no_arg/no_equal");
+		if (!ft_lstd_find(ms->env_sort_dict, extracted[0], find_in_dict_sorted))
+		{
+			add_in_chosen_env(ms, extracted[0], extracted[2], 3);
+			sort_dict(&ms->env_sort_dict, ft_str_cmp);
+			if (fill_export_env(ms) == MALLOC_ERROR)
+				return (MALLOC_ERROR);
+		}
 		return(SUCCESS);
 	}
 	else if (ft_str_cmp(extracted[0], "_") != 0)
 	{
-		//TODO : Modify in envs
-		add_or_replace_in_chosen_env(ms, extracted[0], extracted[2], 2);
+		if (add_or_replace_in_chosen_env(ms, extracted[0], extracted[2], 2) \
+															== MALLOC_ERROR)
+			return (MALLOC_ERROR);
 	}
 	return (SUCCESS);
 }

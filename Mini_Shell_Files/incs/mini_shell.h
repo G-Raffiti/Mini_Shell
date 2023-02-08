@@ -121,7 +121,7 @@ void		builtin_error_env(char *arg, int error_code, char *msg);
 t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 
 // ENV  - UTILS ////////////////////////////////////////////////////////////////
-t_error		change_value_envs(t_env_arg *content, char *new_value, int which_env);
+t_error		change_value_envs(t_env_arg *content, char *new_value);
 int			find_in_dict(void *content, void *ref);
 int			find_in_dict_sorted(void *content, void *ref);
 

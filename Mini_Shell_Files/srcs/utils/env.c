@@ -1,20 +1,11 @@
 #include "../../incs/mini_shell.h"
 
-t_error	change_value_envs(t_env_arg *content, char *new_value, int which_env)
+t_error	change_value_envs(t_env_arg *content, char *new_value)
 {
 	content->value = ft_free(content->value);
-	if (which_env == 1)
-	{
-		content->value = ft_strjoin("=", new_value);
-		if (!content->value)
-			return (MALLOC_ERROR);
-	}
-	else
-	{
-		content->value = ft_strdup(new_value);
-		if (!content->value)
-			return (MALLOC_ERROR);
-	}
+	content->value = ft_strdup(new_value);
+	if (!content->value)
+		return (MALLOC_ERROR);
 	if (!content->value)
 		return (MALLOC_ERROR);
 	return (SUCCESS);
