@@ -1,28 +1,22 @@
 
 #include "../../incs/mini_shell.h"
 
-int print_error_env(char *first_arg, int in_pipe)
+int print_error_env(t_mini_shell *ms, char *first_arg, int in_pipe)
 {
-	if (first_arg && first_arg[0] && ft_str_cmp(first_arg, "test") == 0)
-		return (2);
-	else if (access(first_arg, F_OK) == 0 && !in_pipe)
-	{
-		if (access(first_arg, X_OK) == 0)
-			return(4);
-		builtin_error_env(first_arg, 13, ": Permission denied");
-		return (2);
-	}
-	else if (first_arg && first_arg[0] != '-' && !in_pipe)
-	{
-		builtin_error_env(first_arg, 2, ": No such file or directory");
-		return (1);
-	}
-	else if (first_arg && first_arg[0] == '-' && !in_pipe)
-	{
-		ft_putendl_fd("We do not handle this bro", 2);//TODO : talk about what to do : return nothing or return the messgae with option not handled, or return to execve
-		return (2);
-	}
-	return (3);
+	t_lstd	*path;
+	char	*value;
+
+	(void)first_arg;
+	(void)in_pipe;
+	path = ft_lstd_find(ms->env_sort_dict, "PATH", find_in_dict_sorted);
+	if (path)
+		value = get_env_dict(path->content)->value;
+	if (!path || ft_str_cmp(value, "=\"\"") == 0 \
+				|| ft_str_cmp(value, "") == 0)
+		dprintf(2, "no such file or directory -> to set");
+	else
+		return (2);//TODO : seulement si on trouve un chemin valide dans le path
+	return (1);
 }
 
 void	env(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
@@ -32,12 +26,10 @@ void	env(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 	int	error;
 
 	i = -1;
-	error = print_error_env(cmd->cmd[1], in_pipe);
+	error = print_error_env(ms, cmd->cmd[1], in_pipe);
 	if (cmd->cmd[1] && error == 1)
 		return ;
-	else if (error == 2 && !in_pipe)
-		return ;
-	else if (error == 3)
+	else if (error == 2)
 	{
 		while (ms->env[++i])
 		{
@@ -50,6 +42,4 @@ void	env(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 			write(STDOUT_FILENO, "\n", 1);
 		}
 	}
-	else if (error == 4 && !in_pipe)
-		execve(cmd->path, cmd->cmd, ms->env);
 }

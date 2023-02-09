@@ -43,7 +43,7 @@ t_error	add_or_replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_valu
 		if (which_env == 1 || (which_env == 2))
 			return (SUCCESS);
 	}
-	return (add_in_chosen_env(ms, key, new_value, which_env), SUCCESS);
+	return (add_in_chosen_env(ms, key, new_value, which_env));
 }
 
 /**

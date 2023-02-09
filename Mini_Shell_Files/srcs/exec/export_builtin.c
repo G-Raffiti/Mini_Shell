@@ -47,17 +47,17 @@ t_error	export_in_envs(t_mini_shell *ms, char **extracted)
 			add_in_chosen_env(ms, extracted[0], extracted[2], 3);
 			sort_dict(&ms->env_sort_dict, ft_str_cmp);
 			if (fill_export_env(ms) == MALLOC_ERROR)
-				return (MALLOC_ERROR);
+				return (free_split(extracted), MALLOC_ERROR);
 		}
-		return(SUCCESS);
+		return(free_split(extracted), SUCCESS);
 	}
 	else if (ft_str_cmp(extracted[0], "_") != 0)
 	{
 		if (add_or_replace_in_chosen_env(ms, extracted[0], extracted[2], 2) \
 															== MALLOC_ERROR)
-			return (MALLOC_ERROR);
+			return (free_split(extracted), MALLOC_ERROR);
 	}
-	return (SUCCESS);
+	return (free_split(extracted), SUCCESS);
 }
 
 t_error	extract_key_value(char *cmd, char ***extracted)
@@ -98,17 +98,16 @@ t_error	ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 		display_export(ms);
 		return(SUCCESS);//TODO : afficher env_export
 	}
-	else if (!in_pipe)
+	while (!in_pipe && cmd->cmd[++i])
 	{
-		while (cmd->cmd[++i])
+		if (!export_name_is_valid(cmd->cmd[i]))
+			builtin_error_export(cmd->cmd[i], 1, INVALID_IDENTIFIER);
+		else
 		{
-			if (!export_name_is_valid(cmd->cmd[i]))
-				dprintf(2, "(%d)[%s] :not a valid arg export\n", i, cmd->cmd[i]);//TODO : return msg_error
-			else
-			{
-				extract_key_value(cmd->cmd[i], &extracted);
-				export_in_envs(ms, extracted);
-			}
+			if (extract_key_value(cmd->cmd[i], &extracted) == MALLOC_ERROR)
+				return (MALLOC_ERROR);
+			if (export_in_envs(ms, extracted) == MALLOC_ERROR)
+				return (MALLOC_ERROR);
 		}
 	}
 	return (SUCCESS);

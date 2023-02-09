@@ -116,6 +116,7 @@ void		exit_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg);
 
 // BUILTIN ERRORS //////////////////////////////////////////////////////////////
 void		builtin_error_env(char *arg, int error_code, char *msg);
+void		builtin_error_export(char *arg, int error_code, char *msg);
 
 // BUILTIN - UTILS
 t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
@@ -125,8 +126,6 @@ t_error		change_value_envs(t_env_arg *content, char *new_value);
 int			find_in_dict(void *content, void *ref);
 int			find_in_dict_sorted(void *content, void *ref);
 
-// EXPORT - UTILS //////////////////////////////////////////////////////////////
-void		get_equal_char_pos(char *arg, int *pos);
 // LIST UTILS //////////////////////////////////////////////////////////////////
 t_cmd		*get(t_lstd *lst);
 t_env_arg	*get_env_dict(void *content);
@@ -196,6 +195,8 @@ void		env(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 t_error		fill_env(t_mini_shell *ms);
 t_error		fill_export_env(t_mini_shell *ms);
 
+// EXEC - UNSET - BUILTIN
+t_error		unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 // EXEC - MODIF_ENV //////////////////////////////////////////////////////////
 t_error		add_or_replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env);
 t_error		replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env);
