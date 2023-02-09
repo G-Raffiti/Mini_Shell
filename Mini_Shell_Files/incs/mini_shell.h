@@ -10,6 +10,7 @@
 /////		IDIENTIFIER EXPORT /////
 # define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n _"
 # define INV_ID_EXPORT	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n ?"
+# define PWD_PATH_SIZE 4096
 
 # ifndef T_ERROR
 #  define T_ERROR
@@ -181,6 +182,9 @@ t_error		export(t_mini_shell *ms, t_cmd *cmd);
 
 // EXEC - ENV - BUILTIN ////////////////////////////////////////////////////////
 void		env(t_mini_shell *ms, t_cmd *cmd);
+
+// EXEC - PWD - BUILTIN ////////////////////////////////////////////////////////
+t_error		ft_pwd(void);
 
 // TEST ////////////////////////////////////////////////////////////////////////
 t_bool		debug_mod(void);

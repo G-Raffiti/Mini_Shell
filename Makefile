@@ -30,6 +30,7 @@ FILES =			\
 				exec/exec \
 				exec/export_builtin \
 				exec/env_builtin \
+				exec/pwd_builtin \
 				\
 				parsing/check_line \
 				parsing/chevron \

@@ -12,6 +12,33 @@
 
 #include "../incs/libft.h"
 
+char	*ft_strjoin_split(char **split, char sep)
+{
+	size_t	len;
+	int		i;
+	char	*str;
+
+	len = 0;
+	i = -1;
+	while (split[++i])
+		len += ft_strlen(split[i]) + 1;
+	if (!len)
+		len = 1;
+	str = ft_calloc(len, sizeof(char));
+	if (!str)
+		return (NULL);
+	i = -1;
+	len = 0;
+	while (split[++i])
+	{
+		ft_strcat(str, split[i]);
+		len += ft_strlen(split[i]);
+		if (split[i + 1])
+			str[len] = sep;
+	}
+	return (str);
+}
+
 int	final_size(char **strs, char *sep, int size)
 {
 	int	i;
