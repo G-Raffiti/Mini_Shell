@@ -56,6 +56,8 @@ t_error	get_all_paths(t_mini_shell *ms, t_lstd *env_dict)
 	while (current && ft_str_cmp(current->key, "PATH") != 0)
 	{
 		env_dict = env_dict->next;
+		if (!env_dict)
+			break ;//TODO j'ai mis ca la vite fait, si t'a fait mieux erase^^
 		current = get_env_dict(env_dict->content);
 	}
 	if (create_ms_path(ms, current->value) == MALLOC_ERROR)

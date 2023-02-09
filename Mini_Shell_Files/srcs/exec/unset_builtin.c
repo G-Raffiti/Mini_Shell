@@ -22,5 +22,6 @@ t_error	unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe)//TODO : reset path if u
 	}
 	fill_env(ms);
 	fill_export_env(ms);
+	get_all_paths(ms, ms->env_dict);
 	return (SUCCESS);
 }

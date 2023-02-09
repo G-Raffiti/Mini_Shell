@@ -13,9 +13,9 @@ int print_error_env(t_mini_shell *ms, char *first_arg, int in_pipe)
 		value = get_env_dict(path->content)->value;
 	if (!path || ft_str_cmp(value, "=\"\"") == 0 \
 				|| ft_str_cmp(value, "") == 0)
-		dprintf(2, "no such file or directory -> to set");
+		dprintf(2, "no such file or directory -> to set\n");//TODO : check with raph for env if path NULL
 	else
-		return (2);//TODO : seulement si on trouve un chemin valide dans le path
+		return (2);
 	return (1);
 }
 

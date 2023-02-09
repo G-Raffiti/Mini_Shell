@@ -56,6 +56,7 @@ t_error	export_in_envs(t_mini_shell *ms, char **extracted)
 		if (add_or_replace_in_chosen_env(ms, extracted[0], extracted[2], 2) \
 															== MALLOC_ERROR)
 			return (free_split(extracted), MALLOC_ERROR);
+		get_all_paths(ms, ms->env_dict);//TODO check
 	}
 	return (free_split(extracted), SUCCESS);
 }
