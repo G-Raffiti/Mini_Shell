@@ -10,9 +10,11 @@
 char	*read_line(void)
 {
 	char	*line;
-	if (get_exit_code() == 0)
+
+	set_interactiv_signals();
+	if (get_exit_code() == 0 && (get_exit_code() != 131))
 		line = readline(PROMPT""GREEN"-▶ "WHITE);
-	else
+	else if (get_exit_code() != 131)
 		line = readline(PROMPT""RED"-▶ "WHITE);
 	if (line && ft_strlen(line) > 0 && !is_empty_line(line))
 		add_history(line);

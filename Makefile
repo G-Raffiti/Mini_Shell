@@ -32,6 +32,7 @@ FILES =			\
 				exec/export_builtin \
 				exec/env_builtin \
 				exec/unset_builtin \
+				exec/signals \
 				\
 				parsing/check_line \
 				parsing/chevron \

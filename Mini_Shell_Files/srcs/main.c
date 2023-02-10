@@ -15,6 +15,7 @@ static void	loop(t_mini_shell *ms)
 		line = read_line();
 		if (!line)
 			return;
+
 		if (is_empty_line(line))
 		{
 			line = ft_free(line);

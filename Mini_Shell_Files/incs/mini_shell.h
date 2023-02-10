@@ -6,6 +6,7 @@
 # include "error.h"
 # include "debug.h"
 # include <errno.h>
+# include <signal.h>
 # define PROMPT "ms "
 /////		IDIENTIFIER EXPORT /////
 # define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n _"
@@ -203,6 +204,10 @@ t_error		replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int
 t_error		add_in_chosen_env(t_mini_shell *ms, char *key, char *value, int which_env);
 t_error		get_value_env_type(t_env_arg *content);
 t_error		get_key_env_type(t_env_arg *content);
+
+// EXEC - SIGNALS //////////////////////////////////////////////////////////////
+void		set_interactiv_signals();
+void		set_exec_signals();
 // TEST ////////////////////////////////////////////////////////////////////////
 t_bool		debug_mod(void);
 void		enable_debug(void);

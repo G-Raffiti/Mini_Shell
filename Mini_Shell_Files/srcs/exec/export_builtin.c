@@ -8,7 +8,6 @@ void	display_export(t_mini_shell *ms)
 	int	j;
 
 	i = 0;
-	j = 0;
 	while (ms->env_sort[i])
 	{
 		j = 0;
