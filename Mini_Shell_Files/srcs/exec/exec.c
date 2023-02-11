@@ -148,7 +148,7 @@ void	wait_exit_status(t_lstd *current)
 		if (WIFEXITED(wstatus))
 			exit_status = WEXITSTATUS(wstatus);
 		else if (WIFSIGNALED(wstatus))
-			exit_status = WTERMSIG(wstatus);
+			exit_status = 128 + WTERMSIG(wstatus);
 		current = current->next;
 	}
 	set_exit_code(exit_status);

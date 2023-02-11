@@ -1,5 +1,17 @@
 #include "../../incs/mini_shell.h"
 
+t_error	fill_dict_element(t_env_arg **dict, char *key, char *value)
+{
+
+	(*dict)->value = ft_strdup(value);
+	if (!(*dict)->value)
+		return (MALLOC_ERROR);
+	(*dict)->key = ft_strdup(key);
+	if (!(*dict)->key)
+		return (free((*dict)->value), MALLOC_ERROR);
+	return (SUCCESS);
+}
+
 t_error	change_value_envs(t_env_arg *content, char *new_value)
 {
 	content->value = ft_free(content->value);

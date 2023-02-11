@@ -1,81 +1,6 @@
 
 #include "../../incs/mini_shell.h"
 
-
-t_error	fill_dict_element(t_env_arg **dict, char *key, char *value)
-{
-
-	(*dict)->value = ft_strdup(value);
-	if (!(*dict)->value)
-		return (MALLOC_ERROR);
-	(*dict)->key = ft_strdup(key);
-	if (!(*dict)->key)
-		return (free((*dict)->value), MALLOC_ERROR);
-	return (SUCCESS);
-}
-
-t_error	get_key_env_type(t_env_arg *content)
-{
-	char 	*tmp;
-
-	if (ft_str_cmp(content->key, "_") != 0)
-	{
-		tmp = ft_strdup(content->key);
-		if (!tmp)
-			return (MALLOC_ERROR);
-		content->key = ft_free(content->key);
-		content->key = ft_strjoin("declare -x ", tmp);
-		if (!content->key)
-			return (MALLOC_ERROR);
-		tmp = ft_free(tmp);
-	}
-	return (SUCCESS);
-}
-
-t_error	get_value_env_type(t_env_arg *content)
-{
-	char 	*tmp;
-
-	tmp = ft_strdup(content->value);
-	if (!tmp)
-		return (MALLOC_ERROR);
-	content->value = ft_free(content->value);
-	content->value = ft_strjoin("=\"", tmp);
-	if (!content->value)
-		return (MALLOC_ERROR);
-	tmp = ft_free(tmp);
-	tmp = ft_strdup(content->value);
-	if (!tmp)
-		return (MALLOC_ERROR);
-	content->value = ft_free(content->value);
-	content->value = ft_strjoin(tmp, "\"");
-	if (!content->value)
-		return (MALLOC_ERROR);
-	tmp = ft_free(tmp);
-//	dprintf(2, "value in get : %s\n", content->value);
-	return (SUCCESS);
-}
-
-t_error	get_export_type(t_mini_shell *ms)
-{
-	t_lstd		*current;
-	t_env_arg	*content;
-
-	current = ms->env_sort_dict;
-	while (current)
-	{
-		content = get_env_dict(current->content);
-		{
-			if (get_key_env_type(content) == MALLOC_ERROR)
-				return (MALLOC_ERROR);
-			if (get_value_env_type(content) == MALLOC_ERROR)
-				return (MALLOC_ERROR);
-		}
-		current = current->next;
-	}
-	return (SUCCESS);
-}
-
 t_error get_keys(t_env_arg **env_dict, char *env)
 {
 	int		i;
@@ -129,7 +54,7 @@ t_error	dup_env(t_mini_shell *ms, char **env)
 	return (SUCCESS);
 }
 
-t_error	create_export_env(t_mini_shell *ms)
+t_error	get_export_env(t_mini_shell *ms)
 {
 	t_env_arg *env_sort_dict;
 	t_lstd *current_sort;
@@ -144,11 +69,15 @@ t_error	create_export_env(t_mini_shell *ms)
 			exit_malloc(ms, "env: get_keys");
 		if (get_values(&env_sort_dict, ms->env[key_index]) == MALLOC_ERROR)
 			exit_malloc(ms, "env: get_values");
-		current_sort = ft_lstd_new(env_sort_dict);
-		if (!current_sort)
+		if (!create_new_list_element(&current_sort, env_sort_dict))
 			exit_malloc(ms, "env: new_lstd");
 		ft_lstd_push_back_elem(&ms->env_sort_dict, current_sort);
 	}
+	if (get_export_type(ms) == MALLOC_ERROR)
+		exit_malloc(ms, "main: get_export_type");
+	sort_dict(&ms->env_sort_dict, ft_str_cmp);
+	if (fill_export_env(ms) == MALLOC_ERROR)
+		exit_malloc(ms, "main: sort_export_and_fill_export_env");
 	return (SUCCESS);
 }
 
@@ -169,111 +98,9 @@ t_error	get_env(t_mini_shell *ms, char **env)
 			exit_malloc(ms, "env: get_keys");
 		if (get_values(&env_dict, env[key_index]) == MALLOC_ERROR)
 			exit_malloc(ms, "env: get_values");
-		current = ft_lstd_new(env_dict);
-		if (!current)
+		if (!create_new_list_element(&current, env_dict))
 			exit_malloc(ms, "env: new_lstd");
 		ft_lstd_push_back_elem(&ms->env_dict, current);
 	}
 	return (SUCCESS);
 }
-
-t_error fill_new_envs(t_lstd *current, char **str, int which_env)
-{
-	t_lstd		*content;
-	char		*value;
-	char 		*key;
-
-	content = current->content;
-	if (which_env == 0)
-		value = ft_strjoin("=", get_env_dict(content)->value);
-	else
-		value = get_env_dict(content)->value;
-	key = get_env_dict(content)->key;
-	*str = ft_strjoin(key, value);
-	if (!*str)
-		return (MALLOC_ERROR);
-	return (SUCCESS);
-}
-
-t_error	refresh_env(t_mini_shell *ms)
-{
-	int			size_dict;
-
-	ms->env = ft_free(ms->env);
-	size_dict = ft_lstd_size(ms->env_dict);
-	ms->env = ft_calloc(size_dict, sizeof(char *));
-	if (!ms->env_sort)
-		return (MALLOC_ERROR);
-	ms->env[size_dict - 1] = NULL;
-	return (SUCCESS);
-}
-
-t_error	refresh_export_env(t_mini_shell *ms)
-{
-	int			size_sorted_dict;
-
-	ms->env_sort = ft_free(ms->env_sort);
-	if (ms->exported)
-		size_sorted_dict = ft_lstd_size(ms->env_sort_dict);
-	else
-		size_sorted_dict = ft_lstd_size(ms->env_dict);
-	ms->env_sort = ft_calloc(size_sorted_dict, sizeof(char *));
-	if (!ms->env_sort)
-		return (MALLOC_ERROR);
-	ms->env_sort[size_sorted_dict - 1] = NULL;
-	return (SUCCESS);
-}
-
-t_error	fill_export_env(t_mini_shell *ms)
-{
-	t_lstd		*current;
-	int 		i;
-
-	i = 0;
-	refresh_export_env(ms);
-	current = ms->env_sort_dict;
-	while (current)
-	{
-		if (ft_str_cmp(get_env_dict(current->content)->key, "_") != 0)
-		{
-			if (fill_new_envs(current, &(ms->env_sort)[i], 1) == MALLOC_ERROR)
-				return (MALLOC_ERROR);
-			i++;
-		}
-		current = current->next;
-	}
-	i = 0;
-//	while (ms->env_sort[i])
-//	{
-//		dprintf(2, "%s\n", ms->env_sort[i]);
-//		i++;
-//	}
-	ms->exported = TRUE;
-	return (SUCCESS);
-}
-
-t_error	fill_env(t_mini_shell *ms)
-{
-	t_lstd		*current;
-	int 		i;
-
-	i = 0;
-	refresh_env(ms);
-	current = ms->env_dict;
-	while (current)
-	{
-		if (fill_new_envs(current, &(ms->env)[i], 0) == MALLOC_ERROR)
-			return (MALLOC_ERROR);
-		i++;
-		current = current->next;
-	}
-//	i = 0;
-//	while (ms->env_sort[i])
-//	{
-//		dprintf(2, "%s\n", ms->env_sort[i]);
-//		i++;
-//	}
-	return (SUCCESS);
-}
-// TODO [Aurel]: synchro list env to char** env
-// TODO [Aurel]: synchro char** env to list env

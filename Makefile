@@ -44,7 +44,9 @@ FILES =			\
 				parsing/replace_dollars \
 				parsing/set_builtin \
 				\
-				utils/env \
+				utils/env_utils \
+				utils/env_type_utils \
+				utils/dict_utils \
 				utils/free_struct \
 				utils/list_cmd_utils \
 				utils/new_struct \

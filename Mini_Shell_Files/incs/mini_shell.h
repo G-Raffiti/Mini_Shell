@@ -122,10 +122,24 @@ void		builtin_error_export(char *arg, int error_code, char *msg);
 // BUILTIN - UTILS
 t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 
-// ENV  - UTILS ////////////////////////////////////////////////////////////////
+// DICT  - UTILS ////////////////////////////////////////////////////////////////
 t_error		change_value_envs(t_env_arg *content, char *new_value);
 int			find_in_dict(void *content, void *ref);
 int			find_in_dict_sorted(void *content, void *ref);
+t_error		fill_dict_element(t_env_arg **dict, char *key, char *value);
+
+// ENV - UTILS//////////////////////////////////////////////////////////////////
+t_error		fill_export_env(t_mini_shell *ms);
+t_error		fill_env(t_mini_shell *ms);
+t_error		refresh_env(t_mini_shell *ms);
+t_error		refresh_export_env(t_mini_shell *ms);
+t_error		fill_refreshed_env(t_lstd *current, char **str, int which_env);
+
+// ENV_TYPE - UTILS ////////////////////////////////////////////////////////////
+t_error		get_value_env_type(t_env_arg *content);
+t_error		get_key_env_type(t_env_arg *content);
+t_error		get_export_type(t_mini_shell *ms);
+
 
 // LIST UTILS //////////////////////////////////////////////////////////////////
 t_cmd		*get(t_lstd *lst);
@@ -145,11 +159,7 @@ t_error		parse_line(t_mini_shell *ms, char *line);
 
 // PARSING - ENV /////////////////////////////////////////////////////////////////////////
 t_error		get_env(t_mini_shell *ms, char **env);
-t_error		get_all_paths(t_mini_shell *ms, t_lstd *env_dict);
-t_error		fill_export_env(t_mini_shell *ms);
-t_error		get_export_type(t_mini_shell *ms);
-t_error		create_export_env(t_mini_shell *ms);
-t_error		fill_dict_element(t_env_arg **dict, char *key, char *value);
+t_error		get_export_env(t_mini_shell *ms);
 
 // PARSING - READ_LINE /////////////////////////////////////////////////////////
 char		*read_line(void);
@@ -170,10 +180,12 @@ t_error		open_files(t_mini_shell *ms, t_cmd *cmd);
 
 // PARSING - GET PATH //////////////////////////////////////////////////////////
 t_error		get_path(t_mini_shell *ms, t_cmd *cmd);
+t_error		get_all_paths(t_mini_shell *ms, t_lstd *env_dict);
 
 // PARSING - REPLACE_DOLLARS
 t_error		replace_dollars(t_mini_shell *ms, t_cmd *cmds);
 void		replace_dollar_before_quotes(t_cmd *cmd);
+
 // PARSING - SET BUILTIN ///////////////////////////////////////////////////////
 void		set_builtin(t_cmd *cmd);
 
@@ -193,8 +205,7 @@ t_error		ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 
 // EXEC - ENV - BUILTIN ////////////////////////////////////////////////////////
 void		env(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
-t_error		fill_env(t_mini_shell *ms);
-t_error		fill_export_env(t_mini_shell *ms);
+
 
 // EXEC - UNSET - BUILTIN
 t_error		unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
@@ -202,8 +213,6 @@ t_error		unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 t_error		add_or_replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env);
 t_error		replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env);
 t_error		add_in_chosen_env(t_mini_shell *ms, char *key, char *value, int which_env);
-t_error		get_value_env_type(t_env_arg *content);
-t_error		get_key_env_type(t_env_arg *content);
 
 // EXEC - SIGNALS //////////////////////////////////////////////////////////////
 void		set_interactiv_signals();

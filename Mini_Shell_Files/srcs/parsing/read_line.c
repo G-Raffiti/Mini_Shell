@@ -12,7 +12,7 @@ char	*read_line(void)
 	char	*line;
 
 	set_interactiv_signals();
-	if (get_exit_code() == 0 && (get_exit_code() != 131))
+	if (get_exit_code() == 0)
 		line = readline(PROMPT""GREEN"-▶ "WHITE);
 	else if (get_exit_code() != 131)
 		line = readline(PROMPT""RED"-▶ "WHITE);
