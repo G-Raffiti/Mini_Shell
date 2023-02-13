@@ -16,12 +16,19 @@ t_error	unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe)//TODO : reset path if u
 		current = ft_lstd_find(ms->env_dict, cmd->cmd[i], find_in_dict);
 		current_sorted = ft_lstd_find(ms->env_sort_dict, cmd->cmd[i], find_in_dict_sorted);
 		if (current)
+		{
 			ft_lstd_remove(current);
+			current = ft_free(current);
+		}
 		if (current_sorted)
+		{
 			ft_lstd_remove(current_sorted);
+			current_sorted = ft_free(current_sorted);
+		}
 	}
+	if (ft_str_cmp(cmd->cmd[1], "PATH") == 0)
+		ms->paths = free_split(ms->paths);
 	fill_env(ms);
 	fill_export_env(ms);
-	get_all_paths(ms, ms->env_dict);
 	return (SUCCESS);
 }

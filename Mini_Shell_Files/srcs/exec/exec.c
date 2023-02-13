@@ -36,7 +36,7 @@ static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 	else
 	{
 		exec_builtin(ms, cmd, 1);
-		exit(1);
+		exit(0);
 	}
 	exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
 }
@@ -144,6 +144,11 @@ void	wait_exit_status(t_lstd *current)
 	current = ft_lstd_first(current);
 	while (current)
 	{
+		if (get(current)->is_builtin)
+		{
+			current = current->next;
+			continue;
+		}
 		waitpid(get(current)->pid, &wstatus, 0);
 		if (WIFEXITED(wstatus))
 			exit_status = WEXITSTATUS(wstatus);

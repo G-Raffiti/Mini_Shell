@@ -121,7 +121,7 @@ t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 // EXPORT_BUILTIN //////////////////////////////////////////////////////////////
 t_error		ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 
-// EXEC - SIGNALS //////////////////////////////////////////////////////////////
+// SIGNALS /////////////////////////////////////////////////////////////////////
 void		set_interactiv_signals();
 void		set_exec_signals();
 
@@ -221,7 +221,7 @@ void		safe_close(t_mini_shell *ms, int fd, char *msg);
 void		safe_dup2(t_mini_shell *ms, int fd, int std, char *msg);
 int			safe_dup(t_mini_shell *ms, int std, char *msg);
 
-/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\ OTHERS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
 
 // EXIT ////////////////////////////////////////////////////////////////////////
 int			get_exit_code(void);
@@ -244,7 +244,6 @@ void		debug_all_cmds(t_mini_shell *ms);
 void		debug_mini_shell(t_mini_shell *ms);
 void		debug_fd(t_mini_shell *ms, t_cmd *cmd);
 
-// OTHER
 char		**ft_strtab_dup(char **tab_to_dup);
 
 #endif

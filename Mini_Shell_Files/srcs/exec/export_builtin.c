@@ -48,15 +48,15 @@ t_error	export_in_envs(t_mini_shell *ms, char **extracted)
 			if (fill_export_env(ms) == MALLOC_ERROR)
 				return (free_split(extracted), MALLOC_ERROR);
 		}
-		return(free_split(extracted), SUCCESS);
 	}
 	else if (ft_str_cmp(extracted[0], "_") != 0)
 	{
 		if (add_or_replace_in_chosen_env(ms, extracted[0], extracted[2], 2) \
 															== MALLOC_ERROR)
 			return (free_split(extracted), MALLOC_ERROR);
-		get_all_paths(ms, ms->env_dict);//TODO check
 	}
+	if (ft_str_cmp(extracted[0], "PATH") == 0)
+		get_all_paths(ms, ms->env_dict);
 	return (free_split(extracted), SUCCESS);
 }
 
@@ -96,10 +96,11 @@ t_error	ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 	if (!cmd->cmd[1])
 	{
 		display_export(ms);
-		return(SUCCESS);//TODO : afficher env_export
+		return(SUCCESS);
 	}
 	while (!in_pipe && cmd->cmd[++i])
 	{
+		dprintf(2, "cmd : %s\n", cmd->cmd[i]);
 		if (!export_name_is_valid(cmd->cmd[i]))
 			builtin_error_export(cmd->cmd[i], 1, INVALID_IDENTIFIER);
 		else
