@@ -48,8 +48,6 @@ t_error	split_count(t_cmd *cmds, int *split_len)
 	if ((*split_len) == 1 && prev_is_arg == 0)
 		return (ERROR);
 	(*split_len)++;
-	if (debug_mod())
-		dprintf(2, "SPLIT_LEN : %d\n\n", *split_len);
 	return (SUCCESS);
 }
 
@@ -101,16 +99,11 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 				(*splited_raw)[nbr++] = ft_substr(raw_cmd, start_dol - len_prev, len_prev);
 				if ((!*splited_raw))
 					return (MALLOC_ERROR);
-				if (debug_mod())
-					dprintf(2, "Splited[%d] : %s\n",nbr - 1, (*splited_raw)[nbr - 1]);
 				len_prev = 0;
 			}
 			(*splited_raw)[nbr++] = ft_substr(raw_cmd, start_dol, i - start_dol + 1);
 			if ((!*splited_raw))
 				return (MALLOC_ERROR);
-			if (debug_mod())
-				dprintf(2, "Splited[%d] : %s\n",nbr - 1, (*splited_raw)[nbr - 1]);
-
 		}
 		else
 		{
@@ -121,8 +114,6 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 	if (prev_is_arg == 0)
 	{
 		(*splited_raw)[nbr++] = ft_substr(raw_cmd, ft_strlen(raw_cmd) - len_prev, len_prev);
-		if (debug_mod())
-			dprintf(2, "Splited[%d] : %s\n",nbr - 1, (*splited_raw)[nbr - 1]);
 	}
 	return (SUCCESS);
 }
@@ -180,12 +171,10 @@ t_error	replace_in_split(t_mini_shell *ms, char **splited_raw, int *final_len)
 		if (splited_raw[str_pos][c_pos + 1] && (splited_raw)[str_pos][c_pos] == '$' &&
 				valid_id_dollars(splited_raw[str_pos][c_pos + 1]))
 		{
-//			dprintf(2, "raw[%d] BEFORE replaced : %s\n", str_pos, splited_raw[str_pos]);
 			key = (&splited_raw[str_pos][c_pos]) + 1;
 			get_pair_key_value(ms, dict, &key_value, key);
 			if (get_key_and_replace(&splited_raw[str_pos], &key_value, key) == MALLOC_ERROR)
 				return (MALLOC_ERROR);
-//			dprintf(2, "raw[%d] replaced : %s | len = %ld\n", str_pos, splited_raw[str_pos], ft_strlen(splited_raw[str_pos]));
 		}
 		*final_len += (int)ft_strlen(splited_raw[str_pos]);
 	}
@@ -313,7 +302,6 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 	if (fill_token_and_final_raw(cmds, dup_splited_raw, splited_raw) \
 											== MALLOC_ERROR)
 		return (free_split(splited_raw), free_split(dup_splited_raw), MALLOC_ERROR);
-	debug(3, "RAW_CMD[] == > ", cmds->raw_cmd, "\n");
 	return(0);
 }
 
@@ -334,5 +322,4 @@ void	replace_dollar_before_quotes(t_cmd *cmd)
 			raw[i] = ' ';
 		}
 	}
-	debug(3, "RAW: ", raw, "\n");
 }

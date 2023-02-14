@@ -100,7 +100,6 @@ t_error	ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 	}
 	while (!in_pipe && cmd->cmd[++i])
 	{
-		dprintf(2, "cmd : %s\n", cmd->cmd[i]);
 		if (!export_name_is_valid(cmd->cmd[i]))
 			builtin_error_export(cmd->cmd[i], 1, INVALID_IDENTIFIER);
 		else

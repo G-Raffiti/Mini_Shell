@@ -94,6 +94,8 @@ static t_error extract_file_name(char *str, char *quote, char **file_name)
 	while (*str && (!ft_contain(" <>\"\'", *str)
 					|| (*quote && ft_contain("<>", *str))))
 		str++;
+	// TODO if file name start with a $ replace than check if it contains '
+	//  ' or '/' error "ambiguous redirect" and "Is a directory"
 	*file_name = ft_substr(start, 0, str - start);
 	if (!*file_name)
 		return (MALLOC_ERROR);

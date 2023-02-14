@@ -85,6 +85,9 @@ t_error	fill_cmds(t_mini_shell *ms, char **error_msg, int *code_error)
 			return (MALLOC_ERROR);
 		if (is_empty_line(get(current)->raw_cmd))
 		{
+			// TODO if a fd == -1 print No such file or directory
+			close(get(current)->input->fd);
+			close(get(current)->output->fd);
 			current = ft_lstd_remove_and_del(current, free_cmd_void);
 			continue;
 		}
