@@ -48,6 +48,14 @@ t_error	create_cmds(t_mini_shell *mini_shell, char *line)
 	return (SUCCESS);
 }
 
+void free_cmd_void(void *pt_cmd)
+{
+	t_cmd *cmd;
+
+	cmd = (t_cmd *)pt_cmd;
+	cmd = free_cmd(cmd);
+}
+
 t_error	fill_cmds(t_mini_shell *ms, char **error_msg, int *code_error)
 {
 	t_lstd	*current;
@@ -56,6 +64,12 @@ t_error	fill_cmds(t_mini_shell *ms, char **error_msg, int *code_error)
 	current = ft_lstd_first(ms->cmds);
 	while (current)
 	{
+		if (is_empty_line(get(current)->raw_cmd))
+		{
+			*error_msg = SYNTAX_PIPE;
+			*code_error = 2;
+			return (ERROR);
+		}
 		status = open_files(ms, get(current));
 		debug(1, "open_Files"GREEN" DONE "GREY"| "WHITE);
 		if (status == MALLOC_ERROR)
@@ -71,9 +85,8 @@ t_error	fill_cmds(t_mini_shell *ms, char **error_msg, int *code_error)
 			return (MALLOC_ERROR);
 		if (is_empty_line(get(current)->raw_cmd))
 		{
-			*error_msg = SYNTAX_PIPE;
-			*code_error = 2;
-			return (ERROR);
+			current = ft_lstd_remove_and_del(current, free_cmd_void);
+			continue;
 		}
 		if (get_cmd(get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);

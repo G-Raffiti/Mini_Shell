@@ -54,6 +54,7 @@ void	ft_lstd_push_front(t_lstd **lst, void *data);
 void	ft_lstd_push_front_elem(t_lstd **lst, t_lstd *elem);
 t_lstd	*ft_lstd_push_tab(int size, void **data);
 t_lstd	*ft_lstd_remove(t_lstd *elem);
+t_lstd	*ft_lstd_remove_and_del(t_lstd *elem, void (*free_fct)(void *));
 void	ft_lstd_remove_if(t_lstd **lst, void *ref, int (*cmp)(), \
 						void (*free_fct)(void *));
 void	ft_lstd_reverse(t_lstd **lst);

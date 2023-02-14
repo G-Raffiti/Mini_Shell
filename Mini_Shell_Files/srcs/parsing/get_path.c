@@ -77,7 +77,9 @@ t_error	get_path(t_mini_shell *ms, t_cmd *cmd)
 		return (SUCCESS);
 	}
 	i = -1;
-	if (!ms->paths)
+	if (!ms->paths || ft_contain(cmd->cmd[0], '/')) //TODO verification if
+		// path have to be absolute or if ist also work for relatif path.
+		// if it does join pwd with cmd->cmd[0] if it contains a "/"
 		return (SUCCESS);
 	while (ms->paths[++i])
 	{
