@@ -34,7 +34,10 @@ static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 	if (!cmd->is_builtin)
 		execve(cmd->path, cmd->cmd, ms->env);
 	else
-		exec_builtin(ms, cmd);
+	{
+		exec_builtin(ms, cmd, 1);
+		exit(0);
+	}
 	exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
 }
 
@@ -44,6 +47,12 @@ static void	exec_one(t_mini_shell *ms, t_cmd *one)
 		return ;
 	if (one->input->fd > 0)
 		safe_dup2(ms, one->input->fd, STDIN_FILENO, "exec_one");
+	if (one->is_builtin)
+	{
+		exec_builtin(ms, one, 0);
+		return ;//TODO : check exit properly
+	}
+	set_exec_signals();
 	safe_fork(ms, one, "exec_one");
 	if (one->pid)
 	{
@@ -63,6 +72,7 @@ static void	exec_first(t_mini_shell *ms, t_cmd *first)
 		return ;
 	if (first->input->fd != -2)
 		safe_dup2(ms, first->input->fd, STDIN_FILENO, "exec_first");
+	set_exec_signals();
 	safe_fork(ms, first, "exec_first");
 	if (first->pid)
 	{
@@ -88,6 +98,7 @@ static void	exec_cmd(t_mini_shell *ms, t_cmd *cmd)
 	safe_pipe(ms, "exec_mid");
 	if (permission_denied(ms, cmd) == ERROR)
 		return ;
+	set_exec_signals();
 	safe_fork(ms, cmd, "exec_mid");
 	if (cmd->pid)
 	{
@@ -112,6 +123,7 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 	close(ms->pipe[0]);
 	if (permission_denied(ms, last) == ERROR)
 		return;
+	set_exec_signals();
 	safe_fork(ms, last, "exec_last");
 	if (last->pid)
 	{
@@ -132,11 +144,16 @@ void	wait_exit_status(t_lstd *current)
 	current = ft_lstd_first(current);
 	while (current)
 	{
+		if (get(current)->is_builtin)
+		{
+			current = current->next;
+			continue;
+		}
 		waitpid(get(current)->pid, &wstatus, 0);
 		if (WIFEXITED(wstatus))
 			exit_status = WEXITSTATUS(wstatus);
 		else if (WIFSIGNALED(wstatus))
-			exit_status = WTERMSIG(wstatus);
+			exit_status = 128 + WTERMSIG(wstatus);
 		current = current->next;
 	}
 	set_exit_code(exit_status);

@@ -10,6 +10,6 @@
 # define SYNTAX_NEWLINE		"syntax error near unexpected token `newline'\n"
 # define COMMAND_NOT_FOUND	"command not found\n"
 # define QUOTE_ERROR		"parse error quote not closed\n"
-
+# define INVALID_IDENTIFIER	"not a valid identifier"
 
 #endif

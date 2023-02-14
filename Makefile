@@ -26,11 +26,14 @@ FILES =			\
 				debug/debug \
 				\
 				env/env \
+				env/modif_env \
 				\
 				exec/exec \
 				exec/export_builtin \
 				exec/env_builtin \
 				exec/pwd_builtin \
+				exec/unset_builtin \
+				exec/signals \
 				\
 				parsing/check_line \
 				parsing/chevron \
@@ -42,11 +45,14 @@ FILES =			\
 				parsing/replace_dollars \
 				parsing/set_builtin \
 				\
+				utils/env_utils \
+				utils/env_type_utils \
+				utils/dict_utils \
 				utils/free_struct \
 				utils/list_cmd_utils \
 				utils/new_struct \
 				utils/safe_functions \
-				utils/builtin_utils \
+				utils/builtin \
 				utils/check_functions \
 				\
 				builtin_errors \

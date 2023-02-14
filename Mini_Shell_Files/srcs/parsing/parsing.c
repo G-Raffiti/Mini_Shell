@@ -111,7 +111,7 @@ t_error	parse_line(t_mini_shell *ms, char *line)
 	debug(1, "check"GREEN" DONE "GREY"| "WHITE);
 	if (create_cmds(ms, line) == MALLOC_ERROR)
 		return (free(line), exit_malloc(ms, "parsing: crete_cmds"));
-	debug(1, "crete cmds"GREEN" DONE "GREY"| "WHITE);
+	debug(1, "create cmds"GREEN" DONE "GREY"| "WHITE);
 	status = fill_cmds(ms, &error_msg, &code_error);
 	if (status == MALLOC_ERROR)
 		return (free(line), exit_malloc(ms, "parsing: fill_cmds"));

@@ -187,9 +187,7 @@ t_error	replace_in_split(t_mini_shell *ms, char **splited_raw, int *final_len)
 				return (MALLOC_ERROR);
 //			dprintf(2, "raw[%d] replaced : %s | len = %ld\n", str_pos, splited_raw[str_pos], ft_strlen(splited_raw[str_pos]));
 		}
-		else
-//			dprintf(2, "raw[%d] NOT replaced : %s | len = %ld\n", str_pos, splited_raw[str_pos], ft_strlen(splited_raw[str_pos]));
-		*final_len += ft_strlen(splited_raw[str_pos]);
+		*final_len += (int)ft_strlen(splited_raw[str_pos]);
 	}
 	return  (SUCCESS);
 }
@@ -214,10 +212,14 @@ char	**ft_strtab_dup(char **tab_to_dup)
 
 t_error	create_token_and_final_raw(t_cmd **cmd, int final_len)
 {
+	int i;
 
+	i = -1;
 	(*cmd)->is_dollar = ft_calloc(sizeof(t_bool), final_len);
 	if (!(*cmd)->is_dollar)
 		return (MALLOC_ERROR);
+	while (++i < final_len)
+		(*cmd)->is_dollar[i] = FALSE;
 	(*cmd)->raw_cmd = ft_free((*cmd)->raw_cmd);
 	(*cmd)->raw_cmd = ft_calloc(sizeof(char), final_len);
 	if (!(*cmd)->raw_cmd)
@@ -229,12 +231,6 @@ t_error	fill_token(t_cmd *cmds, char **splited_raw, int start_token, int str_pos
 {
 	int	i;
 
-	i = -1;
-	if (start_token == 0 || start_token == (int)ft_strlen(splited_raw[str_pos - 1]))
-	{
-		while (cmds->is_dollar[++i])
-			cmds->is_dollar[i] = FALSE;
-	}
 	i = -1;
 	while (splited_raw[str_pos][++i])
 		cmds->is_dollar[start_token + i] = TRUE;
@@ -299,7 +295,6 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 	int		split_len;
 	int		final_len;
 
-	split_len  = 0;
 	final_len = 1;
 	if (!cmds->raw_cmd || split_count(cmds, &split_len) == 0)
 		return (SUCCESS);

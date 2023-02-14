@@ -6,6 +6,7 @@
 # include "error.h"
 # include "debug.h"
 # include <errno.h>
+# include <signal.h>
 # define PROMPT "ms "
 /////		IDIENTIFIER EXPORT /////
 # define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n _"
@@ -84,6 +85,7 @@ typedef struct s_mini_shell
 	char			**paths;
 	t_lstd			*cmds;
 	int				pipe[2];
+	t_bool 			exported;
 }					t_mini_shell;
 
 #ifndef G_EXIT_CODE
@@ -93,11 +95,103 @@ extern int	g_exit_code;
 
 #endif
 
-// NEW STRUCT //////////////////////////////////////////////////////////////////
-t_error		new_fd(t_fd **fd);
-t_error		new_cmd(t_cmd **cmd);
-t_error		new_mini_shell(t_mini_shell **ms);
-t_error		new_env_args(t_env_arg **env_dict);
+/******************************************************************************/
+/********************************   ENV   *************************************/
+/******************************************************************************/
+
+// ENV /////////////////////////////////////////////////////////////////////////
+t_error		get_env(t_mini_shell *ms, char **env);
+t_error		get_export_env(t_mini_shell *ms);
+
+// MODIF_ENV ///////////////////////////////////////////////////////////////////
+t_error		add_or_replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env);
+t_error		replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env);
+t_error		add_in_chosen_env(t_mini_shell *ms, char *key, char *value, int which_env);
+
+/******************************************************************************/
+/*******************************   EXEC   *************************************/
+/******************************************************************************/
+
+// ENV_BUILTIN /////////////////////////////////////////////////////////////////
+void		env(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
+
+// EXEC ////////////////////////////////////////////////////////////////////////
+t_error		exec_cmds(t_mini_shell *ms);
+t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
+
+// EXPORT_BUILTIN //////////////////////////////////////////////////////////////
+t_error		ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
+
+// SIGNALS /////////////////////////////////////////////////////////////////////
+void		set_interactiv_signals();
+void		set_exec_signals();
+
+// UNSET_BUILTIN ///////////////////////////////////////////////////////////////
+t_error		unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
+
+/******************************************************************************/
+/*******************************   PARSING   **********************************/
+/******************************************************************************/
+
+// PARSING /////////////////////////////////////////////////////////////////////
+int			set_quote_state(char c, char *quote);
+t_error		parse_line(t_mini_shell *ms, char *line);
+
+// CHECK LINE //////////////////////////////////////////////////////////////////
+t_bool		is_empty_line(char *line);
+t_error		check_line(char *line);
+t_error		parse_error(char *error_msg, int error_code);
+
+// GET CMD /////////////////////////////////////////////////////////////////////
+t_error		get_cmd(t_cmd *cmd);
+
+// GET PATH ////////////////////////////////////////////////////////////////////
+t_error		get_path(t_mini_shell *ms, t_cmd *cmd);
+t_error		get_all_paths(t_mini_shell *ms, t_lstd *env_dict);
+
+// GET RAW CMD /////////////////////////////////////////////////////////////////
+char		**split_pipe(char *line);
+
+// READ_LINE ///////////////////////////////////////////////////////////////////
+char		*read_line(void);
+
+// REPLACE_DOLLARS /////////////////////////////////////////////////////////////
+t_error		replace_dollars(t_mini_shell *ms, t_cmd *cmds);
+void		replace_dollar_before_quotes(t_cmd *cmd);
+
+// SET BUILTIN /////////////////////////////////////////////////////////////////
+void		set_builtin(t_cmd *cmd);
+
+// OPEN FILES //////////////////////////////////////////////////////////////////
+t_error		open_files(t_mini_shell *ms, t_cmd *cmd);
+
+/******************************************************************************/
+/*******************************   UTILS   ************************************/
+/******************************************************************************/
+
+// BUILTIN /////////////////////////////////////////////////////////////////////
+t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
+
+// CHECK_FUNC //////////////////////////////////////////////////////////////////
+int			valid_id_dollars(char c);
+int			valid_id_export(char c);
+int			is_not_alpha(char c);
+
+// DICT ////////////////////////////////////////////////////////////////////////
+t_error		change_value_envs(t_env_arg *content, char *new_value);
+int			find_in_dict(void *content, void *ref);
+int			find_in_dict_sorted(void *content, void *ref);
+
+// ENV /////////////////////////////////////////////////////////////////////////
+t_error		fill_export_env(t_mini_shell *ms);
+t_error		fill_env(t_mini_shell *ms);
+t_error		refresh_env(t_mini_shell *ms);
+t_error		refresh_export_env(t_mini_shell *ms);
+
+// ENV_TYPE ////////////////////////////////////////////////////////////////////
+t_error		get_value_env_type(t_env_arg *content);
+t_error		get_key_env_type(t_env_arg *content);
+t_error		get_export_type(t_mini_shell *ms);
 
 // FREE STRUCT /////////////////////////////////////////////////////////////////
 void		*ft_free(void *pt);
@@ -105,6 +199,30 @@ void		*free_split(char **split);
 void		*free_fd(t_fd *fd);
 void		*free_cmd(t_cmd *cmd);
 void		*free_mini_shell(t_mini_shell *ms);
+
+// LIST UTILS //////////////////////////////////////////////////////////////////
+t_cmd		*get(t_lstd *lst);
+t_env_arg	*get_env_dict(void *content);
+void		clear_cmds(t_lstd **lst, void *(*free_fct)(t_cmd *));
+void		sort_dict(t_lstd **lst, int (*cmp)());
+t_error		create_new_list_element(t_lstd **element, t_env_arg *dict);
+
+// NEW STRUCT //////////////////////////////////////////////////////////////////
+t_error		new_fd(t_fd **fd);
+t_error		new_cmd(t_cmd **cmd);
+t_error		new_mini_shell(t_mini_shell **ms);
+t_error		create_new_dict_element(t_env_arg **env_dict);
+t_error		fill_dict_element(t_env_arg **dict, char *key, char *value);
+t_error		fill_refreshed_env(t_lstd *current, char **str, int which_env);
+
+// SAFE FUNC ///////////////////////////////////////////////////////////////////
+void		safe_fork(t_mini_shell *ms, t_cmd *cmd, char *msg);
+void		safe_pipe(t_mini_shell *ms, char *msg);
+void		safe_close(t_mini_shell *ms, int fd, char *msg);
+void		safe_dup2(t_mini_shell *ms, int fd, int std, char *msg);
+int			safe_dup(t_mini_shell *ms, int std, char *msg);
+
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\ OTHERS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
 
 // EXIT ////////////////////////////////////////////////////////////////////////
 int			get_exit_code(void);
@@ -116,72 +234,7 @@ void		exit_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg);
 
 // BUILTIN ERRORS //////////////////////////////////////////////////////////////
 void		builtin_error_env(char *arg, int error_code, char *msg);
-
-// LIST UTILS //////////////////////////////////////////////////////////////////
-t_cmd		*get(t_lstd *lst);
-t_env_arg	*get_env_dict(void *content);
-void		clear_cmds(t_lstd **lst, void *(*free_fct)(t_cmd *));
-void		sort_dict(t_lstd **lst, int (*cmp)());
-
-// CHECK_UTILS /////////////////////////////////////////////////////////////////
-int			valid_id_dollars(char c);
-int			valid_id_export(char c);
-int			is_not_alpha(char c);
-
-// PARSING /////////////////////////////////////////////////////////////////////
-int			set_quote_state(char c, char *quote);
-t_error		parse_line(t_mini_shell *ms, char *line);
-
-// PARSING - ENV /////////////////////////////////////////////////////////////////////////
-int			find_in_dict(void *content, void *ref);
-t_error		get_env(t_mini_shell *ms, char **env);
-t_error		get_all_paths(t_mini_shell *ms, t_lstd *env_dict);
-t_error		sort_export_and_fill_export_env(t_mini_shell *ms);
-t_error		get_export_type(t_mini_shell *ms);
-t_error		create_export_env(t_mini_shell *ms);
-
-// PARSING - READ_LINE /////////////////////////////////////////////////////////
-char		*read_line(void);
-
-// PARSING - CHECK LINE ////////////////////////////////////////////////////////
-t_bool		is_empty_line(char *line);
-t_error		check_line(char *line);
-t_error		parse_error(char *error_msg, int error_code);
-
-// PARSING - GET RAW CMD ///////////////////////////////////////////////////////
-char		**split_pipe(char *line);
-
-// PARSING - GET CMD ///////////////////////////////////////////////////////////
-t_error		get_cmd(t_cmd *cmd);
-
-// PARSING - OPEN FILES ////////////////////////////////////////////////////////
-t_error		open_files(t_mini_shell *ms, t_cmd *cmd);
-
-// PARSING - GET PATH //////////////////////////////////////////////////////////
-t_error		get_path(t_mini_shell *ms, t_cmd *cmd);
-
-// PARSING - REPLACE_DOLLARS
-t_error		replace_dollars(t_mini_shell *ms, t_cmd *cmds);
-void		replace_dollar_before_quotes(t_cmd *cmd);
-// PARSING - SET BUILTIN ///////////////////////////////////////////////////////
-void		set_builtin(t_cmd *cmd);
-
-// SAFE FUNC ///////////////////////////////////////////////////////////////////
-void		safe_fork(t_mini_shell *ms, t_cmd *cmd, char *msg);
-void		safe_pipe(t_mini_shell *ms, char *msg);
-void		safe_close(t_mini_shell *ms, int fd, char *msg);
-void		safe_dup2(t_mini_shell *ms, int fd, int std, char *msg);
-int			safe_dup(t_mini_shell *ms, int std, char *msg);
-
-// EXEC ////////////////////////////////////////////////////////////////////////
-t_error		exec_cmds(t_mini_shell *ms);
-t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd);
-
-// EXEC - EXPORT_BUILTIN ///////////////////////////////////////////////////////
-t_error		export(t_mini_shell *ms, t_cmd *cmd);
-
-// EXEC - ENV - BUILTIN ////////////////////////////////////////////////////////
-void		env(t_mini_shell *ms, t_cmd *cmd);
+void		builtin_error_export(char *arg, int error_code, char *msg);
 
 // EXEC - PWD - BUILTIN ////////////////////////////////////////////////////////
 t_error		ft_pwd(void);
@@ -195,7 +248,6 @@ void		debug_all_cmds(t_mini_shell *ms);
 void		debug_mini_shell(t_mini_shell *ms);
 void		debug_fd(t_mini_shell *ms, t_cmd *cmd);
 
-// OTHER
 char		**ft_strtab_dup(char **tab_to_dup);
 
 #endif
