@@ -1,0 +1,14 @@
+cmake-build-debug
+ignore_leaks.txt
+Lib_FT
+Lib_List_Double
+Makefile
+Mini_Shell_Files
+ms.out
+out
+README.md
+run.sh
+test1
+valgrind.log
+valgrind-out.log
+valgrind-out.log.core.107454
