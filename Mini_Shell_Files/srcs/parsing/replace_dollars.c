@@ -285,6 +285,7 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 	int		final_len;
 
 	final_len = 1;
+	split_len = 0;
 	if (!cmds->raw_cmd || split_count(cmds, &split_len) == 0)
 		return (SUCCESS);
 	splited_raw = ft_calloc(sizeof(char *), split_len);
