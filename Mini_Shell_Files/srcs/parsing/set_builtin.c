@@ -6,6 +6,8 @@
 
 void	set_builtin(t_cmd *cmd)
 {
+	if (!cmd->cmd)
+		return ;
 	if (ft_str_cmp(cmd->cmd[0], "echo") == 0
 		|| ft_str_cmp(cmd->cmd[0], "cd") == 0
 		|| ft_str_cmp(cmd->cmd[0], "pwd") == 0

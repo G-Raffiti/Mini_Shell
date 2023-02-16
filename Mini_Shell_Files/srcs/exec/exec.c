@@ -56,7 +56,7 @@ static void	exec_one(t_mini_shell *ms, t_cmd *one)
 		safe_dup2(ms, one->input->fd, STDIN_FILENO, "exec_one");
 	if (one->is_builtin && !one->need_fork)
 	{
-		exit_status = exec_builtin(ms, one, TRUE);
+		exit_status = exec_builtin(ms, one, FALSE);
 		if (exit_status == MALLOC_ERROR)
 			exit_malloc(ms, "execve_cmd");
 		else if (exit_status == ERROR)

@@ -59,7 +59,7 @@ void	debug_cmd(t_cmd *cmd)
 	printf(WHITE"RAW_CMD: "GREY"["YELLOW"%s"GREY"] | ", cmd->raw_cmd);
 	printf(WHITE"PARSED_CMD: "GREY);
 	i = 0;
-	while (cmd->cmd[i])
+	while (cmd->cmd && cmd->cmd[i])
 	{
 		printf("["YELLOW"%s"GREY"] ", cmd->cmd[i]);
 		i++;
