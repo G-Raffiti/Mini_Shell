@@ -2,7 +2,7 @@
 #include "../../incs/mini_shell.h"
 #include <stdlib.h>
 
-t_error	create_new_dict_element(t_env_arg **env_dict)
+t_error	new_env_arg(t_env_arg **env_dict)
 {
 	*env_dict = ft_calloc(1, sizeof(t_env_arg));
 	if (!*env_dict)

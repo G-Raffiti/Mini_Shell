@@ -6,5 +6,7 @@
 
 t_error	ft_exit(t_mini_shell *ms)
 {
+	close(ms->stds[0]);
+	close(ms->stds[1]);
 	return (exit_end_program(ms));
 }

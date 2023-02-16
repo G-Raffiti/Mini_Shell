@@ -1,16 +1,16 @@
 
 #include "../../incs/mini_shell.h"
 
-t_error get_keys(t_env_arg **env_dict, char *env)
+t_error get_keys(t_env_arg *env_dict, char *env)
 {
 	int		i;
 
 	i = 0;
 	while (env[i] && env[i] != '=')
 		i++;
-	(*env_dict)->key = ft_substr(env, 0, i);
-	if (!(*env_dict)->key)
-		return (free(*env_dict), MALLOC_ERROR);
+	env_dict->key = ft_substr(env, 0, i);
+	if (!env_dict->key)
+		return (MALLOC_ERROR);
 	return (SUCCESS);
 }
 
@@ -54,13 +54,13 @@ t_error	get_export_env(t_mini_shell *ms)
 	key_index = -1;
 	while (++key_index < ft_strlen_tab(ms->env))
 	{
-		if (create_new_dict_element(&env_sort_dict) == MALLOC_ERROR)
-			exit_malloc(ms, "env: create_new_dict_element");
-		if (get_keys(&env_sort_dict, ms->env[key_index]) == MALLOC_ERROR)
+		if (new_env_arg(&env_sort_dict) == MALLOC_ERROR)
+			exit_malloc(ms, "env: new_env_arg");
+		if (get_keys(env_sort_dict, ms->env[key_index]) == MALLOC_ERROR)
 			exit_malloc(ms, "env: get_keys");
 		if (get_values(env_sort_dict, ms->env[key_index]) == MALLOC_ERROR)
 			exit_malloc(ms, "env: get_values");
-		if (!create_new_list_element(&current_sort, env_sort_dict))
+		if (create_new_list_element(&current_sort, env_sort_dict) == MALLOC_ERROR)
 			exit_malloc(ms, "env: new_lstd");
 		ft_lstd_push_back_elem(&ms->env_sort_dict, current_sort);
 	}
@@ -74,22 +74,22 @@ t_error	get_export_env(t_mini_shell *ms)
 
 t_error	get_env(t_mini_shell *ms, char **env)
 {
-	t_env_arg *env_dict;
-	t_lstd *current;
-	int key_index;
+	t_env_arg	*env_dict;
+	t_lstd		*current;
+	int			key_index;
 
 	key_index = -1;
 	if (dup_env(ms, env) == MALLOC_ERROR)
 		exit_malloc(ms, "env: dup_env");
 	while (++key_index < ft_strlen_tab(env))
 	{
-		if (create_new_dict_element(&env_dict) == MALLOC_ERROR)
-			exit_malloc(ms, "env: create_new_dict_element");
-		if (get_keys(&env_dict, env[key_index]) == MALLOC_ERROR)
+		if (new_env_arg(&env_dict) == MALLOC_ERROR)
+			exit_malloc(ms, "env: new_env_arg");
+		if (get_keys(env_dict, env[key_index]) == MALLOC_ERROR)
 			exit_malloc(ms, "env: get_keys");
 		if (get_values(env_dict, env[key_index]) == MALLOC_ERROR)
 			exit_malloc(ms, "env: get_values");
-		if (!create_new_list_element(&current, env_dict))
+		if (create_new_list_element(&current, env_dict) == MALLOC_ERROR)
 			exit_malloc(ms, "env: new_lstd");
 		ft_lstd_push_back_elem(&ms->env_dict, current);
 	}

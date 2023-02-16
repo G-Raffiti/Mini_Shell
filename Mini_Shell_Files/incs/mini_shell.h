@@ -83,6 +83,7 @@ typedef struct s_mini_shell
 	char			**paths;
 	t_lstd			*cmds;
 	int				pipe[2];
+	int				stds[2];
 	t_bool 			exported;
 }					t_mini_shell;
 
@@ -215,7 +216,9 @@ t_error		create_new_list_element(t_lstd **element, t_env_arg *dict);
 t_error		new_fd(t_fd **fd);
 t_error		new_cmd(t_cmd **cmd);
 t_error		new_mini_shell(t_mini_shell **ms);
-t_error		create_new_dict_element(t_env_arg **env_dict);
+t_error		new_env_arg(t_env_arg **env_dict);
+
+// DICT UTILS //////////////////////////////////////////////////////////////////
 t_error		fill_dict_element(t_env_arg **dict, char *key, char *value);
 t_error		fill_refreshed_env(t_lstd *current, char **str, int which_env);
 

@@ -122,7 +122,7 @@ t_error	add_in_classic_env(t_mini_shell *ms, char *key, char *new_value)
 	t_env_arg		*dict;
 	t_lstd			*element;
 
-	if (create_new_dict_element(&dict) == MALLOC_ERROR)
+	if (new_env_arg(&dict) == MALLOC_ERROR)
 		return (MALLOC_ERROR);
 	if (fill_dict_element(&dict, key, new_value) == MALLOC_ERROR)
 		return (free(dict), MALLOC_ERROR);
@@ -139,7 +139,7 @@ t_error	add_in_export_env(t_mini_shell *ms, char *key, char *new_value, int whic
 	t_env_arg		*dict;
 	t_lstd			*element;
 
-	if (create_new_dict_element(&dict) == MALLOC_ERROR)
+	if (new_env_arg(&dict) == MALLOC_ERROR)
 		return (MALLOC_ERROR);
 	if (fill_dict_element(&dict, key, new_value) == MALLOC_ERROR)
 		return (free(dict), MALLOC_ERROR);

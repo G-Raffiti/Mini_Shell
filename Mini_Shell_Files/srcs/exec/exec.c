@@ -177,11 +177,9 @@ void	wait_exit_status(t_lstd *current)
 t_error	exec_cmds(t_mini_shell *ms)
 {
 	t_lstd	*current;
-	int		save_in;
-	int		save_out;
 
-	save_in = safe_dup(ms, STDIN_FILENO, "exec: exec");
-	save_out = safe_dup(ms, STDOUT_FILENO, "exec: exec");
+	ms->stds[0] = safe_dup(ms, STDIN_FILENO, "exec: exec");
+	ms->stds[1] = safe_dup(ms, STDOUT_FILENO, "exec: exec");
 	current = ft_lstd_first(ms->cmds);
 	if (!current->previous && !current->next)
 		exec_one(ms, get(current));
@@ -198,7 +196,7 @@ t_error	exec_cmds(t_mini_shell *ms)
 	}
 	close(STDIN_FILENO);
 	wait_exit_status(current);
-	safe_dup2(ms, save_in, STDIN_FILENO, "exec: exec");
-	safe_dup2(ms, save_out, STDOUT_FILENO, "exec: exec");
+	safe_dup2(ms, ms->stds[0], STDIN_FILENO, "exec: exec");
+	safe_dup2(ms, ms->stds[1], STDOUT_FILENO, "exec: exec");
 	return (SUCCESS);
 }
