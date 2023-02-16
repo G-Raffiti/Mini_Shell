@@ -5,18 +5,17 @@
 # include "../../Lib_FT/incs/libft.h"
 # include "error.h"
 # include "debug.h"
-# include <errno.h>
-# include <signal.h>
-# define PROMPT "ms "
-/////		IDIENTIFIER EXPORT /////
+/// IDIENTIFIER EXPORT /////////////////////////////////////////////////////////
 # define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n _"
 # define INV_ID_EXPORT	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n ?"
-# define PWD_PATH_SIZE 4096
 
+/// DEFINE /////////////////////////////////////////////////////////////////////
+# define PWD_PATH_SIZE 4096
+# define PROMPT "ms "
+
+/// ENUMS //////////////////////////////////////////////////////////////////////
 # ifndef T_ERROR
 #  define T_ERROR
-
-
 
 typedef enum e_error
 {
@@ -38,9 +37,6 @@ typedef enum e_bool
 
 # endif
 
-
-
-/////////////////////////////////////
 typedef enum e_chevron
 {
 	ERROR_CHT,
@@ -50,6 +46,7 @@ typedef enum e_chevron
 	APPEND_CHT,
 }	t_chevron;
 
+/// STRUCTURES /////////////////////////////////////////////////////////////////
 typedef struct s_fd
 {
 	int				fd;
@@ -74,6 +71,7 @@ typedef struct s_cmd
 	t_fd			*output;
 	t_bool			is_builtin;
 	t_bool			is_valid;
+	t_bool			need_fork;
 }					t_cmd;
 
 typedef struct s_mini_shell
@@ -87,13 +85,6 @@ typedef struct s_mini_shell
 	int				pipe[2];
 	t_bool 			exported;
 }					t_mini_shell;
-
-#ifndef G_EXIT_CODE
-#define G_EXIT_CODE
-
-extern int	g_exit_code;
-
-#endif
 
 /******************************************************************************/
 /********************************   ENV   *************************************/
@@ -112,22 +103,38 @@ t_error		add_in_chosen_env(t_mini_shell *ms, char *key, char *value, int which_e
 /*******************************   EXEC   *************************************/
 /******************************************************************************/
 
-// ENV_BUILTIN /////////////////////////////////////////////////////////////////
-void		env(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
-
 // EXEC ////////////////////////////////////////////////////////////////////////
 t_error		exec_cmds(t_mini_shell *ms);
-t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
-
-// EXPORT_BUILTIN //////////////////////////////////////////////////////////////
-t_error		ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 
 // SIGNALS /////////////////////////////////////////////////////////////////////
 void		set_interactiv_signals();
 void		set_exec_signals();
 
+// ENV_BUILTIN /////////////////////////////////////////////////////////////////
+t_error		env(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
+
+// EXPORT_BUILTIN //////////////////////////////////////////////////////////////
+t_error		ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
+
 // UNSET_BUILTIN ///////////////////////////////////////////////////////////////
 t_error		unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
+
+/******************************************************************************/
+/*******************************   BUILTIN   **********************************/
+/******************************************************************************/
+
+// BUILTIN /////////////////////////////////////////////////////////////////////
+t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd, t_bool in_pipe);
+
+// BUILTIN ERRORS //////////////////////////////////////////////////////////////
+void		builtin_error_env(char *arg, int error_code, char *msg);
+void		builtin_error_export(char *arg, int error_code, char *msg);
+
+// BUILTINS FUNCTIONS //////////////////////////////////////////////////////////
+t_error		ft_cd(t_mini_shell *ms, t_cmd *cmd);
+t_error		ft_echo(t_mini_shell *ms, t_cmd *cmd);
+t_error		ft_exit(t_mini_shell *ms);
+t_error		ft_pwd(void);
 
 /******************************************************************************/
 /*******************************   PARSING   **********************************/
@@ -168,9 +175,6 @@ t_error		open_files(t_mini_shell *ms, t_cmd *cmd);
 /******************************************************************************/
 /*******************************   UTILS   ************************************/
 /******************************************************************************/
-
-// BUILTIN /////////////////////////////////////////////////////////////////////
-t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 
 // CHECK_FUNC //////////////////////////////////////////////////////////////////
 int			valid_id_dollars(char c);
@@ -224,20 +228,16 @@ int			safe_dup(t_mini_shell *ms, int std, char *msg);
 
 /*\\\\\\\\\\\\\\\\\\\\\\\\\\ OTHERS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
 
-// EXIT ////////////////////////////////////////////////////////////////////////
+// EXIT CODE ///////////////////////////////////////////////////////////////////
 int			get_exit_code(void);
 void		set_exit_code(int value);
-t_error		exit_malloc(t_mini_shell *mini_shell, char *msg);
+
+// EXIT ////////////////////////////////////////////////////////////////////////
+int			end_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg);
+t_error		exit_malloc(t_mini_shell *ms, char *msg);
 t_error		exit_end_program(t_mini_shell *ms);
 void		exit_error(t_mini_shell *ms, int error_code, char *msg);
 void		exit_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg);
-
-// BUILTIN ERRORS //////////////////////////////////////////////////////////////
-void		builtin_error_env(char *arg, int error_code, char *msg);
-void		builtin_error_export(char *arg, int error_code, char *msg);
-
-// EXEC - PWD - BUILTIN ////////////////////////////////////////////////////////
-t_error		ft_pwd(void);
 
 // TEST ////////////////////////////////////////////////////////////////////////
 t_bool		debug_mod(void);

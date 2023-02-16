@@ -94,10 +94,11 @@ t_error	fill_cmds(t_mini_shell *ms, char **error_msg, int *code_error)
 		if (get_cmd(get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		debug(1, "get_cmd"GREEN" DONE "GREY"| "WHITE);
-		if (get_path(ms, get(current)) == MALLOC_ERROR)
+		set_builtin(get(current));
+		if (!get(current)->is_builtin && get_path(ms, get(current)) == \
+										MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		debug(1, "get_path"GREEN" DONE "GREY"| "WHITE);
-		set_builtin(get(current));
 		current = current->next;
 	}
 	return (SUCCESS);

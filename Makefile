@@ -23,6 +23,13 @@ FILE_LIB =		./Lib_FT/incs/libft.h \
 				./Lib_List_Double/incs/ft_lstd.h
 
 FILES =			\
+				builtin/builtin \
+				builtin/builtin_errors \
+				builtin/ft_cd \
+				builtin/ft_echo \
+				builtin/ft_exit \
+				builtin/ft_pwd \
+				\
 				debug/debug \
 				\
 				env/env \
@@ -31,7 +38,6 @@ FILES =			\
 				exec/exec \
 				exec/export_builtin \
 				exec/env_builtin \
-				exec/pwd_builtin \
 				exec/unset_builtin \
 				exec/signals \
 				\
@@ -52,10 +58,7 @@ FILES =			\
 				utils/list_cmd_utils \
 				utils/new_struct \
 				utils/safe_functions \
-				utils/builtin \
 				utils/check_functions \
-				\
-				builtin_errors \
 				\
 				exit \
 				exit_code \
@@ -92,6 +95,7 @@ $(PATH_OBJ)%.o:	$(PATH_SRC)%.c $(FILES_INC) $(FILE_LIB)
 
 $(PATH_OBJ):
 				@mkdir $@
+				@mkdir $(PATH_OBJ)/builtin
 				@mkdir $(PATH_OBJ)/debug
 				@mkdir $(PATH_OBJ)/env
 				@mkdir $(PATH_OBJ)/exec

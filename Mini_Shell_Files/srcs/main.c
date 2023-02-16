@@ -10,35 +10,22 @@ static void	loop(t_mini_shell *ms)
 {
 	char	*line;
 
+	line = NULL;
 	while (TRUE)
 	{
+		clear_cmds(&(ms->cmds), free_cmd);
+		line = ft_free(line);
 		line = read_line();
 		if (!line)
 			return;
-
 		if (is_empty_line(line))
-		{
-			line = ft_free(line);
 			continue;
-		}
 		debug(3, WHITE"line"GREY" = ["WHITE, line,GREY"] | "WHITE);
 		if (parse_line(ms, line) == ERROR)
-		{
-			clear_cmds(&(ms->cmds), free_cmd);
-			line = ft_free(line);
 			continue;
-		}
 		debug_all_cmds(ms);
-		if (ft_str_cmp("exit", get(ms->cmds)->cmd[0]) == 0)
-		{
-			line = ft_free(line);
-			clear_cmds(&(ms->cmds), free_cmd);
-			exit_end_program(ms);
-		}
 		set_exit_code(0);
 		exec_cmds(ms);
-		clear_cmds(&(ms->cmds), free_cmd);
-		line = ft_free(line);
 	}
 }
 

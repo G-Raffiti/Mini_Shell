@@ -2,7 +2,7 @@
 // Created by rbonneva on 06/02/23.
 //
 
-#include "../../incs/mini_shell.h"
+#include "mini_shell.h"
 
 t_error	ft_pwd(void)
 {

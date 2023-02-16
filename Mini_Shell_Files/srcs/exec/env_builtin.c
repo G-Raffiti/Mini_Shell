@@ -19,7 +19,7 @@ int print_error_env(t_mini_shell *ms, char *first_arg, int in_pipe)
 	return (1);
 }
 
-void	env(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
+t_error	env(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 {
 	int	i;
 	int	j;
@@ -28,7 +28,7 @@ void	env(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 	i = -1;
 	error = print_error_env(ms, cmd->cmd[1], in_pipe);
 	if (cmd->cmd[1] && error == 1)
-		return ;
+		return (ERROR);
 	else if (error == 2)
 	{
 		while (ms->env[++i])
@@ -42,4 +42,5 @@ void	env(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 			write(STDOUT_FILENO, "\n", 1);
 		}
 	}
+	return (SUCCESS);
 }

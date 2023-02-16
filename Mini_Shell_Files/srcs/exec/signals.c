@@ -4,6 +4,7 @@
 
 #include "../../incs/mini_shell.h"
 # include <readline/readline.h>
+#include <signal.h>
 
 void	interactiv_handler(int signum)
 {

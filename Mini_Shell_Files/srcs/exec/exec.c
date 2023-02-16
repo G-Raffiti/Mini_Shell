@@ -31,26 +31,37 @@ static t_error permission_denied(t_mini_shell *ms, t_cmd *cmd)
 
 static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 {
+	t_error exit_status;
+
 	if (!cmd->is_builtin)
 		execve(cmd->path, cmd->cmd, ms->env);
 	else
 	{
-		exec_builtin(ms, cmd, 1);
-		exit(0);
+		exit_status = exec_builtin(ms, cmd, TRUE);
+		if (exit_status != MALLOC_ERROR)
+			exit(get_exit_code());
+		else
+			exit_malloc(ms, "execve_cmd");
 	}
 	exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
 }
 
 static void	exec_one(t_mini_shell *ms, t_cmd *one)
 {
+	t_error exit_status;
+
 	if (permission_denied(ms, one) == ERROR)
 		return ;
 	if (one->input->fd > 0)
 		safe_dup2(ms, one->input->fd, STDIN_FILENO, "exec_one");
-	if (one->is_builtin)
+	if (one->is_builtin && !one->need_fork)
 	{
-		exec_builtin(ms, one, 0);
-		return ;//TODO : check exit properly
+		exit_status = exec_builtin(ms, one, TRUE);
+		if (exit_status == MALLOC_ERROR)
+			exit_malloc(ms, "execve_cmd");
+		else if (exit_status == ERROR)
+			set_exit_code(end_child(ms, one, 127, COMMAND_NOT_FOUND));
+		return ;
 	}
 	set_exec_signals();
 	safe_fork(ms, one, "exec_one");
@@ -141,6 +152,7 @@ void	wait_exit_status(t_lstd *current)
 	int		wstatus;
 	int		exit_status;
 
+	exit_status = get_exit_code();
 	current = ft_lstd_first(current);
 	while (current)
 	{

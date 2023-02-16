@@ -27,18 +27,19 @@ void	change_value_in_env(t_mini_shell *ms, char *key, char *value)
 	//  'key'='value'
 }
 
-void	ft_cd(t_mini_shell *ms, t_cmd *cmd)
+t_error	ft_cd(t_mini_shell *ms, t_cmd *cmd)
 {
 	char *path;
 
 	if (cmd->cmd[1] && cmd->cmd[2])
-		return (exit_child(ms, cmd, 2, "to many arguments\n"));
+		return (end_child(ms, cmd, 2, "to many arguments\n"));
 	if (!cmd->cmd[1] || ft_str_cmp(cmd->cmd[1], "~") == 0)
 		path = get_env_value(ms, "HOME");
 	else
 		path = cmd->cmd[1];
 	if (!path)
-		return (exit_child(ms, cmd, 2, "path parse error\n"));
+		return (end_child(ms, cmd, 2, "path parse error\n"));
 	if (chdir(path) == 0)
 		change_value_in_env(ms, "PWD", path);
+	return (SUCCESS);
 }

@@ -54,6 +54,8 @@ void	debug_cmd(t_cmd *cmd)
 		cmd->output->fd);
 	is_valid = cmd->is_valid ? GREEN"Yes"GREY : RED"No"GREY;
 	printf(WHITE"IS_VALID? %s | ", is_valid);
+	is_valid = cmd->is_builtin ? GREEN"Yes"GREY : RED"No"GREY;
+	printf(WHITE"IS_BUILTIN? %s | ", is_valid);
 	printf(WHITE"RAW_CMD: "GREY"["YELLOW"%s"GREY"] | ", cmd->raw_cmd);
 	printf(WHITE"PARSED_CMD: "GREY);
 	i = 0;

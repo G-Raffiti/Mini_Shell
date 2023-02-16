@@ -2,7 +2,7 @@
 // Created by aurel on 2/5/23.
 //
 
-#include "../incs/mini_shell.h"
+#include "mini_shell.h"
 
 void	builtin_error_env(char *arg, int error_code, char *msg)
 {
