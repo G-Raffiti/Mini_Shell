@@ -21,9 +21,10 @@ t_error	fill_paths(t_mini_shell *ms, char *full_path)
 		trunc_path = ft_substr(full_path, start, char_pos - start);
 		if (!trunc_path)
 			return (MALLOC_ERROR);
-		ms->paths[nbr_path++] = ft_strjoin(trunc_path, "/");
+		ms->paths[nbr_path] = ft_strjoin(trunc_path, "/");
 		if (!ms->paths)
 			return (free(trunc_path), MALLOC_ERROR);
+		nbr_path++;
 	}
 	return (SUCCESS);
 }
