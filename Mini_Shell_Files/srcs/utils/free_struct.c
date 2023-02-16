@@ -37,6 +37,8 @@ void	*free_cmd(t_cmd *cmd)
 		return (NULL);
 	if (cmd->raw_cmd)
 		cmd->raw_cmd = ft_free(cmd->raw_cmd);
+	if (cmd->is_dollar)
+		cmd->is_dollar = ft_free(cmd->is_dollar);
 	if (cmd->path)
 		cmd->path = ft_free(cmd->path);
 	if (cmd->cmd)
@@ -49,13 +51,24 @@ void	*free_cmd(t_cmd *cmd)
 	return (NULL);
 }
 
+void	*free_dict(void *pt)
+{
+	ft_free(get_env_dict((t_env_arg*)pt)->key);
+	ft_free(get_env_dict((t_env_arg*)pt)->value);
+	ft_free((t_env_arg*)pt);
+	return (NULL);
+}
+
 void	*free_mini_shell(t_mini_shell *mini_shell)
 {
 	if (!mini_shell)
 		return (NULL);
 	if (mini_shell->env)
 		mini_shell->env = free_split(mini_shell->env);
-	ft_lstd_clear(&mini_shell->env_dict, ft_free);
+	if (mini_shell->env_sort)
+		mini_shell->env = free_split(mini_shell->env_sort);
+	ft_lstd_clear(&mini_shell->env_dict, free_dict);
+	ft_lstd_clear(&mini_shell->env_sort_dict, free_dict);
 	if (mini_shell->paths)
 		mini_shell->paths = free_split(mini_shell->paths);
 	clear_cmds(&mini_shell->cmds, free_cmd);
