@@ -1,23 +1,16 @@
 // created by aurel
 
-#include "mini_shell.h"
+#include "../../incs/mini_shell.h"
 
 //TODO : export -> Attention export sans "=" peut buger
 void	display_export(t_mini_shell *ms)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (ms->env_sort[i])
 	{
-		j = 0;
-		while (ms->env_sort[i][j])
-		{
-			write(STDOUT_FILENO, &(ms->env_sort)[i][j], 1);
-			j++;
-		}
-		write(STDOUT_FILENO, "\n", 1);
+		printf("%s\n", ms->env_sort[i]);
 		i++;
 	}
 }

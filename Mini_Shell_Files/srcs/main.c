@@ -43,7 +43,7 @@ int	main(int argc, char **argv, char **env)
 	if (get_export_env(ms) == MALLOC_ERROR)
 		exit_malloc(ms, "main: get_export_env");
 	get_all_paths(ms, ms->env_dict);
-	debug_mini_shell(ms);
+	//debug_mini_shell(ms);
 	loop(ms);
 	exit_end_program(ms);
 }
