@@ -67,7 +67,6 @@ typedef struct s_cmd
 {
 	int				pid;
 	char			*raw_cmd;
-	t_bool			*is_dollar; // TODO check utility
 	char			*path;
 	char			**cmd;
 	t_fd			*input;
@@ -87,7 +86,7 @@ typedef struct s_mini_shell
 	t_lstd			*cmds;
 	int				pipe[2];
 	int				stds[2];
-	t_bool 			exported; // TODO check if better way ? static ?
+	t_bool 			exported;
 }					t_mini_shell;
 
 /******************************************************************************/
