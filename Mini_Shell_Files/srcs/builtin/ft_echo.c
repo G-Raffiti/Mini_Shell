@@ -4,6 +4,7 @@
 
 #include "../../incs/mini_shell.h"
 
+//TODO: echo -> join args and test if the prompt is printed
 t_bool is_n(char *str)
 {
 	if (str[0] != '-' && (!str[1] || str[1] != 'n'))

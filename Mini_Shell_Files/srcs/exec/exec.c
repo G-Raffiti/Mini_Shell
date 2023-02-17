@@ -43,6 +43,9 @@ static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 		else
 			exit_malloc(ms, "execve_cmd");
 	}
+	//TODO: " / " = bash: /: Is a directory error '126'
+	//TODO: "./ls" = bash: /: No such file or directory error '127'
+	//TODO: "." = bash: .: filename argument required error '2'
 	exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
 }
 
@@ -147,6 +150,8 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 	execve_cmd(ms, last);
 }
 
+//TODO: builtin -> pb : prompt not waiting for print builtin | Wait PID a
+// gerer ?
 void	wait_exit_status(t_lstd *current)
 {
 	int		wstatus;
@@ -156,7 +161,7 @@ void	wait_exit_status(t_lstd *current)
 	current = ft_lstd_first(current);
 	while (current)
 	{
-		if (get(current)->is_builtin)
+		if (!get(current)->pid)
 		{
 			current = current->next;
 			continue;

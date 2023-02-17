@@ -89,12 +89,12 @@ void	debug_mini_shell(t_mini_shell *ms)
 {
 	if (!g_debug)
 		return ;
-	printf("env %p\n", ms->env);
+	printf("ft_env %p\n", ms->env);
 	if (ms->env)
 	{
 		int i = -1;
 		while (ms->env[++i])
-			printf("ms->env line %d: - %s\n", i, ms->env[i]);
+			printf("ms->ft_env line %d: - %s\n", i, ms->env[i]);
 	}
 	printf("\nenv_dict %p\n", ms->env_dict);
 	if (ms->env_dict)

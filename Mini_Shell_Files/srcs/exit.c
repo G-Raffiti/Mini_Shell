@@ -34,7 +34,7 @@ void	exit_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg)
 		exit_error(ms, errno, msg);
 	}
 	set_exit_code(error_code);
-	printf("%s: %s\n", cmd->cmd[0], msg);
+	printf("%s: %s", cmd->cmd[0], msg);
 	safe_dup2(ms, save_out, STDOUT_FILENO, "exec_child");
 	exit(error_code);
 }

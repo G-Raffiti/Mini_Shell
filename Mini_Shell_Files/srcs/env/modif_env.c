@@ -15,7 +15,7 @@ t_error	change_value_envs(t_env_arg *content, char *new_value);
  * @param ms
  * @param key
  * @param new_value
- * @param which_env \n env : 0 \n export_env : 1 \n both : 2
+ * @param which_env \n ft_env : 0 \n export_env : 1 \n both : 2
  * @return t_error, as always >>o\<\<
  */
 t_error	add_or_replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env)
@@ -47,13 +47,13 @@ t_error	add_or_replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_valu
 }
 
 /**
- * \n Replace value by 'new_value in chosen env \n
+ * \n Replace value by 'new_value in chosen ft_env \n
  * You have to know if the key exist already
  * No both replacement is possible, do it again \>\>o\>\>
  * @param ms
  * @param content\\ dict here
  * @param new_value
- * @param which_env \n env : 0 \n export_env : 1
+ * @param which_env \n ft_env : 0 \n export_env : 1
  * @return t_error
  */
 t_error	replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env)
@@ -92,7 +92,7 @@ t_error	replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int 
  * @param ms
  * @param key
  * @param new_value
- * @param which_env \n 0 : env \n 1 : export_env \n 2 : both \n 3 : for export_env, if 'export ARG' (without '=')
+ * @param which_env \n 0 : ft_env \n 1 : export_env \n 2 : both \n 3 : for export_env, if 'export ARG' (without '=')
  * @return t_error
  */
 t_error	add_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env)
