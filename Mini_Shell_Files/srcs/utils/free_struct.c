@@ -37,8 +37,6 @@ void	*free_cmd(t_cmd *cmd)
 		return (NULL);
 	if (cmd->raw_cmd)
 		cmd->raw_cmd = ft_free(cmd->raw_cmd);
-	if (cmd->is_dollar)
-		cmd->is_dollar = ft_free(cmd->is_dollar);
 	if (cmd->path)
 		cmd->path = ft_free(cmd->path);
 	if (cmd->cmd)

@@ -199,31 +199,12 @@ char	**ft_strtab_dup(char **tab_to_dup)
 	return (tab);
 }
 
-t_error	create_token_and_final_raw(t_cmd **cmd, int final_len)
+t_error	create_final_raw(t_cmd **cmd, int final_len)
 {
-	int i;
-
-	i = -1;
-	(*cmd)->is_dollar = ft_calloc(sizeof(t_bool), final_len);
-	if (!(*cmd)->is_dollar)
-		return (MALLOC_ERROR);
-	while (++i < final_len)
-		(*cmd)->is_dollar[i] = FALSE;
 	(*cmd)->raw_cmd = ft_free((*cmd)->raw_cmd);
 	(*cmd)->raw_cmd = ft_calloc(sizeof(char), final_len);
 	if (!(*cmd)->raw_cmd)
 		return (MALLOC_ERROR);
-	return (SUCCESS);
-}
-
-t_error	fill_token(t_cmd *cmds, char **splited_raw, int start_token, int str_pos)
-{
-	int	i;
-
-	i = -1;
-	while (splited_raw[str_pos][++i])
-		cmds->is_dollar[start_token + i] = TRUE;
-
 	return (SUCCESS);
 }
 
@@ -254,24 +235,8 @@ t_error	fill_final_raw(t_cmd *cmds, char **splited_raw)
 	return (SUCCESS);
 }
 
-t_error	fill_token_and_final_raw(t_cmd *cmds, char **dup_splited_raw, \
-											char **splited_raw)
+t_error	fill_end_raw(t_cmd *cmds, char **splited_raw)
 {
-	int			str_pos;
-	int 		c_pos;
-	int 		start_token;
-
-	str_pos = -1;
-	c_pos = 0;
-	start_token = 0;
-	while (dup_splited_raw[++str_pos])
-	{
-		if (str_pos != 0)
-			start_token += (int)ft_strlen(splited_raw[str_pos]);
-		if ((dup_splited_raw)[str_pos][c_pos] == '$' && dup_splited_raw[str_pos][c_pos + 1] && \
-            valid_id_dollars(dup_splited_raw[str_pos][c_pos + 1]))
-			fill_token(cmds, splited_raw, start_token, str_pos);
-	}
 	if (fill_final_raw(cmds, splited_raw) == MALLOC_ERROR)
 		return (MALLOC_ERROR);
 	return  (SUCCESS);
@@ -280,7 +245,6 @@ t_error	fill_token_and_final_raw(t_cmd *cmds, char **dup_splited_raw, \
 t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 {
 	char	**splited_raw;
-	char	**dup_splited_raw;
 	int		split_len;
 	int		final_len;
 
@@ -293,16 +257,12 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 		return (MALLOC_ERROR);
 	if (fill_split_args(cmds, &splited_raw) == MALLOC_ERROR)
 		return (free_split(splited_raw), MALLOC_ERROR);
-	dup_splited_raw = ft_strtab_dup(splited_raw);
-	if (!dup_splited_raw)
-		return (free_split(splited_raw), MALLOC_ERROR);
 	if (replace_in_split(ms, splited_raw, &final_len) == MALLOC_ERROR)
 		return (free_split(splited_raw), MALLOC_ERROR);
-	if (create_token_and_final_raw(&cmds, final_len) == MALLOC_ERROR)
+	if (create_final_raw(&cmds, final_len) == MALLOC_ERROR)
 		return (free_split(splited_raw), MALLOC_ERROR);
-	if (fill_token_and_final_raw(cmds, dup_splited_raw, splited_raw) \
-											== MALLOC_ERROR)
-		return (free_split(splited_raw), free_split(dup_splited_raw), MALLOC_ERROR);
+	if (fill_end_raw(cmds, splited_raw) == MALLOC_ERROR)
+		return (free_split(splited_raw), MALLOC_ERROR);
 	return(0);
 }
 

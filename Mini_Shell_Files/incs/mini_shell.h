@@ -67,7 +67,6 @@ typedef struct s_cmd
 {
 	int				pid;
 	char			*raw_cmd;
-	t_bool			*is_dollar; // TODO check utility
 	char			*path;
 	char			**cmd;
 	t_fd			*input;
