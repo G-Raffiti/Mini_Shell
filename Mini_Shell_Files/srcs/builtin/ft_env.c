@@ -11,7 +11,7 @@ int print_error_env(t_mini_shell *ms, char *first_arg, int in_pipe)
 	path = ft_lstd_find(ms->env_sort_dict, "PATH", find_in_dict_sorted);
 	if (path)
 		value = get_env_dict(path->content)->value;
-	if (!path || ft_str_cmp(value, "=\"\"") == 0 \
+	if (ft_str_cmp(value, "=\"\"") == 0 \
 				|| ft_str_cmp(value, "") == 0)
 		dprintf(2, "no such file or directory -> to set\n");//TODO : check with raph for ft_env if path NULL
 	else
