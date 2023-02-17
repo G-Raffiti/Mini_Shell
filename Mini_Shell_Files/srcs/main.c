@@ -6,12 +6,6 @@
 #include <string.h>
 #include "../incs/mini_shell.h"
 
-t_bool test = FALSE;
-t_bool test_mode()
-{
-	return (test);
-}
-
 static void	loop(t_mini_shell *ms)
 {
 	char	*line;
@@ -48,7 +42,7 @@ int	main(int argc, char **argv, char **env)
 	if (argc == 2 && ft_str_cmp(argv[1], "debug") == 0)
 		enable_debug();
 	if (argc == 2 && ft_str_cmp(argv[1], "test") == 0)
-		test = TRUE;
+		set_test_mode();
 	if (!test_mode())
 		printf("☠  ---Welcome to mini Hell--- ☠ \n");
 	if (new_mini_shell(&ms) == MALLOC_ERROR)
