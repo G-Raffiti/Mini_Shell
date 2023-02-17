@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 cd /Users
 cd '/////' 2>/dev/null
 cd "doesntexist"
@@ -38,6 +39,8 @@ echo | |
 >>echo>>
 |echo|
 | echo -n oui
+=======
+>>>>>>> main
 exit 0 0
 exit 42 42
 exit -42 -24
@@ -90,66 +93,3 @@ exit something somethingv2
 exit 42 42 42 42 42
 exit echo something
 exit exit
-env | grep "_="
-export | grep "SHLVL"
-export $?
-export TEST=
-export TEST=123
-export ___TEST=123
-export --TEST=123
-export TE\ST=100
-export -TEST=100
-export _TEST=100
-export | grep "SHLVL"
-export 1TEST=
-export TES=T=""
-export TES\\T=123
-export TES\$T=123
-export TES\\T
-export TES=T=123
-export -TEST=123
-export _TEST=123
-export TES_T=123
-export TEST_=123
-export TES$?T=123
-export ________=123
-export TEST+=100
-env | grep "_="
-env | grep "SHLVL"
-unset
-export TEST=100
-unset doesntexist
-unset PWD
-unset PWD
-unset OLDPWD
-unset PATH
-unset PATH
-unset PATH
-unset TES\\T
-unset TES.T
-unset TES+T
-unset TES=T
-unset TES}T
-unset TES{T
-unset TES-T
-unset -TEST
-unset _TEST
-unset TES_T
-unset TEST_
-unset TE*ST
-unset TES#T
-unset TES@T
-unset TES!T
-unset TES$?T
-unset ============
-unset +++++++
-unset ________
-unset export
-unset echo
-unset pwd
-unset cd
-unset unset
-unset sudo
-unset TES^T
-unset TES!T
-unset TES~T
