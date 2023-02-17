@@ -1,0 +1,163 @@
+cd /Users
+cd '/////' 2>/dev/null
+cd "$PWD/file_tests"
+cd "doesntexist"
+cd "doesntexist" 2>/dev/null
+cd "wtf" 2>/dev/null
+cd ?
+cd +
+cd _
+cd woof
+cd bark bark
+cd $PWD/file_tests
+cd $OLDPWD/something
+unset
+export TEST=100
+unset doesntexist
+unset PWD
+unset PWD
+unset OLDPWD
+unset PATH
+unset PATH
+unset PATH
+unset TES\\T
+unset TES.T
+unset TES+T
+unset TES=T
+unset TES}T
+unset TES{T
+unset TES-T
+unset -TEST
+unset _TEST
+unset TES_T
+unset TEST_
+unset TE*ST
+unset TES#T
+unset TES@T
+unset TES!T
+unset TES$?T
+unset ============
+unset +++++++
+unset ________
+unset export
+unset echo
+unset pwd
+unset cd
+unset unset
+unset sudo
+unset TES^T
+unset TES!T
+unset TES~T
+env | grep "_="
+env | grep "SHLVL"
+whoami | grep $USER
+env | grep "_="
+export | grep "SHLVL"
+export $?
+export TEST=
+export TEST=123
+export ___TEST=123
+export --TEST=123
+export TE\ST=100
+export -TEST=100
+export _TEST=100
+export | grep "SHLVL"
+export 1TEST=
+export TES=T=""
+export TES\\T=123
+export TES\$T=123
+export TES\\T
+export TES=T=123
+export -TEST=123
+export _TEST=123
+export TES_T=123
+export TEST_=123
+export TES$?T=123
+export ________=123
+export TEST+=100
+| test
+echo > <
+echo | |
+<
+|
+| | |
+||||||||
+>
+>>>>>>>>
+<<<<<<<<<
+> > > >
+>> >> >> >>
+~
+<<
+.
+/
+>echo>
+<echo<
+>>echo>>
+|echo|
+| echo -n oui
+echo ~
+echo ~/123
+echo ~/123/456
+echo $USER
+echo \" \" \" \"\"\" \'\'\'
+echo $USER
+echo $USER$12USER$USER=4$USER12
+echo $USER $123456789USER $USER123456789
+echo $USER $9999USER $8888USER $7777USER
+echo "$9USER" "'$USER=12$SOMETHING'"
+echo $PWD/file
+echo "$PWD/file"
+echo $PWD
+exit 0 0
+exit 42 42
+exit -42 -24
+exit 42
+exit 42 53 68
+exit 259
+exit -12030
+exit --1239312
+exit ++++1203020103
+exit +0
+exit ++++++0
+exit -----0
+exit azerty
+exit kewkwqke
+exit a
+exit z
+exit "1"
+exit "2"
+exit "+102"
+exit "1230"
+exit "+++1230"
+exit "1"23
+exit "2"32"32"
+exit "'42'"
+exit '42'"42"42
+exit +'42'"42"42
+exit -'42'"42"42
+exit 9223372036854775807
+exit 9223372036854775808
+exit -4
+exit wrong
+exit wrong_command
+exit something
+exit 1
+exit -1
+exit 42
+exit 0
+exit --000
+exit +++++++000
+exit ++++3193912939
+exit ---31232103012
+exit "something"
+exit q
+exit help
+exit export
+exit echo
+exit cd ..
+exit 0 0
+exit something somethingv2
+exit 42 42 42 42 42
+exit echo something
+exit exit
