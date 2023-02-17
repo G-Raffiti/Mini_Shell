@@ -35,6 +35,18 @@ static void	loop(t_mini_shell *ms)
 	}
 }
 
+int ft_launch_minishell(char *line, t_mini_shell *ms)
+{
+	clear_cmds(&(ms->cmds), free_cmd);
+	if (is_empty_line(line))
+		return get_exit_code();
+	if (parse_line(ms, line) == ERROR)
+		return get_exit_code();
+	set_exit_code(0);
+	exec_cmds(ms);
+	return get_exit_code();
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_mini_shell	*ms;
@@ -43,8 +55,8 @@ int	main(int argc, char **argv, char **env)
 		enable_debug();
 	if (argc == 2 && ft_str_cmp(argv[1], "test") == 0)
 		set_test_mode();
-	if (!test_mode())
-		printf("☠  ---Welcome to mini Hell--- ☠ \n");
+	//if (!test_mode())
+	//	printf("☠  ---Welcome to mini Hell--- ☠ \n");
 	if (new_mini_shell(&ms) == MALLOC_ERROR)
 		exit_malloc(ms, "main: new_mini_shell");
 	if (get_env(ms, env) == MALLOC_ERROR)
@@ -52,6 +64,12 @@ int	main(int argc, char **argv, char **env)
 	if (get_export_env(ms) == MALLOC_ERROR)
 		exit_malloc(ms, "main: get_export_env");
 	get_all_paths(ms, ms->env_dict);
+
+	if (argc >= 3 && !ft_strncmp(argv[1], "-c", 3))
+	{
+		int exit_status = ft_launch_minishell(argv[2], ms);
+		exit(exit_status);
+	}
 	loop(ms);
 	exit_end_program(ms);
 }

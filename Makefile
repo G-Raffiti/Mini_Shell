@@ -4,7 +4,7 @@
 #								FILES									#
 #***********************************************************************#
 
-NAME =			ms.out
+NAME =			minishell
 CC =			gcc
 CC_FLAGS =		-Wall -Wextra -Werror -gdwarf-4 -g #-fsanitize=address
 
