@@ -2,9 +2,9 @@
 // Created by aurel on 2/9/23.
 //
 
-#include "mini_shell.h"
+#include "../../incs/mini_shell.h"
 
-t_error	ft_unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe)//TODO : reset path if unset 'PATH'. and ft_unset all builtin
+t_error	ft_unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 {
 	t_lstd	*current;
 	t_lstd	*current_sorted;

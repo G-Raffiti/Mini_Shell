@@ -2,7 +2,7 @@
 
 #include "../../incs/mini_shell.h"
 
-//TODO : export -> Attention export sans "=" peut buger
+//TODO : export -> Attention export sans "=" peut buger (Pas reussi a reproduire, a surveiller)
 void	display_export(t_mini_shell *ms)
 {
 	int	i;

@@ -168,7 +168,6 @@ t_error	replace_in_split(t_mini_shell *ms, char **splited_raw, int *final_len)
 	c_pos = 0;
 	while (splited_raw[++str_pos])
 	{
-		dprintf(2, "i = %s\n", splited_raw[2]);
 		if (splited_raw[str_pos][c_pos] && splited_raw[str_pos][c_pos + 1] && (splited_raw)[str_pos][c_pos] == '$' &&
 				valid_id_dollars(splited_raw[str_pos][c_pos + 1]))
 		{

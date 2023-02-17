@@ -161,8 +161,6 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 	execve_cmd(ms, last);
 }
 
-//TODO: builtin -> pb : prompt not waiting for print builtin | Wait PID a
-// gerer ?
 void	wait_exit_status(t_lstd *current)
 {
 	int		wstatus;

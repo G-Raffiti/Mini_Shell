@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 cd /Users
 cd '/////' 2>/dev/null
 cd "doesntexist"
@@ -15,8 +14,6 @@ echo ~/123
 echo ~/123/456
 echo \" \" \" \"\"\" \'\'\'
 echo $USER$12USER$USER=4$USER12
-echo $USER $123456789USER $USER123456789
-echo $USER $9999USER $8888USER $7777USER
 echo "$9USER" "'$USER=12$SOMETHING'"
 | test
 echo > <
@@ -39,8 +36,6 @@ echo | |
 >>echo>>
 |echo|
 | echo -n oui
-=======
->>>>>>> main
 exit 0 0
 exit 42 42
 exit -42 -24
@@ -93,3 +88,33 @@ exit something somethingv2
 exit 42 42 42 42 42
 exit echo something
 exit exit
+env | grep "_="
+export | grep "SHLVL"
+export $?
+export TEST=
+export TEST=123
+export ___TEST=123
+export --TEST=123
+export TE\ST=100
+export -TEST=100
+export _TEST=100
+export | grep "SHLVL"
+export 1TEST=
+export TES=T=""
+export TES\\T=123
+export TES\$T=123
+export TES\\T
+export TES=T=123
+export -TEST=123
+export _TEST=123
+export TES_T=123
+export TEST_=123
+export TES$?T=123
+export ________=123
+export TEST+=100
+env | grep "_="
+env | grep "SHLVL"
+unset
+export TEST=100
+unset TES;T
+unset -TEST
