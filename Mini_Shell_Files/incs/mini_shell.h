@@ -240,7 +240,7 @@ t_error		exit_end_program(t_mini_shell *ms);
 void		exit_error(t_mini_shell *ms, int error_code, char *msg);
 void		exit_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg);
 
-// TEST ////////////////////////////////////////////////////////////////////////
+// DEBUG ///////////////////////////////////////////////////////////////////////
 t_bool		debug_mod(void);
 void		enable_debug(void);
 void		debug(int ac, ...);
@@ -248,6 +248,10 @@ void		debug_cmd(t_cmd *cmd);
 void		debug_all_cmds(t_mini_shell *ms);
 void		debug_mini_shell(t_mini_shell *ms);
 void		debug_fd(t_mini_shell *ms, t_cmd *cmd);
+
+// TEST MODE ///////////////////////////////////////////////////////////////////
+t_bool		test_mode();
+void		set_test_mode();
 
 char		**ft_strtab_dup(char **tab_to_dup);
 

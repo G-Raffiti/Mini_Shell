@@ -34,6 +34,7 @@ FILES =			\
 				builtin/ft_unset \
 				\
 				debug/debug \
+				debug/test_mode \
 				\
 				env/env \
 				env/modif_env \
