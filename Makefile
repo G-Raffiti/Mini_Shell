@@ -29,6 +29,9 @@ FILES =			\
 				builtin/ft_echo \
 				builtin/ft_exit \
 				builtin/ft_pwd \
+				builtin/ft_export \
+				builtin/ft_env \
+				builtin/ft_unset \
 				\
 				debug/debug \
 				\
@@ -36,9 +39,6 @@ FILES =			\
 				env/modif_env \
 				\
 				exec/exec \
-				exec/export_builtin \
-				exec/env_builtin \
-				exec/unset_builtin \
 				exec/signals \
 				\
 				parsing/check_line \

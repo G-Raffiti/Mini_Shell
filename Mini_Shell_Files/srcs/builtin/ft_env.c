@@ -1,5 +1,5 @@
 
-#include "../../incs/mini_shell.h"
+#include "mini_shell.h"
 
 int print_error_env(t_mini_shell *ms, char *first_arg, int in_pipe)
 {
@@ -13,13 +13,13 @@ int print_error_env(t_mini_shell *ms, char *first_arg, int in_pipe)
 		value = get_env_dict(path->content)->value;
 	if (!path || ft_str_cmp(value, "=\"\"") == 0 \
 				|| ft_str_cmp(value, "") == 0)
-		dprintf(2, "no such file or directory -> to set\n");//TODO : check with raph for env if path NULL
+		dprintf(2, "no such file or directory -> to set\n");//TODO : check with raph for ft_env if path NULL
 	else
 		return (2);
 	return (1);
 }
 
-t_error	env(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
+t_error	ft_env(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 {
 	int	i;
 	int	j;

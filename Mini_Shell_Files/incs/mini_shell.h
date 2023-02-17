@@ -52,6 +52,9 @@ typedef struct s_fd
 	int				fd;
 	char			*name;
 	int				error;
+	// HEREDOC :
+	char			*limiter;
+	int				here_doc_pipe[2];
 }					t_fd;
 
 typedef struct s_env_arg
@@ -64,13 +67,13 @@ typedef struct s_cmd
 {
 	int				pid;
 	char			*raw_cmd;
-	t_bool			*is_dollar;
+	t_bool			*is_dollar; // TODO check utility
 	char			*path;
 	char			**cmd;
 	t_fd			*input;
 	t_fd			*output;
 	t_bool			is_builtin;
-	t_bool			is_valid;
+	t_bool			is_valid; //TODO => delete
 	t_bool			need_fork;
 }					t_cmd;
 
@@ -84,7 +87,7 @@ typedef struct s_mini_shell
 	t_lstd			*cmds;
 	int				pipe[2];
 	int				stds[2];
-	t_bool 			exported;
+	t_bool 			exported; // TODO check if better way ? static ?
 }					t_mini_shell;
 
 /******************************************************************************/
@@ -111,14 +114,6 @@ t_error		exec_cmds(t_mini_shell *ms);
 void		set_interactiv_signals();
 void		set_exec_signals();
 
-// ENV_BUILTIN /////////////////////////////////////////////////////////////////
-t_error		env(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
-
-// EXPORT_BUILTIN //////////////////////////////////////////////////////////////
-t_error		ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
-
-// UNSET_BUILTIN ///////////////////////////////////////////////////////////////
-t_error		unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 
 /******************************************************************************/
 /*******************************   BUILTIN   **********************************/
@@ -136,6 +131,9 @@ t_error		ft_cd(t_mini_shell *ms, t_cmd *cmd);
 t_error		ft_echo(t_mini_shell *ms, t_cmd *cmd);
 t_error		ft_exit(t_mini_shell *ms);
 t_error		ft_pwd(void);
+t_error		ft_env(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
+t_error		ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
+t_error		ft_unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 
 /******************************************************************************/
 /*******************************   PARSING   **********************************/

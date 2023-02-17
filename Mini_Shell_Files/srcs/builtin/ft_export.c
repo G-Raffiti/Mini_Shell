@@ -1,7 +1,8 @@
 // created by aurel
 
-#include "../../incs/mini_shell.h"
+#include "mini_shell.h"
 
+//TODO : export -> Attention export sans "=" peut buger
 void	display_export(t_mini_shell *ms)
 {
 	int	i;

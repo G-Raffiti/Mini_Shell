@@ -55,13 +55,13 @@ t_error	get_export_env(t_mini_shell *ms)
 	while (++key_index < ft_strlen_tab(ms->env))
 	{
 		if (new_env_arg(&env_sort_dict) == MALLOC_ERROR)
-			exit_malloc(ms, "env: new_env_arg");
+			exit_malloc(ms, "ft_env: new_env_arg");
 		if (get_keys(env_sort_dict, ms->env[key_index]) == MALLOC_ERROR)
-			exit_malloc(ms, "env: get_keys");
+			exit_malloc(ms, "ft_env: get_keys");
 		if (get_values(env_sort_dict, ms->env[key_index]) == MALLOC_ERROR)
-			exit_malloc(ms, "env: get_values");
+			exit_malloc(ms, "ft_env: get_values");
 		if (create_new_list_element(&current_sort, env_sort_dict) == MALLOC_ERROR)
-			exit_malloc(ms, "env: new_lstd");
+			exit_malloc(ms, "ft_env: new_lstd");
 		ft_lstd_push_back_elem(&ms->env_sort_dict, current_sort);
 	}
 	if (get_export_type(ms) == MALLOC_ERROR)
@@ -80,17 +80,17 @@ t_error	get_env(t_mini_shell *ms, char **env)
 
 	key_index = -1;
 	if (dup_env(ms, env) == MALLOC_ERROR)
-		exit_malloc(ms, "env: dup_env");
+		exit_malloc(ms, "ft_env: dup_env");
 	while (++key_index < ft_strlen_tab(env))
 	{
 		if (new_env_arg(&env_dict) == MALLOC_ERROR)
-			exit_malloc(ms, "env: new_env_arg");
+			exit_malloc(ms, "ft_env: new_env_arg");
 		if (get_keys(env_dict, env[key_index]) == MALLOC_ERROR)
-			exit_malloc(ms, "env: get_keys");
+			exit_malloc(ms, "ft_env: get_keys");
 		if (get_values(env_dict, env[key_index]) == MALLOC_ERROR)
-			exit_malloc(ms, "env: get_values");
+			exit_malloc(ms, "ft_env: get_values");
 		if (create_new_list_element(&current, env_dict) == MALLOC_ERROR)
-			exit_malloc(ms, "env: new_lstd");
+			exit_malloc(ms, "ft_env: new_lstd");
 		ft_lstd_push_back_elem(&ms->env_dict, current);
 	}
 	return (SUCCESS);
