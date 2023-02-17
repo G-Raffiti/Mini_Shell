@@ -1,2 +1,2 @@
+lsa: command not found
 exit code: 0
-lso: command not found

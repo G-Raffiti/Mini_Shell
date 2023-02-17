@@ -1,6 +1,8 @@
-1,2c1,2
+2c2
 < exit code: 0
-< cati: command not found
 ---
-> exit code: 1
-> 
+> exit code: 127
+2c2
+< exit code: 0
+---
+> exit code: 127
