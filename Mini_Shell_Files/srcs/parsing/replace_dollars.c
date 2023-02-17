@@ -71,11 +71,11 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 
 	while (raw_cmd[++i])
 	{
-		if (set_quote_state(raw_cmd[i], &quote) != '\'' && raw_cmd[i] == '$' &&
-			is_not_alpha(raw_cmd[i + 1]))
+		if (set_quote_state(raw_cmd[i], &quote) != '\'' && raw_cmd[i] == '$')
 		{
 			start_dol = i;
-			if (i != 0 && raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]) && prev_is_arg == 0)
+			if (i != 0 && raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]) && prev_is_arg == 0 && \
+                    is_not_alpha(raw_cmd[i + 1]))
 				start_dol = i;
 			else if (raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]))
 				start_dol = i;
@@ -168,7 +168,8 @@ t_error	replace_in_split(t_mini_shell *ms, char **splited_raw, int *final_len)
 	c_pos = 0;
 	while (splited_raw[++str_pos])
 	{
-		if (splited_raw[str_pos][c_pos + 1] && (splited_raw)[str_pos][c_pos] == '$' &&
+		dprintf(2, "i = %s\n", splited_raw[2]);
+		if (splited_raw[str_pos][c_pos] && splited_raw[str_pos][c_pos + 1] && (splited_raw)[str_pos][c_pos] == '$' &&
 				valid_id_dollars(splited_raw[str_pos][c_pos + 1]))
 		{
 			key = (&splited_raw[str_pos][c_pos]) + 1;
