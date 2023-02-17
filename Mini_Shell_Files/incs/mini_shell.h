@@ -128,7 +128,7 @@ void		builtin_error_export(char *arg, int error_code, char *msg);
 
 // BUILTINS FUNCTIONS //////////////////////////////////////////////////////////
 t_error		ft_cd(t_mini_shell *ms, t_cmd *cmd);
-t_error		ft_echo(t_mini_shell *ms, t_cmd *cmd);
+t_error		ft_echo(t_cmd *cmd);
 t_error		ft_exit(t_mini_shell *ms);
 t_error		ft_pwd(void);
 t_error		ft_env(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
@@ -252,6 +252,7 @@ void		debug_fd(t_mini_shell *ms, t_cmd *cmd);
 // TEST MODE ///////////////////////////////////////////////////////////////////
 t_bool		test_mode();
 void		set_test_mode();
+int			test_minishell(char *line, t_mini_shell *ms);
 
 char		**ft_strtab_dup(char **tab_to_dup);
 
