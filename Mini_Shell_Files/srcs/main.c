@@ -26,6 +26,12 @@ static void	loop(t_mini_shell *ms)
 		debug_all_cmds(ms);
 		set_exit_code(0);
 		exec_cmds(ms);
+		if (test_mode())
+		{
+			clear_cmds(&(ms->cmds), free_cmd);
+			line = ft_free(line);
+			exit(get_exit_code());
+		}
 	}
 }
 
@@ -35,7 +41,10 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc == 2 && ft_str_cmp(argv[1], "debug") == 0)
 		enable_debug();
-	printf("☠  ---Welcome to mini Hell--- ☠ \n");
+	if (argc == 2 && ft_str_cmp(argv[1], "test") == 0)
+		set_test_mode();
+	if (!test_mode())
+		printf("☠  ---Welcome to mini Hell--- ☠ \n");
 	if (new_mini_shell(&ms) == MALLOC_ERROR)
 		exit_malloc(ms, "main: new_mini_shell");
 	if (get_env(ms, env) == MALLOC_ERROR)
@@ -43,7 +52,6 @@ int	main(int argc, char **argv, char **env)
 	if (get_export_env(ms) == MALLOC_ERROR)
 		exit_malloc(ms, "main: get_export_env");
 	get_all_paths(ms, ms->env_dict);
-	//debug_mini_shell(ms);
 	loop(ms);
 	exit_end_program(ms);
 }

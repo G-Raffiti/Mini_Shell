@@ -1,8 +1,0 @@
-2c2
-< exit code: 0
----
-> exit code: 127
-2c2
-< exit code: 0
----
-> exit code: 127
