@@ -80,6 +80,25 @@ static t_chevron get_chevron_type(char *str)
 	return (type);
 }
 
+static char	*replace_dollar(t_mini_shell *ms, char **str)
+{
+	char *value;
+	char *key;
+	t_lstd *dict;
+
+	value = NULL;
+	if ((*str)[1] && **str == '$' && valid_id_dollars((*str)[1]))
+	{
+		key = (*str) + 1;
+		dict = ft_lstd_find(ms->env_dict, key, find_in_dict);
+		*str
+		if (dict)
+			value = ft_strdup(get_env_dict(dict->content)->value);
+		else
+			value = ft_strdup("");
+	}
+	return value;
+}
 static t_error extract_file_name(char *str, char *quote, char **file_name)
 {
 	char	*start;
@@ -97,6 +116,7 @@ static t_error extract_file_name(char *str, char *quote, char **file_name)
 	// TODO if file name start with a $ replace than check if it contains '
 	//  ' or '/' error "ambiguous redirect" and "Is a directory"
 	*file_name = ft_substr(start, 0, str - start);
+	*file_name = replace_dollar()
 	if (!*file_name)
 		return (MALLOC_ERROR);
 	if (*str && *str == *quote)

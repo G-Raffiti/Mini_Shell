@@ -85,14 +85,6 @@ t_error	fill_cmds(t_mini_shell *ms, char **error_msg, int *code_error)
 		replace_dollar_before_quotes(get(current));
 		if (replace_dollars(ms, get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
-		//if (is_empty_line(get(current)->raw_cmd))
-		//{
-		//	// TODO if a fd == -1 print No such file or directory
-		//	close(get(current)->input->fd);
-		//	close(get(current)->output->fd);
-		//	current = ft_lstd_remove_and_del(current, free_cmd_void);
-		//	continue;
-		//}
 		if (get_cmd(get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		debug(1, "get_cmd"GREEN" DONE "GREY"| "WHITE);

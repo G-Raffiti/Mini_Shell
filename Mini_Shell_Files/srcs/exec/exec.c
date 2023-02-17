@@ -13,16 +13,24 @@ static t_error permission_denied(t_mini_shell *ms, t_cmd *cmd)
 	if (cmd->input->fd == -1)
 	{
 		set_exit_code(cmd->input->error);
-		printf("%s: %s: %s\n", cmd->cmd[0], cmd->input->name,
-			   strerror(cmd->input->error));
+		if (!cmd->cmd)
+			printf("%s: %s\n", cmd->input->name,
+					strerror(cmd->input->error));
+		else
+			printf("%s: %s: %s\n", cmd->cmd[0], cmd->input->name,
+					strerror(cmd->input->error));
 		safe_close(ms, ms->pipe[1], "exec_first");
 		return (ERROR);
 	}
 	if (cmd->output->fd == -1)
 	{
 		set_exit_code(cmd->output->error);
-		printf("%s: %s: %s\n", cmd->cmd[0], cmd->output->name,
-			   strerror(cmd->output->error));
+		if (!cmd->cmd)
+			printf("%s: %s\n", cmd->output->name,
+					strerror(cmd->output->error));
+		else
+			printf("%s: %s: %s\n", cmd->cmd[0], cmd->output->name,
+					strerror(cmd->output->error));
 		safe_close(ms, ms->pipe[1], "exec_first");
 		return (ERROR);
 	}
@@ -33,6 +41,8 @@ static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 {
 	t_error exit_status;
 
+	if (!cmd->cmd)
+		exit(0);
 	if (!cmd->is_builtin)
 		execve(cmd->path, cmd->cmd, ms->env);
 	else
@@ -43,9 +53,10 @@ static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 		else
 			exit_malloc(ms, "execve_cmd");
 	}
-	//TODO: " / " = bash: /: Is a directory error '126'
-	//TODO: "./ls" = bash: /: No such file or directory error '127'
 	//TODO: "." = bash: .: filename argument required error '2'
+	//TODO: " / " = bash: /: Is a directory error '126' access
+	// si access F_OK => access X_OK + exit_child errno strerror(errno ENOENT)
+	//TODO: "./ls" = bash: /: No such file or directory | error '127'
 	exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
 }
 

@@ -4,6 +4,7 @@
 
 #include "../../incs/mini_shell.h"
 
+// TODO exit arguments atoi etc ...
 t_error	ft_exit(t_mini_shell *ms)
 {
 	close(ms->stds[0]);
