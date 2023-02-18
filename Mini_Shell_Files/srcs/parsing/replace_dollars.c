@@ -277,7 +277,7 @@ void	replace_dollar_before_quotes(t_cmd *cmd)
 	raw = cmd->raw_cmd;
 	while (raw[++i])
 	{
-		if (set_quote_state(raw[i], &quote) == 0 && raw[i] == '$' \
+		if (set_quote_state(raw[i], &quote) != '\'' && raw[i] == '$' \
 					&& (raw[i + 1] == '\'' || raw[i + 1] == '\"' || !is_not_alpha(raw[i + 1])))
 		{
 			if (!is_not_alpha(raw[i + 1]))
