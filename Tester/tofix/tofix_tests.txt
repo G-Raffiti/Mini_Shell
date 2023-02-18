@@ -90,31 +90,15 @@ exit echo something
 exit exit
 env | grep "_="
 export | grep "SHLVL"
-export $?
-export TEST=
-export TEST=123
-export ___TEST=123
 export --TEST=123
-export TE\ST=100
 export -TEST=100
-export _TEST=100
 export | grep "SHLVL"
-export 1TEST=
-export TES=T=""
 export TES\\T=123
 export TES\$T=123
 export TES\\T
-export TES=T=123
 export -TEST=123
-export _TEST=123
-export TES_T=123
-export TEST_=123
-export TES$?T=123
-export ________=123
 export TEST+=100
 env | grep "_="
 env | grep "SHLVL"
-unset
-export TEST=100
 unset TES;T
 unset -TEST

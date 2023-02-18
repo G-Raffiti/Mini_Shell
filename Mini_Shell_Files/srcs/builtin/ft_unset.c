@@ -26,7 +26,7 @@ t_error	ft_unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 			current_sorted = ft_free(current_sorted);
 		}
 	}
-	if (ft_str_cmp(cmd->cmd[1], "PATH") == 0)
+	if (cmd->cmd[1] && ft_str_cmp(cmd->cmd[1], "PATH") == 0)
 		ms->paths = free_split(ms->paths);
 	fill_env(ms);
 	fill_export_env(ms);

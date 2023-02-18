@@ -20,7 +20,7 @@ int	export_name_is_valid(char *arg)
 	int i;
 
 	i = 0;
-	if (arg[i] == '=')
+	if (arg[i] == '=' || !is_not_alpha(arg[i]))
 		return (0);
 	while (arg[i] && arg[i] != '=')
 	{
