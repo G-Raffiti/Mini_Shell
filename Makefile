@@ -50,6 +50,7 @@ FILES =			\
 				parsing/parsing \
 				parsing/read_line \
 				parsing/replace_dollars \
+				parsing/replace_tilde \
 				parsing/set_builtin \
 				\
 				utils/env_utils \

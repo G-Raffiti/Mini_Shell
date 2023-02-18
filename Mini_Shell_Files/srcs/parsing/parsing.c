@@ -82,6 +82,8 @@ t_error	fill_cmds(t_mini_shell *ms, char **error_msg, int *code_error)
 			*code_error = 2;
 			return (ERROR);
 		}
+		if (replace_tilde(ms, get(current)) == MALLOC_ERROR)
+			return (MALLOC_ERROR);
 		replace_dollar_before_quotes(get(current));
 		if (replace_dollars(ms, get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
