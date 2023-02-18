@@ -69,3 +69,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 mini_shell
+Tester/tofix/tofix_tests.txt
+Tester/tofix/tofix_tests.txt
+minishell
