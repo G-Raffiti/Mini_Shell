@@ -17,7 +17,10 @@ int	end_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg)
 		exit_error(ms, errno, msg);
 	}
 	set_exit_code(error_code);
-	printf("%s: %s\n", cmd->cmd[0], msg);
+	if (!cmd->cmd[1])
+		printf("%s: %s\n", cmd->cmd[0], msg);
+	else
+		printf("%s: %s: %s\n", cmd->cmd[0], cmd->cmd[1], msg);
 	safe_dup2(ms, save_out, STDOUT_FILENO, "exec_child");
 	return(error_code);
 }
@@ -34,7 +37,10 @@ void	exit_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg)
 		exit_error(ms, errno, msg);
 	}
 	set_exit_code(error_code);
-	printf("%s: %s", cmd->cmd[0], msg);
+	if (!cmd->cmd[1])
+		printf("%s: %s\n", cmd->cmd[0], msg);
+	else
+		printf("%s: %s: %s\n", cmd->cmd[0], cmd->cmd[1], msg);
 	safe_dup2(ms, save_out, STDOUT_FILENO, "exec_child");
 	exit(error_code);
 }
@@ -55,10 +61,12 @@ t_error	exit_malloc(t_mini_shell *mini_shell, char *msg)
 	exit(get_exit_code());
 }
 
-t_error	exit_end_program(t_mini_shell *ms)
+t_error	exit_end_program(t_mini_shell *ms, int exit_code)
 {
+	close(ms->stds[0]);
+	close(ms->stds[1]);
 	set_exit_code(0);
 	printf("exit\n");
 	free_mini_shell(ms);
-	exit(0);
+	exit(exit_code);
 }

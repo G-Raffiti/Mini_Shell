@@ -84,7 +84,7 @@ t_error	check_line(char *line)
 	if (is_pipe_error(line))
 		return (parse_error(SYNTAX_PIPE, 2));
 	if (is_quote_error(line))
-		return (parse_error(QUOTE_ERROR, 0));
+		return (parse_error(QUOTE_ERROR, 2));
 	if (is_chevron_error(line))
 		return (parse_error(SYNTAX_NEWLINE,2));
 	return (SUCCESS);

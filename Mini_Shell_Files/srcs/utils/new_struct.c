@@ -31,7 +31,6 @@ t_error	new_cmd(t_cmd **cmd)
 		return (MALLOC_ERROR);
 	}
 	(*cmd)->is_builtin = FALSE;
-	(*cmd)->is_valid = TRUE;
 	return (SUCCESS);
 }
 

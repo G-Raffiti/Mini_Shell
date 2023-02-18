@@ -57,5 +57,5 @@ int	main(int argc, char **argv, char **env)
 		exit(exit_status);
 	}
 	loop(ms);
-	exit_end_program(ms);
+	exit_end_program(ms, EXIT_SUCCESS);
 }

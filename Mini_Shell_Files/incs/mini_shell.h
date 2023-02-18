@@ -72,7 +72,6 @@ typedef struct s_cmd
 	t_fd			*input;
 	t_fd			*output;
 	t_bool			is_builtin;
-	t_bool			is_valid; //TODO => delete
 	t_bool			need_fork;
 }					t_cmd;
 
@@ -130,7 +129,7 @@ void		builtin_error_export(char *arg, int error_code, char *msg);
 // BUILTINS FUNCTIONS //////////////////////////////////////////////////////////
 t_error		ft_cd(t_mini_shell *ms, t_cmd *cmd);
 t_error		ft_echo(t_cmd *cmd);
-t_error		ft_exit(t_mini_shell *ms);
+t_error		ft_exit(t_mini_shell *ms, t_cmd *cmd);
 t_error		ft_pwd(void);
 t_error		ft_env(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 t_error		ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
@@ -240,7 +239,7 @@ void		set_exit_code(int value);
 // EXIT ////////////////////////////////////////////////////////////////////////
 int			end_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg);
 t_error		exit_malloc(t_mini_shell *ms, char *msg);
-t_error		exit_end_program(t_mini_shell *ms);
+t_error		exit_end_program(t_mini_shell *ms, int exit_code);
 void		exit_error(t_mini_shell *ms, int error_code, char *msg);
 void		exit_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg);
 

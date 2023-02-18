@@ -20,19 +20,16 @@ static void	chevron_out(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 		cmd->output->fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	cmd->output->name = file_name;
 	if (cmd->output->fd == -1)
-	{
 		cmd->output->error = errno;
-		cmd->is_valid = FALSE;
-	}
 }
 
 ///open file and create t_fd
 static void	chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 *file_name)
 {
-	cmd->input->type = type;
-	if (!cmd->is_valid)
+	if (cmd->input->fd == -1)
 		return ;
+	cmd->input->type = type;
 	if (type == OUT_REDIR || type == APPEND_REDIR)
 	{
 		chevron_out(ms, cmd, type, file_name);
@@ -53,10 +50,7 @@ static void	chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 	}
 	cmd->input->name = file_name;
 	if (cmd->input->fd == -1)
-	{
 		cmd->input->error = errno;
-		cmd->is_valid = FALSE;
-	}
 }
 
 

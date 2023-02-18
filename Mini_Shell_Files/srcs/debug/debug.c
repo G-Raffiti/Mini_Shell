@@ -52,8 +52,6 @@ void	debug_cmd(t_cmd *cmd)
 		cmd->input->name == NULL ? "Pipe" : cmd->input->name, cmd->input->fd,
 		cmd->output->name == NULL ? "Pipe" : cmd->output->name,
 		cmd->output->fd);
-	is_valid = cmd->is_valid ? GREEN"Yes"GREY : RED"No"GREY;
-	printf(WHITE"IS_VALID? %s | ", is_valid);
 	is_valid = cmd->is_builtin ? GREEN"Yes"GREY : RED"No"GREY;
 	printf(WHITE"IS_BUILTIN? %s | ", is_valid);
 	printf(WHITE"RAW_CMD: "GREY"["YELLOW"%s"GREY"] | ", cmd->raw_cmd);
