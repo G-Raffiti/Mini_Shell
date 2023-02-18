@@ -18,8 +18,8 @@ t_error	split_count(t_cmd *cmds, int *split_len)
 
 	while (raw_cmd[++i])
 	{
-		if (set_quote_state(raw_cmd[i], &quote) != '\'' && raw_cmd[i] == '$' &&
-			is_not_alpha(raw_cmd[i + 1]))
+		if (set_quote_state(raw_cmd[i], &quote) != '\'' && raw_cmd[i] == '$'
+			)
 		{
 			if (i != 0 && raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]) && prev_is_arg == 0)
 				*split_len += 2;
@@ -35,7 +35,7 @@ t_error	split_count(t_cmd *cmds, int *split_len)
 				prev_is_arg = 1;
 				set_quote_state(raw_cmd[i], &quote);
 				i++;
-				if (raw_cmd[i] == '?')
+				if ((raw_cmd[i] == '?' || !is_not_alpha(raw_cmd[i])) && raw_cmd[i - 1] == '$')
 					break;
 			}
 		}
@@ -91,7 +91,7 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 
 				set_quote_state(raw_cmd[i], &quote);
 				i++;
-				if (raw_cmd[i] == '?')
+				if ((raw_cmd[i] == '?' || !is_not_alpha(raw_cmd[i])) && raw_cmd[i - 1] == '$')
 					break;
 			}
 			if (len_prev > 0)
@@ -169,7 +169,7 @@ t_error	replace_in_split(t_mini_shell *ms, char **splited_raw, int *final_len)
 	while (splited_raw[++str_pos])
 	{
 		if (splited_raw[str_pos][c_pos] && splited_raw[str_pos][c_pos + 1] && (splited_raw)[str_pos][c_pos] == '$' &&
-				valid_id_dollars(splited_raw[str_pos][c_pos + 1]))
+			valid_id_dollars(splited_raw[str_pos][c_pos + 1]))
 		{
 			key = (&splited_raw[str_pos][c_pos]) + 1;
 			get_pair_key_value(ms, dict, &key_value, key);
@@ -252,11 +252,15 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 	split_len = 0;
 	if (!cmds->raw_cmd || split_count(cmds, &split_len) == 0)
 		return (SUCCESS);
+//	dprintf(2, "SPLIT len = %d\n", split_len);
 	splited_raw = ft_calloc(sizeof(char *), split_len);
 	if (!splited_raw)
 		return (MALLOC_ERROR);
 	if (fill_split_args(cmds, &splited_raw) == MALLOC_ERROR)
 		return (free_split(splited_raw), MALLOC_ERROR);
+//	int i = -1;
+//	while (splited_raw[++i])
+//		dprintf(2, "SPLITED raw [%d] = %s\n",i, splited_raw[i]);
 	if (replace_in_split(ms, splited_raw, &final_len) == MALLOC_ERROR)
 		return (free_split(splited_raw), MALLOC_ERROR);
 	if (create_final_raw(&cmds, final_len) == MALLOC_ERROR)
@@ -266,39 +270,9 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 	return(0);
 }
 
-int	dollar_replaced(t_cmd *cmd, char *raw, int *i, int state)
-{
-	char	*tmp_start;
-	char	*tmp_end;
-	if (!is_not_alpha(raw[*i + 1]))
-	{
-		if (state == '\"')
-		{
-			tmp_start = ft_substr(cmd->raw_cmd, 0,*i);
-			if (!tmp_start)
-				return (0);
-			tmp_end = ft_substr(cmd->raw_cmd, *i + 2, ft_strlen(cmd->raw_cmd));
-			if (!tmp_start)
-				return (free(tmp_start), 0);
-			cmd->raw_cmd = ft_free(cmd->raw_cmd);
-			cmd->raw_cmd = ft_strjoin(tmp_start, tmp_end);
-			if (!cmd->raw_cmd)
-				return (free(tmp_start), free(tmp_end), 0);
-			tmp_start = ft_free(tmp_start);
-			i--;
-			return (1);
-		}
-		raw[*i + 1] = ' ';
-	}
-	raw[*i] = ' ';
-	return (2);
-}
-
-t_error	replace_dollar_before_quotes(t_cmd *cmd)
+void	replace_dollar_before_quotes(t_cmd *cmd)
 {
 	int		i;
-	int 	state;
-	int 	replace_state;
 	char 	quote;
 	char 	*raw;
 
@@ -307,17 +281,8 @@ t_error	replace_dollar_before_quotes(t_cmd *cmd)
 	raw = cmd->raw_cmd;
 	while (raw[++i])
 	{
-		state = set_quote_state(raw[i], &quote);
-		if (state != '\'' && raw[i] == '$' \
-					&& (raw[i + 1] == '\'' || raw[i + 1] == '\"' \
-					|| !is_not_alpha(raw[i + 1])))
-		{
-			replace_state = dollar_replaced(cmd, raw, &i, state);
-			if (replace_state == 1)
-				continue ;
-			else if (replace_state == 0)
-				return (MALLOC_ERROR);
-		}
+		if (set_quote_state(raw[i], &quote) != '\'' && raw[i] == '$' \
+					&& (raw[i + 1] == '\'' || raw[i + 1] == '\"'))
+			raw[i] = ' ';
 	}
-	return (SUCCESS);
 }

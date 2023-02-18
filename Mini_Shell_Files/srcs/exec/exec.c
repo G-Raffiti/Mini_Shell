@@ -209,6 +209,8 @@ t_error	exec_cmds(t_mini_shell *ms)
 	ms->stds[0] = safe_dup(ms, STDIN_FILENO, "exec: exec");
 	ms->stds[1] = safe_dup(ms, STDOUT_FILENO, "exec: exec");
 	current = ft_lstd_first(ms->cmds);
+//	if (here_docs(ms, current) == MALLOC_ERROR)
+//		return (MALLOC_ERROR);
 	if (!current->previous && !current->next)
 		exec_one(ms, get(current));
 	else

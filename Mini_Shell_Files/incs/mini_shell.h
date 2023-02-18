@@ -112,6 +112,8 @@ t_error		exec_cmds(t_mini_shell *ms);
 void		set_interactiv_signals();
 void		set_exec_signals();
 
+// HERE_DOCS ///////////////////////////////////////////////////////////////////
+t_error		here_docs(t_mini_shell *ms, t_lstd *current);
 /******************************************************************************/
 /*******************************   BUILTIN   **********************************/
 /******************************************************************************/
@@ -160,7 +162,7 @@ char		*read_line(void);
 
 // REPLACE_DOLLARS /////////////////////////////////////////////////////////////
 t_error		replace_dollars(t_mini_shell *ms, t_cmd *cmds);
-t_error		replace_dollar_before_quotes(t_cmd *cmd);
+void		replace_dollar_before_quotes(t_cmd *cmd);
 
 // REPLACE TILDE ///////////////////////////////////////////////////////////////
 t_error		replace_tilde(t_mini_shell *ms, t_cmd *cmd);
