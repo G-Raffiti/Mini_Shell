@@ -162,7 +162,7 @@ char		*read_line(void);
 
 // REPLACE_DOLLARS /////////////////////////////////////////////////////////////
 t_error		replace_dollars(t_mini_shell *ms, t_cmd *cmds);
-void		replace_dollar_before_quotes(t_cmd *cmd);
+t_error		replace_dollar_before_quotes(t_cmd *cmd);
 
 // SET BUILTIN /////////////////////////////////////////////////////////////////
 void		set_builtin(t_cmd *cmd);
