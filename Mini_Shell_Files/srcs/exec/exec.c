@@ -67,7 +67,11 @@ static void	exec_one(t_mini_shell *ms, t_cmd *one)
 	if (permission_denied(ms, one) == ERROR)
 		return ;
 	if (one->input->fd > 0)
+	{
 		safe_dup2(ms, one->input->fd, STDIN_FILENO, "exec_one");
+		if (one->input->here_doc_pipe[1])
+			close(one->input->here_doc_pipe[1]);
+	}
 	if (one->is_builtin && !one->need_fork)
 	{
 		exit_status = exec_builtin(ms, one, FALSE);
@@ -96,7 +100,11 @@ static void	exec_first(t_mini_shell *ms, t_cmd *first)
 	if (permission_denied(ms, first) == ERROR)
 		return ;
 	if (first->input->fd != -2)
+	{
 		safe_dup2(ms, first->input->fd, STDIN_FILENO, "exec_first");
+		if (first->input->here_doc_pipe[1])
+			close(first->input->here_doc_pipe[1]);
+	}
 	set_exec_signals();
 	safe_fork(ms, first, "exec_first");
 	if (first->pid)
@@ -119,7 +127,11 @@ static void	exec_cmd(t_mini_shell *ms, t_cmd *cmd)
 	if (cmd->input->fd == -2)
 		safe_dup2(ms, ms->pipe[0], STDIN_FILENO, "exec_mid");
 	else if (cmd->input->fd > 0)
+	{
 		safe_dup2(ms, cmd->input->fd, STDIN_FILENO, "exec_mid");
+		if (cmd->input->here_doc_pipe[1])
+			close(cmd->input->here_doc_pipe[1]);
+	}
 	safe_pipe(ms, "exec_mid");
 	if (permission_denied(ms, cmd) == ERROR)
 		return ;
@@ -144,7 +156,11 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 	if (last->input->fd == -2)
 		safe_dup2(ms, ms->pipe[0], STDIN_FILENO, "exec_last");
 	else if (last->input->fd > 0)
+	{
 		safe_dup2(ms, last->input->fd, STDIN_FILENO, "exec_last");
+		if (last->input->here_doc_pipe[1])
+			close(last->input->here_doc_pipe[1]);
+	}
 	close(ms->pipe[0]);
 	if (permission_denied(ms, last) == ERROR)
 		return;
@@ -191,12 +207,20 @@ void	wait_exit_status(t_lstd *current)
 t_error	exec_cmds(t_mini_shell *ms)
 {
 	t_lstd	*current;
+	t_error	here_doc_status;
 
 	ms->stds[0] = safe_dup(ms, STDIN_FILENO, "exec: exec");
 	ms->stds[1] = safe_dup(ms, STDOUT_FILENO, "exec: exec");
 	current = ft_lstd_first(ms->cmds);
-//	if (here_docs(ms, current) == MALLOC_ERROR)
-//		return (MALLOC_ERROR);
+	here_doc_status = here_docs(ms, current);
+	if (here_doc_status == MALLOC_ERROR)
+		return (MALLOC_ERROR);
+	else if (get_exit_code() == 130)
+	{
+		safe_dup2(ms, ms->stds[0], STDIN_FILENO, "exec: exec");
+		safe_close(ms, ms->stds[1], "exec: exec");
+		return (SUCCESS);
+	}
 	if (!current->previous && !current->next)
 		exec_one(ms, get(current));
 	else

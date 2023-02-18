@@ -3,12 +3,51 @@
 //
 
 #include "../../incs/mini_shell.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
-t_error exec_here_doc(t_cmd *cmd)
+t_error exec_here_doc(t_mini_shell *ms, t_cmd *cmd)
 {
-	char	*buf;
+	char	*line;
+	char	*tmp;
+	char 	*ret;
+	char	*line_read;
 
-	while ()
+	ret = NULL;
+	(void)ms;
+	set_here_doc_signals();
+	while (TRUE)
+	{
+		line_read = readline("> ");
+		if (!line_read || ft_str_cmp(line_read, cmd->input->limiter) == 0 || get_exit_code() == 130)
+		{
+			if (!ret)
+			{
+				ret = ft_calloc(sizeof(char), 1);
+				if (!ret)
+					return (MALLOC_ERROR);
+			}
+			write(cmd->input->here_doc_pipe[1], ret, ft_strlen(ret));
+			set_interactiv_signals();
+			return (SUCCESS);
+		}
+		line = ft_strjoin(line_read, "\n");
+		if (!line)
+			return (MALLOC_ERROR);
+		tmp = ft_strjoin(ret, line);
+//		dprintf(2, "TMP = %s\n", tmp);
+		if (!tmp)
+			return (MALLOC_ERROR);
+		line = ft_free(line);
+		ret = ft_free(ret);
+		ret = ft_strdup(tmp);
+		if (!ret)
+			return (MALLOC_ERROR);
+		tmp = ft_free(tmp);
+//		dprintf(2, "RET = %s\n", ret);
+
+	}
+	return (ERROR);
 }
 
 t_error	here_docs(t_mini_shell *ms, t_lstd *current)
@@ -19,7 +58,7 @@ t_error	here_docs(t_mini_shell *ms, t_lstd *current)
 		cmd = get(current);
 		if (cmd->input->type == HERE_DOC_REDIR)
 		{
-			if (exec_here_doc(cmd) == MALLOC_ERROR)
+			if (exec_here_doc(ms, cmd) == MALLOC_ERROR)
 				return (MALLOC_ERROR);
 		}
 		current = current->next;
