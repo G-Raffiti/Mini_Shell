@@ -18,7 +18,7 @@ t_error	exec_builtin(t_mini_shell *ms, t_cmd *cmd, t_bool in_pipe)
 	else if (ft_str_cmp(cmd->cmd[0], "echo") == 0)
 		return (ft_echo(cmd));
 	else if (ft_str_cmp(cmd->cmd[0], "exit") == 0 && !in_pipe)
-		return (ft_exit(ms));
+		return (ft_exit(ms, cmd));
 	else if (ft_str_cmp(cmd->cmd[0], "pwd") == 0)
 		return (ft_pwd());
 	return (ERROR);

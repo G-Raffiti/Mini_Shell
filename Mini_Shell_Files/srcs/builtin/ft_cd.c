@@ -1,9 +1,8 @@
 //
 // Created by rbonneva on 06/02/23.
 //
-
-//TODO: cd -> if OLDPWD is not in dict -> bash: cd: OLDPWD not set
-// cd - print the OLDPWD and go
+#include <string.h>
+#include <errno.h>
 #include "../../incs/mini_shell.h"
 
 char	*get_env_value(t_mini_shell *ms, char *key)
@@ -20,29 +19,37 @@ char	*get_env_value(t_mini_shell *ms, char *key)
 	return (pair->value);
 }
 
-void	change_value_in_env(t_mini_shell *ms, char *key, char *value)
-{
-	(void)ms;
-	(void)key;
-	(void)value;
-	//TODO : set the value in ms->env_dict {key : value} & also in ms->ft_env
-	//  'key'='value'
-}
-// TODO : ~/gjskfjg/fllsjdfk
+
 t_error	ft_cd(t_mini_shell *ms, t_cmd *cmd)
 {
 	char *path;
 
+	add_or_replace_in_chosen_env(ms, "PWD", getcwd(NULL, PWD_PATH_SIZE), 2);
 	if (cmd->cmd[1] && cmd->cmd[2])
-		return (end_child(ms, cmd, 2, "too many arguments\n"));
+		return (end_child(ms, cmd, 1, TOO_MANY_ARGS));
 	if (!cmd->cmd[1] || ft_str_cmp(cmd->cmd[1], "~") == 0)
+	{
 		path = get_env_value(ms, "HOME");
+		if (path == NULL)
+			return (end_child(ms, cmd, 1, HOME_NOT_SET));
+	}
+	else if (ft_str_cmp(cmd->cmd[1], "-") == 0)
+	{
+		path = get_env_value(ms, "OLDPWD");
+		if (path == NULL)
+			return (end_child(ms, cmd, 1, OLDPWD_NOT_SET));
+		printf("%s\n", get_env_value(ms, "OLDPWD"));
+	}
 	else
 		path = cmd->cmd[1];
-	if (!path)
-		return (end_child(ms, cmd, 2, "path parse error\n"));
-		//TODO cd: HOME not set
 	if (chdir(path) == 0)
-		change_value_in_env(ms, "PWD", path);
-	return (SUCCESS);
+	{
+		if (add_or_replace_in_chosen_env(ms, "OLDPWD", get_env_value(ms, "PWD"),
+									  2) == MALLOC_ERROR)
+			return (MALLOC_ERROR);
+		if (add_or_replace_in_chosen_env(ms, "PWD", path, 2) == MALLOC_ERROR)
+			return (MALLOC_ERROR);
+		return (SUCCESS);
+	}
+	return (end_child(ms, cmd, 1, strerror(errno)));
 }
