@@ -144,8 +144,8 @@ t_error		parse_line(t_mini_shell *ms, char *line);
 
 // CHECK LINE //////////////////////////////////////////////////////////////////
 t_bool		is_empty_line(char *line);
-t_error		check_line(char *line);
-t_error		parse_error(char *error_msg, int error_code);
+t_error		check_line(t_mini_shell *ms, char *line);
+t_error		parse_error(t_mini_shell *ms, char *error_msg, int error_code);
 
 // GET CMD /////////////////////////////////////////////////////////////////////
 t_error		get_cmd(t_cmd *cmd);
@@ -187,6 +187,9 @@ t_error		change_value_envs(t_env_arg *content, char *new_value);
 int			find_in_dict(void *content, void *ref);
 int			find_in_dict_sorted(void *content, void *ref);
 
+// REGEN ENV ///////////////////////////////////////////////////////////////////
+char		**regen_env(void);
+
 // ENV /////////////////////////////////////////////////////////////////////////
 t_error		fill_export_env(t_mini_shell *ms);
 t_error		fill_env(t_mini_shell *ms);
@@ -224,7 +227,7 @@ t_error		fill_refreshed_env(t_lstd *current, char **str, int which_env);
 
 // SAFE FUNC ///////////////////////////////////////////////////////////////////
 void		safe_fork(t_mini_shell *ms, t_cmd *cmd, char *msg);
-void		safe_pipe(t_mini_shell *ms, char *msg);
+void		safe_pipe(t_mini_shell *ms, int pipes[2], char *msg);
 void		safe_close(t_mini_shell *ms, int fd, char *msg);
 void		safe_dup2(t_mini_shell *ms, int fd, int std, char *msg);
 int			safe_dup(t_mini_shell *ms, int std, char *msg);

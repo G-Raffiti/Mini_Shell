@@ -37,6 +37,7 @@ FILES =			\
 				debug/test_mode \
 				\
 				env/env \
+				env/env_regen \
 				env/modif_env \
 				\
 				exec/exec \

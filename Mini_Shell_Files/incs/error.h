@@ -19,5 +19,6 @@
 # define IS_DIRECTORY		"Is a directory"
 # define PERMISSION_DENIED	"Permission denied"
 # define NO_FILE			"No such file or directory"
+# define AMBIGUOUS_REDIRECT	"ambiguous redirect"
 
 #endif

@@ -44,7 +44,7 @@ static void	chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 		cmd->input->fd = open(file_name, O_RDONLY);
 	else if (type == HERE_DOC_REDIR)
 	{
-		pipe(cmd->input->here_doc_pipe); // TODO protect pipe
+		safe_pipe(ms, cmd->input->here_doc_pipe, "chevron_in");
 		cmd->input->fd = cmd->input->here_doc_pipe[0];
 		cmd->input->limiter = file_name;
 	}
@@ -79,7 +79,7 @@ static t_chevron get_chevron_type(char *str)
 	return (type);
 }
 
-static void	replace_dollar(t_mini_shell *ms, char **str)
+static t_error	replace_dollar(t_mini_shell *ms, char **str)
 {
 	char *key;
 	t_lstd *dict;
@@ -93,8 +93,16 @@ static void	replace_dollar(t_mini_shell *ms, char **str)
 			*str = ft_strdup(get_env_dict(dict->content)->value);
 		else
 			*str = ft_strdup("");
+		if (ft_contain(*str, ' '))
+			return (parse_error(ms, AMBIGUOUS_REDIRECT, 2));
+		if (ft_contain(*str, '/'))
+			return (parse_error(ms, IS_DIRECTORY, 2));
 	}
+	if (*str == NULL)
+		return (MALLOC_ERROR);
+	return (SUCCESS);
 }
+
 static t_error extract_file_name(t_mini_shell *ms, char *str, char *quote, char
 **file_name)
 {
@@ -106,15 +114,14 @@ static t_error extract_file_name(t_mini_shell *ms, char *str, char *quote, char
 		str++;
 	start = str;
 	if (!*quote && (*str == '<' || *str == '>'))
-		return (ERROR);
+		return (parse_error(ms, SYNTAX_NEWLINE, 2));
 	while (*str && (!ft_contain(" <>\"\'", *str)
 					|| (*quote && ft_contain("<>", *str))))
 		str++;
-	// TODO if file name start with a $ replace than check if it contains '
-	//  ' or '/' error "ambiguous redirect" and "Is a directory"
-	replace_dollar(ms, file_name);
 	*file_name = ft_substr(start, 0, str - start);
 	if (!*file_name)
+		return (MALLOC_ERROR);
+	if (replace_dollar(ms, file_name) == MALLOC_ERROR)
 		return (MALLOC_ERROR);
 	if (*str && *str == *quote)
 		(*str)++;

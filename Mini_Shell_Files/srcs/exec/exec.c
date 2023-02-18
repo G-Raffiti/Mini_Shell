@@ -44,6 +44,8 @@ static void error_exec(t_mini_shell *ms, t_cmd *cmd)
 
 	if (ft_str_cmp(cmd->cmd[0], ".") == 0)
 		exit_child(ms, cmd, 2, FILENAME_REQUIERED);
+	if (ft_str_cmp(cmd->cmd[0], "..") == 0)
+		exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
 	stat(cmd->cmd[0], &file_stat);
 	if ((file_stat.st_mode & S_IFMT) == S_IFDIR)
 		exit_child(ms, cmd, 126, IS_DIRECTORY);
@@ -106,7 +108,7 @@ static void	exec_one(t_mini_shell *ms, t_cmd *one)
 
 static void	exec_first(t_mini_shell *ms, t_cmd *first)
 {
-	safe_pipe(ms, "exec_first");
+	safe_pipe(ms, ms->pipe, "exec_first");
 	if (permission_denied(ms, first) == ERROR)
 		return ;
 	if (first->input->fd != -2)
@@ -134,7 +136,7 @@ static void	exec_cmd(t_mini_shell *ms, t_cmd *cmd)
 		safe_dup2(ms, ms->pipe[0], STDIN_FILENO, "exec_mid");
 	else if (cmd->input->fd > 0)
 		safe_dup2(ms, cmd->input->fd, STDIN_FILENO, "exec_mid");
-	safe_pipe(ms, "exec_mid");
+	safe_pipe(ms, ms->pipe, "exec_mid");
 	if (permission_denied(ms, cmd) == ERROR)
 		return ;
 	set_exec_signals();
