@@ -4,6 +4,7 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <string.h>
+#include <sys/stat.h>
 #include "../../../Lib_List_Double/incs/ft_lstd.h"
 #include "../../incs/mini_shell.h"
 #include "debug.h"
@@ -37,15 +38,30 @@ static t_error permission_denied(t_mini_shell *ms, t_cmd *cmd)
 	return (SUCCESS);
 }
 
+static void error_exec(t_mini_shell *ms, t_cmd *cmd)
+{
+	struct stat file_stat;
+
+	if (ft_str_cmp(cmd->cmd[0], ".") == 0)
+		exit_child(ms, cmd, 2, FILENAME_REQUIERED);
+	stat(cmd->cmd[0], &file_stat);
+	if ((file_stat.st_mode & S_IFMT) == S_IFDIR)
+		exit_child(ms, cmd, 126, IS_DIRECTORY);
+	else if ((file_stat.st_mode & S_IFMT) == S_IFREG && access(cmd->cmd[0],
+																  X_OK) != 0)
+		exit_child(ms, cmd, 126, PERMISSION_DENIED);
+	else if (ft_contain(cmd->cmd[0], '/'))
+		exit_child(ms, cmd, 127, NO_FILE);
+	exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
+}
+
 static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 {
 	t_error exit_status;
 
 	if (!cmd->cmd)
 		exit(0);
-	if (!cmd->is_builtin)
-		execve(cmd->path, cmd->cmd, ms->env);
-	else
+	if (cmd->is_builtin)
 	{
 		exit_status = exec_builtin(ms, cmd, TRUE);
 		if (exit_status != MALLOC_ERROR)
@@ -53,11 +69,9 @@ static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 		else
 			exit_malloc(ms, "execve_cmd");
 	}
-	//TODO: "." = bash: .: filename argument required error '2'
-	//TODO: " / " = bash: /: Is a directory error '126' access
-	// si access F_OK => access X_OK + exit_child errno strerror(errno ENOENT)
-	//TODO: "./ls" = bash: /: No such file or directory | error '127'
-	exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
+	else
+		execve(cmd->path, cmd->cmd, ms->env);
+	error_exec(ms, cmd);
 }
 
 static void	exec_one(t_mini_shell *ms, t_cmd *one)
