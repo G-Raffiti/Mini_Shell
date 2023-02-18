@@ -1,7 +1,100 @@
+cd /Users
+cd '/////' 2>/dev/null
+cd "doesntexist"
+cd "doesntexist" 2>/dev/null
+cd "wtf" 2>/dev/null
+cd ?
+cd +
+cd _
+cd woof
+cd bark bark
+cd $OLDPWD/something
 echo ~
 echo ~/123
 echo ~/123/456
 echo \" \" \" \"\"\" \'\'\'
-echo $USER$12USER$USER=4$USER12
-echo $USER $9999USER $8888USER $7777USER
-echo "$9USER" "'$USER=12$SOMETHING'"
+| test
+echo > <
+echo | |
+<
+|
+| | |
+||||||||
+>
+>>>>>>>>
+<<<<<<<<<
+> > > >
+>> >> >> >>
+~
+<<
+.
+/
+>echo>
+<echo<
+>>echo>>
+|echo|
+| echo -n oui
+exit 0 0
+exit 42 42
+exit -42 -24
+exit 42
+exit 42 53 68
+exit 259
+exit -12030
+exit --1239312
+exit ++++1203020103
+exit +0
+exit ++++++0
+exit -----0
+exit azerty
+exit kewkwqke
+exit a
+exit z
+exit "1"
+exit "2"
+exit "+102"
+exit "1230"
+exit "+++1230"
+exit "1"23
+exit "2"32"32"
+exit "'42'"
+exit '42'"42"42
+exit +'42'"42"42
+exit -'42'"42"42
+exit 9223372036854775807
+exit 9223372036854775808
+exit -4
+exit wrong
+exit wrong_command
+exit something
+exit 1
+exit -1
+exit 42
+exit 0
+exit --000
+exit +++++++000
+exit ++++3193912939
+exit ---31232103012
+exit "something"
+exit q
+exit help
+exit export
+exit echo
+exit cd ..
+exit 0 0
+exit something somethingv2
+exit 42 42 42 42 42
+exit echo something
+exit exit
+env | grep "_="
+export | grep "SHLVL"
+export --TEST=123
+export TE\ST=100
+export -TEST=100
+export | grep "SHLVL"
+export -TEST=123
+export TEST+=100
+env | grep "_="
+env | grep "SHLVL"
+unset TES;T
+unset -TEST
