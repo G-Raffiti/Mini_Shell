@@ -2,7 +2,7 @@
 
 #include "../../incs/mini_shell.h"
 
-//TODO : export -> Attention export sans "=" peut buger
+//TODO : export -> Attention export sans "=" peut buger (Pas reussi a reproduire, a surveiller)
 void	display_export(t_mini_shell *ms)
 {
 	int	i;
@@ -20,7 +20,7 @@ int	export_name_is_valid(char *arg)
 	int i;
 
 	i = 0;
-	if (arg[i] == '=')
+	if (arg[i] == '=' || !is_not_alpha(arg[i]))
 		return (0);
 	while (arg[i] && arg[i] != '=')
 	{

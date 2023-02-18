@@ -71,11 +71,11 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 
 	while (raw_cmd[++i])
 	{
-		if (set_quote_state(raw_cmd[i], &quote) != '\'' && raw_cmd[i] == '$' &&
-			is_not_alpha(raw_cmd[i + 1]))
+		if (set_quote_state(raw_cmd[i], &quote) != '\'' && raw_cmd[i] == '$')
 		{
 			start_dol = i;
-			if (i != 0 && raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]) && prev_is_arg == 0)
+			if (i != 0 && raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]) && prev_is_arg == 0 && \
+                    is_not_alpha(raw_cmd[i + 1]))
 				start_dol = i;
 			else if (raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]))
 				start_dol = i;
@@ -168,7 +168,7 @@ t_error	replace_in_split(t_mini_shell *ms, char **splited_raw, int *final_len)
 	c_pos = 0;
 	while (splited_raw[++str_pos])
 	{
-		if (splited_raw[str_pos][c_pos + 1] && (splited_raw)[str_pos][c_pos] == '$' &&
+		if (splited_raw[str_pos][c_pos] && splited_raw[str_pos][c_pos + 1] && (splited_raw)[str_pos][c_pos] == '$' &&
 				valid_id_dollars(splited_raw[str_pos][c_pos + 1]))
 		{
 			key = (&splited_raw[str_pos][c_pos]) + 1;
@@ -266,9 +266,39 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 	return(0);
 }
 
-void	replace_dollar_before_quotes(t_cmd *cmd)
+int	dollar_replaced(t_cmd *cmd, char *raw, int *i, int state)
+{
+	char	*tmp_start;
+	char	*tmp_end;
+	if (!is_not_alpha(raw[*i + 1]))
+	{
+		if (state == '\"')
+		{
+			tmp_start = ft_substr(cmd->raw_cmd, 0,*i);
+			if (!tmp_start)
+				return (0);
+			tmp_end = ft_substr(cmd->raw_cmd, *i + 2, ft_strlen(cmd->raw_cmd));
+			if (!tmp_start)
+				return (free(tmp_start), 0);
+			cmd->raw_cmd = ft_free(cmd->raw_cmd);
+			cmd->raw_cmd = ft_strjoin(tmp_start, tmp_end);
+			if (!cmd->raw_cmd)
+				return (free(tmp_start), free(tmp_end), 0);
+			tmp_start = ft_free(tmp_start);
+			i--;
+			return (1);
+		}
+		raw[*i + 1] = ' ';
+	}
+	raw[*i] = ' ';
+	return (2);
+}
+
+t_error	replace_dollar_before_quotes(t_cmd *cmd)
 {
 	int		i;
+	int 	state;
+	int 	replace_state;
 	char 	quote;
 	char 	*raw;
 
@@ -277,10 +307,17 @@ void	replace_dollar_before_quotes(t_cmd *cmd)
 	raw = cmd->raw_cmd;
 	while (raw[++i])
 	{
-		if (set_quote_state(raw[i], &quote) == 0 && raw[i] == '$' \
-					&& (raw[i + 1] == '\'' || raw[i + 1] == '\"'))
+		state = set_quote_state(raw[i], &quote);
+		if (state != '\'' && raw[i] == '$' \
+					&& (raw[i + 1] == '\'' || raw[i + 1] == '\"' \
+					|| !is_not_alpha(raw[i + 1])))
 		{
-			raw[i] = ' ';
+			replace_state = dollar_replaced(cmd, raw, &i, state);
+			if (replace_state == 1)
+				continue ;
+			else if (replace_state == 0)
+				return (MALLOC_ERROR);
 		}
 	}
+	return (SUCCESS);
 }

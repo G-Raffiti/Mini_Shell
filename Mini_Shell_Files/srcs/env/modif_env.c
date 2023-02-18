@@ -156,6 +156,6 @@ t_error	add_in_export_env(t_mini_shell *ms, char *key, char *new_value, int whic
 		if (fill_export_env(ms) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 	}
-	return (MALLOC_ERROR);
+	return (SUCCESS);
 }
 

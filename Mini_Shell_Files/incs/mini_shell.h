@@ -6,8 +6,8 @@
 # include "error.h"
 # include "debug.h"
 /// IDIENTIFIER EXPORT /////////////////////////////////////////////////////////
-# define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n _"
-# define INV_ID_EXPORT	"! # $ % & ( ) * + - . < > = : ; ` / ' \" @ { } [ ] ^ | ~ \n ?"
+# define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \\ \" @ { } [ ] ^ | ~ \n _"
+# define INV_ID_EXPORT	"! # $ % & ( ) * + - . < > = : ; ` /  \\ ' \" @ { } [ ] ^ | ~ \n ?"
 
 /// DEFINE /////////////////////////////////////////////////////////////////////
 # define PWD_PATH_SIZE 4096
@@ -161,7 +161,7 @@ char		*read_line(void);
 
 // REPLACE_DOLLARS /////////////////////////////////////////////////////////////
 t_error		replace_dollars(t_mini_shell *ms, t_cmd *cmds);
-void		replace_dollar_before_quotes(t_cmd *cmd);
+t_error		replace_dollar_before_quotes(t_cmd *cmd);
 
 // REPLACE TILDE ///////////////////////////////////////////////////////////////
 t_error		replace_tilde(t_mini_shell *ms, t_cmd *cmd);

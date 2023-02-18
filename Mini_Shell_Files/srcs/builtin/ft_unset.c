@@ -2,9 +2,9 @@
 // Created by aurel on 2/9/23.
 //
 
-#include "mini_shell.h"
+#include "../../incs/mini_shell.h"
 
-t_error	ft_unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe)//TODO : reset path if unset 'PATH'. and ft_unset all builtin
+t_error	ft_unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 {
 	t_lstd	*current;
 	t_lstd	*current_sorted;
@@ -26,7 +26,7 @@ t_error	ft_unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe)//TODO : reset path i
 			current_sorted = ft_free(current_sorted);
 		}
 	}
-	if (ft_str_cmp(cmd->cmd[1], "PATH") == 0)
+	if (cmd->cmd[1] && ft_str_cmp(cmd->cmd[1], "PATH") == 0)
 		ms->paths = free_split(ms->paths);
 	fill_env(ms);
 	fill_export_env(ms);

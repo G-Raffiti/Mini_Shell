@@ -1,6 +1,9 @@
 #projet
 valgrind*
-tofix*
+Tester/
+minishell
+
+
 # Cmake
 
 CMakeLists.txt
