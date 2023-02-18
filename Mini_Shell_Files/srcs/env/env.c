@@ -70,6 +70,29 @@ t_error	get_export_env(t_mini_shell *ms)
 	return (SUCCESS);
 }
 
+t_error	increase_shell_lvl(t_mini_shell *ms)
+{
+	int		i;
+	char	*lvl;
+
+	i = -1;
+	while (ms->env[++i])
+	{
+		if (ft_strncmp(ms->env[i], "SHLVL", 5) == 0 && ms->env[i][5] == '=')
+		{
+			lvl = ft_itoa((ft_atoi(ms->env[i] + 6) + 1));
+			if (!lvl)
+				return (MALLOC_ERROR);
+			ms->env[i] = ft_free(ms->env[i]);
+			ms->env[i] = ft_strjoin("SHLVL=", lvl);
+			if (!ms->env[i])
+				return (MALLOC_ERROR);
+			lvl = ft_free(lvl);
+		}
+	}
+	return (SUCCESS);
+}
+
 t_error	get_env(t_mini_shell *ms, char **env)
 {
 	t_env_arg	*env_dict;
@@ -79,7 +102,8 @@ t_error	get_env(t_mini_shell *ms, char **env)
 	key_index = -1;
 	if (dup_env(ms, env) == MALLOC_ERROR)
 		exit_malloc(ms, "env: dup_env");
-	// TODO increase SHLVL by 1
+	if (increase_shell_lvl(ms) == MALLOC_ERROR)
+		return (MALLOC_ERROR);
 	while (++key_index < ft_strlen_tab(env))
 	{
 		if (new_env_arg(&env_dict) == MALLOC_ERROR)
