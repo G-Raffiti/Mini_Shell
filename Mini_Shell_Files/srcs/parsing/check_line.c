@@ -66,11 +66,13 @@ t_bool	is_chevron_error(char *line)
 		set_quote_state(*line, &is_in_quote);
 		if (!is_chevron_last && !is_in_quote && ft_contain("<>", *line))
 			is_chevron_last = TRUE;
+		else if (is_chevron_last && *line == '|')
+			return (TRUE);
 		else if (is_chevron_last && *line != ' ')
 			is_chevron_last = FALSE;
 		line++;
 	}
-	return (is_chevron_last);
+	return (FALSE);
 }
 
 t_error	parse_error(t_mini_shell *ms, char *msg, int error_code)
@@ -96,6 +98,6 @@ t_error	check_line(t_mini_shell *ms, char *line)
 	if (is_quote_error(line))
 		return (parse_error(ms, QUOTE_ERROR, 2));
 	if (is_chevron_error(line))
-		return (parse_error(ms, SYNTAX_NEWLINE,2));
+		return (parse_error(ms, SYNTAX_PIPE, 2));
 	return (SUCCESS);
 }

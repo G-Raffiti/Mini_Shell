@@ -25,7 +25,7 @@ int	end_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg)
 	return(error_code);
 }
 
-void	exit_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg)
+int	end_child_arg(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg)
 {
 	int	save_out;
 
@@ -42,7 +42,7 @@ void	exit_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg)
 	else
 		printf("%s: %s: %s\n", cmd->cmd[0], cmd->cmd[1], msg);
 	safe_dup2(ms, save_out, STDOUT_FILENO, "exec_child");
-	exit(error_code);
+	return(error_code);
 }
 
 void	exit_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg)
@@ -57,10 +57,7 @@ void	exit_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg)
 		exit_error(ms, errno, msg);
 	}
 	set_exit_code(error_code);
-	if (!cmd->cmd[1])
-		printf("%s: %s\n", cmd->cmd[0], msg);
-	else
-		printf("%s: %s: %s\n", cmd->cmd[0], cmd->cmd[1], msg);
+	printf("%s: %s\n", cmd->cmd[0], msg);
 	safe_dup2(ms, save_out, STDOUT_FILENO, "exec_child");
 	exit(error_code);
 }

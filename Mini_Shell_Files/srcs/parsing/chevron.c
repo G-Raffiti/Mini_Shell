@@ -113,8 +113,6 @@ static t_error extract_file_name(t_mini_shell *ms, char *str, char *quote, char
 	if (set_quote_state(*str, quote))
 		str++;
 	start = str;
-	if (!*quote && (*str == '<' || *str == '>'))
-		return (parse_error(ms, SYNTAX_NEWLINE, 2));
 	while (*str && (!ft_contain(" <>\"\'", *str)
 					|| (*quote && ft_contain("<>", *str))))
 		str++;
@@ -130,6 +128,27 @@ static t_error extract_file_name(t_mini_shell *ms, char *str, char *quote, char
 		*start = ' ';
 		start++;
 	}
+	return (SUCCESS);
+}
+
+t_error valid_file(t_mini_shell *ms, char *str)
+{
+	while (*str == ' ')
+		str++;
+	if (ft_strncmp(str, "<<<", 3) == 0)
+		return (parse_error(ms, SYNTAX_REDIR_3IN, 2));
+	if (ft_strncmp(str, "<<", 2) == 0)
+		return (parse_error(ms, SYNTAX_REDIR_2IN, 2));
+	if (ft_strncmp(str, ">>", 2) == 0)
+		return (parse_error(ms, SYNTAX_REDIR_2OUT, 2));
+	if (*str == '<')
+		return (parse_error(ms, SYNTAX_REDIR_IN, 2));
+	if (*str == '>')
+		return (parse_error(ms, SYNTAX_REDIR_OUT, 2));
+	if (*str == '|')
+		return (parse_error(ms, SYNTAX_PIPE, 2));
+	if (!*str)
+		return (parse_error(ms, SYNTAX_NEWLINE, 2));
 	return (SUCCESS);
 }
 
@@ -149,6 +168,8 @@ t_error	open_files(t_mini_shell *ms, t_cmd *cmd)
 		if (!set_quote_state(*str, &quote) && ft_contain("<>", *str))
 		{
 			chevron_type = get_chevron_type(str);
+			if (valid_file(ms, str) == ERROR)
+				return (ERROR);
 			error = extract_file_name(ms, str, &quote, &file_name);
 			if (error != SUCCESS)
 				return (error);

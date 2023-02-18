@@ -51,5 +51,5 @@ t_error	ft_cd(t_mini_shell *ms, t_cmd *cmd)
 			return (MALLOC_ERROR);
 		return (SUCCESS);
 	}
-	return (end_child(ms, cmd, 1, strerror(errno)));
+	return (end_child_arg(ms, cmd, 1, strerror(errno)));
 }

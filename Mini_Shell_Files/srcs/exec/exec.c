@@ -42,12 +42,12 @@ static void error_exec(t_mini_shell *ms, t_cmd *cmd)
 {
 	struct stat file_stat;
 
+	stat(cmd->cmd[0], &file_stat);
 	if (ft_str_cmp(cmd->cmd[0], ".") == 0)
 		exit_child(ms, cmd, 2, FILENAME_REQUIERED);
-	if (ft_str_cmp(cmd->cmd[0], "..") == 0)
+	else if (ft_str_cmp(cmd->cmd[0], "..") == 0)
 		exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
-	stat(cmd->cmd[0], &file_stat);
-	if ((file_stat.st_mode & S_IFMT) == S_IFDIR)
+	else if ((file_stat.st_mode & S_IFMT) == S_IFDIR)
 		exit_child(ms, cmd, 126, IS_DIRECTORY);
 	else if ((file_stat.st_mode & S_IFMT) == S_IFREG && access(cmd->cmd[0],
 																  X_OK) != 0)

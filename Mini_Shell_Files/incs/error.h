@@ -6,7 +6,11 @@
 #define ERROR_H
 
 # define SYNTAX_PIPE		"syntax error near unexpected token `|'"
-# define SYNTAX_CHEVRON		"syntax error near unexpected token `>'"
+# define SYNTAX_REDIR_OUT	"syntax error near unexpected token `>'"
+# define SYNTAX_REDIR_IN	"syntax error near unexpected token `<'"
+# define SYNTAX_REDIR_2OUT	"syntax error near unexpected token `>>'"
+# define SYNTAX_REDIR_2IN	"syntax error near unexpected token `<<'"
+# define SYNTAX_REDIR_3IN	"syntax error near unexpected token `<<<'"
 # define SYNTAX_NEWLINE		"syntax error near unexpected token `newline'"
 # define COMMAND_NOT_FOUND	"command not found"
 # define QUOTE_ERROR		"syntax error quote not closed"

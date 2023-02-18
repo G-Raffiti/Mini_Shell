@@ -241,6 +241,7 @@ void		set_exit_code(int value);
 
 // EXIT ////////////////////////////////////////////////////////////////////////
 int			end_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg);
+int			end_child_arg(t_mini_shell *ms, t_cmd *cmd, int code, char *msg);
 t_error		exit_malloc(t_mini_shell *ms, char *msg);
 t_error		exit_end_program(t_mini_shell *ms, int exit_code);
 void		exit_error(t_mini_shell *ms, int error_code, char *msg);
