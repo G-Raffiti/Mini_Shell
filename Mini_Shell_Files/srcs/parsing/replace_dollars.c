@@ -168,6 +168,7 @@ t_error	replace_in_split(t_mini_shell *ms, char **splited_raw, int *final_len)
 	c_pos = 0;
 	while (splited_raw[++str_pos])
 	{
+		dprintf(2, "splited = %s\n", splited_raw[str_pos]);
 		if (splited_raw[str_pos][c_pos] && splited_raw[str_pos][c_pos + 1] && (splited_raw)[str_pos][c_pos] == '$' &&
 				valid_id_dollars(splited_raw[str_pos][c_pos + 1]))
 		{
@@ -272,24 +273,24 @@ int	dollar_replaced(t_cmd *cmd, char *raw, int *i, int state)
 	char	*tmp_end;
 	if (!is_not_alpha(raw[*i + 1]))
 	{
-		if (state == '\"')
-		{
-			tmp_start = ft_substr(cmd->raw_cmd, 0,*i);
-			if (!tmp_start)
-				return (0);
-			tmp_end = ft_substr(cmd->raw_cmd, *i + 2, ft_strlen(cmd->raw_cmd));
-			if (!tmp_start)
-				return (free(tmp_start), 0);
-			cmd->raw_cmd = ft_free(cmd->raw_cmd);
-			cmd->raw_cmd = ft_strjoin(tmp_start, tmp_end);
-			if (!cmd->raw_cmd)
-				return (free(tmp_start), free(tmp_end), 0);
-			tmp_start = ft_free(tmp_start);
-			i--;
-			return (1);
-		}
-		raw[*i + 1] = ' ';
+		(void)state;
+
+		tmp_start = ft_substr(cmd->raw_cmd, 0,*i);
+		if (!tmp_start)
+			return (0);
+		tmp_end = ft_substr(cmd->raw_cmd, *i + 1, ft_strlen(cmd->raw_cmd));
+		if (!tmp_end)
+			return (free(tmp_start), 0);
+		cmd->raw_cmd = ft_free(cmd->raw_cmd);
+		cmd->raw_cmd = ft_strjoin(tmp_start, tmp_end);
+		if (!cmd->raw_cmd)
+			return (free(tmp_start), free(tmp_end), 0);
+		tmp_start = ft_free(tmp_start);
+		cmd->raw_cmd[*i] = ' ';
+		i--;
+		return (1);
 	}
+	raw[*i + 1] = ' ';
 	raw[*i] = ' ';
 	return (2);
 }
