@@ -40,21 +40,25 @@ static t_error permission_denied(t_mini_shell *ms, t_cmd *cmd)
 
 static void error_exec(t_mini_shell *ms, t_cmd *cmd)
 {
-	struct stat file_stat;
+	struct stat *file_stat;
 
-	stat(cmd->cmd[0], &file_stat);
+	file_stat = NULL;
+	file_stat = ft_calloc(1, sizeof(struct stat));
+	if (!file_stat)
+		exit_child(ms, cmd, ENOMEM, MALLOC_FAILED);
+	lstat(cmd->cmd[0], file_stat);
 	if (ft_str_cmp(cmd->cmd[0], ".") == 0)
-		exit_child(ms, cmd, 2, FILENAME_REQUIERED);
-	else if (ft_str_cmp(cmd->cmd[0], "..") == 0)
-		exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
-	else if ((file_stat.st_mode & S_IFMT) == S_IFDIR)
-		exit_child(ms, cmd, 126, IS_DIRECTORY);
-	else if ((file_stat.st_mode & S_IFMT) == S_IFREG && access(cmd->cmd[0],
-																  X_OK) != 0)
-		exit_child(ms, cmd, 126, PERMISSION_DENIED);
-	else if (ft_contain(cmd->cmd[0], '/'))
-		exit_child(ms, cmd, 127, NO_FILE);
-	exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
+		return (free(file_stat), exit_child(ms, cmd, 2, FILENAME_REQUIERED));
+	if (ft_str_cmp(cmd->cmd[0], "..") == 0)
+		return (free(file_stat), exit_child(ms, cmd, 127, COMMAND_NOT_FOUND));
+	if ((file_stat->st_mode & S_IFMT) == S_IFDIR)
+		return (free(file_stat), exit_child(ms, cmd, 126, IS_DIRECTORY));
+	if (ft_contain(cmd->cmd[0], '/'))
+		return (free(file_stat), exit_child(ms, cmd, 127, NO_FILE));
+	if ((file_stat->st_mode & S_IFMT) == S_IFREG && access(cmd->cmd[0],
+														  X_OK) != 0)
+		return (free(file_stat), exit_child(ms, cmd, 126, PERMISSION_DENIED));
+	return (free(file_stat), exit_child(ms, cmd, 127, COMMAND_NOT_FOUND));
 }
 
 static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
@@ -69,7 +73,7 @@ static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 		if (exit_status != MALLOC_ERROR)
 			exit(get_exit_code());
 		else
-			exit_malloc(ms, "execve_cmd");
+			exit_child(ms, cmd, ENOMEM, MALLOC_FAILED);
 	}
 	else
 		execve(cmd->path, cmd->cmd, ms->env);
@@ -193,7 +197,7 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 	execve_cmd(ms, last);
 }
 
-void	wait_exit_status(t_lstd *current)
+void	wait_exit_status(t_mini_shell *ms, t_lstd *current)
 {
 	int		wstatus;
 	int		exit_status;
@@ -212,8 +216,12 @@ void	wait_exit_status(t_lstd *current)
 			exit_status = WEXITSTATUS(wstatus);
 		else if (WIFSIGNALED(wstatus))
 			exit_status = 128 + WTERMSIG(wstatus);
+		if (exit_status == ENOMEM)
+			set_exit_code(ENOMEM);
 		current = current->next;
 	}
+	if (get_exit_code() == ENOMEM)
+		exit_malloc(ms, "wait_exit_status");
 	set_exit_code(exit_status);
 	if (debug_mod())
 		dprintf(2, YELLOW"-▶ %s%d"YELLOW" ◀-"WHITE"\n", get_exit_code() == 0 ?
@@ -251,7 +259,7 @@ t_error	exec_cmds(t_mini_shell *ms)
 		exec_last(ms, get(current));
 	}
 	close(STDIN_FILENO);
-	wait_exit_status(current);
+	wait_exit_status(ms, current);
 	safe_dup2(ms, ms->stds[0], STDIN_FILENO, "exec: exec");
 	safe_dup2(ms, ms->stds[1], STDOUT_FILENO, "exec: exec");
 	return (SUCCESS);
