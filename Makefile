@@ -42,6 +42,7 @@ FILES =			\
 				\
 				exec/exec \
 				exec/signals \
+				exec/here_docs \
 				\
 				parsing/check_line \
 				parsing/chevron \
