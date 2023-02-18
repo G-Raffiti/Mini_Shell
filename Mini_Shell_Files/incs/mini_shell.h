@@ -39,11 +39,11 @@ typedef enum e_bool
 
 typedef enum e_chevron
 {
-	ERROR_CHT,
-	IN_CHT,
-	HERE_DOC_CHT,
-	OUT_CHT,
-	APPEND_CHT,
+	ERROR_REDIR,
+	IN_REDIR,
+	HERE_DOC_REDIR,
+	OUT_REDIR,
+	APPEND_REDIR,
 }	t_chevron;
 
 /// STRUCTURES /////////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ typedef struct s_fd
 	int				fd;
 	char			*name;
 	int				error;
-	// HEREDOC :
+	t_chevron		type;
 	char			*limiter;
 	int				here_doc_pipe[2];
 }					t_fd;

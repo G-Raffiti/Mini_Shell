@@ -8,12 +8,13 @@
 static void	chevron_out(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 *file_name)
 {
+	cmd->output->type = type;
 	if (cmd->output->fd > 0)
 	{
 		safe_close(ms, cmd->output->fd, "chevron_out");
 		cmd->output->name = ft_free(cmd->input->name);
 	}
-	if (type == OUT_CHT)
+	if (type == OUT_REDIR)
 		cmd->output->fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	else
 		cmd->output->fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
@@ -29,9 +30,10 @@ static void	chevron_out(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 static void	chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 *file_name)
 {
+	cmd->input->type = type;
 	if (!cmd->is_valid)
 		return ;
-	if (type == OUT_CHT || type == APPEND_CHT)
+	if (type == OUT_REDIR || type == APPEND_REDIR)
 	{
 		chevron_out(ms, cmd, type, file_name);
 		return ;
@@ -41,11 +43,14 @@ static void	chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 		safe_close(ms, cmd->input->fd, "chevron_in");
 		cmd->input->name = ft_free(cmd->input->name);
 	}
-	if (type == IN_CHT)
+	if (type == IN_REDIR)
 		cmd->input->fd = open(file_name, O_RDONLY);
-	else if (type == HERE_DOC_CHT)
-		cmd->input->fd = open(file_name, O_CREAT | O_TRUNC |
-		O_WRONLY, 0644);
+	else if (type == HERE_DOC_REDIR)
+	{
+		pipe(cmd->input->here_doc_pipe); // TODO protect pipe
+		cmd->input->fd = cmd->input->here_doc_pipe[0];
+		cmd->input->limiter = file_name;
+	}
 	cmd->input->name = file_name;
 	if (cmd->input->fd == -1)
 	{
@@ -61,18 +66,18 @@ static t_chevron get_chevron_type(char *str)
 
 	type = -1;
 	if (*str == '<' && *(str + 1) != '<')
-		type = IN_CHT;
+		type = IN_REDIR;
 	else if (*str == '>' && *(str + 1) != '>')
-		type = OUT_CHT;
+		type = OUT_REDIR;
 	else if (*str == '<' && *(str + 1) == '<')
 	{
-		type = HERE_DOC_CHT;
+		type = HERE_DOC_REDIR;
 		*str = ' ';
 		str++;
 	}
 	else if (*str == '>' && *(str + 1) == '>')
 	{
-		type = APPEND_CHT;
+		type = APPEND_REDIR;
 		*str = ' ';
 		str++;
 	}
@@ -113,8 +118,8 @@ static t_error extract_file_name(t_mini_shell *ms, char *str, char *quote, char
 		str++;
 	// TODO if file name start with a $ replace than check if it contains '
 	//  ' or '/' error "ambiguous redirect" and "Is a directory"
-	*file_name = ft_substr(start, 0, str - start);
 	replace_dollar(ms, file_name);
+	*file_name = ft_substr(start, 0, str - start);
 	if (!*file_name)
 		return (MALLOC_ERROR);
 	if (*str && *str == *quote)
