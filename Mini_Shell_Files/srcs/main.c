@@ -62,7 +62,7 @@ int	main(int argc, char **argv, char **env)
 	if (argc >= 3 && !ft_strncmp(argv[1], "-c", 3))//delete
 	{//delete
 		int exit_status = test_minishell(argv[2], ms);//delete
-		exit(exit_status);//delete
+		exit_end_program(ms, exit_status);//delete
 	}//delete
 	loop(ms);
 	exit_end_program(ms, EXIT_SUCCESS);

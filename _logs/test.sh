@@ -1,22 +1,23 @@
-#!/bin/bash
-> output_ms.txt
+
 > all_valgrinds.log
-# Define the command you want to run
+
 testing()
 {
-  local CMD="$1"
+    local CMD="$1"
+    VAR="##################################################################################################################################################################################################################"
+    VAR+=$(echo"")
+    VAR+=$(echo"$CMD")
+    STD=$(echo "$CMD" | valgrind --show-leak-kinds=all --leak-check=full --track-fds=yes --verbose --show-mismatched-frees=yes --read-var-info=yes --suppressions=ignore_leaks.txt --log-file=valgrind-out.log ./minishell test)
+    VAR+=$(< valgrind-out.log grep "==" | cat)
+    VAR+=$(echo"$CMD")
+    VAR+=$(echo"")
+    echo "$VAR" > valgrinds.log
+    sed -i '/blocks are still reachable/c\REACHABLE' valgrinds.log
+    sed -i '/== $/c\END' valgrinds.log
+    sed -i '/REACHABLE/,/END/d' valgrinds.log
+    sed -i 's/END$/-/g' valgrinds.log
 
-#	minishell_output=$(echo "$CMD" | ./minishell test)
-#  minishell_exit_code=$?
-VAR=$(echo "$CMD" | valgrind --show-leak-kinds=all --leak-check=full --track-fds=yes --verbose --show-mismatched-frees=yes --read-var-info=yes --suppressions=ignore_leaks.txt --log-file=valgrind-out.log ./minishell test
-< valgrind-out.log grep "==" | cat > valgrind.log | grep -v "Welcome to" | grep -v "")
-  # Write the exit code and output to the same file
-#  echo "exit code: $minishell_exit_code" >> output_ms.txt
- echo "$CMD" >> all_valgrinds.log
-  cat valgrind.log >> all_valgrinds.log
- echo "$CMD" >> all_valgrinds.log
- echo "" >> all_valgrinds.log
-
+    cat valgrinds.log >> all_valgrinds.log
 }
 
 counter=0
