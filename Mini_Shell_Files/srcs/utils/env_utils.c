@@ -17,8 +17,7 @@ t_error fill_refreshed_env(t_lstd *current, char **str, int which_env)
 	else
 		value = get_env_dict(content)->value;
 	key = get_env_dict(content)->key;
-	if (*str)
-		*str = ft_free(*str);
+	*str = ft_free(*str);
 	*str = ft_strjoin(key, value);
 	if (which_env == 0)
 		value = ft_free(value);

@@ -66,7 +66,7 @@ t_error	extract_key_value(char *cmd, char ***extracted)
 		return (MALLOC_ERROR);
 	while (++i < 3)
 	{
-		(*extracted)[i] = ft_calloc(sizeof(char), ft_strlen(cmd));
+		(*extracted)[i] = ft_calloc(sizeof(char), ft_strlen(cmd) + 1);
 		if (!*extracted)
 			return (MALLOC_ERROR);
 	}

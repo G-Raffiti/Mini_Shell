@@ -8,7 +8,10 @@ t_error	fill_dict_element(t_env_arg **dict, char *key, char *value)
 		return (MALLOC_ERROR);
 	(*dict)->key = ft_strdup(key);
 	if (!(*dict)->key)
-		return (free((*dict)->value), MALLOC_ERROR);
+	{
+		(*dict)->value = ft_free((*dict)->value);
+		return (MALLOC_ERROR);
+	}
 	return (SUCCESS);
 }
 
@@ -46,7 +49,7 @@ int find_in_dict_sorted(void *content, void *ref)
 {
 	if (ft_str_cmp(get_env_dict(content)->key, "_") == 0)
 		return (0);
-	if (ft_str_cmp((get_env_dict(content)->key + 11), (char *)ref) == 0)
+	if (ft_str_cmp((get_env_dict(content)->key + 10), (char *)ref) == 0)
 		return (1);
 	return (0);
 }
