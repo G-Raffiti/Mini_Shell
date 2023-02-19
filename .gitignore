@@ -1,7 +1,7 @@
 #projet
 valgrind*
 Tester/
-minishell
+test_dir/minishell
 
 
 # Cmake
@@ -71,5 +71,5 @@ dkms.conf
 mini_shell
 Tester/tofix/tofix_tests.txt
 Tester/tofix/tofix_tests.txt
-minishell
+test_dir/minishell
 Tester/tofix/tofix_tests.txt
