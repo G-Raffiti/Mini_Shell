@@ -8,12 +8,10 @@ testing()
 
 #	minishell_output=$(echo "$CMD" | ./minishell test)
 #  minishell_exit_code=$?
-  minishell_output=$(echo "$CMD" | valgrind --show-leak-kinds=all --leak-check=full --track-fds=yes --verbose --show-mismatched-frees=yes --read-var-info=yes --suppressions=ignore_leaks.txt --log-file=valgrind-out.log ./minishell test
+VAR=$(echo "$CMD" | valgrind --show-leak-kinds=all --leak-check=full --track-fds=yes --verbose --show-mismatched-frees=yes --read-var-info=yes --suppressions=ignore_leaks.txt --log-file=valgrind-out.log ./minishell test
 < valgrind-out.log grep "==" | cat > valgrind.log | grep -v "Welcome to" | grep -v "")
   # Write the exit code and output to the same file
 #  echo "exit code: $minishell_exit_code" >> output_ms.txt
-  echo "$minishell_output" >> output_ms.txt
-  printf "\n" >> output_ms.txt
   cat valgrind.log >> all_valgrinds.log
 
 }
