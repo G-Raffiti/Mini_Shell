@@ -1,7 +1,0 @@
-ms [0;32m-▶ [0m..$DGSDF $???S?Dgfd /v/ | $HOME > out | "$SALUT$USER" '' | <><>tututututututut;
-syntax error near unexpected token `>'
-ms [0;31m-▶ [0mexit
-
-ms [0;32m-▶ [0m
-ms [0;32m-▶ [0mexit
-
