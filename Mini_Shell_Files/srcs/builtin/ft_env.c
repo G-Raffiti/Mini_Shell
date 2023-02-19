@@ -1,5 +1,5 @@
 
-#include "mini_shell.h"
+#include "../../incs/mini_shell.h"
 
 int print_error_env(t_mini_shell *ms, char *first_arg, int in_pipe)
 {

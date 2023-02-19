@@ -26,7 +26,7 @@ static void	loop(t_mini_shell *ms)
 		{//delete
 			clear_cmds(&(ms->cmds), free_cmd);//delete
 			line = ft_free(line);//delete
-			exit(get_exit_code());//delete
+			exit_end_program(ms, get_exit_code());
 		}//delete
 	}
 }
@@ -55,7 +55,7 @@ int	main(int argc, char **argv, char **env)
 	if (get_env(ms, env) == MALLOC_ERROR)
 		exit_malloc(ms, "main: get_env");
 	if (env_malloced)
-		free_split(env);
+		env = free_split(env);
 	if (get_export_env(ms) == MALLOC_ERROR)
 		exit_malloc(ms, "main: get_export_env");
 	get_all_paths(ms, ms->env_dict);
