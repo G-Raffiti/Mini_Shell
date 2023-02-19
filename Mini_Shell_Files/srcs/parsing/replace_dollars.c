@@ -217,6 +217,7 @@ t_error	fill_final_raw(t_cmd *cmds, char **splited_raw)
 	tmp = ft_strdup(splited_raw[i]);
 	if (!tmp)
 		return (MALLOC_ERROR);
+	cmds->raw_cmd = ft_free(cmds->raw_cmd);
 	cmds->raw_cmd = ft_strdup(tmp);
 	if (!cmds->raw_cmd)
 		return (MALLOC_ERROR);
@@ -267,6 +268,7 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 		return (free_split(splited_raw), MALLOC_ERROR);
 	if (fill_end_raw(cmds, splited_raw) == MALLOC_ERROR)
 		return (free_split(splited_raw), MALLOC_ERROR);
+	splited_raw = free_split(splited_raw);
 	return(0);
 }
 
