@@ -1,0 +1,13 @@
+==342645== 2 bytes in 1 blocks are indirectly lost in loss record 1 of 84
+==342645== 2 bytes in 2 blocks are indirectly lost in loss record 2 of 84
+==342645== 7 bytes in 3 blocks are indirectly lost in loss record 3 of 84
+==342645== 18 bytes in 2 blocks are indirectly lost in loss record 15 of 84
+==342645== 28 bytes in 3 blocks are indirectly lost in loss record 22 of 84
+==342645== 49 bytes in 3 blocks are definitely lost in loss record 26 of 84
+==342645== 169 (112 direct, 57 indirect) bytes in 3 blocks are definitely lost in loss record 34 of 84
+==342645==    definitely lost: 161 bytes in 6 blocks
+==342645==    indirectly lost: 57 bytes in 11 blocks
+==342645==      possibly lost: 0 bytes in 0 blocks
+==342702==    definitely lost: 0 bytes in 0 blocks
+==342702==    indirectly lost: 0 bytes in 0 blocks
+==342702==      possibly lost: 0 bytes in 0 blocks

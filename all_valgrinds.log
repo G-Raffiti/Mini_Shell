@@ -1,0 +1,204 @@
+==342645== Memcheck, a memory error detector
+==342645== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==342645== Using Valgrind-3.20.0-5147d671e4-20221024 and LibVEX; rerun with -h for copyright info
+==342645== Command: ./minishell test
+==342645== Parent PID: 342643
+==342645== 
+==342645== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-342645-by-aurel-on-fedora-37
+==342645== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-342645-by-aurel-on-fedora-37
+==342645== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-342645-by-aurel-on-fedora-37
+==342645== 
+==342645== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==342645== don't want to do, unless you know exactly what you're doing,
+==342645== or are doing some strange experiment):
+==342645==   /snap/valgrind/142/usr/libexec/valgrind/../../bin/vgdb --pid=342645 ...command...
+==342645== 
+==342645== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==342645==   /path/to/gdb ./minishell
+==342645== and then give GDB the following command
+==342645==   target remote | /snap/valgrind/142/usr/libexec/valgrind/../../bin/vgdb --pid=342645
+==342645== --pid is optional if only one valgrind process is running
+==342645== 
+==342645== WARNING: new redirection conflicts with existing -- ignoring it
+==342645== Downloading debug info for /usr/lib64/libreadline.so.8.2...
+==342645== Successfully downloaded debug file for /usr/lib64/libreadline.so.8.2
+==342645== Downloading debug info for /home/aurel/.cache/debuginfod_client/7a2fe3f0fdf59c9969b6fc975d45dc8c5bafce75/debuginfo...
+==342645== Successfully downloaded debug file for /home/aurel/.cache/debuginfod_client/7a2fe3f0fdf59c9969b6fc975d45dc8c5bafce75/debuginfo
+==342645== Downloading debug info for /usr/lib64/libc.so.6...
+==342645== Successfully downloaded debug file for /usr/lib64/libc.so.6
+==342645== WARNING: new redirection conflicts with existing -- ignoring it
+==342645== WARNING: new redirection conflicts with existing -- ignoring it
+==342645== WARNING: new redirection conflicts with existing -- ignoring it
+==342645== WARNING: new redirection conflicts with existing -- ignoring it
+==342645== Downloading debug info for /usr/lib64/libtinfo.so.6.3...
+==342645== Successfully downloaded debug file for /usr/lib64/libtinfo.so.6.3
+==342645== Downloading debug info for /home/aurel/.cache/debuginfod_client/698cae6b13b3a224051b6646b50e00a6d62f83fe/debuginfo...
+==342645== Successfully downloaded debug file for /home/aurel/.cache/debuginfod_client/698cae6b13b3a224051b6646b50e00a6d62f83fe/debuginfo
+==342645== Preferring higher priority redirection:
+==342645== WARNING: new redirection conflicts with existing -- ignoring it
+==342645== 
+==342645== FILE DESCRIPTORS: 4 open (2 std) at exit.
+==342645== Open file descriptor 4: out
+==342645==    at 0x4CFCF35: open (open64.c:41)
+==342645==    by 0x404A24: chevron_out (chevron.c:18)
+==342645==    by 0x404AE1: chevron_in (chevron.c:35)
+==342645==    by 0x405164: open_files (chevron.c:176)
+==342645==    by 0x405F06: fill_cmds (parsing.c:71)
+==342645==    by 0x4060EC: parse_line (parsing.c:102)
+==342645==    by 0x408AD1: loop (main.c:20)
+==342645==    by 0x408D33: main (main.c:67)
+==342645== 
+==342645== Open file descriptor 3: /home/aurel/Documents/CLionProjects/Mini_Shell/valgrind-out.log
+==342645==    <inherited from parent>
+==342645== 
+==342645== 
+==342645== HEAP SUMMARY:
+==342645==     in use at exit: 227,652 bytes in 253 blocks
+==342645==   total heap usage: 1,779 allocs, 1,526 frees, 296,398 bytes allocated
+==342645== 
+==342645== Searching for pointers to 253 not-freed blocks
+==342645== Checked 239,632 bytes
+==342645== 
+==342645== 2 bytes in 1 blocks are indirectly lost in loss record 1 of 84
+==342645==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==342645==    by 0x409375: ft_itoa (ft_itoa.c:26)
+==342645==    by 0x4067D3: get_key_and_replace (replace_dollars.c:135)
+==342645==    by 0x4069DA: replace_in_split (replace_dollars.c:176)
+==342645==    by 0x406DC2: replace_dollars (replace_dollars.c:264)
+==342645==    by 0x405F8A: fill_cmds (parsing.c:78)
+==342645==    by 0x4060EC: parse_line (parsing.c:102)
+==342645==    by 0x408AD1: loop (main.c:20)
+==342645==    by 0x408D33: main (main.c:67)
+==342645== 
+==342645== 2 bytes in 2 blocks are indirectly lost in loss record 2 of 84
+==342645==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==342645==    by 0x4092EE: ft_calloc (ft_calloc.c:21)
+==342645==    by 0x406858: get_key_and_replace (replace_dollars.c:149)
+==342645==    by 0x4069DA: replace_in_split (replace_dollars.c:176)
+==342645==    by 0x406DC2: replace_dollars (replace_dollars.c:264)
+==342645==    by 0x405F8A: fill_cmds (parsing.c:78)
+==342645==    by 0x4060EC: parse_line (parsing.c:102)
+==342645==    by 0x408AD1: loop (main.c:20)
+==342645==    by 0x408D33: main (main.c:67)
+==342645== 
+==342645== 7 bytes in 3 blocks are indirectly lost in loss record 3 of 84
+==342645==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==342645==    by 0x409619: ft_substr (ft_substr.c:30)
+==342645==    by 0x406631: fill_split_args (replace_dollars.c:99)
+==342645==    by 0x406D90: replace_dollars (replace_dollars.c:259)
+==342645==    by 0x405F8A: fill_cmds (parsing.c:78)
+==342645==    by 0x4060EC: parse_line (parsing.c:102)
+==342645==    by 0x408AD1: loop (main.c:20)
+==342645==    by 0x408D33: main (main.c:67)
+==342645== 
+==342645== 18 bytes in 2 blocks are indirectly lost in loss record 15 of 84
+==342645==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==342645==    by 0x4096C4: ft_strdup (ft_strdup.c:19)
+==342645==    by 0x40682F: get_key_and_replace (replace_dollars.c:143)
+==342645==    by 0x4069DA: replace_in_split (replace_dollars.c:176)
+==342645==    by 0x406DC2: replace_dollars (replace_dollars.c:264)
+==342645==    by 0x405F8A: fill_cmds (parsing.c:78)
+==342645==    by 0x4060EC: parse_line (parsing.c:102)
+==342645==    by 0x408AD1: loop (main.c:20)
+==342645==    by 0x408D33: main (main.c:67)
+==342645== 
+==342645== 28 bytes in 3 blocks are indirectly lost in loss record 22 of 84
+==342645==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==342645==    by 0x409619: ft_substr (ft_substr.c:30)
+==342645==    by 0x406711: fill_split_args (replace_dollars.c:116)
+==342645==    by 0x406D90: replace_dollars (replace_dollars.c:259)
+==342645==    by 0x405F8A: fill_cmds (parsing.c:78)
+==342645==    by 0x4060EC: parse_line (parsing.c:102)
+==342645==    by 0x408AD1: loop (main.c:20)
+==342645==    by 0x408D33: main (main.c:67)
+==342645== 
+==342645== 49 bytes in 3 blocks are definitely lost in loss record 26 of 84
+==342645==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==342645==    by 0x4092EE: ft_calloc (ft_calloc.c:21)
+==342645==    by 0x406B63: create_final_raw (replace_dollars.c:205)
+==342645==    by 0x406DEB: replace_dollars (replace_dollars.c:266)
+==342645==    by 0x405F8A: fill_cmds (parsing.c:78)
+==342645==    by 0x4060EC: parse_line (parsing.c:102)
+==342645==    by 0x408AD1: loop (main.c:20)
+==342645==    by 0x408D33: main (main.c:67)
+==342645== 
+==342645== 169 (112 direct, 57 indirect) bytes in 3 blocks are definitely lost in loss record 34 of 84
+==342645==    at 0x4E050C5: malloc (vg_replace_malloc.c:393)
+==342645==    by 0x4092EE: ft_calloc (ft_calloc.c:21)
+==342645==    by 0x406D66: replace_dollars (replace_dollars.c:256)
+==342645==    by 0x405F8A: fill_cmds (parsing.c:78)
+==342645==    by 0x4060EC: parse_line (parsing.c:102)
+==342645==    by 0x408AD1: loop (main.c:20)
+==342645==    by 0x408D33: main (main.c:67)
+==342645== 
+==342645== LEAK SUMMARY:
+==342645==    definitely lost: 161 bytes in 6 blocks
+==342645==    indirectly lost: 57 bytes in 11 blocks
+==342645==      possibly lost: 0 bytes in 0 blocks
+==342645==    still reachable: 0 bytes in 0 blocks
+==342645==         suppressed: 227,434 bytes in 236 blocks
+==342645== 
+==342645== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==342645== 
+==342645== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==342702== Memcheck, a memory error detector
+==342702== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==342702== Using Valgrind-3.20.0-5147d671e4-20221024 and LibVEX; rerun with -h for copyright info
+==342702== Command: ./minishell test
+==342702== Parent PID: 342700
+==342702== 
+==342702== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-342702-by-aurel-on-fedora-37
+==342702== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-342702-by-aurel-on-fedora-37
+==342702== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-342702-by-aurel-on-fedora-37
+==342702== 
+==342702== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==342702== don't want to do, unless you know exactly what you're doing,
+==342702== or are doing some strange experiment):
+==342702==   /snap/valgrind/142/usr/libexec/valgrind/../../bin/vgdb --pid=342702 ...command...
+==342702== 
+==342702== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==342702==   /path/to/gdb ./minishell
+==342702== and then give GDB the following command
+==342702==   target remote | /snap/valgrind/142/usr/libexec/valgrind/../../bin/vgdb --pid=342702
+==342702== --pid is optional if only one valgrind process is running
+==342702== 
+==342702== WARNING: new redirection conflicts with existing -- ignoring it
+==342702== Downloading debug info for /usr/lib64/libreadline.so.8.2...
+==342702== Successfully downloaded debug file for /usr/lib64/libreadline.so.8.2
+==342702== Downloading debug info for /home/aurel/.cache/debuginfod_client/7a2fe3f0fdf59c9969b6fc975d45dc8c5bafce75/debuginfo...
+==342702== Successfully downloaded debug file for /home/aurel/.cache/debuginfod_client/7a2fe3f0fdf59c9969b6fc975d45dc8c5bafce75/debuginfo
+==342702== Downloading debug info for /usr/lib64/libc.so.6...
+==342702== Successfully downloaded debug file for /usr/lib64/libc.so.6
+==342702== WARNING: new redirection conflicts with existing -- ignoring it
+==342702== WARNING: new redirection conflicts with existing -- ignoring it
+==342702== WARNING: new redirection conflicts with existing -- ignoring it
+==342702== WARNING: new redirection conflicts with existing -- ignoring it
+==342702== Downloading debug info for /usr/lib64/libtinfo.so.6.3...
+==342702== Successfully downloaded debug file for /usr/lib64/libtinfo.so.6.3
+==342702== Downloading debug info for /home/aurel/.cache/debuginfod_client/698cae6b13b3a224051b6646b50e00a6d62f83fe/debuginfo...
+==342702== Successfully downloaded debug file for /home/aurel/.cache/debuginfod_client/698cae6b13b3a224051b6646b50e00a6d62f83fe/debuginfo
+==342702== Preferring higher priority redirection:
+==342702== WARNING: new redirection conflicts with existing -- ignoring it
+==342702== 
+==342702== FILE DESCRIPTORS: 3 open (2 std) at exit.
+==342702== Open file descriptor 3: /home/aurel/Documents/CLionProjects/Mini_Shell/valgrind-out.log
+==342702==    <inherited from parent>
+==342702== 
+==342702== 
+==342702== HEAP SUMMARY:
+==342702==     in use at exit: 223,302 bytes in 232 blocks
+==342702==   total heap usage: 1,683 allocs, 1,451 frees, 290,493 bytes allocated
+==342702== 
+==342702== Searching for pointers to 232 not-freed blocks
+==342702== Checked 239,424 bytes
+==342702== 
+==342702== LEAK SUMMARY:
+==342702==    definitely lost: 0 bytes in 0 blocks
+==342702==    indirectly lost: 0 bytes in 0 blocks
+==342702==      possibly lost: 0 bytes in 0 blocks
+==342702==    still reachable: 0 bytes in 0 blocks
+==342702==         suppressed: 223,302 bytes in 232 blocks
+==342702== 
+==342702== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==342702== 
+==342702== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
