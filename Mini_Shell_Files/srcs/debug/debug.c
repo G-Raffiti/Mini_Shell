@@ -52,12 +52,12 @@ void	debug_cmd(t_cmd *cmd)
 		cmd->input->name == NULL ? "Pipe" : cmd->input->name, cmd->input->fd,
 		cmd->output->name == NULL ? "Pipe" : cmd->output->name,
 		cmd->output->fd);
-	is_valid = cmd->is_valid ? GREEN"Yes"GREY : RED"No"GREY;
-	printf(WHITE"IS_VALID? %s | ", is_valid);
+	is_valid = cmd->is_builtin ? GREEN"Yes"GREY : RED"No"GREY;
+	printf(WHITE"IS_BUILTIN? %s | ", is_valid);
 	printf(WHITE"RAW_CMD: "GREY"["YELLOW"%s"GREY"] | ", cmd->raw_cmd);
 	printf(WHITE"PARSED_CMD: "GREY);
 	i = 0;
-	while (cmd->cmd[i])
+	while (cmd->cmd && cmd->cmd[i])
 	{
 		printf("["YELLOW"%s"GREY"] ", cmd->cmd[i]);
 		i++;
@@ -87,12 +87,12 @@ void	debug_mini_shell(t_mini_shell *ms)
 {
 	if (!g_debug)
 		return ;
-	printf("env %p\n", ms->env);
+	printf("ft_env %p\n", ms->env);
 	if (ms->env)
 	{
 		int i = -1;
 		while (ms->env[++i])
-			printf("ms->env line %d: - %s\n", i, ms->env[i]);
+			printf("ms->ft_env line %d: - %s\n", i, ms->env[i]);
 	}
 	printf("\nenv_dict %p\n", ms->env_dict);
 	if (ms->env_dict)

@@ -27,6 +27,7 @@ void	*free_fd(t_fd *fd)
 	if (!fd)
 		return (NULL);
 	fd->name = ft_free(fd->name);
+	fd->limiter = ft_free(fd->limiter);
 	free(fd);
 	return (NULL);
 }
@@ -49,16 +50,29 @@ void	*free_cmd(t_cmd *cmd)
 	return (NULL);
 }
 
-void	*free_mini_shell(t_mini_shell *mini_shell)
+void	*free_dict(void *pt)
 {
-	if (!mini_shell)
+	ft_free(get_env_dict((t_env_arg*)pt)->key);
+	ft_free(get_env_dict((t_env_arg*)pt)->value);
+	ft_free((t_env_arg*)pt);
+	return (NULL);
+}
+
+void	*free_mini_shell(t_mini_shell *ms)
+{
+	if (!ms)
 		return (NULL);
-	if (mini_shell->env)
-		mini_shell->env = free_split(mini_shell->env);
-	ft_lstd_clear(&mini_shell->env_dict, ft_free);
-	if (mini_shell->paths)
-		mini_shell->paths = free_split(mini_shell->paths);
-	clear_cmds(&mini_shell->cmds, free_cmd);
-	mini_shell = ft_free(mini_shell);
+	if (ms->env)
+		ms->env = free_split(ms->env);
+	if (ms->env_sort)
+		ms->env = free_split(ms->env_sort);
+	ft_lstd_clear(&ms->env_dict, free_dict);
+	ft_lstd_clear(&ms->env_sort_dict, free_dict);
+	if (ms->paths)
+		ms->paths = free_split(ms->paths);
+	clear_cmds(&ms->cmds, free_cmd);
+	close(ms->stds[0]);
+	close(ms->stds[1]);
+	ms = ft_free(ms);
 	return (NULL);
 }

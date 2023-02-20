@@ -22,3 +22,14 @@ int	ft_isdigit(char *str)
 	}
 	return (TRUE);
 }
+
+int ft_is_digit_signed(char *str)
+{
+	while (*str)
+	{
+		if (!(*str >= '0' && *str <= '9') && *str != '-' && *str != '+')
+			return (FALSE);
+		str++;
+	}
+	return (TRUE);
+}

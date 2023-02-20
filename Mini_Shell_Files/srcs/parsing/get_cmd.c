@@ -116,6 +116,11 @@ static char	**split_cmd(char *raw_cmd)
 
 t_error	get_cmd(t_cmd *cmd)
 {
+	if (is_empty_line(cmd->raw_cmd))
+	{
+		cmd->cmd = NULL;
+		return (SUCCESS);
+	}
 	cmd->cmd = split_cmd(cmd->raw_cmd);
 	if (!cmd->cmd)
 		return (MALLOC_ERROR);

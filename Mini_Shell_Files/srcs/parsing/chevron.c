@@ -8,30 +8,29 @@
 static void	chevron_out(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 *file_name)
 {
+	cmd->output->type = type;
 	if (cmd->output->fd > 0)
 	{
 		safe_close(ms, cmd->output->fd, "chevron_out");
 		cmd->output->name = ft_free(cmd->input->name);
 	}
-	if (type == OUT_CHT)
+	if (type == OUT_REDIR)
 		cmd->output->fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	else
 		cmd->output->fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	cmd->output->name = file_name;
 	if (cmd->output->fd == -1)
-	{
 		cmd->output->error = errno;
-		cmd->is_valid = FALSE;
-	}
 }
 
 ///open file and create t_fd
 static void	chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 *file_name)
 {
-	if (!cmd->is_valid)
+	if (cmd->input->fd == -1)
 		return ;
-	if (type == OUT_CHT || type == APPEND_CHT)
+	cmd->input->type = type;
+	if (type == OUT_REDIR || type == APPEND_REDIR)
 	{
 		chevron_out(ms, cmd, type, file_name);
 		return ;
@@ -41,17 +40,17 @@ static void	chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 		safe_close(ms, cmd->input->fd, "chevron_in");
 		cmd->input->name = ft_free(cmd->input->name);
 	}
-	if (type == IN_CHT)
+	if (type == IN_REDIR)
 		cmd->input->fd = open(file_name, O_RDONLY);
-	else if (type == HERE_DOC_CHT)
-		cmd->input->fd = open(file_name, O_CREAT | O_TRUNC |
-		O_WRONLY, 0644);
+	else if (type == HERE_DOC_REDIR)
+	{
+		safe_pipe(ms, cmd->input->here_doc_pipe, "chevron_in");
+		cmd->input->fd = cmd->input->here_doc_pipe[0];
+		cmd->input->limiter = file_name;
+	}
 	cmd->input->name = file_name;
 	if (cmd->input->fd == -1)
-	{
 		cmd->input->error = errno;
-		cmd->is_valid = FALSE;
-	}
 }
 
 
@@ -61,18 +60,18 @@ static t_chevron get_chevron_type(char *str)
 
 	type = -1;
 	if (*str == '<' && *(str + 1) != '<')
-		type = IN_CHT;
+		type = IN_REDIR;
 	else if (*str == '>' && *(str + 1) != '>')
-		type = OUT_CHT;
+		type = OUT_REDIR;
 	else if (*str == '<' && *(str + 1) == '<')
 	{
-		type = HERE_DOC_CHT;
+		type = HERE_DOC_REDIR;
 		*str = ' ';
 		str++;
 	}
 	else if (*str == '>' && *(str + 1) == '>')
 	{
-		type = APPEND_CHT;
+		type = APPEND_REDIR;
 		*str = ' ';
 		str++;
 	}
@@ -80,8 +79,33 @@ static t_chevron get_chevron_type(char *str)
 	return (type);
 }
 
-static t_error extract_file_name(char *str, char *quote, char **file_name)
+static t_error	replace_dollar(t_mini_shell *ms, char **str)
 {
+	char *key;
+	t_lstd *dict;
+
+	if ((*str)[1] && **str == '$' && valid_id_dollars((*str)[1]))
+	{
+		key = (*str) + 1;
+		dict = ft_lstd_find(ms->env_dict, key, find_in_dict);
+		*str = ft_free(*str);
+		if (dict)
+			*str = ft_strdup(get_env_dict(dict->content)->value);
+		else
+			*str = ft_strdup("");
+		if (*str == NULL)
+			return (MALLOC_ERROR);
+		if (ft_contain(*str, ' '))
+			return (free(*str), parse_error(ms, AMBIGUOUS_REDIRECT, 2));
+		if (ft_contain(*str, '/'))
+			return (free(*str), parse_error(ms, IS_DIRECTORY, 2));
+	}
+	return (SUCCESS);
+}
+
+char	*extract_file_name(t_mini_shell *ms, char *str, char *quote)
+{
+	char	*file_name;
 	char	*start;
 
 	while (*str == ' ')
@@ -89,16 +113,14 @@ static t_error extract_file_name(char *str, char *quote, char **file_name)
 	if (set_quote_state(*str, quote))
 		str++;
 	start = str;
-	if (!*quote && (*str == '<' || *str == '>'))
-		return (ERROR);
 	while (*str && (!ft_contain(" <>\"\'", *str)
 					|| (*quote && ft_contain("<>", *str))))
 		str++;
-	// TODO if file name start with a $ replace than check if it contains '
-	//  ' or '/' error "ambiguous redirect" and "Is a directory"
-	*file_name = ft_substr(start, 0, str - start);
-	if (!*file_name)
-		return (MALLOC_ERROR);
+	file_name = ft_substr(start, 0, str - start);
+	if (!file_name)
+		return (NULL);
+	if (replace_dollar(ms, &file_name) == MALLOC_ERROR)
+		return (ft_free(file_name));
 	if (*str && *str == *quote)
 		(*str)++;
 	while (*start && start != str)
@@ -106,6 +128,27 @@ static t_error extract_file_name(char *str, char *quote, char **file_name)
 		*start = ' ';
 		start++;
 	}
+	return (file_name);
+}
+
+t_error valid_file(t_mini_shell *ms, char *str)
+{
+	while (*str == ' ')
+		str++;
+	if (ft_strncmp(str, "<<<", 3) == 0)
+		return (parse_error(ms, SYNTAX_REDIR_3IN, 2));
+	if (ft_strncmp(str, "<<", 2) == 0)
+		return (parse_error(ms, SYNTAX_REDIR_2IN, 2));
+	if (ft_strncmp(str, ">>", 2) == 0)
+		return (parse_error(ms, SYNTAX_REDIR_2OUT, 2));
+	if (*str == '<')
+		return (parse_error(ms, SYNTAX_REDIR_IN, 2));
+	if (*str == '>')
+		return (parse_error(ms, SYNTAX_REDIR_OUT, 2));
+	if (*str == '|')
+		return (parse_error(ms, SYNTAX_PIPE, 2));
+	if (!*str)
+		return (parse_error(ms, SYNTAX_NEWLINE, 2));
 	return (SUCCESS);
 }
 
@@ -125,9 +168,11 @@ t_error	open_files(t_mini_shell *ms, t_cmd *cmd)
 		if (!set_quote_state(*str, &quote) && ft_contain("<>", *str))
 		{
 			chevron_type = get_chevron_type(str);
-			error = extract_file_name(str, &quote, &file_name);
-			if (error != SUCCESS)
-				return (error);
+			if (valid_file(ms, str) == ERROR)
+				return (ERROR);
+			file_name = extract_file_name(ms, str, &quote);
+			if(file_name == NULL)
+				return (MALLOC_ERROR);
 			chevron_in(ms, cmd, chevron_type, file_name);
 		}
 		str++;

@@ -4,6 +4,7 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <string.h>
+#include <sys/stat.h>
 #include "../../../Lib_List_Double/incs/ft_lstd.h"
 #include "../../incs/mini_shell.h"
 #include "debug.h"
@@ -13,44 +14,92 @@ static t_error permission_denied(t_mini_shell *ms, t_cmd *cmd)
 	if (cmd->input->fd == -1)
 	{
 		set_exit_code(cmd->input->error);
-		printf("%s: %s: %s\n", cmd->cmd[0], cmd->input->name,
-			   strerror(cmd->input->error));
+		if (!cmd->cmd)
+			printf("%s: %s\n", cmd->input->name,
+					strerror(cmd->input->error));
+		else
+			printf("%s: %s: %s\n", cmd->cmd[0], cmd->input->name,
+					strerror(cmd->input->error));
 		safe_close(ms, ms->pipe[1], "exec_first");
 		return (ERROR);
 	}
 	if (cmd->output->fd == -1)
 	{
 		set_exit_code(cmd->output->error);
-		printf("%s: %s: %s\n", cmd->cmd[0], cmd->output->name,
-			   strerror(cmd->output->error));
+		if (!cmd->cmd)
+			printf("%s: %s\n", cmd->output->name,
+					strerror(cmd->output->error));
+		else
+			printf("%s: %s: %s\n", cmd->cmd[0], cmd->output->name,
+					strerror(cmd->output->error));
 		safe_close(ms, ms->pipe[1], "exec_first");
 		return (ERROR);
 	}
 	return (SUCCESS);
 }
 
+static void error_exec(t_mini_shell *ms, t_cmd *cmd)
+{
+	struct stat *file_stat;
+
+	file_stat = NULL;
+	file_stat = ft_calloc(1, sizeof(struct stat));
+	if (!file_stat)
+		exit_child(ms, cmd, ENOMEM, MALLOC_FAILED);
+	lstat(cmd->cmd[0], file_stat);
+	if (ft_str_cmp(cmd->cmd[0], ".") == 0)
+		return (free(file_stat), exit_child(ms, cmd, 2, FILENAME_REQUIERED));
+	if (ft_str_cmp(cmd->cmd[0], "..") == 0)
+		return (free(file_stat), exit_child(ms, cmd, 127, COMMAND_NOT_FOUND));
+	if ((file_stat->st_mode & S_IFMT) == S_IFDIR)
+		return (free(file_stat), exit_child(ms, cmd, 126, IS_DIRECTORY));
+	if (ft_contain(cmd->cmd[0], '/'))
+		return (free(file_stat), exit_child(ms, cmd, 127, NO_FILE));
+	if ((file_stat->st_mode & S_IFMT) == S_IFREG && access(cmd->cmd[0],
+														  X_OK) != 0)
+		return (free(file_stat), exit_child(ms, cmd, 126, PERMISSION_DENIED));
+	return (free(file_stat), exit_child(ms, cmd, 127, COMMAND_NOT_FOUND));
+}
+
 static void execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 {
-	if (!cmd->is_builtin)
-		execve(cmd->path, cmd->cmd, ms->env);
-	else
-	{
-		exec_builtin(ms, cmd, 1);
+	t_error exit_status;
+
+	if (!cmd->cmd)
 		exit(0);
+	if (cmd->is_builtin)
+	{
+		exit_status = exec_builtin(ms, cmd, TRUE);
+		if (exit_status != MALLOC_ERROR)
+			exit(get_exit_code());
+		else
+			exit_child(ms, cmd, ENOMEM, MALLOC_FAILED);
 	}
-	exit_child(ms, cmd, 127, COMMAND_NOT_FOUND);
+	else
+		execve(cmd->path, cmd->cmd, ms->env);
+	error_exec(ms, cmd);
 }
 
 static void	exec_one(t_mini_shell *ms, t_cmd *one)
 {
+	t_error exit_status;
+
 	if (permission_denied(ms, one) == ERROR)
 		return ;
 	if (one->input->fd > 0)
-		safe_dup2(ms, one->input->fd, STDIN_FILENO, "exec_one");
-	if (one->is_builtin)
 	{
-		exec_builtin(ms, one, 0);
-		return ;//TODO : check exit properly
+		safe_dup2(ms, one->input->fd, STDIN_FILENO, "exec_one");
+		if (one->input->here_doc_pipe[1])
+			close(one->input->here_doc_pipe[1]);
+	}
+	if (one->is_builtin && !one->need_fork)
+	{
+		exit_status = exec_builtin(ms, one, FALSE);
+		if (exit_status == MALLOC_ERROR)
+			exit_malloc(ms, "execve_cmd");
+		else if (exit_status == ERROR)
+			set_exit_code(end_child(ms, one, 127, COMMAND_NOT_FOUND));
+		return ;
 	}
 	set_exec_signals();
 	safe_fork(ms, one, "exec_one");
@@ -67,11 +116,15 @@ static void	exec_one(t_mini_shell *ms, t_cmd *one)
 
 static void	exec_first(t_mini_shell *ms, t_cmd *first)
 {
-	safe_pipe(ms, "exec_first");
+	safe_pipe(ms, ms->pipe, "exec_first");
 	if (permission_denied(ms, first) == ERROR)
 		return ;
 	if (first->input->fd != -2)
+	{
 		safe_dup2(ms, first->input->fd, STDIN_FILENO, "exec_first");
+		if (first->input->here_doc_pipe[1])
+			close(first->input->here_doc_pipe[1]);
+	}
 	set_exec_signals();
 	safe_fork(ms, first, "exec_first");
 	if (first->pid)
@@ -94,8 +147,12 @@ static void	exec_cmd(t_mini_shell *ms, t_cmd *cmd)
 	if (cmd->input->fd == -2)
 		safe_dup2(ms, ms->pipe[0], STDIN_FILENO, "exec_mid");
 	else if (cmd->input->fd > 0)
+	{
 		safe_dup2(ms, cmd->input->fd, STDIN_FILENO, "exec_mid");
-	safe_pipe(ms, "exec_mid");
+		if (cmd->input->here_doc_pipe[1])
+			close(cmd->input->here_doc_pipe[1]);
+	}
+	safe_pipe(ms, ms->pipe, "exec_mid");
 	if (permission_denied(ms, cmd) == ERROR)
 		return ;
 	set_exec_signals();
@@ -119,7 +176,11 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 	if (last->input->fd == -2)
 		safe_dup2(ms, ms->pipe[0], STDIN_FILENO, "exec_last");
 	else if (last->input->fd > 0)
+	{
 		safe_dup2(ms, last->input->fd, STDIN_FILENO, "exec_last");
+		if (last->input->here_doc_pipe[1])
+			close(last->input->here_doc_pipe[1]);
+	}
 	close(ms->pipe[0]);
 	if (permission_denied(ms, last) == ERROR)
 		return;
@@ -136,15 +197,16 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 	execve_cmd(ms, last);
 }
 
-void	wait_exit_status(t_lstd *current)
+void	wait_exit_status(t_mini_shell *ms, t_lstd *current)
 {
 	int		wstatus;
 	int		exit_status;
 
+	exit_status = get_exit_code();
 	current = ft_lstd_first(current);
 	while (current)
 	{
-		if (get(current)->is_builtin)
+		if (!get(current)->pid)
 		{
 			current = current->next;
 			continue;
@@ -154,8 +216,12 @@ void	wait_exit_status(t_lstd *current)
 			exit_status = WEXITSTATUS(wstatus);
 		else if (WIFSIGNALED(wstatus))
 			exit_status = 128 + WTERMSIG(wstatus);
+		if (exit_status == ENOMEM)
+			set_exit_code(ENOMEM);
 		current = current->next;
 	}
+	if (get_exit_code() == ENOMEM)
+		exit_malloc(ms, "wait_exit_status");
 	set_exit_code(exit_status);
 	if (debug_mod())
 		dprintf(2, YELLOW"-▶ %s%d"YELLOW" ◀-"WHITE"\n", get_exit_code() == 0 ?
@@ -165,12 +231,20 @@ void	wait_exit_status(t_lstd *current)
 t_error	exec_cmds(t_mini_shell *ms)
 {
 	t_lstd	*current;
-	int		save_in;
-	int		save_out;
+	t_error	here_doc_status;
 
-	save_in = safe_dup(ms, STDIN_FILENO, "exec: exec");
-	save_out = safe_dup(ms, STDOUT_FILENO, "exec: exec");
+	ms->stds[0] = safe_dup(ms, STDIN_FILENO, "exec: exec");
+	ms->stds[1] = safe_dup(ms, STDOUT_FILENO, "exec: exec");
 	current = ft_lstd_first(ms->cmds);
+	here_doc_status = here_docs(ms, current);
+	if (here_doc_status == MALLOC_ERROR)
+		return (MALLOC_ERROR);
+	else if (get_exit_code() == 130)
+	{
+		safe_dup2(ms, ms->stds[0], STDIN_FILENO, "exec: exec");
+		safe_close(ms, ms->stds[1], "exec: exec");
+		return (SUCCESS);
+	}
 	if (!current->previous && !current->next)
 		exec_one(ms, get(current));
 	else
@@ -185,8 +259,8 @@ t_error	exec_cmds(t_mini_shell *ms)
 		exec_last(ms, get(current));
 	}
 	close(STDIN_FILENO);
-	wait_exit_status(current);
-	safe_dup2(ms, save_in, STDIN_FILENO, "exec: exec");
-	safe_dup2(ms, save_out, STDOUT_FILENO, "exec: exec");
+	wait_exit_status(ms, current);
+	safe_dup2(ms, ms->stds[0], STDIN_FILENO, "exec: exec");
+	safe_dup2(ms, ms->stds[1], STDOUT_FILENO, "exec: exec");
 	return (SUCCESS);
 }

@@ -4,9 +4,9 @@
 #								FILES									#
 #***********************************************************************#
 
-NAME =			ms.out
+NAME =			minishell
 CC =			gcc
-CC_FLAGS =		-Wall -Wextra -Werror -gdwarf-4 -g3#-fsanitize=address
+CC_FLAGS =		-Wall -Wextra -Werror -gdwarf-4 -g -fsanitize=address
 
 PATH_OBJ =		./Mini_Shell_Files/objs/
 PATH_SRC =		./Mini_Shell_Files/srcs/
@@ -23,17 +23,26 @@ FILE_LIB =		./Lib_FT/incs/libft.h \
 				./Lib_List_Double/incs/ft_lstd.h
 
 FILES =			\
+				builtin/builtin \
+				builtin/builtin_errors \
+				builtin/ft_cd \
+				builtin/ft_echo \
+				builtin/ft_exit \
+				builtin/ft_pwd \
+				builtin/ft_export \
+				builtin/ft_env \
+				builtin/ft_unset \
+				\
 				debug/debug \
+				debug/test_mode \
 				\
 				env/env \
+				env/env_regen \
 				env/modif_env \
 				\
 				exec/exec \
-				exec/export_builtin \
-				exec/env_builtin \
-				exec/pwd_builtin \
-				exec/unset_builtin \
 				exec/signals \
+				exec/here_docs \
 				\
 				parsing/check_line \
 				parsing/chevron \
@@ -43,6 +52,7 @@ FILES =			\
 				parsing/parsing \
 				parsing/read_line \
 				parsing/replace_dollars \
+				parsing/replace_tilde \
 				parsing/set_builtin \
 				\
 				utils/env_utils \
@@ -52,10 +62,7 @@ FILES =			\
 				utils/list_cmd_utils \
 				utils/new_struct \
 				utils/safe_functions \
-				utils/builtin \
 				utils/check_functions \
-				\
-				builtin_errors \
 				\
 				exit \
 				exit_code \
@@ -92,6 +99,7 @@ $(PATH_OBJ)%.o:	$(PATH_SRC)%.c $(FILES_INC) $(FILE_LIB)
 
 $(PATH_OBJ):
 				@mkdir $@
+				@mkdir $(PATH_OBJ)/builtin
 				@mkdir $(PATH_OBJ)/debug
 				@mkdir $(PATH_OBJ)/env
 				@mkdir $(PATH_OBJ)/exec

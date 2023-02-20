@@ -6,24 +6,29 @@
 
 t_error	fill_paths(t_mini_shell *ms, char *full_path)
 {
-	int		char_pos;
 	char	*trunc_path;
-	int		start;
-	int 	nbr_path;
+	int		len;
+	int		nbr_path;
 
-	char_pos = -1;
 	nbr_path = 0;
-	while (full_path[++char_pos])
+	while (*full_path)
 	{
-		start = char_pos;
-		while (full_path[char_pos] && full_path[char_pos] != ':')
-			char_pos++;
-		trunc_path = ft_substr(full_path, start, char_pos - start);
+		len = 0;
+		while (*full_path && *full_path != ':')
+		{
+			full_path++;
+			len++;
+		}
+		trunc_path = ft_substr(full_path - len, 0, len);
 		if (!trunc_path)
 			return (MALLOC_ERROR);
-		ms->paths[nbr_path++] = ft_strjoin(trunc_path, "/");
-		if (!ms->paths)
-			return (free(trunc_path), MALLOC_ERROR);
+		ms->paths[nbr_path] = ft_strjoin(trunc_path, "/");
+		trunc_path = ft_free(trunc_path);
+		if (!ms->paths[nbr_path])
+			return (MALLOC_ERROR);
+		if (*full_path)
+			full_path++;
+		nbr_path++;
 	}
 	return (SUCCESS);
 }
@@ -34,10 +39,10 @@ t_error	create_ms_path(t_mini_shell *ms, char *full_path)
 	int nbr_of_paths;
 
 	char_pos = 0;
-	nbr_of_paths = 1;
+	nbr_of_paths = 2;
 	while (full_path[char_pos])
 	{
-		if (full_path[char_pos] != ':')
+		if (full_path[char_pos] == ':')
 			nbr_of_paths++;
 		char_pos++;
 	}
@@ -50,19 +55,24 @@ t_error	create_ms_path(t_mini_shell *ms, char *full_path)
 
 t_error	get_all_paths(t_mini_shell *ms, t_lstd *env_dict)
 {
-	t_env_arg	*current;
+	t_env_arg	*dict_pair;
+	char		*paths;
 
-	current = get_env_dict(env_dict->content);
-	while (current && ft_str_cmp(current->key, "PATH") != 0)
+	dict_pair = get_env_dict(env_dict->content);
+	while (dict_pair && ft_str_cmp(dict_pair->key, "PATH") != 0)
 	{
 		env_dict = env_dict->next;
 		if (!env_dict)
-			break ;//TODO j'ai mis ca la vite fait, si t'a fait mieux erase^^
-		current = get_env_dict(env_dict->content);
+		{
+			ms->paths = NULL;
+			return (ERROR);
+		}
+		dict_pair = get_env_dict(env_dict->content);
 	}
-	if (create_ms_path(ms, current->value) == MALLOC_ERROR)
+	paths = dict_pair->value;
+	if (create_ms_path(ms, paths) == MALLOC_ERROR)
 		exit_malloc(ms, "get_path: create_ms_path");
-	if (fill_paths(ms, current->value) == MALLOC_ERROR)
+	if (fill_paths(ms, paths) == MALLOC_ERROR)
 		exit_malloc(ms, "get_path: fill_paths");
 	return (SUCCESS);
 }
@@ -78,11 +88,9 @@ t_error	get_path(t_mini_shell *ms, t_cmd *cmd)
 			return (MALLOC_ERROR);
 		return (SUCCESS);
 	}
-	i = -1;
-	if (!ms->paths || ft_contain(cmd->cmd[0], '/')) //TODO verification if
-		// path have to be absolute or if ist also work for relatif path.
-		// if it does join pwd with cmd->cmd[0] if it contains a "/"
+	if (!ms->paths || ft_contain(cmd->cmd[0], '/'))
 		return (SUCCESS);
+	i = -1;
 	while (ms->paths[++i])
 	{
 		cmd->path = ft_strjoin(ms->paths[i], cmd->cmd[0]);

@@ -1,0 +1,221 @@
+
+echo \a
+\e\c\h\o bonjour
+echo charles\
+echo \ \ jesuis\ \ charles
+echo \ \ jesuis\| \ charles
+echo \ \ jesuis\&\& \ charles
+echo \ \ jesuis\|\| \ charles
+echo \ \ jesuis \|\| \ charles
+echo \ \ jesuis\| \ charles
+echo \ \ \ \ \ \ \ \
+echo \ \ \ \ \ \ \ \               \ \ \ \ \ \
+echo \$PATH
+echo \$\P\A\T\H
+echo\ bonjour
+\ echo bonjour
+ \ echo bonjour
+                 \ echo bonjour
+ \                 echo bonjour
+                 \                    echo bonjour
+/bin/echo " \  "
+/bin/echo " \" "
+/bin/echo " \' "
+/bin/echo " \a "
+/bin/echo " \b "
+/bin/echo " \| "
+/bin/echo " \! "
+/bin/echo " \@ "
+/bin/echo " \$ "
+/bin/echo " \$LESS "
+/bin/echo " \$? "
+/bin/echo " \\ "
+/bin/echo " \\\ "
+/bin/echo " \\\\ "
+/bin/echo " \\\\\ "
+/bin/echo " \\\\\\ "
+/bin/echo " \\\\\\\ "
+/bin/echo " \\\\\\\\ "
+/bin/echo ' \  '
+/bin/echo ' \" '
+/bin/echo ' \a '
+/bin/echo ' \b '
+/bin/echo ' \| '
+/bin/echo ' \! '
+/bin/echo ' \@ '
+/bin/echo ' \$ '
+/bin/echo ' $LESS '
+/bin/echo ' \$? '
+/bin/echo ' \\ '
+/bin/echo ' \\\ '
+echo \
+echo "\""'bonjour'
+########################################################## preprocess/interpolation ###########################################################
+export TEST='bonjour' |  echo $TEST
+export TEST='bonjour' |  echo $TES
+export TEST='bonjour' |  echo $TEST_
+export TEST='bonjour' |  echo "|$TEST|"
+export TEST='bonjour' |  echo "|$TES|"
+export TEST='bonjour' |  echo "|$TEST_|"
+export TEST='bonjour' |  echo '|$TEST|'
+export TEST='bonjour' |  echo '|$TES|'
+export TEST='bonjour' |  echo '|$TEST_|'
+export A='foo' B='bar' C='baz' |  echo $A$B$C
+export A='foo' B='bar' C='baz' |  echo "$A$B$C"
+export A='foo' B='bar' C='baz' |  echo '$A$B$C'
+export A='foo' B='bar' C='baz' |  echo $A,$B,$C
+export A='foo' B='bar' C='baz' |  echo "$A,$B,$C"
+export A='foo' B='bar' C='baz' |  echo '$A,$B,$C'
+export A='foo' B='bar' C='baz' |  echo $A"$B"$C"A"$B"$C"
+export A='foo' B='bar' C='baz' |  echo $A'$B'$C'A'$B'$C'
+export A='foo ' B=' bar  ' C='baz ' |  echo $A"$B"$C"A"$B"$C"
+export A='foo ' B=' bar  ' C='baz ' |  echo $A'$B'$C'A'$B'$C'
+echo $A
+echo $A$B
+echo $A$B$C
+echo $A$B$C$D
+export A='bonjour\je' |  echo [$A |
+export A='\b\\o\\j\\\\\\\our\\je\\\\' |  echo [$A |
+export A='   \b\\o\\j\\\\\\\our\\je\\\\' |  echo [$A |
+export A='\b\\o\\j\\\\\\\our\\je\\\\   ' |  echo [$A |
+export A='  \b\\o\\j\\\\\\\our\\je\\\\ ' |  echo [$A |
+export A='a  \b\\o\\j\\\\\\\our\\je\\\\ b' |  echo [$A |
+export A=' a  \b\\o\\j\\\\\\\our\\je\\\\ b ' |  echo [$A |
+export A=' ' |  echo [$A |
+export A='    ' |  echo [$A |
+export A='\ ' |  echo [$A |
+export A=' \  ' |  echo [$A |
+export A='bonjour' |  echo \ \ \ \ \ \ \ $A\ \ \ \ \ \
+export A='bonjour je suis' |  echo \ \ \ \ \ \ \ $A\ \ \ \ \ \
+export A='  bonjour je suis  ' |  echo \ \ \ \ \ \ \ $A\ \ \ \ \ \
+export A='bonjour je suis splited' |  echo $A
+export A='bonjour     je     suis    splited' |  echo $A
+export A='   bonjour     je     suis    splited   ' |  echo $A
+export A='bonjour je suis splited' |  echo [$A |
+export A='bonjour     je     suis    splited' |  echo [$A |
+export A='   bonjour     je     suis    splited   ' |  echo [$A |
+export A='bonjour je suis splited' |  echo "[$A | "
+export A='bonjour     je     suis    splited' |  echo "[$A | "
+export A='   bonjour     je     suis    splited   ' |  echo "[$A | "
+export A='bonjour je suis splited' |  echo \ $A
+export A='bonjour     je     suis    splited' |  echo \ $A
+export A='   bonjour     je     suis    splited   ' |  echo \ $A
+export A='bonjour je suis splited' |  echo $A\
+export A='bonjour     je     suis    splited' |  echo $A\
+export A='   bonjour     je     suis    splited   ' |  echo $A\
+export A='   bonjour     je     suis    splited   ' |  echo $A$A$A
+export A=''Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem consequatur. Quas molestiae corporis et...
+export A=''Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem consequatur. Quas molestiae corporis et...
+export A=''Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem consequatur. Quas molestiae corporis et...
+export ECHO='echo' |  $ECHO $ECHO
+export A='ec' B='ho' |  $A$B bonjour
+echo $
+echo \$
+echo \$\$\$\$
+echo \$$\$$
+export A='a' B='b' | echo $\A $\B
+export A='a' B='b' | echo $\A$\B
+export A=' ' | echo $A
+export A='  ' | echo $A
+export A='   ' | echo $A
+export A='    ' | echo $A
+export A='  a ' | echo $A
+export A='                                ' | echo $A
+export A='                     a          ' | echo $A
+export A=' ' | echo @$A@
+export A=' ' | echo @ $A@
+export A=' ' | echo @$A @
+export A='       ' | echo @$A@
+export A=' ' | echo '@'$A'@'
+export A=' ' | echo '@' $A'@'
+export A=' ' | echo '@'$A '@'
+export A=' ' | echo "@"$A"@"
+export A=' ' | echo "@" $A"@"
+export A=' ' | echo "@"$A "@"
+export A=' ' | echo @"$A"@
+export A=' ' | echo @ "$A"@
+export A=' ' | echo @"$A" @
+export A='       ' | echo @"$A"@
+export A=' ' | echo '@'"$A"'@'
+export A=' ' | echo '@' "$A"'@'
+export A=' ' | echo '@'"$A" '@'
+export A=' ' | echo "@""$A""@"
+export A=' ' | echo "@" "$A""@"
+export A=' ' | echo "@""$A" "@"
+export A='' B='' C='' | echo $A$B$C
+export A='file' | echo bonjour > $A
+export A='fi le' | echo bonjour > $A
+export A='fi le' | echo bonjour > "$A"
+export A='fi le' | echo bonjour > '$A'
+############################################################## preprocess/quote ###############################################################
+'echo' 'bonjour'
+'echo' 'je' 'suis' 'charles'
+"echo" "bonjour"
+"echo" "je" "suis" "charles"
+echo je'suis'"charles"
+echo "je"suis'charles'
+echo 'je'"suis"charles
+echo "\""
+echo "\$"
+echo "\\"
+echo "\a"
+echo "\A"
+ls ""
+ls ''
+ls "" "" "" '' """"
+ls '' '' '''' ''
+'     echo' bonjour
+'echo     ' bonjour
+"     echo" bonjour
+"echo     " bonjour
+''echo bonjour
+""echo bonjour
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''echo bonjour
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""echo bonjour
+echo'' bonjour
+echo"" bonjour
+echo'''''''''''''''''''''''''''''''''''''''''''''''''''''''''' bonjour
+echo"""""""""""""""""""""""""""""""""""""""""""""""""""""""""" bonjour
+ec''ho bonjour
+ec""ho bonjour
+ec''''''''''''''''''''''''''''''''''''''''''''''''''''''''''ho bonjour
+ec""""""""""""""""""""""""""""""""""""""""""""""""""""""""""ho bonjour
+'''''''e''''''''''c''''''''''''h''''''''o''''''''''''''''''''' bonjour
+"""""""e""""""""""c""""""""""""h""""""""o""""""""""""""""""""" bonjour
+echo '"'
+echo '""""""""""""""""""""""""""'
+echo "'"
+echo "''''''''''''''''''''''''''"
+echo '
+echo "
+echo '''
+echo """
+echo '''''''''''''''''''''''''''''''''''''''''''
+echo """""""""""""""""""""""""""""""""""""""""""
+echo 'AH\'
+echo "AH\"
+echo "AH\""
+echo '\''
+echo "\""
+echo "\\""
+echo bonjour > "fi le"
+echo bonjour > 'fi le'
+############################################################## preprocess/spaces ##############################################################
+echo foo
+echo                    foo
+             echo foo
+echo foo
+         echo           foo
+echo\t\t\t\t\t\t\t\t\t\tfoo
+\t\t\t\t\t\techo\tfoo
+echo\tfoo\t\t\t\t\t\t
+\t\t\t\techo\t\t\t\tfoo\t\t\t\t
+\fecho\ffoo
+echofoo
+\recho\rfoo
+\vecho\vfoo
+\t\r\v\fecho\v\t\r\vfoo
+
+
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
+            \t\t\t           \t\t\t
