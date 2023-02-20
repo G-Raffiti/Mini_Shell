@@ -62,12 +62,14 @@ FILES =			\
 				utils/env_type_utils \
 				utils/dict_utils \
 				utils/free_struct \
+				utils/ft_free \
 				utils/list_cmd_utils \
 				utils/new_struct \
 				utils/safe_functions \
 				utils/check_functions \
 				\
 				exit \
+				end_child \
 				exit_code \
 				main
 
