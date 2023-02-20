@@ -79,11 +79,13 @@ static t_chevron get_chevron_type(char *str)
 	return (type);
 }
 
-static t_error	replace_dollar(t_mini_shell *ms, char **str)
+static t_error	replace_dollar(t_mini_shell *ms, char **str, t_chevron type)
 {
 	char *key;
 	t_lstd *dict;
 
+	if (type == HERE_DOC_REDIR)
+		return (SUCCESS);
 	if ((*str)[1] && **str == '$' && valid_id_dollars((*str)[1]))
 	{
 		key = (*str) + 1;
@@ -103,7 +105,8 @@ static t_error	replace_dollar(t_mini_shell *ms, char **str)
 	return (SUCCESS);
 }
 
-char	*extract_file_name(t_mini_shell *ms, char *str, char *quote)
+char	*extract_file_name(t_mini_shell *ms, char *str, char *quote,
+						   t_chevron type)
 {
 	char	*file_name;
 	char	*start;
@@ -119,7 +122,7 @@ char	*extract_file_name(t_mini_shell *ms, char *str, char *quote)
 	file_name = ft_substr(start, 0, str - start);
 	if (!file_name)
 		return (NULL);
-	if (replace_dollar(ms, &file_name) == MALLOC_ERROR)
+	if (replace_dollar(ms, &file_name, type) == MALLOC_ERROR)
 		return (ft_free(file_name));
 	if (*str && *str == *quote)
 		(*str)++;
@@ -170,7 +173,7 @@ t_error	open_files(t_mini_shell *ms, t_cmd *cmd)
 			chevron_type = get_chevron_type(str);
 			if (valid_file(ms, str) == ERROR)
 				return (ERROR);
-			file_name = extract_file_name(ms, str, &quote);
+			file_name = extract_file_name(ms, str, &quote, chevron_type);
 			if(file_name == NULL)
 				return (MALLOC_ERROR);
 			chevron_in(ms, cmd, chevron_type, file_name);
