@@ -30,7 +30,7 @@ t_error	refresh_env(t_mini_shell *ms)
 {
 	int			size_dict;
 
-	ms->env = ft_free(ms->env);
+	ms->env = free_split(ms->env);
 	size_dict = ft_lstd_size(ms->env_dict);
 	ms->env = ft_calloc(size_dict, sizeof(char *));
 	if (!ms->env_sort)
@@ -43,7 +43,7 @@ t_error	refresh_export_env(t_mini_shell *ms)
 {
 	int			size_sorted_dict;
 
-	ms->env_sort = ft_free(ms->env_sort);
+	ms->env_sort = free_split(ms->env_sort);
 	if (ms->exported)
 		size_sorted_dict = ft_lstd_size(ms->env_sort_dict);
 	else
