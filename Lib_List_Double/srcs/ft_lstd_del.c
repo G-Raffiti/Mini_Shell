@@ -18,7 +18,7 @@ void	ft_lstd_del(t_lstd *elem, void (*free_fct)(void *))
 	{
 		if (elem->next)
 			elem->next->previous = elem->previous;
-		if(elem->previous)
+		if (elem->previous)
 			elem->previous->next = elem->next;
 		free_fct(elem->content);
 		free(elem);
