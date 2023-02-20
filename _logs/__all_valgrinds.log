@@ -1,0 +1,586 @@
+
+################################################################################################################################################################################################################## 
+
+ CMD -> ..$DGSDF $???S?Dgfd /v/ | $HOME > out | "$SALUT$USER" '' | <><>tututututututut| 
+==1401262== Memcheck, a memory error detector
+==1401262== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401262== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401262== Command: ./minishell test
+==1401262== Parent PID: 1401260
+==1401262== 
+==1401262== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> ..$DGSDF $???S?Dgfd /v/ | $HOME > out | "$SALUT$USER" '' | <><>tututututututut| 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd .| pwd| echo $PWD| echo $OLDPWD 
+==1401275== Memcheck, a memory error detector
+==1401275== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401275== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401275== Command: ./minishell test
+==1401275== Parent PID: 1401273
+==1401275== 
+==1401275== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd .| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ..| pwd| echo $PWD| echo $OLDPWD 
+==1401287== Memcheck, a memory error detector
+==1401287== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401287== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401287== Command: ./minishell test
+==1401287== Parent PID: 1401285
+==1401287== 
+==1401287== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ..| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ../..| pwd| echo $PWD| echo $OLDPWD 
+==1401299== Memcheck, a memory error detector
+==1401299== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401299== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401299== Command: ./minishell test
+==1401299== Parent PID: 1401297
+==1401299== 
+==1401299== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ../..| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ../../..| pwd| echo $PWD| echo $OLDPWD 
+==1401311== Memcheck, a memory error detector
+==1401311== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401311== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401311== Command: ./minishell test
+==1401311== Parent PID: 1401309
+==1401311== 
+==1401311== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ../../..| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ../../../..| pwd| echo $PWD| echo $OLDPWD 
+==1401323== Memcheck, a memory error detector
+==1401323== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401323== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401323== Command: ./minishell test
+==1401323== Parent PID: 1401321
+==1401323== 
+==1401323== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ../../../..| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ../../../../..| pwd| echo $PWD| echo $OLDPWD 
+==1401335== Memcheck, a memory error detector
+==1401335== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401335== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401335== Command: ./minishell test
+==1401335== Parent PID: 1401333
+==1401335== 
+==1401335== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ../../../../..| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ../../../../../..| pwd| echo $PWD| echo $OLDPWD 
+==1401347== Memcheck, a memory error detector
+==1401347== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401347== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401347== Command: ./minishell test
+==1401347== Parent PID: 1401345
+==1401347== 
+==1401347== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ../../../../../..| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd /| pwd| echo $PWD| echo $OLDPWD 
+==1401359== Memcheck, a memory error detector
+==1401359== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401359== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401359== Command: ./minishell test
+==1401359== Parent PID: 1401357
+==1401359== 
+==1401359== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd /| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ''| pwd| echo $PWD| echo $OLDPWD 
+==1401371== Memcheck, a memory error detector
+==1401371== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401371== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401371== Command: ./minishell test
+==1401371== Parent PID: 1401369
+==1401371== 
+==1401371== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ''| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd '' ''| pwd| echo $PWD| echo $OLDPWD 
+==1401383== Memcheck, a memory error detector
+==1401383== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401383== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401383== Command: ./minishell test
+==1401383== Parent PID: 1401381
+==1401383== 
+==1401383== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd '' ''| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd '' '' ''| pwd| echo $PWD| echo $OLDPWD 
+==1401395== Memcheck, a memory error detector
+==1401395== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401395== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401395== Command: ./minishell test
+==1401395== Parent PID: 1401393
+==1401395== 
+==1401395== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd '' '' ''| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ' '| pwd| echo $PWD| echo $OLDPWD 
+==1401407== Memcheck, a memory error detector
+==1401407== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401407== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401407== Command: ./minishell test
+==1401407== Parent PID: 1401405
+==1401407== 
+==1401407== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ' '| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> mkdir d |  echo $PWD| echo $OLDPWD| cd d ''| pwd| echo $PWD| echo $OLDPWD 
+==1401419== Memcheck, a memory error detector
+==1401419== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401419== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401419== Command: ./minishell test
+==1401419== Parent PID: 1401417
+==1401419== 
+==1401419== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> mkdir d |  echo $PWD| echo $OLDPWD| cd d ''| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> mkdir d |  echo $PWD| echo $OLDPWD| cd d d| pwd| echo $PWD| echo $OLDPWD 
+==1401431== Memcheck, a memory error detector
+==1401431== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401431== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401431== Command: ./minishell test
+==1401431== Parent PID: 1401429
+==1401431== 
+==1401431== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> mkdir d |  echo $PWD| echo $OLDPWD| cd d d| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> mkdir d |  echo $PWD| echo $OLDPWD| cd d ' '| pwd| echo $PWD| echo $OLDPWD 
+==1401444== Memcheck, a memory error detector
+==1401444== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401444== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401444== Command: ./minishell test
+==1401444== Parent PID: 1401442
+==1401444== 
+==1401444== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> mkdir d |  echo $PWD| echo $OLDPWD| cd d ' '| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> export HOME='/home/rbonneva' |  echo $PWD| echo $OLDPWD| cd $HOME| pwd| echo $PWD| echo $OLDPWD 
+==1401456== Memcheck, a memory error detector
+==1401456== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401456== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401456== Command: ./minishell test
+==1401456== Parent PID: 1401454
+==1401456== 
+==1401456== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> export HOME='/home/rbonneva' |  echo $PWD| echo $OLDPWD| cd $HOME| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd /| pwd| echo $PWD| echo $OLDPWD 
+==1401469== Memcheck, a memory error detector
+==1401469== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401469== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401469== Command: ./minishell test
+==1401469== Parent PID: 1401467
+==1401469== 
+==1401469== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd /| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd /.| pwd| echo $PWD| echo $OLDPWD 
+==1401483== Memcheck, a memory error detector
+==1401483== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401483== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401483== Command: ./minishell test
+==1401483== Parent PID: 1401481
+==1401483== 
+==1401483== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd /.| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd /./| pwd| echo $PWD| echo $OLDPWD 
+==1401495== Memcheck, a memory error detector
+==1401495== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401495== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401495== Command: ./minishell test
+==1401495== Parent PID: 1401493
+==1401495== 
+==1401495== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd /./| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd /././././| pwd| echo $PWD| echo $OLDPWD 
+==1401507== Memcheck, a memory error detector
+==1401507== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401507== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401507== Command: ./minishell test
+==1401507== Parent PID: 1401505
+==1401507== 
+==1401507== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd /././././| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd //| pwd| echo $PWD| echo $OLDPWD 
+==1401519== Memcheck, a memory error detector
+==1401519== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401519== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401519== Command: ./minishell test
+==1401519== Parent PID: 1401517
+==1401519== 
+==1401519== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd //| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ///| pwd| echo $PWD| echo $OLDPWD 
+==1401531== Memcheck, a memory error detector
+==1401531== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401531== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401531== Command: ./minishell test
+==1401531== Parent PID: 1401529
+==1401531== 
+==1401531== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ///| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ////| pwd| echo $PWD| echo $OLDPWD 
+==1401543== Memcheck, a memory error detector
+==1401543== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401543== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401543== Command: ./minishell test
+==1401543== Parent PID: 1401541
+==1401543== 
+==1401543== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ////| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd //////////////////////////////////////////////////////| pwd| echo $PWD| echo $OLDPWD 
+==1401555== Memcheck, a memory error detector
+==1401555== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401555== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401555== Command: ./minishell test
+==1401555== Parent PID: 1401553
+==1401555== 
+==1401555== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd //////////////////////////////////////////////////////| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd| echo $OLDPWD 
+==1401567== Memcheck, a memory error detector
+==1401567== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401567== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401567== Command: ./minishell test
+==1401567== Parent PID: 1401565
+==1401567== 
+==1401567== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> export HOME='/home/rbonneva' |  echo $PWD| echo $OLDPWD| cd| echo $PWD| echo $OLDPWD 
+==1401579== Memcheck, a memory error detector
+==1401579== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401579== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401579== Command: ./minishell test
+==1401579== Parent PID: 1401577
+==1401579== 
+==1401579== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> export HOME='/home/rbonneva' |  echo $PWD| echo $OLDPWD| cd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ' /'| pwd| echo $PWD| echo $OLDPWD 
+==1401592== Memcheck, a memory error detector
+==1401592== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401592== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401592== Command: ./minishell test
+==1401592== Parent PID: 1401590
+==1401592== 
+==1401592== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ' /'| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ' / '| pwd| echo $PWD| echo $OLDPWD 
+==1401604== Memcheck, a memory error detector
+==1401604== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401604== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401604== Command: ./minishell test
+==1401604== Parent PID: 1401602
+==1401604== 
+==1401604== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ' / '| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd '                  /'| pwd| echo $PWD| echo $OLDPWD 
+==1401616== Memcheck, a memory error detector
+==1401616== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401616== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401616== Command: ./minishell test
+==1401616== Parent PID: 1401614
+==1401616== 
+==1401616== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd '                  /'| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd '                  /              '| pwd| echo $PWD| echo $OLDPWD 
+==1401628== Memcheck, a memory error detector
+==1401628== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401628== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401628== Command: ./minishell test
+==1401628== Parent PID: 1401626
+==1401628== 
+==1401628== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd '                  /              '| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ' // '| pwd| echo $PWD| echo $OLDPWD 
+==1401646== Memcheck, a memory error detector
+==1401646== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401646== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401646== Command: ./minishell test
+==1401646== Parent PID: 1401644
+==1401646== 
+==1401646== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ' // '| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd //home| pwd| echo $PWD| echo $OLDPWD 
+==1401659== Memcheck, a memory error detector
+==1401659== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401659== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401659== Command: ./minishell test
+==1401659== Parent PID: 1401657
+==1401659== 
+==1401659== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd //home| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ' //home'| pwd| echo $PWD| echo $OLDPWD 
+==1401671== Memcheck, a memory error detector
+==1401671== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401671== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401671== Command: ./minishell test
+==1401671== Parent PID: 1401669
+==1401671== 
+==1401671== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd ' //home'| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> echo $PWD| echo $OLDPWD| cd '     //home    '| pwd| echo $PWD| echo $OLDPWD 
+==1401684== Memcheck, a memory error detector
+==1401684== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401684== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401684== Command: ./minishell test
+==1401684== Parent PID: 1401682
+==1401684== 
+==1401684== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> echo $PWD| echo $OLDPWD| cd '     //home    '| pwd| echo $PWD| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> mkdir -m 000 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+==1401697== Memcheck, a memory error detector
+==1401697== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401697== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401697== Command: ./minishell test
+==1401697== Parent PID: 1401695
+==1401697== 
+==1401697== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> mkdir -m 000 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> mkdir -m 001 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+==1401709== Memcheck, a memory error detector
+==1401709== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401709== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401709== Command: ./minishell test
+==1401709== Parent PID: 1401707
+==1401709== 
+==1401709== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> mkdir -m 001 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> mkdir -m 002 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+==1401721== Memcheck, a memory error detector
+==1401721== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401721== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401721== Command: ./minishell test
+==1401721== Parent PID: 1401719
+==1401721== 
+==1401721== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> mkdir -m 002 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> mkdir -m 003 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+==1401733== Memcheck, a memory error detector
+==1401733== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401733== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401733== Command: ./minishell test
+==1401733== Parent PID: 1401731
+==1401733== 
+==1401733== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> mkdir -m 003 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> mkdir -m 004 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+==1401745== Memcheck, a memory error detector
+==1401745== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401745== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401745== Command: ./minishell test
+==1401745== Parent PID: 1401743
+==1401745== 
+==1401745== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> mkdir -m 004 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> mkdir -m 005 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+==1401757== Memcheck, a memory error detector
+==1401757== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401757== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401757== Command: ./minishell test
+==1401757== Parent PID: 1401755
+==1401757== 
+==1401757== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> mkdir -m 005 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> mkdir -m 006 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+==1401769== Memcheck, a memory error detector
+==1401769== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401769== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401769== Command: ./minishell test
+==1401769== Parent PID: 1401767
+==1401769== 
+==1401769== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> mkdir -m 006 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> mkdir -m 007 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+==1401781== Memcheck, a memory error detector
+==1401781== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401781== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401781== Command: ./minishell test
+==1401781== Parent PID: 1401779
+==1401781== 
+==1401781== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> mkdir -m 007 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> mkdir -m 010 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+==1401793== Memcheck, a memory error detector
+==1401793== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401793== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401793== Command: ./minishell test
+==1401793== Parent PID: 1401791
+==1401793== 
+==1401793== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> mkdir -m 010 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+ 
+################################################################################################################################################################################################################## 
+
+ CMD -> mkdir -m 020 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+==1401805== Memcheck, a memory error detector
+==1401805== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401805== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401805== Command: ./minishell test
+==1401805== Parent PID: 1401803
+==1401805== 
+==1401805== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> mkdir -m 020 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+ 

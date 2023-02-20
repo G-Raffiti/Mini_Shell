@@ -1,0 +1,14 @@
+
+################################################################################################################################################################################################################## 
+
+ CMD -> mkdir -m 020 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+==1401805== Memcheck, a memory error detector
+==1401805== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1401805== Using Valgrind-3.15.0-608cb11914-20190413 and LibVEX; rerun with -h for copyright info
+==1401805== Command: ./minishell test
+==1401805== Parent PID: 1401803
+==1401805== 
+==1401805== FATAL: can't open suppressions file "__ignore_leaks.txt"
+
+ CMD -> mkdir -m 020 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD 
+ 
