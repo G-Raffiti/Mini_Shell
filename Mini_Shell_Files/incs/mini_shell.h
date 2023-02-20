@@ -128,7 +128,7 @@ void		interactiv_handler(int signum);
 void		exec_handler(int signum);
 
 // HERE_DOCS ///////////////////////////////////////////////////////////////////
-t_error		here_docs(t_mini_shell *ms, t_lstd *current);
+t_error		here_docs(t_lstd *current);
 /******************************************************************************/
 /*******************************   BUILTIN   **********************************/
 /******************************************************************************/
@@ -164,6 +164,7 @@ t_error		parse_error(t_mini_shell *ms, char *error_msg, int error_code);
 
 // GET CMD /////////////////////////////////////////////////////////////////////
 t_error		get_cmd(t_cmd *cmd);
+char		*str_dup_no_quote(char *line, int len);
 
 // GET PATH ////////////////////////////////////////////////////////////////////
 t_error		get_path(t_mini_shell *ms, t_cmd *cmd);
@@ -187,6 +188,8 @@ void		set_builtin(t_cmd *cmd);
 
 // OPEN FILES //////////////////////////////////////////////////////////////////
 t_error		open_files(t_mini_shell *ms, t_cmd *cmd);
+char		*extract_file_name(t_mini_shell *ms, char *str, char *quote,
+						t_chevron type);
 
 /******************************************************************************/
 /*******************************   UTILS   ************************************/

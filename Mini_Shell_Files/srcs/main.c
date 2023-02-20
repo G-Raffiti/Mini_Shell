@@ -13,12 +13,20 @@ static void	loop(t_mini_shell *ms)
 		line = ft_free(line);
 		line = read_line();
 		if (!line)
-			return;
+			return ;
 		if (is_empty_line(line))
-			continue;
+			continue ;
 		debug(3, WHITE"line"GREY" = ["WHITE, line,GREY"] | "WHITE);//delete
 		if (parse_line(ms, line) == ERROR)
+		{
+			if (test_mode())//delete
+			{//delete
+				clear_cmds(&(ms->cmds), free_cmd);//delete
+				line = ft_free(line);//delete
+				exit_end_program(ms, get_exit_code());
+			}//delete
 			continue;
+		}
 		debug_all_cmds(ms);//delete
 		set_exit_code(0);
 		exec_cmds(ms);

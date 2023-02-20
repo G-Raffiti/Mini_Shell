@@ -1,26 +1,5 @@
-
 #include "../../incs/mini_shell.h"
 #include <stdlib.h>
-
-void	*ft_free(void *pt)
-{
-	if (pt)
-		free(pt);
-	return (NULL);
-}
-
-void	*free_split(char **split)
-{
-	int	i;
-
-	if (!split)
-		return (NULL);
-	i = -1;
-	while (split[++i])
-		split[i] = ft_free(split[i]);
-	split = ft_free(split);
-	return (NULL);
-}
 
 void	*free_fd(t_fd *fd)
 {
@@ -51,7 +30,7 @@ void	*free_cmd(t_cmd *cmd)
 
 void	free_cmd_void(void *pt_cmd)
 {
-	t_cmd *cmd;
+	t_cmd	*cmd;
 
 	cmd = (t_cmd *)pt_cmd;
 	cmd = free_cmd(cmd);
@@ -59,9 +38,9 @@ void	free_cmd_void(void *pt_cmd)
 
 void	*free_dict(void *pt)
 {
-	ft_free(get_env_dict((t_env_arg*)pt)->key);
-	ft_free(get_env_dict((t_env_arg*)pt)->value);
-	ft_free((t_env_arg*)pt);
+	ft_free(get_env_dict((t_env_arg *)pt)->key);
+	ft_free(get_env_dict((t_env_arg *)pt)->value);
+	ft_free((t_env_arg *)pt);
 	return (NULL);
 }
 

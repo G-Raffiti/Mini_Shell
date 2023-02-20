@@ -1,4 +1,3 @@
-
 #include "../../incs/mini_shell.h"
 
 t_cmd	*get(t_lstd *lst)
@@ -48,11 +47,11 @@ void	sort_dict(t_lstd **lst, int (*cmp)())
 	a = *lst;
 	while (a->next)
 	{
-
 		b = a->next;
 		while (b)
 		{
-			if (cmp(get_env_dict(a->content)->key, get_env_dict(b->content)->key) > 0)
+			if (cmp(get_env_dict(a->content)->key,
+					get_env_dict(b->content)->key) > 0)
 			{
 				tmp = a->content;
 				a->content = b->content;

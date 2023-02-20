@@ -1,7 +1,3 @@
-//
-// Created by rbonneva on 30/01/23.
-//
-
 #include "../../incs/mini_shell.h"
 
 t_error	fill_paths(t_mini_shell *ms, char *full_path)

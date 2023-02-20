@@ -3,7 +3,7 @@
 //
 
 #include <signal.h>
-# include <readline/readline.h>
+#include <readline/readline.h>
 #include "../../incs/mini_shell.h"
 
 void	here_doc_handler(int signum)
@@ -16,8 +16,7 @@ void	here_doc_handler(int signum)
 	}
 	else if (signum == SIGQUIT)
 	{
-		printf("\b \b \b\b \b");//attention peut etre de la merde,
-		// utiliser tcgetattr si jamais.
+		printf("\b \b \b\b \b");
 		rl_redisplay();
 		set_exit_code(0);
 	}
@@ -35,8 +34,7 @@ void	interactiv_handler(int signum)
 	}
 	else if (signum == SIGQUIT)
 	{
-		printf("\b \b \b\b \b");//attention peut etre de la merde,
-		// utiliser tcgetattr si jamais.
+		printf("\b \b \b\b \b");
 		rl_redisplay();
 		set_exit_code(0);
 	}

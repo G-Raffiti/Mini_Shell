@@ -6,7 +6,7 @@
 
 NAME =			minishell
 CC =			gcc
-CC_FLAGS =		-Wall -Wextra -Werror -gdwarf-4 -g3 #-fsanitize=address
+CC_FLAGS =		-Wall -Wextra -Werror -gdwarf-4 -g3 -fsanitize=address
 
 PATH_OBJ =		./Mini_Shell_Files/objs/
 PATH_SRC =		./Mini_Shell_Files/srcs/
@@ -49,9 +49,12 @@ FILES =			\
 				\
 				parsing/check_line \
 				parsing/chevron \
+				parsing/file_extract_file_name \
 				parsing/get_cmd \
+				parsing/get_cmd_str_dup \
 				parsing/get_path \
 				parsing/get_raw_cmd \
+				parsing/parse_error \
 				parsing/parsing \
 				parsing/read_line \
 				parsing/replace_dollars \
@@ -62,12 +65,14 @@ FILES =			\
 				utils/env_type_utils \
 				utils/dict_utils \
 				utils/free_struct \
+				utils/ft_free \
 				utils/list_cmd_utils \
 				utils/new_struct \
 				utils/safe_functions \
 				utils/check_functions \
 				\
 				exit \
+				end_child \
 				exit_code \
 				main
 
