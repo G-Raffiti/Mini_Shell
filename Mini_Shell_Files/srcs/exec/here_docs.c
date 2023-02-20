@@ -21,6 +21,7 @@ t_error exec_here_doc(t_mini_shell *ms, t_cmd *cmd)
 		line_read = readline("> ");
 		if (!line_read || ft_str_cmp(line_read, cmd->input->limiter) == 0 || get_exit_code() == 130)
 		{
+
 			if (!ret)
 			{
 				ret = ft_calloc(sizeof(char), 1);
@@ -28,10 +29,12 @@ t_error exec_here_doc(t_mini_shell *ms, t_cmd *cmd)
 					return (MALLOC_ERROR);
 			}
 			write(cmd->input->here_doc_pipe[1], ret, ft_strlen(ret));
+			ret = ft_free(ret);
 			set_interactiv_signals();
 			return (SUCCESS);
 		}
 		line = ft_strjoin(line_read, "\n");
+		line_read = ft_free(line_read);
 		if (!line)
 			return (MALLOC_ERROR);
 		tmp = ft_strjoin(ret, line);
