@@ -12,16 +12,12 @@ int	set_quote_state(char c, char *quote)
 	return (*quote);
 }
 
-t_error	create_cmds(t_mini_shell *mini_shell, char *line)
+t_error	create_cmds(t_mini_shell *mini_shell, char **raw_cmds)
 {
 	int		i;
-	char	**raw_cmds;
 	t_lstd	*current;
 	t_cmd	*cmd;
 
-	raw_cmds = split_pipe(line);
-	if (!raw_cmds)
-		return (MALLOC_ERROR);
 	i = 0;
 	while (raw_cmds[i])
 	{
@@ -47,6 +43,7 @@ t_bool	need_path(t_lstd *current)
 {
 	return (get(current)->cmd && !get(current)->is_builtin);
 }
+
 t_error	fill_cmds(t_mini_shell *ms)
 {
 	t_lstd	*current;
@@ -81,11 +78,15 @@ t_error	fill_cmds(t_mini_shell *ms)
 t_error	parse_line(t_mini_shell *ms, char *line)
 {
 	t_error	status;
+	char	**raw_cmds;
 
 	if (check_line(ms, line) == ERROR)
 		return (ERROR);
 	debug(1, "check"GREEN" DONE "GREY"| "WHITE);//delete
-	if (create_cmds(ms, line) == MALLOC_ERROR)
+	raw_cmds = split_pipe(line);
+	if (!raw_cmds)
+		return (MALLOC_ERROR);
+	if (create_cmds(ms, raw_cmds) == MALLOC_ERROR)
 		return (free(line), exit_malloc(ms, "parsing: crete_cmds"));
 	debug(1, "create cmds"GREEN" DONE "GREY"| "WHITE);//delete
 	status = fill_cmds(ms);
