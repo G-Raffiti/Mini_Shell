@@ -107,11 +107,25 @@ t_error		add_in_chosen_env(t_mini_shell *ms, char *key, char *value, int which_e
 
 // EXEC ////////////////////////////////////////////////////////////////////////
 t_error		exec_cmds(t_mini_shell *ms);
+void		execve_cmd(t_mini_shell *ms, t_cmd *cmd);
+
+// EXEC PIPELINE ///////////////////////////////////////////////////////////////
+void		exec_pipeline(t_mini_shell *ms, t_lstd *current);
+
+// EXEC_ERROR //////////////////////////////////////////////////////////////////
+t_error		permission_denied(t_mini_shell *ms, t_cmd *cmd);
+void		error_exec(t_mini_shell *ms, t_cmd *cmd);
+void		wait_exit_status(t_mini_shell *ms, t_lstd *current);
 
 // SIGNALS /////////////////////////////////////////////////////////////////////
 void		set_interactiv_signals();
 void		set_here_doc_signals();
 void		set_exec_signals();
+
+// SIGNALS HANDLER /////////////////////////////////////////////////////////////
+void		here_doc_handler(int signum);
+void		interactiv_handler(int signum);
+void		exec_handler(int signum);
 
 // HERE_DOCS ///////////////////////////////////////////////////////////////////
 t_error		here_docs(t_mini_shell *ms, t_lstd *current);
@@ -190,6 +204,7 @@ int			find_in_dict_sorted(void *content, void *ref);
 
 // REGEN ENV ///////////////////////////////////////////////////////////////////
 char		**regen_env(void);
+t_error		increase_shell_lvl(t_mini_shell *ms);
 
 // ENV /////////////////////////////////////////////////////////////////////////
 t_error		fill_export_env(t_mini_shell *ms);
