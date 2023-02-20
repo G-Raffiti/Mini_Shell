@@ -1,7 +1,3 @@
-//
-// Created by Raphael Bonneval on 1/24/23.
-//
-
 #include "../../incs/mini_shell.h"
 
 /// TO use every where
@@ -19,27 +15,27 @@ int	set_quote_state(char c, char *quote)
 t_error	create_cmds(t_mini_shell *mini_shell, char *line)
 {
 	int		i;
-	char **raw_cmds;
-	t_lstd *current;
-	t_cmd *cmd;
+	char	**raw_cmds;
+	t_lstd	*current;
+	t_cmd	*cmd;
 
 	raw_cmds = split_pipe(line);
 	if (!raw_cmds)
 		return (MALLOC_ERROR);
 	i = 0;
-	while(raw_cmds[i])
+	while (raw_cmds[i])
 	{
-		if(new_cmd(&cmd) == MALLOC_ERROR)
-			return (free_split(raw_cmds), clear_cmds(&mini_shell->cmds, free_cmd),
-					MALLOC_ERROR);
+		if (new_cmd(&cmd) == MALLOC_ERROR)
+			return (free_split(raw_cmds),
+				clear_cmds(&mini_shell->cmds, free_cmd), MALLOC_ERROR);
 		cmd->raw_cmd = ft_strdup(raw_cmds[i]);
 		if (!cmd->raw_cmd)
-			return (free_split(raw_cmds), clear_cmds(&mini_shell->cmds, free_cmd),
-					MALLOC_ERROR);
+			return (free_split(raw_cmds),
+				clear_cmds(&mini_shell->cmds, free_cmd), MALLOC_ERROR);
 		current = ft_lstd_new(cmd);
 		if (!current)
-			return (free_split(raw_cmds), clear_cmds(&mini_shell->cmds, free_cmd),
-					MALLOC_ERROR);
+			return (free_split(raw_cmds),
+				clear_cmds(&mini_shell->cmds, free_cmd), MALLOC_ERROR);
 		ft_lstd_push_back_elem(&mini_shell->cmds, current);
 		i++;
 	}

@@ -188,6 +188,8 @@ void		set_builtin(t_cmd *cmd);
 
 // OPEN FILES //////////////////////////////////////////////////////////////////
 t_error		open_files(t_mini_shell *ms, t_cmd *cmd);
+char		*extract_file_name(t_mini_shell *ms, char *str, char *quote,
+						t_chevron type);
 
 /******************************************************************************/
 /*******************************   UTILS   ************************************/
