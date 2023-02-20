@@ -47,13 +47,6 @@ t_error	create_cmds(t_mini_shell *mini_shell, char *line)
 	return (SUCCESS);
 }
 
-void free_cmd_void(void *pt_cmd)
-{
-	t_cmd *cmd;
-
-	cmd = (t_cmd *)pt_cmd;
-	cmd = free_cmd(cmd);
-}
 t_bool	need_path(t_lstd *current)
 {
 	return (get(current)->cmd && !get(current)->is_builtin);

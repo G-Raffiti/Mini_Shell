@@ -207,6 +207,7 @@ void		*ft_free(void *pt);
 void		*free_split(char **split);
 void		*free_fd(t_fd *fd);
 void		*free_cmd(t_cmd *cmd);
+void		free_cmd_void(void *pt_cmd);
 void		*free_mini_shell(t_mini_shell *ms);
 
 // LIST UTILS //////////////////////////////////////////////////////////////////

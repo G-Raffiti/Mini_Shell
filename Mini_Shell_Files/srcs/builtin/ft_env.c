@@ -1,7 +1,10 @@
+//
+// Created by aurel on 2/4/23.
+//
 
 #include "../../incs/mini_shell.h"
 
-int print_error_env(t_mini_shell *ms, char *first_arg, int in_pipe)
+int	print_error_env(t_mini_shell *ms, char *first_arg, int in_pipe)
 {
 	t_lstd	*path;
 	char	*value;

@@ -50,6 +50,14 @@ void	*free_cmd(t_cmd *cmd)
 	return (NULL);
 }
 
+void	free_cmd_void(void *pt_cmd)
+{
+	t_cmd *cmd;
+
+	cmd = (t_cmd *)pt_cmd;
+	cmd = free_cmd(cmd);
+}
+
 void	*free_dict(void *pt)
 {
 	ft_free(get_env_dict((t_env_arg*)pt)->key);

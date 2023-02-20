@@ -1,8 +1,9 @@
-// created by aurel
+//
+// Created by aurel on 2/4/23.
+//
 
 #include "../../incs/mini_shell.h"
 
-//TODO : export -> Attention export sans "=" peut buger (Pas reussi a reproduire, a surveiller)
 void	display_export(t_mini_shell *ms)
 {
 	int	i;
@@ -17,7 +18,7 @@ void	display_export(t_mini_shell *ms)
 
 int	export_name_is_valid(char *arg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (arg[i] == '=' || !is_not_alpha(arg[i]))
@@ -56,8 +57,8 @@ t_error	export_in_envs(t_mini_shell *ms, char **extracted)
 
 t_error	extract_key_value(char *cmd, char ***extracted)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	j = -1;
@@ -90,7 +91,7 @@ t_error	ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 	if (!cmd->cmd[1])
 	{
 		display_export(ms);
-		return(SUCCESS);
+		return (SUCCESS);
 	}
 	while (!in_pipe && cmd->cmd[++i])
 	{
@@ -106,4 +107,3 @@ t_error	ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 	}
 	return (SUCCESS);
 }
-

@@ -4,7 +4,7 @@
 
 #include "../../incs/mini_shell.h"
 
-t_bool is_n(char *str)
+t_bool	is_n(char *str)
 {
 	if (!str[0] || (str[0] && str[0] != '-' && (!str[1] || str[1] != 'n')))
 		return (FALSE);
