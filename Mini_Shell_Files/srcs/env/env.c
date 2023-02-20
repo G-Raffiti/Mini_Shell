@@ -37,7 +37,7 @@ t_error	dup_env(t_mini_shell *ms, char **env)
 	{
 		ms->env[i] = ft_strdup(env[i]);
 		if(!ms->env[i])
-			return(free_split(ms->env), MALLOC_ERROR);
+			return(MALLOC_ERROR);
 		i++;
 	}
 	return (SUCCESS);

@@ -2,6 +2,7 @@
 valgrind*
 Tester/
 test_dir/minishell
+_test/
 
 
 # Cmake
@@ -74,3 +75,4 @@ Tester/tofix/tofix_tests.txt
 test_dir/minishell
 Tester/tofix/tofix_tests.txt
 *testdir/*
+_test/-

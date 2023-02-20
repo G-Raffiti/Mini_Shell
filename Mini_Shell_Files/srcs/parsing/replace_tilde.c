@@ -113,7 +113,8 @@ t_error	replace_tilde(t_mini_shell *ms, t_cmd *cmd)
 		return (free_split(split), MALLOC_ERROR);
 	cmd->raw_cmd = ft_free(cmd->raw_cmd);
 	cmd->raw_cmd = ft_strjoin_split(split, "");
+	split = free_split(split);
 	if (!cmd->raw_cmd)
-		return (free_split(split), MALLOC_ERROR);
+		return (MALLOC_ERROR);
 	return (SUCCESS);
 }

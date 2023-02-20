@@ -93,19 +93,19 @@ static t_error	replace_dollar(t_mini_shell *ms, char **str)
 			*str = ft_strdup(get_env_dict(dict->content)->value);
 		else
 			*str = ft_strdup("");
+		if (*str == NULL)
+			return (MALLOC_ERROR);
 		if (ft_contain(*str, ' '))
-			return (parse_error(ms, AMBIGUOUS_REDIRECT, 2));
+			return (free(*str), parse_error(ms, AMBIGUOUS_REDIRECT, 2));
 		if (ft_contain(*str, '/'))
-			return (parse_error(ms, IS_DIRECTORY, 2));
+			return (free(*str), parse_error(ms, IS_DIRECTORY, 2));
 	}
-	if (*str == NULL)
-		return (MALLOC_ERROR);
 	return (SUCCESS);
 }
 
-static t_error extract_file_name(t_mini_shell *ms, char *str, char *quote, char
-**file_name)
+char	*extract_file_name(t_mini_shell *ms, char *str, char *quote)
 {
+	char	*file_name;
 	char	*start;
 
 	while (*str == ' ')
@@ -116,11 +116,11 @@ static t_error extract_file_name(t_mini_shell *ms, char *str, char *quote, char
 	while (*str && (!ft_contain(" <>\"\'", *str)
 					|| (*quote && ft_contain("<>", *str))))
 		str++;
-	*file_name = ft_substr(start, 0, str - start);
-	if (!*file_name)
-		return (MALLOC_ERROR);
-	if (replace_dollar(ms, file_name) == MALLOC_ERROR)
-		return (MALLOC_ERROR);
+	file_name = ft_substr(start, 0, str - start);
+	if (!file_name)
+		return (NULL);
+	if (replace_dollar(ms, &file_name) == MALLOC_ERROR)
+		return (ft_free(file_name));
 	if (*str && *str == *quote)
 		(*str)++;
 	while (*start && start != str)
@@ -128,7 +128,7 @@ static t_error extract_file_name(t_mini_shell *ms, char *str, char *quote, char
 		*start = ' ';
 		start++;
 	}
-	return (SUCCESS);
+	return (file_name);
 }
 
 t_error valid_file(t_mini_shell *ms, char *str)
@@ -170,9 +170,9 @@ t_error	open_files(t_mini_shell *ms, t_cmd *cmd)
 			chevron_type = get_chevron_type(str);
 			if (valid_file(ms, str) == ERROR)
 				return (ERROR);
-			error = extract_file_name(ms, str, &quote, &file_name);
-			if (error != SUCCESS)
-				return (error);
+			file_name = extract_file_name(ms, str, &quote);
+			if(file_name == NULL)
+				return (MALLOC_ERROR);
 			chevron_in(ms, cmd, chevron_type, file_name);
 		}
 		str++;

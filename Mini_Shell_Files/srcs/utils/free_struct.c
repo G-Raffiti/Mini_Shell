@@ -27,6 +27,7 @@ void	*free_fd(t_fd *fd)
 	if (!fd)
 		return (NULL);
 	fd->name = ft_free(fd->name);
+	fd->limiter = ft_free(fd->limiter);
 	free(fd);
 	return (NULL);
 }
