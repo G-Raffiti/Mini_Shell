@@ -18,8 +18,8 @@
 # include <stdio.h>
 # include <unistd.h>
 
-#ifndef T_BOOL
-# define T_BOOL
+# ifndef T_BOOL
+#  define T_BOOL
 
 typedef enum e_bool
 {

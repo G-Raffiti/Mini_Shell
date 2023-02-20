@@ -107,14 +107,28 @@ t_error		add_in_chosen_env(t_mini_shell *ms, char *key, char *value, int which_e
 
 // EXEC ////////////////////////////////////////////////////////////////////////
 t_error		exec_cmds(t_mini_shell *ms);
+void		execve_cmd(t_mini_shell *ms, t_cmd *cmd);
+
+// EXEC PIPELINE ///////////////////////////////////////////////////////////////
+void		exec_pipeline(t_mini_shell *ms, t_lstd *current);
+
+// EXEC_ERROR //////////////////////////////////////////////////////////////////
+t_error		permission_denied(t_mini_shell *ms, t_cmd *cmd);
+void		error_exec(t_mini_shell *ms, t_cmd *cmd);
+void		wait_exit_status(t_mini_shell *ms, t_lstd *current);
 
 // SIGNALS /////////////////////////////////////////////////////////////////////
 void		set_interactiv_signals();
 void		set_here_doc_signals();
 void		set_exec_signals();
 
+// SIGNALS HANDLER /////////////////////////////////////////////////////////////
+void		here_doc_handler(int signum);
+void		interactiv_handler(int signum);
+void		exec_handler(int signum);
+
 // HERE_DOCS ///////////////////////////////////////////////////////////////////
-t_error		here_docs(t_mini_shell *ms, t_lstd *current);
+t_error		here_docs(t_lstd *current);
 /******************************************************************************/
 /*******************************   BUILTIN   **********************************/
 /******************************************************************************/
@@ -131,7 +145,7 @@ t_error		ft_cd(t_mini_shell *ms, t_cmd *cmd);
 t_error		ft_echo(t_cmd *cmd);
 t_error		ft_exit(t_mini_shell *ms, t_cmd *cmd);
 t_error		ft_pwd(void);
-t_error		ft_env(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
+t_error		ft_env(t_mini_shell *ms);
 t_error		ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 t_error		ft_unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 
@@ -150,6 +164,7 @@ t_error		parse_error(t_mini_shell *ms, char *error_msg, int error_code);
 
 // GET CMD /////////////////////////////////////////////////////////////////////
 t_error		get_cmd(t_cmd *cmd);
+char		*str_dup_no_quote(char *line, int len);
 
 // GET PATH ////////////////////////////////////////////////////////////////////
 t_error		get_path(t_mini_shell *ms, t_cmd *cmd);
@@ -173,6 +188,8 @@ void		set_builtin(t_cmd *cmd);
 
 // OPEN FILES //////////////////////////////////////////////////////////////////
 t_error		open_files(t_mini_shell *ms, t_cmd *cmd);
+char		*extract_file_name(t_mini_shell *ms, char *str, char *quote,
+						t_chevron type);
 
 /******************************************************************************/
 /*******************************   UTILS   ************************************/
@@ -190,6 +207,7 @@ int			find_in_dict_sorted(void *content, void *ref);
 
 // REGEN ENV ///////////////////////////////////////////////////////////////////
 char		**regen_env(void);
+t_error		increase_shell_lvl(t_mini_shell *ms);
 
 // ENV /////////////////////////////////////////////////////////////////////////
 t_error		fill_export_env(t_mini_shell *ms);
@@ -207,6 +225,7 @@ void		*ft_free(void *pt);
 void		*free_split(char **split);
 void		*free_fd(t_fd *fd);
 void		*free_cmd(t_cmd *cmd);
+void		free_cmd_void(void *pt_cmd);
 void		*free_mini_shell(t_mini_shell *ms);
 
 // LIST UTILS //////////////////////////////////////////////////////////////////

@@ -2,7 +2,6 @@
 
 t_error	fill_dict_element(t_env_arg **dict, char *key, char *value)
 {
-
 	(*dict)->value = ft_strdup(value);
 	if (!(*dict)->value)
 		return (MALLOC_ERROR);
@@ -45,7 +44,7 @@ int	find_in_dict(void *content, void *ref)
  * @param ref
  * @return if find : 1 \n else : 0
  */
-int find_in_dict_sorted(void *content, void *ref)
+int	find_in_dict_sorted(void *content, void *ref)
 {
 	if (ft_str_cmp(get_env_dict(content)->key, "_") == 0)
 		return (0);

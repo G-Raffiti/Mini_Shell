@@ -4,12 +4,11 @@
 
 #include "../../incs/mini_shell.h"
 
-
-t_error fill_refreshed_env(t_lstd *current, char **str, int which_env)
+t_error	fill_refreshed_env(t_lstd *current, char **str, int which_env)
 {
-	t_lstd		*content;
-	char		*value;
-	char 		*key;
+	t_lstd	*content;
+	char	*value;
+	char	*key;
 
 	content = current->content;
 	if (which_env == 0)
@@ -28,12 +27,12 @@ t_error fill_refreshed_env(t_lstd *current, char **str, int which_env)
 
 t_error	refresh_env(t_mini_shell *ms)
 {
-	int			size_dict;
+	int	size_dict;
 
 	ms->env = free_split(ms->env);
 	size_dict = ft_lstd_size(ms->env_dict);
 	ms->env = ft_calloc(size_dict, sizeof(char *));
-	if (!ms->env_sort)
+	if (!ms->env)
 		return (MALLOC_ERROR);
 	ms->env[size_dict - 1] = NULL;
 	return (SUCCESS);
@@ -41,7 +40,7 @@ t_error	refresh_env(t_mini_shell *ms)
 
 t_error	refresh_export_env(t_mini_shell *ms)
 {
-	int			size_sorted_dict;
+	int	size_sorted_dict;
 
 	ms->env_sort = free_split(ms->env_sort);
 	if (ms->exported)
@@ -57,8 +56,8 @@ t_error	refresh_export_env(t_mini_shell *ms)
 
 t_error	fill_export_env(t_mini_shell *ms)
 {
-	t_lstd		*current;
-	int 		i;
+	t_lstd	*current;
+	int		i;
 
 	i = 0;
 	refresh_export_env(ms);
@@ -67,7 +66,8 @@ t_error	fill_export_env(t_mini_shell *ms)
 	{
 		if (ft_str_cmp(get_env_dict(current->content)->key, "_") != 0)
 		{
-			if (fill_refreshed_env(current, &(ms->env_sort)[i], 1) == MALLOC_ERROR)
+			if (fill_refreshed_env(current, &(ms->env_sort)[i], 1)
+				== MALLOC_ERROR)
 				return (MALLOC_ERROR);
 			i++;
 		}
@@ -79,8 +79,8 @@ t_error	fill_export_env(t_mini_shell *ms)
 
 t_error	fill_env(t_mini_shell *ms)
 {
-	t_lstd		*current;
-	int 		i;
+	t_lstd	*current;
+	int		i;
 
 	i = 0;
 	refresh_env(ms);

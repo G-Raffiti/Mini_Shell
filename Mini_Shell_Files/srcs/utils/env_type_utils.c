@@ -6,7 +6,7 @@
 
 t_error	get_key_env_type(t_env_arg *content)
 {
-	char 	*tmp;
+	char	*tmp;
 
 	if (ft_str_cmp(content->key, "_") != 0)
 	{
@@ -24,7 +24,7 @@ t_error	get_key_env_type(t_env_arg *content)
 
 t_error	get_value_env_type(t_env_arg *content)
 {
-	char 	*tmp;
+	char	*tmp;
 
 	tmp = ft_strdup(content->value);
 	if (!tmp)
