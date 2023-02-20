@@ -2,13 +2,11 @@
 // Created by rbonneva on 17/02/23.
 //
 
-//TODO : SHLVL -> si il est ft_unset il vaut 0 (+1 a la generation du nouvel ft_env)
-
 #include "../../incs/mini_shell.h"
 
 char	**regen_env(void)
 {
-	char **env;
+	char	**env;
 
 	env = ft_calloc(4, sizeof(char *));
 	if (!env)
@@ -23,4 +21,27 @@ char	**regen_env(void)
 	if (!env[2])
 		return (free_split(env));
 	return (env);
+}
+
+t_error	increase_shell_lvl(t_mini_shell *ms)
+{
+	int		i;
+	char	*lvl;
+
+	i = -1;
+	while (ms->env[++i])
+	{
+		if (ft_strncmp(ms->env[i], "SHLVL", 5) == 0 && ms->env[i][5] == '=')
+		{
+			lvl = ft_itoa((ft_atoi(ms->env[i] + 6) + 1));
+			if (!lvl)
+				return (MALLOC_ERROR);
+			ms->env[i] = ft_free(ms->env[i]);
+			ms->env[i] = ft_strjoin("SHLVL=", lvl);
+			if (!ms->env[i])
+				return (MALLOC_ERROR);
+			lvl = ft_free(lvl);
+		}
+	}
+	return (SUCCESS);
 }

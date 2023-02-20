@@ -41,8 +41,11 @@ FILES =			\
 				env/modif_env \
 				\
 				exec/exec \
-				exec/signals \
+				exec/exec_error \
+				exec/exec_pipeline \
 				exec/here_docs \
+				exec/signals_handler \
+				exec/signals_seter \
 				\
 				parsing/check_line \
 				parsing/chevron \

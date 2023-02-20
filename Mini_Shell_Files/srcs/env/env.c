@@ -1,7 +1,10 @@
+//
+// Created by aurel on 2/6/23.
+//
 
 #include "../../incs/mini_shell.h"
 
-t_error get_keys(t_env_arg *env_dict, char *env)
+static t_error	get_keys(t_env_arg *env_dict, char *env)
 {
 	int		i;
 
@@ -14,7 +17,7 @@ t_error get_keys(t_env_arg *env_dict, char *env)
 	return (SUCCESS);
 }
 
-t_error get_values(t_env_arg *env_dict, char *env_line)
+static t_error	get_values(t_env_arg *env_dict, char *env_line)
 {
 	while (*env_line && *env_line != '=')
 		env_line++;
@@ -25,19 +28,19 @@ t_error get_values(t_env_arg *env_dict, char *env_line)
 	return (SUCCESS);
 }
 
-t_error	dup_env(t_mini_shell *ms, char **env)
+static t_error	dup_env(t_mini_shell *ms, char **env)
 {
 	int	i;
 
 	i = 0;
 	ms->env = ft_calloc(sizeof(char *), ft_strlen_tab(env) + 1);
 	if (!ms->env)
-		return(MALLOC_ERROR);
+		return (MALLOC_ERROR);
 	while (env[i])
 	{
 		ms->env[i] = ft_strdup(env[i]);
-		if(!ms->env[i])
-			return(MALLOC_ERROR);
+		if (!ms->env[i])
+			return (MALLOC_ERROR);
 		i++;
 	}
 	return (SUCCESS);
@@ -45,9 +48,9 @@ t_error	dup_env(t_mini_shell *ms, char **env)
 
 t_error	get_export_env(t_mini_shell *ms)
 {
-	t_env_arg *env_sort_dict;
-	t_lstd *current_sort;
-	int key_index;
+	t_env_arg	*env_sort_dict;
+	t_lstd		*current_sort;
+	int			key_index;
 
 	key_index = -1;
 	while (++key_index < ft_strlen_tab(ms->env))
@@ -58,7 +61,8 @@ t_error	get_export_env(t_mini_shell *ms)
 			exit_malloc(ms, "ft_env: get_keys");
 		if (get_values(env_sort_dict, ms->env[key_index]) == MALLOC_ERROR)
 			exit_malloc(ms, "ft_env: get_values");
-		if (create_new_list_element(&current_sort, env_sort_dict) == MALLOC_ERROR)
+		if (create_new_list_element(&current_sort, env_sort_dict)
+			== MALLOC_ERROR)
 			exit_malloc(ms, "ft_env: new_lstd");
 		ft_lstd_push_back_elem(&ms->env_sort_dict, current_sort);
 	}
@@ -67,29 +71,6 @@ t_error	get_export_env(t_mini_shell *ms)
 	sort_dict(&ms->env_sort_dict, ft_str_cmp);
 	if (fill_export_env(ms) == MALLOC_ERROR)
 		exit_malloc(ms, "main: sort_export_and_fill_export_env");
-	return (SUCCESS);
-}
-
-t_error	increase_shell_lvl(t_mini_shell *ms)
-{
-	int		i;
-	char	*lvl;
-
-	i = -1;
-	while (ms->env[++i])
-	{
-		if (ft_strncmp(ms->env[i], "SHLVL", 5) == 0 && ms->env[i][5] == '=')
-		{
-			lvl = ft_itoa((ft_atoi(ms->env[i] + 6) + 1));
-			if (!lvl)
-				return (MALLOC_ERROR);
-			ms->env[i] = ft_free(ms->env[i]);
-			ms->env[i] = ft_strjoin("SHLVL=", lvl);
-			if (!ms->env[i])
-				return (MALLOC_ERROR);
-			lvl = ft_free(lvl);
-		}
-	}
 	return (SUCCESS);
 }
 

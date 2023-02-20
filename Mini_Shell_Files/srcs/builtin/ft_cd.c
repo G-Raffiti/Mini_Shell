@@ -1,14 +1,15 @@
 //
 // Created by rbonneva on 06/02/23.
 //
+
 #include <string.h>
 #include <errno.h>
 #include "../../incs/mini_shell.h"
 
 char	*get_env_value(t_mini_shell *ms, char *key)
 {
-	t_lstd	*elem;
-	t_env_arg *pair;
+	t_lstd		*elem;
+	t_env_arg	*pair;
 
 	elem = ft_lstd_find(ms->env_dict, key, find_in_dict);
 	if (!elem)
@@ -19,10 +20,23 @@ char	*get_env_value(t_mini_shell *ms, char *key)
 	return (pair->value);
 }
 
+t_error	ft_chdir(t_mini_shell *ms, t_cmd *cmd, char *path)
+{
+	if (chdir(path) == 0)
+	{
+		if (add_or_replace_in_chosen_env(ms, "OLDPWD", get_env_value(ms, "PWD"),
+				2) == MALLOC_ERROR)
+			return (MALLOC_ERROR);
+		if (add_or_replace_in_chosen_env(ms, "PWD", path, 2) == MALLOC_ERROR)
+			return (MALLOC_ERROR);
+		return (SUCCESS);
+	}
+	return (end_child_arg(ms, cmd, 1, strerror(errno)));
+}
 
 t_error	ft_cd(t_mini_shell *ms, t_cmd *cmd)
 {
-	char *path;
+	char	*path;
 
 	add_or_replace_in_chosen_env(ms, "PWD", getcwd(NULL, PWD_PATH_SIZE), 2);
 	if (cmd->cmd[1] && cmd->cmd[2])
@@ -42,14 +56,5 @@ t_error	ft_cd(t_mini_shell *ms, t_cmd *cmd)
 	}
 	else
 		path = cmd->cmd[1];
-	if (chdir(path) == 0)
-	{
-		if (add_or_replace_in_chosen_env(ms, "OLDPWD", get_env_value(ms, "PWD"),
-									  2) == MALLOC_ERROR)
-			return (MALLOC_ERROR);
-		if (add_or_replace_in_chosen_env(ms, "PWD", path, 2) == MALLOC_ERROR)
-			return (MALLOC_ERROR);
-		return (SUCCESS);
-	}
-	return (end_child_arg(ms, cmd, 1, strerror(errno)));
+	return (ft_chdir(ms, cmd, path));
 }
