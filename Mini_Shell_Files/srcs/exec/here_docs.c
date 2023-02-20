@@ -35,7 +35,6 @@ t_error exec_here_doc(t_mini_shell *ms, t_cmd *cmd)
 		if (!line)
 			return (MALLOC_ERROR);
 		tmp = ft_strjoin(ret, line);
-//		dprintf(2, "TMP = %s\n", tmp);
 		if (!tmp)
 			return (MALLOC_ERROR);
 		line = ft_free(line);
@@ -44,8 +43,6 @@ t_error exec_here_doc(t_mini_shell *ms, t_cmd *cmd)
 		if (!ret)
 			return (MALLOC_ERROR);
 		tmp = ft_free(tmp);
-//		dprintf(2, "RET = %s\n", ret);
-
 	}
 	return (ERROR);
 }
