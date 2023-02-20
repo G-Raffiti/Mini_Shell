@@ -50,8 +50,10 @@ FILES =			\
 				parsing/check_line \
 				parsing/chevron \
 				parsing/get_cmd \
+				parsing/get_cmd_str_dup \
 				parsing/get_path \
 				parsing/get_raw_cmd \
+				parsing/parse_error \
 				parsing/parsing \
 				parsing/read_line \
 				parsing/replace_dollars \

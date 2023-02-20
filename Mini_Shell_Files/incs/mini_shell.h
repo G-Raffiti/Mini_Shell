@@ -164,6 +164,7 @@ t_error		parse_error(t_mini_shell *ms, char *error_msg, int error_code);
 
 // GET CMD /////////////////////////////////////////////////////////////////////
 t_error		get_cmd(t_cmd *cmd);
+char		*str_dup_no_quote(char *line, int len);
 
 // GET PATH ////////////////////////////////////////////////////////////////////
 t_error		get_path(t_mini_shell *ms, t_cmd *cmd);
