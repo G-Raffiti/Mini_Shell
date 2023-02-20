@@ -10,7 +10,7 @@ t_error	exec_builtin(t_mini_shell *ms, t_cmd *cmd, t_bool in_pipe)
 	if (ft_str_cmp(cmd->cmd[0], "export") == 0)
 		return (ft_export(ms, cmd, in_pipe));
 	else if (ft_str_cmp(cmd->cmd[0], "env") == 0 && ms->env != NULL)
-		return (ft_env(ms, cmd, in_pipe));
+		return (ft_env(ms));
 	else if (ft_str_cmp(cmd->cmd[0], "unset") == 0)
 		return (ft_unset(ms, cmd, in_pipe));
 	else if (ft_str_cmp(cmd->cmd[0], "cd") == 0 && !in_pipe)
