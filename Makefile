@@ -59,6 +59,7 @@ FILES =			\
 				parsing/read_line \
 				parsing/replace_dollars \
 				parsing/replace_tilde \
+				parsing/replace_tilde_split \
 				parsing/set_builtin \
 				\
 				utils/check_functions \

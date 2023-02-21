@@ -1,9 +1,5 @@
-//
-// Created by rbonneva on 03/02/23.
-//
-
 #ifndef ERROR_H
-#define ERROR_H
+# define ERROR_H
 
 # define SYNTAX_PIPE		"syntax error near unexpected token `|'"
 # define SYNTAX_REDIR_OUT	"syntax error near unexpected token `>'"
@@ -25,4 +21,5 @@
 # define NO_FILE			"No such file or directory"
 # define AMBIGUOUS_REDIRECT	"ambiguous redirect"
 # define MALLOC_FAILED		"Memory allocation failed"
+
 #endif

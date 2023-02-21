@@ -19,8 +19,8 @@ static void	loop(t_mini_shell *ms)
 		debug(3, WHITE"line"GREY" = ["WHITE, line,GREY"] | "WHITE);//delete
 		if (parse_line(ms, line) == ERROR)
 		{
-			if (test_mode())//delete
-			{//delete
+			if (test_mode()) //delete
+			{ //delete
 				clear_cmds(&(ms->cmds), free_cmd);//delete
 				line = ft_free(line);//delete
 				exit_end_program(ms, get_exit_code());

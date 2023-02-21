@@ -1,9 +1,5 @@
-//
-// Created by rbonneva on 02/02/23.
-//
-
 #ifndef DEBUG_H
-#define DEBUG_H
+# define DEBUG_H
 
 # define BLACK "\033[0;30m"
 # define RED "\033[0;31m"
