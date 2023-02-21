@@ -53,7 +53,7 @@ typedef struct s_dollar
 {
 	char	quote;
 	char	*raw_cmd;
-	int 	prev_is_arg;
+	int		prev_is_arg;
 	int		start_dol;
 	int		len_prev;
 	int		nbr;
@@ -193,7 +193,16 @@ char		*read_line(void);
 
 // REPLACE_DOLLARS /////////////////////////////////////////////////////////////
 t_error		replace_dollars(t_mini_shell *ms, t_cmd *cmds);
+t_error		fill_end_raw(t_cmd *cmds, char **splited_raw);
+t_error		create_final_raw(t_cmd **cmd, int final_len);
 void		replace_dollar_before_quotes(t_cmd *cmd);
+t_error		get_key_and_replace(char **raw, t_env_arg **key_value, char *key);
+void		get_pair_key_value(t_mini_shell *ms, t_lstd *dict,
+				t_env_arg **key_value, char *key);
+void		check_secial_char(char *quote, int *prev_is_arg,
+				int *i, char *raw_cmd);
+int			check_id_and_count_prev(t_dollar *dlr, char *which_function, int
+				*split_len, int i);
 
 // REPLACE TILDE ///////////////////////////////////////////////////////////////
 t_error		replace_tilde(t_mini_shell *ms, t_cmd *cmd);

@@ -9,6 +9,7 @@ void	initialize_struct_dollar(t_dollar *dlr, t_cmd *cmds)
 	dlr->prev_is_arg = 0;
 	dlr->raw_cmd = cmds->raw_cmd;
 }
+
 t_error	new_env_arg(t_env_arg **env_dict)
 {
 	*env_dict = ft_calloc(1, sizeof(t_env_arg));
