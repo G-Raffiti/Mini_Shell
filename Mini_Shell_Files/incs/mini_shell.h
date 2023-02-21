@@ -13,6 +13,8 @@
 # define PWD_PATH_SIZE 4096
 # define PROMPT "ms "
 
+# define SPLIT_COUNT "split_count"
+# define FILL_SPLIT_ARGS "fill_split_args"
 /// ENUMS //////////////////////////////////////////////////////////////////////
 # ifndef T_ERROR
 #  define T_ERROR

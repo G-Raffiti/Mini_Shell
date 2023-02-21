@@ -4,50 +4,34 @@
 
 #include "../../incs/mini_shell.h"
 
-t_error	split_count(t_cmd *cmds, int *split_len)
+int	check_id_and_count_prev(t_dollar *dlr, char *which_function, int
+*split_len, int i)
 {
-	char	quote;
-	char	*raw_cmd;
-	int 	prev_is_arg;
-	int	i;
-
-	i = -1;
-	quote = 0;
-	prev_is_arg = 0;
-	raw_cmd = cmds->raw_cmd;
-
-	while (raw_cmd[++i])
+	if (ft_str_cmp(which_function, FILL_SPLIT_ARGS) == 0)
 	{
-		if (set_quote_state(raw_cmd[i], &quote) != '\'' && raw_cmd[i] == '$')
+		if (!(dlr->raw_cmd[i + 1] && valid_id_dollars(dlr->raw_cmd[i + 1])))
 		{
-			if (i != 0 && raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]) && prev_is_arg == 0)
-				*split_len += 2;
-			else if (raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]))
-				*split_len += 1;
-			else
-			{
-				prev_is_arg = 0;
-				continue;
-			}
-			while (raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]))
-			{
-				prev_is_arg = 1;
-				set_quote_state(raw_cmd[i], &quote);
-				i++;
-				if ((raw_cmd[i] == '?' || !is_not_alpha(raw_cmd[i])) && raw_cmd[i - 1] == '$')
-					break;
-			}
+			dlr->prev_is_arg = 0;
+			dlr->len_prev++;
+			return (0);
 		}
-		else
-			prev_is_arg = 0;
+		return (1);
 	}
-//	count_arg(raw_cmd, split_len, &prev_is_arg, quote);//TODO : REFACTO 40 LIGNEEEEEE
-	if (prev_is_arg == 0)
-		(*split_len)++;
-	if ((*split_len) == 1 && prev_is_arg == 0)
-		return (ERROR);
-	(*split_len)++;
-	return (SUCCESS);
+	else if (ft_str_cmp(which_function, SPLIT_COUNT) == 0)
+	{
+		if (i != 0 && dlr->raw_cmd[i + 1] && valid_id_dollars(dlr->raw_cmd[i +
+		1]) && dlr->prev_is_arg == 0)
+			*split_len += 2;
+		else if (dlr->raw_cmd[i + 1] && valid_id_dollars(dlr->raw_cmd[i + 1]))
+			*split_len += 1;
+		else
+		{
+			dlr->prev_is_arg = 0;
+			return (0);
+		}
+		return (1);
+	}
+	return (-1);
 }
 
 void	check_quote_and_special_arg_treatment(char *quote, int *prev_is_arg, int
@@ -59,10 +43,40 @@ void	check_quote_and_special_arg_treatment(char *quote, int *prev_is_arg, int
 		set_quote_state(raw_cmd[*i], quote);
 		(*i)++;
 		if ((raw_cmd[*i] == '?' || !is_not_alpha(raw_cmd[*i])) && raw_cmd[*i -
-		1] == '$')
+																		  1] == '$')
 			return ;
 	}
 }
+
+t_error	split_count(t_cmd *cmds, int *split_len)
+{
+	t_dollar dlr;
+	int	i;
+
+	i = -1;
+	initialize_struct_dollar(&dlr, cmds);
+	while (dlr.raw_cmd[++i])
+	{
+		if (set_quote_state(dlr.raw_cmd[i], &dlr.quote) != '\'' && dlr.raw_cmd[i] ==
+		'$')
+		{
+			if (check_id_and_count_prev(&dlr, SPLIT_COUNT, split_len, i) == 0)
+				continue;
+			check_quote_and_special_arg_treatment(&dlr.quote, &dlr.prev_is_arg,
+												  &i, dlr.raw_cmd);
+		}
+		else
+			dlr.prev_is_arg = 0;
+	}
+	if (dlr.prev_is_arg == 0)
+		(*split_len)++;
+	if ((*split_len) == 1 && dlr.prev_is_arg == 0)
+		return (ERROR);
+	(*split_len)++;
+	return (SUCCESS);
+}
+
+
 
 t_error	fill_curr_and_prev(t_dollar *dlr, char ***splited_raw, int i)
 {
@@ -81,17 +95,6 @@ t_error	fill_curr_and_prev(t_dollar *dlr, char ***splited_raw, int i)
 	return (SUCCESS);
 }
 
-int	check_id_and_count_prev(t_dollar *dlr, int i)
-{
-	if (!(dlr->raw_cmd[i + 1] && valid_id_dollars(dlr->raw_cmd[i + 1])))
-	{
-		dlr->prev_is_arg = 0;
-		dlr->len_prev++;
-		return (0);
-	}
-	return (1);
-}
-
 t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 {
 	t_dollar	dlr;
@@ -104,7 +107,7 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 		if (set_quote_state(dlr.raw_cmd[i], &dlr.quote) != '\'' && dlr.raw_cmd[i] == '$')
 		{
 			dlr.start_dol = i;
-			if (check_id_and_count_prev(&dlr, i) == 0)
+			if (check_id_and_count_prev(&dlr, FILL_SPLIT_ARGS, NULL, i) == 0)
 				continue;
 			check_quote_and_special_arg_treatment(&dlr.quote, &dlr.prev_is_arg, &i,
 												  dlr.raw_cmd);
