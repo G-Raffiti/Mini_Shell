@@ -1,13 +1,13 @@
-
 #ifndef MINI_SHELL_H
 # define MINI_SHELL_H
 # include "../../Lib_List_Double/incs/ft_lstd.h"
 # include "../../Lib_FT/incs/libft.h"
 # include "error.h"
 # include "debug.h"
+
 /// IDIENTIFIER EXPORT /////////////////////////////////////////////////////////
-# define INV_ID	"! # $ % & ( ) * + - . < > = : ; ` / ' \\ \" @ { } [ ] ^ | ~ \n _"
-# define INV_ID_EXPORT	"! # $ % & ( ) * + - . < > = : ; ` /  \\ ' \" @ { } [ ] ^ | ~ \n ?"
+# define INV_ID	" !#$%&()*+-.<>=:;`/'\\\"@{}[]^|~\n_"
+# define INV_ID_EXPORT	" !#$%&()*+-.<>=:;`/\\'\"@{}[]^|~\n?"
 
 /// DEFINE /////////////////////////////////////////////////////////////////////
 # define PWD_PATH_SIZE 4096
@@ -27,7 +27,7 @@ typedef enum e_error
 # endif
 
 # ifndef T_BOOL
-# define T_BOOL
+#  define T_BOOL
 
 typedef enum e_bool
 {
@@ -60,7 +60,7 @@ typedef struct s_fd
 typedef struct s_env_arg
 {
 	char			*key;
-	char 			*value;
+	char			*value;
 }					t_env_arg;
 
 typedef struct s_cmd
@@ -85,7 +85,7 @@ typedef struct s_mini_shell
 	t_lstd			*cmds;
 	int				pipe[2];
 	int				stds[2];
-	t_bool 			exported;
+	t_bool			exported;
 }					t_mini_shell;
 
 /******************************************************************************/
@@ -97,9 +97,12 @@ t_error		get_env(t_mini_shell *ms, char **env);
 t_error		get_export_env(t_mini_shell *ms);
 
 // MODIF_ENV ///////////////////////////////////////////////////////////////////
-t_error		add_or_replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env);
-t_error		replace_in_chosen_env(t_mini_shell *ms, char *key, char *new_value, int which_env);
-t_error		add_in_chosen_env(t_mini_shell *ms, char *key, char *value, int which_env);
+t_error		add_or_replace_in_chosen_env(t_mini_shell *ms, char *key,
+				char *new_value, int which_env);
+t_error		replace_in_chosen_env(t_mini_shell *ms, char *key,
+				char *new_value, int which_env);
+t_error		add_in_chosen_env(t_mini_shell *ms, char *key,
+				char *value, int which_env);
 
 /******************************************************************************/
 /*******************************   EXEC   *************************************/
@@ -118,9 +121,9 @@ void		error_exec(t_mini_shell *ms, t_cmd *cmd);
 void		wait_exit_status(t_mini_shell *ms, t_lstd *current);
 
 // SIGNALS /////////////////////////////////////////////////////////////////////
-void		set_interactiv_signals();
-void		set_here_doc_signals();
-void		set_exec_signals();
+void		set_interactiv_signals(void);
+void		set_here_doc_signals(void);
+void		set_exec_signals(void);
 
 // SIGNALS HANDLER /////////////////////////////////////////////////////////////
 void		here_doc_handler(int signum);
@@ -129,6 +132,7 @@ void		exec_handler(int signum);
 
 // HERE_DOCS ///////////////////////////////////////////////////////////////////
 t_error		here_docs(t_lstd *current);
+
 /******************************************************************************/
 /*******************************   BUILTIN   **********************************/
 /******************************************************************************/
@@ -182,6 +186,8 @@ void		replace_dollar_before_quotes(t_cmd *cmd);
 
 // REPLACE TILDE ///////////////////////////////////////////////////////////////
 t_error		replace_tilde(t_mini_shell *ms, t_cmd *cmd);
+int			count_part_tilde(char *raw);
+t_error		fill_split_tilde(char **split, char *raw);
 
 // SET BUILTIN /////////////////////////////////////////////////////////////////
 void		set_builtin(t_cmd *cmd);
@@ -189,7 +195,7 @@ void		set_builtin(t_cmd *cmd);
 // OPEN FILES //////////////////////////////////////////////////////////////////
 t_error		open_files(t_mini_shell *ms, t_cmd *cmd);
 char		*extract_file_name(t_mini_shell *ms, char *str, char *quote,
-						t_chevron type);
+				t_chevron type);
 
 /******************************************************************************/
 /*******************************   UTILS   ************************************/
@@ -279,8 +285,8 @@ void		debug_mini_shell(t_mini_shell *ms);
 void		debug_fd(t_mini_shell *ms, t_cmd *cmd);
 
 // TEST MODE ///////////////////////////////////////////////////////////////////
-t_bool		test_mode();
-void		set_test_mode();
+t_bool		test_mode(void);
+void		set_test_mode(void);
 int			test_minishell(char *line, t_mini_shell *ms);
 
 char		**ft_strtab_dup(char **tab_to_dup);

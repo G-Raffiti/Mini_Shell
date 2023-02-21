@@ -19,7 +19,6 @@ void	set_builtin(t_cmd *cmd)
 	if (ft_str_cmp(cmd->cmd[0], "echo") == 0
 		|| ft_str_cmp(cmd->cmd[0], "pwd") == 0
 		|| (ft_str_cmp(cmd->cmd[0], "export") == 0 && !cmd->cmd[1])
-		|| ft_str_cmp(cmd->cmd[0], "env") == 0
-		)
+		|| ft_str_cmp(cmd->cmd[0], "env") == 0)
 		cmd->need_fork = TRUE;
 }

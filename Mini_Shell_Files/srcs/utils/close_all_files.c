@@ -1,4 +1,4 @@
-# include "../../incs/mini_shell.h"
+#include "../../incs/mini_shell.h"
 
 void	close_all_files(t_mini_shell *ms)
 {

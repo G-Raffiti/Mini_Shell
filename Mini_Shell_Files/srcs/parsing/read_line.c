@@ -1,11 +1,6 @@
-//
-// Created by Raphael Bonneval on 1/24/23.
-//
-#include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "../../incs/mini_shell.h"
-#include "../../incs/debug.h"
 
 char	*read_line(void)
 {

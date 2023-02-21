@@ -32,7 +32,7 @@ t_error	fill_paths(t_mini_shell *ms, char *full_path)
 t_error	create_ms_path(t_mini_shell *ms, char *full_path)
 {
 	int	char_pos;
-	int nbr_of_paths;
+	int	nbr_of_paths;
 
 	char_pos = 0;
 	nbr_of_paths = 2;
@@ -75,7 +75,7 @@ t_error	get_all_paths(t_mini_shell *ms, t_lstd *env_dict)
 
 t_error	get_path(t_mini_shell *ms, t_cmd *cmd)
 {
-	int i;
+	int	i;
 
 	if (access(cmd->cmd[0], X_OK) == 0)
 	{

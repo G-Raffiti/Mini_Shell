@@ -39,8 +39,8 @@ t_error	fill_split(char **split, char *line)
 	while (*line)
 	{
 		len = 0;
-		while (line[len] && !(!set_quote_state(line[len], &quote) && line[len]
-																	 == '|'))
+		while (line[len]
+			&& !(!set_quote_state(line[len], &quote) && line[len] == '|'))
 			len++;
 		split[block] = ft_substr(line, 0, len);
 		if (!split[block])
@@ -62,7 +62,6 @@ char	**split_pipe(char *line)
 	int		cmd_nb;
 
 	cmd_nb = count_blocks(line);
-
 	split = malloc(sizeof(char *) * (cmd_nb + 1));
 	if (!split)
 		return (NULL);

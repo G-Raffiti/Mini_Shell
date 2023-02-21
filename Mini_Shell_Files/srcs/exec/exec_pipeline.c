@@ -1,7 +1,3 @@
-//
-// Created by rbonneva on 2/20/23.
-//
-
 #include "../../incs/mini_shell.h"
 
 static void	exec_first(t_mini_shell *ms, t_cmd *first)
@@ -54,9 +50,9 @@ static void	exec_cmd(t_mini_shell *ms, t_cmd *cmd)
 	safe_fork(ms, cmd, "exec_mid");
 	if (cmd->pid)
 	{
+		safe_close(ms, ms->pipe[1], "exec_mid");
 		if (cmd->output->fd > 0)
 			safe_close(ms, cmd->output->fd, "exec_mid");
-		safe_close(ms, ms->pipe[1], "exec_mid");
 		return ;
 	}
 	if (cmd->output->fd == -2)
