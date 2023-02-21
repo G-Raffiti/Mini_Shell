@@ -2,7 +2,6 @@
 valgrind*
 Tester/
 test_dir/minishell
-_test/
 
 
 # Cmake

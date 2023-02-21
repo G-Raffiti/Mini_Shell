@@ -3,6 +3,7 @@
 //
 
 #include <signal.h>
+#include <stdio.h>
 #include <readline/readline.h>
 #include "../../incs/mini_shell.h"
 
