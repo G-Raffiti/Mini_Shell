@@ -18,8 +18,7 @@ t_error	split_count(t_cmd *cmds, int *split_len)
 
 	while (raw_cmd[++i])
 	{
-		if (set_quote_state(raw_cmd[i], &quote) != '\'' && raw_cmd[i] == '$'
-			)
+		if (set_quote_state(raw_cmd[i], &quote) != '\'' && raw_cmd[i] == '$')
 		{
 			if (i != 0 && raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]) && prev_is_arg == 0)
 				*split_len += 2;
@@ -74,10 +73,7 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 		if (set_quote_state(raw_cmd[i], &quote) != '\'' && raw_cmd[i] == '$')
 		{
 			start_dol = i;
-			if (i != 0 && raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]) && prev_is_arg == 0 && \
-                    is_not_alpha(raw_cmd[i + 1]))
-				start_dol = i;
-			else if (raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]))
+			if ((raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1])))
 				start_dol = i;
 			else
 			{
@@ -253,15 +249,11 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 	split_len = 0;
 	if (!cmds->raw_cmd || split_count(cmds, &split_len) == 0)
 		return (SUCCESS);
-//	dprintf(2, "SPLIT len = %d\n", split_len);
 	splited_raw = ft_calloc(sizeof(char *), split_len);
 	if (!splited_raw)
 		return (MALLOC_ERROR);
 	if (fill_split_args(cmds, &splited_raw) == MALLOC_ERROR)
 		return (free_split(splited_raw), MALLOC_ERROR);
-//	int i = -1;
-//	while (splited_raw[++i])
-//		dprintf(2, "SPLITED raw [%d] = %s\n",i, splited_raw[i]);
 	if (replace_in_split(ms, splited_raw, &final_len) == MALLOC_ERROR)
 		return (free_split(splited_raw), MALLOC_ERROR);
 	if (create_final_raw(&cmds, final_len) == MALLOC_ERROR)
