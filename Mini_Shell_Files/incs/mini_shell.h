@@ -47,6 +47,15 @@ typedef enum e_chevron
 }	t_chevron;
 
 /// STRUCTURES /////////////////////////////////////////////////////////////////
+typedef struct s_dollar
+{
+	char	quote;
+	char	*raw_cmd;
+	int 	prev_is_arg;
+	int		start_dol;
+	int		len_prev;
+	int		nbr;
+}					t_dollar;
 typedef struct s_fd
 {
 	int				fd;
@@ -243,6 +252,7 @@ t_error		new_fd(t_fd **fd);
 t_error		new_cmd(t_cmd **cmd);
 t_error		new_mini_shell(t_mini_shell **ms);
 t_error		new_env_arg(t_env_arg **env_dict);
+void		initialize_struct_dollar(t_dollar *dlr, t_cmd *cmds);
 
 // DICT UTILS //////////////////////////////////////////////////////////////////
 t_error		fill_dict_element(t_env_arg **dict, char *key, char *value);

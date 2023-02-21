@@ -1,5 +1,14 @@
 #include "../../incs/mini_shell.h"
 
+void	initialize_struct_dollar(t_dollar *dlr, t_cmd *cmds)
+{
+	dlr->nbr = 0;
+	dlr->start_dol = 0;
+	dlr->len_prev = 0;
+	dlr->quote = 0;
+	dlr->prev_is_arg = 0;
+	dlr->raw_cmd = cmds->raw_cmd;
+}
 t_error	new_env_arg(t_env_arg **env_dict)
 {
 	*env_dict = ft_calloc(1, sizeof(t_env_arg));

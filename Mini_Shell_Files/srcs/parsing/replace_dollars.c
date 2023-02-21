@@ -50,67 +50,73 @@ t_error	split_count(t_cmd *cmds, int *split_len)
 	return (SUCCESS);
 }
 
+void	check_quote_and_special_arg_treatment(char *quote, int *prev_is_arg, int
+*i, char *raw_cmd)
+{
+	while (raw_cmd[*i + 1] && valid_id_dollars(raw_cmd[*i + 1]))
+	{
+		*prev_is_arg = 1;
+		set_quote_state(raw_cmd[*i], quote);
+		(*i)++;
+		if ((raw_cmd[*i] == '?' || !is_not_alpha(raw_cmd[*i])) && raw_cmd[*i -
+		1] == '$')
+			return ;
+	}
+}
+
+t_error	fill_curr_and_prev(t_dollar *dlr, char ***splited_raw, int i)
+{
+	if (dlr->len_prev > 0)
+	{
+		(*splited_raw)[dlr->nbr++] = ft_substr(dlr->raw_cmd, dlr->start_dol -
+		dlr->len_prev, dlr->len_prev);
+		if (!(*splited_raw)[dlr->nbr - 1])
+			return (MALLOC_ERROR);
+		dlr->len_prev = 0;
+	}
+	(*splited_raw)[dlr->nbr++] = ft_substr(dlr->raw_cmd, dlr->start_dol, i -
+	dlr->start_dol + 1);
+	if (!(splited_raw)[dlr->nbr - 1])
+		return (MALLOC_ERROR);
+	return (SUCCESS);
+}
+
+int	check_id_and_count_prev(t_dollar *dlr, int i)
+{
+	if (!(dlr->raw_cmd[i + 1] && valid_id_dollars(dlr->raw_cmd[i + 1])))
+	{
+		dlr->prev_is_arg = 0;
+		dlr->len_prev++;
+		return (0);
+	}
+	return (1);
+}
+
 t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 {
-	char	quote;
-	char	*raw_cmd;
-	int 	prev_is_arg;
-	int	i;
-	int start_dol;
-	int len_prev;
-	int nbr;
+	t_dollar	dlr;
+	int			i;
 
 	i = -1;
-	nbr = 0;
-	start_dol = 0;
-	len_prev = 0;
-	quote = 0;
-	prev_is_arg = 0;
-	raw_cmd = cmds->raw_cmd;
-
-	while (raw_cmd[++i])
+	initialize_struct_dollar(&dlr, cmds);
+	while (dlr.raw_cmd[++i])
 	{
-		if (set_quote_state(raw_cmd[i], &quote) != '\'' && raw_cmd[i] == '$')
+		if (set_quote_state(dlr.raw_cmd[i], &dlr.quote) != '\'' && dlr.raw_cmd[i] == '$')
 		{
-			start_dol = i;
-			if ((raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1])))
-				start_dol = i;
-			else
-			{
-				prev_is_arg = 0;
-				len_prev++;
+			dlr.start_dol = i;
+			if (check_id_and_count_prev(&dlr, i) == 0)
 				continue;
-			}
-			while (raw_cmd[i + 1] && valid_id_dollars(raw_cmd[i + 1]))
-			{
-				prev_is_arg = 1;
-
-				set_quote_state(raw_cmd[i], &quote);
-				i++;
-				if ((raw_cmd[i] == '?' || !is_not_alpha(raw_cmd[i])) && raw_cmd[i - 1] == '$')
-					break;
-			}
-			if (len_prev > 0)
-			{
-				(*splited_raw)[nbr++] = ft_substr(raw_cmd, start_dol - len_prev, len_prev);
-				if ((!*splited_raw))
-					return (MALLOC_ERROR);
-				len_prev = 0;
-			}
-			(*splited_raw)[nbr++] = ft_substr(raw_cmd, start_dol, i - start_dol + 1);
-			if ((!*splited_raw))
+			check_quote_and_special_arg_treatment(&dlr.quote, &dlr.prev_is_arg, &i,
+												  dlr.raw_cmd);
+			if (fill_curr_and_prev(&dlr, splited_raw, i) == MALLOC_ERROR)
 				return (MALLOC_ERROR);
+			continue ;
 		}
-		else
-		{
-			prev_is_arg = 0;
-			len_prev++;
-		}
+		dlr.prev_is_arg = 0;
+		dlr.len_prev++;
 	}
-	if (prev_is_arg == 0)
-	{
-		(*splited_raw)[nbr++] = ft_substr(raw_cmd, ft_strlen(raw_cmd) - len_prev, len_prev);
-	}
+	if (dlr.prev_is_arg == 0)
+		(*splited_raw)[dlr.nbr++] = ft_substr(dlr.raw_cmd, ft_strlen(dlr.raw_cmd) - dlr.len_prev, dlr.len_prev);
 	return (SUCCESS);
 }
 
