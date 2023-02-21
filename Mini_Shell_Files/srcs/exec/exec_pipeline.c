@@ -28,7 +28,10 @@ static void	exec_first(t_mini_shell *ms, t_cmd *first)
 	if (first->output->fd == -2)
 		safe_dup2(ms, ms->pipe[1], STDOUT_FILENO, "exec_first");
 	else
+	{
+		safe_close(ms, ms->pipe[1], "exec first");
 		safe_dup2(ms, first->output->fd, STDOUT_FILENO, "exec_first");
+	}
 	execve_cmd(ms, first);
 }
 
@@ -59,7 +62,10 @@ static void	exec_cmd(t_mini_shell *ms, t_cmd *cmd)
 	if (cmd->output->fd == -2)
 		safe_dup2(ms, ms->pipe[1], STDOUT_FILENO, "exec_mid");
 	else
+	{
+		safe_close(ms, ms->pipe[1], "exec_mid");
 		safe_dup2(ms, cmd->output->fd, STDOUT_FILENO, "exec_mid");
+	}
 	execve_cmd(ms, cmd);
 }
 
