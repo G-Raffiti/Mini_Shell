@@ -39,7 +39,7 @@ typedef enum e_bool
 
 typedef enum e_chevron
 {
-	ERROR_REDIR,
+	PIPE_REDIR,
 	IN_REDIR,
 	HERE_DOC_REDIR,
 	OUT_REDIR,
@@ -199,6 +199,9 @@ char		*extract_file_name(t_mini_shell *ms, char *str, char *quote,
 int			valid_id_dollars(char c);
 int			valid_id_export(char c);
 int			is_not_alpha(char c);
+
+// CLOSE ALL FILES /////////////////////////////////////////////////////////////
+void		close_all_files(t_mini_shell *ms);
 
 // DICT ////////////////////////////////////////////////////////////////////////
 t_error		change_value_envs(t_env_arg *content, char *new_value);

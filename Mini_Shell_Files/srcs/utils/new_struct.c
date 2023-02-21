@@ -13,6 +13,7 @@ t_error	new_fd(t_fd **fd)
 	*fd = ft_calloc(1, sizeof(t_fd));
 	if (!*fd)
 		return (MALLOC_ERROR);
+	(*fd)->type = PIPE_REDIR;
 	(*fd)->fd = -2;
 	return (SUCCESS);
 }

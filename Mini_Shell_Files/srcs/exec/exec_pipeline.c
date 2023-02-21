@@ -36,7 +36,9 @@ static void	exec_cmd(t_mini_shell *ms, t_cmd *cmd)
 {
 	if (cmd->input->fd == -2)
 		safe_dup2(ms, ms->pipe[0], STDIN_FILENO, "exec_mid");
-	else if (cmd->input->fd > 0)
+	else
+		close(ms->pipe[0]);
+	if (cmd->input->fd > 0)
 	{
 		safe_dup2(ms, cmd->input->fd, STDIN_FILENO, "exec_mid");
 		if (cmd->input->here_doc_pipe[1])
@@ -65,7 +67,9 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 {
 	if (last->input->fd == -2)
 		safe_dup2(ms, ms->pipe[0], STDIN_FILENO, "exec_last");
-	else if (last->input->fd > 0)
+	else
+		close(ms->pipe[0]);
+	if (last->input->fd > 0)
 	{
 		safe_dup2(ms, last->input->fd, STDIN_FILENO, "exec_last");
 		if (last->input->here_doc_pipe[1])

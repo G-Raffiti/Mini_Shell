@@ -6,6 +6,13 @@ void	*free_fd(t_fd *fd)
 	if (!fd)
 		return (NULL);
 	fd->name = ft_free(fd->name);
+	if (fd->type != PIPE_REDIR && fd->type != HERE_DOC_REDIR && fd->fd > 0)
+		close(fd->fd);
+	else if (fd->type == HERE_DOC_REDIR && fd->fd > 0)
+	{
+		close(fd->here_doc_pipe[0]);
+		close(fd->here_doc_pipe[1]);
+	}
 	free(fd);
 	return (NULL);
 }

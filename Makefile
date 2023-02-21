@@ -6,7 +6,7 @@
 
 NAME =			minishell
 CC =			gcc
-CC_FLAGS =		-Wall -Wextra -Werror -gdwarf-4 -g3 -fsanitize=address
+CC_FLAGS =		-Wall -Wextra -Werror -gdwarf-4 -g3 #-fsanitize=address
 
 PATH_OBJ =		./Mini_Shell_Files/objs/
 PATH_SRC =		./Mini_Shell_Files/srcs/
@@ -61,15 +61,16 @@ FILES =			\
 				parsing/replace_tilde \
 				parsing/set_builtin \
 				\
-				utils/env_utils \
-				utils/env_type_utils \
+				utils/check_functions \
+				utils/close_all_files \
 				utils/dict_utils \
+				utils/env_type_utils \
+				utils/env_utils \
 				utils/free_struct \
 				utils/ft_free \
 				utils/list_cmd_utils \
 				utils/new_struct \
 				utils/safe_functions \
-				utils/check_functions \
 				\
 				exit \
 				end_child \
