@@ -74,7 +74,7 @@ t_error	extract_key_value(char *cmd, char ***extracted)
 	i = 0;
 	while (cmd [++j] && cmd[j] != '=')
 		(*extracted)[0][j] = cmd[j];
-	if (cmd[j++] == '=')
+	if (cmd[j] && cmd[j++] == '=')
 		(*extracted)[1][0] = '=';
 	while (cmd[j])
 		(*extracted)[2][i++] = cmd[j++];

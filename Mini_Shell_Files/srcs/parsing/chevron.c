@@ -11,7 +11,7 @@ static void	chevron_out(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 	if (cmd->output->fd > 0)
 	{
 		safe_close(ms, cmd->output->fd, "chevron_out");
-		cmd->output->name = ft_free(cmd->input->name);
+		cmd->output->name = ft_free(cmd->output->name);
 	}
 	if (type == OUT_REDIR)
 		cmd->output->fd = open(file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
