@@ -3,7 +3,8 @@
 #include <readline/history.h>
 #include "../../incs/mini_shell.h"
 #include <termios.h>
-
+#include <curses.h>
+#include <term.h>
 void	handle_readline_conflict_keybinding()
 {
 	struct termios term;
@@ -22,7 +23,7 @@ char	*read_line(void)
 	if (get_exit_code() == 0)
 		line = readline(PROMPT""GREEN"-▶ "WHITE);
 	else
-		line = readline(PROMPT""RED"-▶ "WHITE);
+		line = readline(PROMPT""RED"-▶ " WHITE);
 	if (line && ft_strlen(line) > 0 && !is_empty_line(line))
 		add_history(line);
 	return (line);
