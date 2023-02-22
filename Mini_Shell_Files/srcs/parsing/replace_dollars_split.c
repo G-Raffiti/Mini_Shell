@@ -124,5 +124,5 @@ t_error	replace_dollars(t_mini_shell *ms, t_cmd *cmds)
 	if (fill_end_raw(cmds, splited_raw) == MALLOC_ERROR)
 		return (free_split(splited_raw), MALLOC_ERROR);
 	splited_raw = free_split(splited_raw);
-	return (0);
+	return (SUCCESS);
 }

@@ -151,10 +151,6 @@ t_error		here_docs(t_lstd *current);
 // BUILTIN /////////////////////////////////////////////////////////////////////
 t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd, t_bool in_pipe);
 
-// BUILTIN ERRORS //////////////////////////////////////////////////////////////
-void		builtin_error_env(char *arg, int error_code, char *msg);
-void		builtin_error_export(char *arg, int error_code, char *msg);
-
 // BUILTINS FUNCTIONS //////////////////////////////////////////////////////////
 t_error		ft_cd(t_mini_shell *ms, t_cmd *cmd);
 t_error		ft_echo(t_cmd *cmd);

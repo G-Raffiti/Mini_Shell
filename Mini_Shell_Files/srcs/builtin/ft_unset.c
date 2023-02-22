@@ -4,6 +4,7 @@
 
 #include "../../incs/mini_shell.h"
 
+
 t_error	ft_unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 {
 	t_lstd	*current;
@@ -25,7 +26,9 @@ t_error	ft_unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 	}
 	if (cmd->cmd[1] && ft_str_cmp(cmd->cmd[1], "PATH") == 0)
 		ms->paths = free_split(ms->paths);
-	fill_env(ms);
-	fill_export_env(ms);
+	if (fill_env(ms) == MALLOC_ERROR)
+		return (MALLOC_ERROR);
+	if (fill_export_env(ms) == MALLOC_ERROR)
+		return (MALLOC_ERROR);
 	return (SUCCESS);
 }

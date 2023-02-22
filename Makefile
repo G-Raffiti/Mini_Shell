@@ -24,7 +24,6 @@ FILE_LIB =		./Lib_FT/incs/libft.h \
 
 FILES =			\
 				builtin/builtin \
-				builtin/builtin_errors \
 				builtin/ft_cd \
 				builtin/ft_echo \
 				builtin/ft_exit \

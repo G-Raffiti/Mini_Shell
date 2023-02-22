@@ -69,7 +69,7 @@ t_error	extract_key_value(char *cmd, char ***extracted)
 	{
 		(*extracted)[i] = ft_calloc(sizeof(char), ft_strlen(cmd) + 1);
 		if (!*extracted)
-			return (MALLOC_ERROR);
+			return (free_split(*extracted), MALLOC_ERROR);
 	}
 	i = 0;
 	while (cmd [++j] && cmd[j] != '=')
@@ -96,7 +96,7 @@ t_error	ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 	while (!in_pipe && cmd->cmd[++i])
 	{
 		if (!export_name_is_valid(cmd->cmd[i]))
-			builtin_error_export(cmd->cmd[i], 1, INVALID_IDENTIFIER);
+			end_child(ms, cmd, 1, INVALID_IDENTIFIER);
 		else
 		{
 			if (extract_key_value(cmd->cmd[i], &extracted) == MALLOC_ERROR)
