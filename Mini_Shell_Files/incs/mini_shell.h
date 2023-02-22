@@ -13,8 +13,8 @@
 # define PWD_PATH_SIZE 4096
 # define PROMPT "ms "
 
-# define SPLIT_COUNT "split_count"
-# define FILL_SPLIT_ARGS "fill_split_args"
+# define SPLIT_COUNT 101
+# define FILL_SPLIT_ARGS 102
 /// ENUMS //////////////////////////////////////////////////////////////////////
 # ifndef T_ERROR
 #  define T_ERROR
@@ -201,7 +201,7 @@ void		get_pair_key_value(t_mini_shell *ms, t_lstd *dict,
 				t_env_arg **key_value, char *key);
 void		check_secial_char(char *quote, int *prev_is_arg,
 				int *i, char *raw_cmd);
-int			check_id_and_count_prev(t_dollar *dlr, char *which_function, int
+int			check_id_and_count_prev(t_dollar *dlr, int which_function, int
 				*split_len, int i);
 
 // REPLACE TILDE ///////////////////////////////////////////////////////////////

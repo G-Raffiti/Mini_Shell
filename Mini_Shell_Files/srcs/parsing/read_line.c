@@ -1,3 +1,4 @@
+#include <stdio.h>//TODO : delete at school
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "../../incs/mini_shell.h"

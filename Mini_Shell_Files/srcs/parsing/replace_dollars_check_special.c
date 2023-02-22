@@ -1,9 +1,9 @@
 #include "../../incs/mini_shell.h"
 
-int	check_id_and_count_prev(t_dollar *dlr, char *which_function, int
+int	check_id_and_count_prev(t_dollar *dlr, int which_function, int
 	*split_len, int i)
 {
-	if (ft_str_cmp(which_function, FILL_SPLIT_ARGS) == 0)
+	if (which_function == FILL_SPLIT_ARGS)
 	{
 		if (!(dlr->raw_cmd[i + 1] && valid_id_dollars(dlr->raw_cmd[i + 1])))
 		{
@@ -13,7 +13,7 @@ int	check_id_and_count_prev(t_dollar *dlr, char *which_function, int
 		}
 		return (1);
 	}
-	else if (ft_str_cmp(which_function, SPLIT_COUNT) == 0)
+	else if (which_function == SPLIT_COUNT)
 	{
 		if (i != 0 && dlr->raw_cmd[i + 1]
 			&& valid_id_dollars(dlr->raw_cmd[i + 1]) && dlr->prev_is_arg == 0)
