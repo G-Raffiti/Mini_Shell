@@ -22,31 +22,44 @@ static void	chevron_out(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 		cmd->output->error = errno;
 }
 
+static	t_error	create_here_docs(t_mini_shell *ms, t_cmd *cmd, char *limiter)
+{
+	t_here_docs *here_doc;
+	t_lstd		*elem;
+
+	here_doc = ft_calloc(1, sizeof(t_here_docs));
+	if (!here_doc)
+		return (MALLOC_ERROR);
+	here_doc->limiter = limiter;
+	safe_pipe(ms, here_doc->pipe_h, "create_here_docs");
+	elem = ft_lstd_new(here_doc);
+	if (!elem)
+		return (free(here_doc), MALLOC_ERROR);
+	ft_lstd_push_back_elem(&cmd->input->here_docs, elem);
+	return (SUCCESS);
+}
+
 static void	chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 *file_name)
 {
 	if (cmd->input->fd == -1)
 		return ;
-	cmd->input->type = type;
 	if (type == OUT_REDIR || type == APPEND_REDIR)
 	{
 		chevron_out(ms, cmd, type, file_name);
 		return ;
 	}
+	cmd->input->type = type;
 	if (cmd->input->fd > 0)
 	{
 		safe_close(ms, cmd->input->fd, "chevron_in");
 		cmd->input->name = ft_free(cmd->input->name);
+		cmd->input->name = file_name;
 	}
 	if (type == IN_REDIR)
 		cmd->input->fd = open(file_name, O_RDONLY);
 	else if (type == HERE_DOC_REDIR)
-	{
-		safe_pipe(ms, cmd->input->here_doc_pipe, "chevron_in");
-		cmd->input->fd = cmd->input->here_doc_pipe[0];
-		cmd->input->limiter = file_name;
-	}
-	cmd->input->name = file_name;
+		create_here_docs(ms, cmd,file_name);
 	if (cmd->input->fd == -1)
 		cmd->input->error = errno;
 }

@@ -5,11 +5,14 @@ static void	exec_first(t_mini_shell *ms, t_cmd *first)
 	safe_pipe(ms, ms->pipe, "exec_first");
 	if (permission_denied(ms, first) == ERROR)
 		return ;
-	if (first->input->fd != -2)
-	{
+	if (first->input->fd != -2 && first->input->type != HERE_DOC_REDIR)
 		safe_dup2(ms, first->input->fd, STDIN_FILENO, "exec_first");
-		if (first->input->here_doc_pipe[1])
-			close(first->input->here_doc_pipe[1]);
+	else if (first->input->type == HERE_DOC_REDIR)
+	{
+		safe_dup2(ms, ((t_here_docs *)(ft_lstd_last(first->input->here_docs)
+				->content))->pipe_h[0], STDIN_FILENO, "exec_one");
+		safe_close(ms,((t_here_docs *)(ft_lstd_last(first->input->here_docs)
+				->content))->pipe_h[1], "exec_one");
 	}
 	set_exec_signals();
 	safe_fork(ms, first, "exec_first");
@@ -37,11 +40,14 @@ static void	exec_cmd(t_mini_shell *ms, t_cmd *cmd)
 		safe_dup2(ms, ms->pipe[0], STDIN_FILENO, "exec_mid");
 	else
 		close(ms->pipe[0]);
-	if (cmd->input->fd > 0)
+	if (cmd->input->fd != -2 && cmd->input->type != HERE_DOC_REDIR)
+		safe_dup2(ms, cmd->input->fd, STDIN_FILENO, "exec_first");
+	else if (cmd->input->type == HERE_DOC_REDIR)
 	{
-		safe_dup2(ms, cmd->input->fd, STDIN_FILENO, "exec_mid");
-		if (cmd->input->here_doc_pipe[1])
-			close(cmd->input->here_doc_pipe[1]);
+		safe_dup2(ms, ((t_here_docs *)(ft_lstd_last(cmd->input->here_docs)
+				->content))->pipe_h[0], STDIN_FILENO, "exec_one");
+		safe_close(ms,((t_here_docs *)(ft_lstd_last(cmd->input->here_docs)
+				->content))->pipe_h[1], "exec_one");
 	}
 	safe_pipe(ms, ms->pipe, "exec_mid");
 	if (permission_denied(ms, cmd) == ERROR)
@@ -53,6 +59,9 @@ static void	exec_cmd(t_mini_shell *ms, t_cmd *cmd)
 		safe_close(ms, ms->pipe[1], "exec_mid");
 		if (cmd->output->fd > 0)
 			safe_close(ms, cmd->output->fd, "exec_mid");
+		if (cmd->input->type == HERE_DOC_REDIR)
+			safe_close(ms,((t_here_docs *)(ft_lstd_last(cmd->input->here_docs)
+					->content))->pipe_h[1], "exec_one");
 		return ;
 	}
 	if (cmd->output->fd == -2)
@@ -71,11 +80,14 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 		safe_dup2(ms, ms->pipe[0], STDIN_FILENO, "exec_last");
 	else
 		close(ms->pipe[0]);
-	if (last->input->fd > 0)
+	if (last->input->fd != -2 && last->input->type != HERE_DOC_REDIR)
+		safe_dup2(ms, last->input->fd, STDIN_FILENO, "exec_first");
+	else if (last->input->type == HERE_DOC_REDIR)
 	{
-		safe_dup2(ms, last->input->fd, STDIN_FILENO, "exec_last");
-		if (last->input->here_doc_pipe[1])
-			close(last->input->here_doc_pipe[1]);
+		safe_dup2(ms, ((t_here_docs *)(ft_lstd_last(last->input->here_docs)
+				->content))->pipe_h[0], STDIN_FILENO, "exec_one");
+		safe_close(ms,((t_here_docs *)(ft_lstd_last(last->input->here_docs)
+				->content))->pipe_h[1], "exec_one");
 	}
 	close(ms->pipe[0]);
 	if (permission_denied(ms, last) == ERROR)
@@ -86,6 +98,9 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 	{
 		if (last->output->fd > 0)
 			safe_close(ms, last->output->fd, "exec_last");
+		if (last->input->type == HERE_DOC_REDIR)
+			safe_close(ms,((t_here_docs *)(ft_lstd_last(last->input->here_docs)
+					->content))->pipe_h[1], "exec_one");
 		return ;
 	}
 	if (last->output->fd > 0)

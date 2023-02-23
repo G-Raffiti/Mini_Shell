@@ -64,9 +64,14 @@ typedef struct s_fd
 	char			*name;
 	int				error;
 	t_chevron		type;
-	char			*limiter;
-	int				here_doc_pipe[2];
+	t_lstd			*here_docs;
 }					t_fd;
+
+typedef struct s_here_docs
+{
+	int 			pipe_h[2];
+	char 			*limiter;
+}					t_here_docs;
 
 typedef struct s_env_arg
 {

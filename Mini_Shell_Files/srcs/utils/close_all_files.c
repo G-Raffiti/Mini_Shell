@@ -17,8 +17,10 @@ void	close_all_files(t_mini_shell *ms)
 			close(cmd->input->fd);
 		else if (cmd->input->type == HERE_DOC_REDIR && cmd->input->fd > 0)
 		{
-			close(cmd->input->here_doc_pipe[0]);
-			close(cmd->input->here_doc_pipe[1]);
+			close(((t_here_docs *)(ft_lstd_last(cmd->input->here_docs)
+					->content))->pipe_h[0]);
+			close(((t_here_docs *)(ft_lstd_last(cmd->input->here_docs)
+					->content))->pipe_h[1]);
 		}
 		if (cmd->output->type != PIPE_REDIR && cmd->output->fd > 0)
 			close(cmd->output->fd);

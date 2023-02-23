@@ -29,11 +29,14 @@ static void	exec_one(t_mini_shell *ms, t_cmd *one)
 {
 	if (permission_denied(ms, one) == ERROR)
 		return ;
-	if (one->input->fd > 0)
-	{
+	if (one->input->fd > 0 && one->input->type != HERE_DOC_REDIR)
 		safe_dup2(ms, one->input->fd, STDIN_FILENO, "exec_one");
-		if (one->input->here_doc_pipe[1])
-			close(one->input->here_doc_pipe[1]);
+	else if (one->input->type == HERE_DOC_REDIR)
+	{
+		safe_dup2(ms, ((t_here_docs *)(ft_lstd_last(one->input->here_docs)
+				->content))->pipe_h[0], STDIN_FILENO, "exec_one");
+		safe_close(ms,((t_here_docs *)(ft_lstd_last(one->input->here_docs)
+				->content))->pipe_h[1], "exec_one");
 	}
 	if (one->is_builtin && !one->need_fork)
 	{

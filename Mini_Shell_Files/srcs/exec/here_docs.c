@@ -22,7 +22,7 @@ static char	*join_lines(char **line_read, char **ret)
 	return (line);
 }
 
-static t_error	exec_here_doc(t_cmd *cmd)
+static t_error	exec_here_doc(t_here_docs *here)
 {
 	char	*ret;
 	char	*line_read;
@@ -32,14 +32,15 @@ static t_error	exec_here_doc(t_cmd *cmd)
 	while (TRUE)
 	{
 		line_read = readline("> ");
-		if (!line_read || ft_str_cmp(line_read, cmd->input->limiter) == 0
+		if (!line_read || ft_str_cmp(line_read, here->limiter) == 0
 			|| get_exit_code() == 130)
 		{
 			if (!ret)
-				write(cmd->input->here_doc_pipe[1], "", 1);
+				write(here->pipe_h[1], "", 1);
 			else
-				write(cmd->input->here_doc_pipe[1], ret, ft_strlen(ret));
+				write(here->pipe_h[1], ret, ft_strlen(ret));
 			ret = ft_free(ret);
+			here->limiter = ft_free(here->limiter);
 			set_interactiv_signals();
 			return (SUCCESS);
 		}
@@ -52,14 +53,22 @@ static t_error	exec_here_doc(t_cmd *cmd)
 t_error	here_docs(t_lstd *current)
 {
 	t_cmd	*cmd;
+	t_lstd 	*cur_h;
 
 	while (current)
 	{
 		cmd = get(current);
-		if (cmd->input->type == HERE_DOC_REDIR)
+		cur_h = cmd->input->here_docs;
+		while (cur_h)
 		{
-			if (exec_here_doc(cmd) == MALLOC_ERROR)
+			if (exec_here_doc((t_here_docs *)cur_h->content) == MALLOC_ERROR)
 				return (MALLOC_ERROR);
+			if (cur_h->next || cmd->input->type == IN_REDIR)
+			{
+				close(((t_here_docs *)cur_h->content)->pipe_h[0]);
+				close(((t_here_docs *)cur_h->content)->pipe_h[1]);
+			}
+			cur_h = cur_h->next;
 		}
 		current = current->next;
 	}

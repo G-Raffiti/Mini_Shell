@@ -3,6 +3,7 @@
 //
 
 #include <stdlib.h>
+#include "../../incs/mini_shell.h"
 
 void	*ft_free(void *pt)
 {

@@ -8,11 +8,7 @@ void	*free_fd(t_fd *fd)
 	fd->name = ft_free(fd->name);
 	if (fd->type != PIPE_REDIR && fd->type != HERE_DOC_REDIR && fd->fd > 0)
 		close(fd->fd);
-	else if (fd->type == HERE_DOC_REDIR && fd->fd > 0)
-	{
-		close(fd->here_doc_pipe[0]);
-		close(fd->here_doc_pipe[1]);
-	}
+	ft_lstd_clear(&fd->here_docs, ft_free);
 	free(fd);
 	return (NULL);
 }

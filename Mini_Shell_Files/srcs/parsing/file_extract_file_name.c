@@ -19,9 +19,9 @@ static t_error	replace_dollar(t_mini_shell *ms, char **str, t_chevron type)
 		if (*str == NULL)
 			return (MALLOC_ERROR);
 		if (ft_contain(*str, ' '))
-			return (free(*str), parse_error(ms, AMBIGUOUS_REDIRECT, 2));
+			return (parse_error(ms, AMBIGUOUS_REDIRECT, 2));
 		if (ft_contain(*str, '/'))
-			return (free(*str), parse_error(ms, IS_DIRECTORY, 2));
+			return (parse_error(ms, IS_DIRECTORY, 2));
 	}
 	return (SUCCESS);
 }
@@ -31,7 +31,7 @@ char	*extract_file_name(t_mini_shell *ms, char *str, char *quote,
 {
 	char	*file_name;
 	char	*start;
-
+	//TODO: replacedollar ERRORs
 	while (*str == ' ')
 		str++;
 	if (set_quote_state(*str, quote))

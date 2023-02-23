@@ -17,7 +17,7 @@ void	ft_lstd_clear(t_lstd **lst, void *(*free_fct)(void *))
 	t_lstd	*temp;
 	t_lstd	*tmp;
 
-	if (!free_fct || !lst)
+	if (!free_fct || !*lst)
 		return ;
 	tmp = (*lst)->previous;
 	while (*lst)
