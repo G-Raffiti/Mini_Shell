@@ -5,20 +5,11 @@
 #include <termios.h>
 #include <curses.h>
 #include <term.h>
-void	handle_readline_conflict_keybinding()
-{
-	struct termios term;
-
-	tcgetattr(STDIN_FILENO, &term);
-	term.c_cc[VLNEXT] = _POSIX_VDISABLE;
-	tcsetattr(STDIN_FILENO, TCSANOW, &term);
-}
 
 char	*read_line(void)
 {
 	char	*line;
 
-	//handle_readline_conflict_keybinding();
 	set_interactiv_signals();
 	if (get_exit_code() == 0)
 		line = readline(PROMPT""GREEN"-▶ "WHITE);
