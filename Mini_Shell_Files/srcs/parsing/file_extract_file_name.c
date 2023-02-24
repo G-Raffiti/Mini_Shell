@@ -35,6 +35,14 @@ char *find_end(char *start)
 	end = start;
 	while (*end)
 	{
+		if (quote == 0)
+		{
+			if (set_quote_state(*end, &quote))
+			{
+				end++;
+				continue;
+			}
+		}
 		set_quote_state(*end, &quote);
 		if (!quote && ft_contain("<> ", *end))
 			break ;

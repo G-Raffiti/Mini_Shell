@@ -7,6 +7,7 @@
 // TODO : in each builtin set_error_code() !!!
 t_error	exec_builtin(t_mini_shell *ms, t_cmd *cmd, t_bool in_pipe)
 {
+	set_exit_code(0);
 	debug (3, "builtin = "YELLOW, cmd->cmd[0], WHITE"\n");
 	if (ft_str_cmp(cmd->cmd[0], "export") == 0)
 		return (ft_export(ms, cmd, in_pipe));

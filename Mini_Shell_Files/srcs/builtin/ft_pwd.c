@@ -13,5 +13,6 @@ t_error	ft_pwd(void)
 		ft_putendl_fd(cwd, 1);
 		return (SUCCESS);
 	}
+	set_exit_code(EXIT_FAILURE);
 	return (ERROR);
 }
