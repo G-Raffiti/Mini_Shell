@@ -1,10 +1,10 @@
 #include "../../incs/mini_shell.h"
 
-int	block_len(char *line, int len)
+size_t	block_len(char *line, size_t len)
 {
-	int		i;
+	size_t	i;
 	char	quote;
-	int		count;
+	size_t	count;
 
 	i = 0;
 	quote = 0;
@@ -20,7 +20,7 @@ int	block_len(char *line, int len)
 	return (i - count);
 }
 
-char	*str_dup_no_quote(char *line, int len)
+char	*str_dup_no_quote(char *line, size_t len)
 {
 	char	*dup;
 	char	quote;
