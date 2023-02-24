@@ -128,7 +128,9 @@ t_error	open_files(t_mini_shell *ms, t_cmd *cmd)
 			chevron_type = get_chevron_type(str);
 			if (valid_file(ms, str) == ERROR)
 				return (ERROR);
-			file_name = extract_file_name(ms, str, &quote, chevron_type);
+			error = extract_file_name(ms, str, chevron_type, &file_name);
+			if (error != SUCCESS)
+				return (error);
 			if (file_name == NULL)
 				return (MALLOC_ERROR);
 			chevron_in(ms, cmd, chevron_type, file_name);

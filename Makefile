@@ -106,7 +106,7 @@ $(PATH_OBJ)%.o:	$(PATH_SRC)%.c $(FILES_INC) $(FILE_LIB)
 				@printf %b " \033[1m$<\033[0m -> \033[1m$@\033[0m..."
 				@$(CC) $(CC_FLAGS) -o $@ -c $< -I $(PATH_INC)
 				@printf "\r"
-				@printf "                                                                                               \r"
+				@printf "                                                                                            \r"
 
 $(PATH_OBJ):
 				@mkdir $@

@@ -7,7 +7,7 @@ static t_error	replace_dollar(t_mini_shell *ms, char **str, t_chevron type)
 
 	if (type == HERE_DOC_REDIR)
 		return (SUCCESS);
-	if ((*str)[1] && **str == '$' && valid_id_dollars((*str)[1]))
+	if (**str && (*str)[1] && **str == '$' && valid_id_dollars((*str)[1]))
 	{
 		key = (*str) + 1;
 		dict = ft_lstd_find(ms->env_dict, key, find_in_dict);
@@ -26,31 +26,50 @@ static t_error	replace_dollar(t_mini_shell *ms, char **str, t_chevron type)
 	return (SUCCESS);
 }
 
-char	*extract_file_name(t_mini_shell *ms, char *str, char *quote,
-						t_chevron type)
+char *find_end(char *start)
 {
-	char	*file_name;
+	char	*end;
+	char	quote;
+
+	quote = 0;
+	end = start;
+	while (*end)
+	{
+		set_quote_state(*end, &quote);
+		if (!quote && ft_contain("<> ", *end))
+			break ;
+		if (quote && *end == quote
+			&& (ft_contain("<> ", end[1]) || !end[1]))
+			break ;
+		end++;
+	}
+	return (end);
+}
+
+t_error	extract_file_name(t_mini_shell *ms, char *str, t_chevron type,
+	char **file_name)
+{
 	char	*start;
-	//TODO: replacedollar ERRORs
+	t_error	replace_status;
+	char	quote;
+
+	quote = 0;
 	while (*str == ' ')
 		str++;
-	if (set_quote_state(*str, quote))
-		str++;
 	start = str;
-	while (*str && (!ft_contain(" <>\"\'", *str)
-			|| (*quote && ft_contain("<>", *str))))
-		str++;
-	file_name = ft_substr(start, 0, str - start);
-	if (!file_name)
-		return (NULL);
-	if (replace_dollar(ms, &file_name, type) == MALLOC_ERROR)
-		return (ft_free(file_name));
-	if (*str && *str == *quote)
+	str = find_end(str);
+	*file_name = str_dup_no_quote(start, str - start);
+	if (!*file_name)
+		return (MALLOC_ERROR);
+	replace_status = replace_dollar(ms, file_name, type);
+	if (replace_status != SUCCESS)
+		return (replace_status);
+	if (*str && *str == quote)
 		(*str)++;
 	while (*start && start != str)
 	{
 		*start = ' ';
 		start++;
 	}
-	return (file_name);
+	return (SUCCESS);
 }

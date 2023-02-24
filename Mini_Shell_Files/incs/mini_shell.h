@@ -51,13 +51,20 @@ typedef enum e_chevron
 /// STRUCTURES /////////////////////////////////////////////////////////////////
 typedef struct s_dollar
 {
-	char	quote;
-	char	*raw_cmd;
-	int		prev_is_arg;
-	int		start_dol;
-	int		len_prev;
-	int		nbr;
+	char			quote;
+	char			*raw_cmd;
+	int				prev_is_arg;
+	int				start_dol;
+	int				len_prev;
+	int				nbr;
 }					t_dollar;
+
+typedef struct s_here_docs
+{
+	int 			pipe_h[2];
+	char 			*limiter;
+}					t_here_docs;
+
 typedef struct s_fd
 {
 	int				fd;
@@ -66,12 +73,6 @@ typedef struct s_fd
 	t_chevron		type;
 	t_lstd			*here_docs;
 }					t_fd;
-
-typedef struct s_here_docs
-{
-	int 			pipe_h[2];
-	char 			*limiter;
-}					t_here_docs;
 
 typedef struct s_env_arg
 {
@@ -180,7 +181,7 @@ t_error		parse_error(t_mini_shell *ms, char *error_msg, int error_code);
 
 // GET CMD /////////////////////////////////////////////////////////////////////
 t_error		get_cmd(t_cmd *cmd);
-char		*str_dup_no_quote(char *line, int len);
+char		*str_dup_no_quote(char *line, size_t len);
 
 // GET PATH ////////////////////////////////////////////////////////////////////
 t_error		get_path(t_mini_shell *ms, t_cmd *cmd);
@@ -215,8 +216,8 @@ void		set_builtin(t_cmd *cmd);
 
 // OPEN FILES //////////////////////////////////////////////////////////////////
 t_error		open_files(t_mini_shell *ms, t_cmd *cmd);
-char		*extract_file_name(t_mini_shell *ms, char *str, char *quote,
-				t_chevron type);
+t_error		extract_file_name(t_mini_shell *ms, char *str, t_chevron type,
+				char **file_name);
 
 /******************************************************************************/
 /*******************************   UTILS   ************************************/
@@ -283,7 +284,9 @@ void		safe_close(t_mini_shell *ms, int fd, char *msg);
 void		safe_dup2(t_mini_shell *ms, int fd, int std, char *msg);
 int			safe_dup(t_mini_shell *ms, int std, char *msg);
 
-/*\\\\\\\\\\\\\\\\\\\\\\\\\\ OTHERS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
+/******************************************************************************/
+/*******************************   OTHERS   ***********************************/
+/******************************************************************************/
 
 // EXIT CODE ///////////////////////////////////////////////////////////////////
 int			get_exit_code(void);
