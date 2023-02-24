@@ -2,9 +2,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "../../incs/mini_shell.h"
-#include <termios.h>
-#include <curses.h>
-#include <term.h>
 
 char	*read_line(void)
 {
