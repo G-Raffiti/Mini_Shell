@@ -24,7 +24,7 @@ char	*str_dup_no_quote(char *line, size_t len)
 {
 	char	*dup;
 	char	quote;
-	int		i;
+	size_t	i;
 
 	len = block_len(line, len);
 	dup = ft_calloc(len + 1, sizeof(char));
