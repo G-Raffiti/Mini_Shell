@@ -39,7 +39,7 @@ t_error	fill_curr_and_prev(t_dollar *dlr, char ***splited_raw, int i)
 	}
 	(*splited_raw)[dlr->nbr++] = ft_substr(dlr->raw_cmd,
 			dlr->start_dol, i - dlr->start_dol + 1);
-	if (!(splited_raw)[dlr->nbr - 1])
+	if (!(*splited_raw)[dlr->nbr - 1])
 		return (MALLOC_ERROR);
 	return (SUCCESS);
 }
