@@ -6,7 +6,7 @@
 
 NAME =			minishell
 CC =			gcc
-CC_FLAGS =		-Wall -Wextra -Werror -gdwarf-4 -g3 -fsanitize=address
+CC_FLAGS =		-Wall -Wextra -Werror -gdwarf-4 -g3 #-fsanitize=address
 
 PATH_OBJ =		./Mini_Shell_Files/objs/
 PATH_SRC =		./Mini_Shell_Files/srcs/
@@ -45,6 +45,7 @@ FILES =			\
 				exec/here_docs \
 				exec/signals_handler \
 				exec/signals_seter \
+				exec/here_docs_expand \
 				\
 				parsing/check_line \
 				parsing/chevron \

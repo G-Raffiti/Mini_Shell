@@ -22,7 +22,8 @@ static void	chevron_out(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 		cmd->output->error = errno;
 }
 
-static	t_error	create_here_docs(t_mini_shell *ms, t_cmd *cmd, char *limiter)
+static	t_error	create_here_docs(t_mini_shell *ms, t_cmd *cmd, char *limiter,
+									  t_chevron *type)
 {
 	t_here_docs *here_doc;
 	t_lstd		*elem;
@@ -30,6 +31,13 @@ static	t_error	create_here_docs(t_mini_shell *ms, t_cmd *cmd, char *limiter)
 	here_doc = ft_calloc(1, sizeof(t_here_docs));
 	if (!here_doc)
 		return (MALLOC_ERROR);
+	if (*type == HERE_DOC_QUOTE_REDIR)
+	{
+		here_doc->have_to_expand = FALSE;
+		*type = HERE_DOC_REDIR;
+	}
+	else
+		here_doc->have_to_expand = TRUE;
 	here_doc->limiter = limiter;
 	safe_pipe(ms, here_doc->pipe_h, "create_here_docs");
 	elem = ft_lstd_new(here_doc);
@@ -49,7 +57,6 @@ static void	chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 		chevron_out(ms, cmd, type, file_name);
 		return ;
 	}
-	cmd->input->type = type;
 	if (cmd->input->fd > 0)
 	{
 		safe_close(ms, cmd->input->fd, "chevron_in");
@@ -58,10 +65,11 @@ static void	chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 	}
 	if (type == IN_REDIR)
 		cmd->input->fd = open(file_name, O_RDONLY);
-	else if (type == HERE_DOC_REDIR)
-		create_here_docs(ms, cmd,file_name);
+	else if (type == HERE_DOC_REDIR || type == HERE_DOC_QUOTE_REDIR)
+		create_here_docs(ms, cmd,file_name, &type);
 	if (cmd->input->fd == -1)
 		cmd->input->error = errno;
+	cmd->input->type = type;
 }
 
 static t_chevron	get_chevron_type(char *str)
@@ -128,7 +136,7 @@ t_error	open_files(t_mini_shell *ms, t_cmd *cmd)
 			chevron_type = get_chevron_type(str);
 			if (valid_file(ms, str) == ERROR)
 				return (ERROR);
-			error = extract_file_name(ms, str, chevron_type, &file_name);
+			error = extract_file_name(ms, str, &chevron_type, &file_name);
 			if (error != SUCCESS)
 				return (error);
 			if (file_name == NULL)

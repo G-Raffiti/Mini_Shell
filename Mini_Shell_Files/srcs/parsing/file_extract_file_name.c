@@ -54,7 +54,20 @@ char *find_end(char *start)
 	return (end);
 }
 
-t_error	extract_file_name(t_mini_shell *ms, char *str, t_chevron type,
+t_chevron	get_type_here_doc(char *start, char *end, t_chevron type)
+{
+	if (type != HERE_DOC_REDIR)
+		return (type);
+	while (start != end)
+	{
+		if (*start == '\"' || *start == '\'')
+			return (HERE_DOC_QUOTE_REDIR);
+		start++;
+	}
+	return (type);
+}
+
+t_error	extract_file_name(t_mini_shell *ms, char *str, t_chevron *type,
 	char **file_name)
 {
 	char	*start;
@@ -66,10 +79,11 @@ t_error	extract_file_name(t_mini_shell *ms, char *str, t_chevron type,
 		str++;
 	start = str;
 	str = find_end(str);
+	*type = get_type_here_doc(start, str, *type);
 	*file_name = str_dup_no_quote(start, str - start);
 	if (!*file_name)
 		return (MALLOC_ERROR);
-	replace_status = replace_dollar(ms, file_name, type);
+	replace_status = replace_dollar(ms, file_name, *type);
 	if (replace_status != SUCCESS)
 		return (replace_status);
 	if (*str && *str == quote)

@@ -6,7 +6,7 @@ t_error	split_count(t_cmd *cmds, int *split_len)
 	int			i;
 
 	i = -1;
-	initialize_struct_dollar(&dlr, cmds);
+	initialize_struct_dollar(&dlr, cmds, NULL);
 	while (dlr.raw_cmd[++i])
 	{
 		if (set_quote_state(dlr.raw_cmd[i], &dlr.quote) != '\''
@@ -50,7 +50,7 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 	int			i;
 
 	i = -1;
-	initialize_struct_dollar(&dlr, cmds);
+	initialize_struct_dollar(&dlr, cmds, NULL);
 	while (dlr.raw_cmd[++i])
 	{
 		if (set_quote_state(dlr.raw_cmd[i], &dlr.quote) != '\''

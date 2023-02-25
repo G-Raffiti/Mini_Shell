@@ -44,6 +44,7 @@ typedef enum e_chevron
 	PIPE_REDIR,
 	IN_REDIR,
 	HERE_DOC_REDIR,
+	HERE_DOC_QUOTE_REDIR,
 	OUT_REDIR,
 	APPEND_REDIR,
 }	t_chevron;
@@ -53,6 +54,7 @@ typedef struct s_dollar
 {
 	char			quote;
 	char			*raw_cmd;
+	char 			*here_doc;
 	int				prev_is_arg;
 	int				start_dol;
 	int				len_prev;
@@ -63,6 +65,7 @@ typedef struct s_here_docs
 {
 	int 			pipe_h[2];
 	char 			*limiter;
+	t_bool			have_to_expand;
 }					t_here_docs;
 
 typedef struct s_fd
@@ -148,7 +151,10 @@ void		interactiv_handler(int signum);
 void		exec_handler(int signum);
 
 // HERE_DOCS ///////////////////////////////////////////////////////////////////
-t_error		here_docs(t_lstd *current);
+t_error		here_docs(t_mini_shell *ms, t_lstd *current);
+
+// EXPAND_HERE_DOC /////////////////////////////////////////////////////////////
+t_error		expand_here_doc(t_mini_shell *ms, char **here_doc, t_here_docs *here);
 
 /******************************************************************************/
 /*******************************   BUILTIN   **********************************/
@@ -216,7 +222,7 @@ void		set_builtin(t_cmd *cmd);
 
 // OPEN FILES //////////////////////////////////////////////////////////////////
 t_error		open_files(t_mini_shell *ms, t_cmd *cmd);
-t_error		extract_file_name(t_mini_shell *ms, char *str, t_chevron type,
+t_error		extract_file_name(t_mini_shell *ms, char *str, t_chevron *type,
 				char **file_name);
 
 /******************************************************************************/
@@ -271,7 +277,8 @@ t_error		new_fd(t_fd **fd);
 t_error		new_cmd(t_cmd **cmd);
 t_error		new_mini_shell(t_mini_shell **ms);
 t_error		new_env_arg(t_env_arg **env_dict);
-void		initialize_struct_dollar(t_dollar *dlr, t_cmd *cmds);
+void		initialize_struct_dollar(t_dollar *dlr, t_cmd *cmds, \
+														char **here_doc);
 
 // DICT UTILS //////////////////////////////////////////////////////////////////
 t_error		fill_dict_element(t_env_arg **dict, char *key, char *value);

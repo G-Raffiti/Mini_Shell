@@ -22,7 +22,7 @@ static char	*join_lines(char **line_read, char **ret)
 	return (line);
 }
 
-static t_error	exec_here_doc(t_here_docs *here)
+static t_error	exec_here_doc(t_mini_shell *ms, t_here_docs *here)
 {
 	char	*ret;
 	char	*line_read;
@@ -35,6 +35,7 @@ static t_error	exec_here_doc(t_here_docs *here)
 		if (!line_read || ft_str_cmp(line_read, here->limiter) == 0
 			|| get_exit_code() == 130)
 		{
+			expand_here_doc(ms, &ret, here);
 			if (!ret)
 				write(here->pipe_h[1], "", 1);
 			else
@@ -50,7 +51,7 @@ static t_error	exec_here_doc(t_here_docs *here)
 	}
 }
 
-t_error	here_docs(t_lstd *current)
+t_error	here_docs(t_mini_shell *ms, t_lstd *current)
 {
 	t_cmd	*cmd;
 	t_lstd 	*cur_h;
@@ -61,7 +62,8 @@ t_error	here_docs(t_lstd *current)
 		cur_h = cmd->input->here_docs;
 		while (cur_h)
 		{
-			if (exec_here_doc((t_here_docs *)cur_h->content) == MALLOC_ERROR)
+			if (exec_here_doc(ms, (t_here_docs *)cur_h->content) ==
+			MALLOC_ERROR)
 				return (MALLOC_ERROR);
 			if (cur_h->next || cmd->input->type == IN_REDIR)
 			{

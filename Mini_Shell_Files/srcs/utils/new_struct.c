@@ -1,13 +1,22 @@
 #include "../../incs/mini_shell.h"
 
-void	initialize_struct_dollar(t_dollar *dlr, t_cmd *cmds)
+void	initialize_struct_dollar(t_dollar *dlr, t_cmd *cmds, char **here_doc)
 {
 	dlr->nbr = 0;
 	dlr->start_dol = 0;
 	dlr->len_prev = 0;
 	dlr->quote = 0;
 	dlr->prev_is_arg = 0;
-	dlr->raw_cmd = cmds->raw_cmd;
+	if (cmds)
+	{
+		dlr->raw_cmd = cmds->raw_cmd;
+		dlr->here_doc = NULL;
+	}
+	else if (*here_doc)
+	{
+		dlr->here_doc = *here_doc;
+		dlr->raw_cmd = NULL;
+	}
 }
 
 t_error	new_env_arg(t_env_arg **env_dict)
