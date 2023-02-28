@@ -11,7 +11,7 @@
 
 /// DEFINE /////////////////////////////////////////////////////////////////////
 # define PWD_PATH_SIZE 4096
-# define PROMPT "ms "
+# define PROMPT "MS "
 
 # define SPLIT_COUNT 101
 # define FILL_SPLIT_ARGS 102

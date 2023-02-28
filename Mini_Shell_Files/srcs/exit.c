@@ -26,7 +26,7 @@ void	exit_error(t_mini_shell *ms, int error_code, char *msg)
 	set_exit_code(error_code);
 	printf(RED"Error:"WHITE" %s in %s\n", strerror(error_code), msg);
 	free_mini_shell(ms);
-	exit(error_code);
+	exit(get_exit_code());
 }
 
 t_error	exit_malloc(t_mini_shell *mini_shell, char *msg)

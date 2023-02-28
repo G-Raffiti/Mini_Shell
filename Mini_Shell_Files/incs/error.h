@@ -21,5 +21,6 @@
 # define NO_FILE			"No such file or directory"
 # define AMBIGUOUS_REDIRECT	"ambiguous redirect"
 # define MALLOC_FAILED		"Memory allocation failed"
+# define FUNCTION_FAILUR	255
 
 #endif

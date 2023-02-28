@@ -5,7 +5,7 @@
 #include <errno.h>
 #include "../incs/mini_shell.h"
 
-int	end_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg)
+t_error	end_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg)
 {
 	int	save_out;
 
@@ -22,7 +22,7 @@ int	end_child(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg)
 	else
 		printf("%s: %s: %s\n", cmd->cmd[0], cmd->cmd[1], msg);
 	safe_dup2(ms, save_out, STDOUT_FILENO, "exec_child");
-	return (error_code);
+	return (SUCCESS);
 }
 
 int	end_child_arg(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg)
@@ -42,5 +42,5 @@ int	end_child_arg(t_mini_shell *ms, t_cmd *cmd, int error_code, char *msg)
 	else
 		printf("%s: %s: %s\n", cmd->cmd[0], cmd->cmd[1], msg);
 	safe_dup2(ms, save_out, STDOUT_FILENO, "exec_child");
-	return (error_code);
+	return (get_exit_code());
 }
