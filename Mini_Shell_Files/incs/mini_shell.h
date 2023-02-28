@@ -264,6 +264,7 @@ void		*free_fd(t_fd *fd);
 void		*free_cmd(t_cmd *cmd);
 void		free_cmd_void(void *pt_cmd);
 void		*free_mini_shell(t_mini_shell *ms);
+void		*free_dict(void *pt);
 
 // LIST UTILS //////////////////////////////////////////////////////////////////
 t_cmd		*get(t_lstd *lst);
