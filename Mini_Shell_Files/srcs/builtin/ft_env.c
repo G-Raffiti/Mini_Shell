@@ -8,6 +8,7 @@ t_error	ft_env(t_mini_shell *ms)
 {
 	int	i;
 
+	i = -1;
 	while (ms->env && ms->env[++i])
 		printf("%s\n", ms->env[i]);
 	return (SUCCESS);
