@@ -2,6 +2,7 @@
 //
 
 #include <errno.h>
+#include <signal.h>
 #include "../../../Lib_List_Double/incs/ft_lstd.h"
 #include "../../incs/mini_shell.h"
 
@@ -45,6 +46,11 @@ static void	exec_one(t_mini_shell *ms, t_cmd *one)
 		return ;
 	}
 	set_exec_signals();
+	if (ft_str_cmp(one->cmd[0], "./minishell") == 0)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
 	safe_fork(ms, one, "exec_one");
 	if (one->pid)
 	{
