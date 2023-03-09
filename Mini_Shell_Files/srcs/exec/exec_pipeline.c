@@ -1,4 +1,5 @@
 #include "../../incs/mini_shell.h"
+#include <signal.h>
 
 static void	exec_first(t_mini_shell *ms, t_cmd *first)
 {
@@ -15,6 +16,12 @@ static void	exec_first(t_mini_shell *ms, t_cmd *first)
 				->content))->pipe_h[1], "exec_one");
 	}
 	set_exec_signals();
+	set_exec_signals();
+	if (first->cmd && ft_str_cmp(first->cmd[0], "./minishell") == 0)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
 	safe_fork(ms, first, "exec_first");
 	if (first->pid)
 	{
@@ -53,6 +60,12 @@ static void	exec_cmd(t_mini_shell *ms, t_cmd *cmd)
 	if (permission_denied(ms, cmd) == ERROR)
 		return ;
 	set_exec_signals();
+	set_exec_signals();
+	if (cmd->cmd && ft_str_cmp(cmd->cmd[0], "./minishell") == 0)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
 	safe_fork(ms, cmd, "exec_mid");
 	if (cmd->pid)
 	{
@@ -93,6 +106,12 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 	if (permission_denied(ms, last) == ERROR)
 		return ;
 	set_exec_signals();
+	set_exec_signals();
+	if (last->cmd && ft_str_cmp(last->cmd[0], "./minishell") == 0)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
 	safe_fork(ms, last, "exec_last");
 	if (last->pid)
 	{
