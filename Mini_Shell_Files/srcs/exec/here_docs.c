@@ -35,6 +35,8 @@ static t_error	exec_here_doc(t_mini_shell *ms, t_here_docs *here)
 		if (!line_read || ft_str_cmp(line_read, here->limiter) == 0
 			|| get_exit_code() == 130)
 		{
+			if (!line_read && get_exit_code() != 130)
+				write(1, "\n", 1);
 			expand_here_doc(ms, &ret, here);
 			if (!ret)
 				write(here->pipe_h[1], "", 1);
