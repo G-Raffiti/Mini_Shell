@@ -11,5 +11,6 @@ t_error	ft_env(t_mini_shell *ms)
 	i = -1;
 	while (ms->env && ms->env[++i])
 		printf("%s\n", ms->env[i]);
+	set_exit_code(EXIT_SUCCESS);
 	return (SUCCESS);
 }

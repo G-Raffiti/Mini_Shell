@@ -165,9 +165,10 @@ t_error		exec_builtin(t_mini_shell *ms, t_cmd *cmd, t_bool in_pipe);
 
 // BUILTINS FUNCTIONS //////////////////////////////////////////////////////////
 t_error		ft_cd(t_mini_shell *ms, t_cmd *cmd);
+char		*get_env_value(t_mini_shell *ms, char *key);
 t_error		ft_echo(t_cmd *cmd);
 t_error		ft_exit(t_mini_shell *ms, t_cmd *cmd);
-t_error		ft_pwd(void);
+t_error		ft_pwd(t_mini_shell *ms);
 t_error		ft_env(t_mini_shell *ms);
 t_error		ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe);
 t_error		ft_unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe);

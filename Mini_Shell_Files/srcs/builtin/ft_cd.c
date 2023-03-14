@@ -22,7 +22,12 @@ char	*get_env_value(t_mini_shell *ms, char *key)
 
 t_error	ft_chdir(t_mini_shell *ms, t_cmd *cmd, char *path)
 {
-	if (chdir(path) == 0)
+	if (!getcwd(NULL, PWD_PATH_SIZE))
+		end_child(ms, cmd, EXIT_SUCCESS, NO_PARENT);
+	else if (add_or_replace_in_chosen_env(ms, "PWD",
+			getcwd(NULL, PWD_PATH_SIZE), 2) == MALLOC_ERROR)
+		return (MALLOC_ERROR);
+	if ((getcwd(NULL, PWD_PATH_SIZE) || path[0] == '/') && chdir(path) == 0)
 	{
 		if (add_or_replace_in_chosen_env(ms, "OLDPWD", get_env_value(ms, "PWD"),
 				2) == MALLOC_ERROR)
@@ -32,6 +37,8 @@ t_error	ft_chdir(t_mini_shell *ms, t_cmd *cmd, char *path)
 			return (MALLOC_ERROR);
 		return (SUCCESS);
 	}
+	if (!getcwd(NULL, PWD_PATH_SIZE))
+		return (SUCCESS);
 	return (end_child_arg(ms, cmd, 1, strerror(errno)));
 }
 
@@ -39,7 +46,6 @@ t_error	ft_cd(t_mini_shell *ms, t_cmd *cmd)
 {
 	char	*path;
 
-	add_or_replace_in_chosen_env(ms, "PWD", getcwd(NULL, PWD_PATH_SIZE), 2);
 	if (cmd->cmd[1] && cmd->cmd[2])
 		return (end_child(ms, cmd, 1, TOO_MANY_ARGS));
 	if (!cmd->cmd[1] || ft_str_cmp(cmd->cmd[1], "~") == 0)
@@ -57,5 +63,6 @@ t_error	ft_cd(t_mini_shell *ms, t_cmd *cmd)
 	}
 	else
 		path = cmd->cmd[1];
+	set_exit_code(EXIT_SUCCESS);
 	return (ft_chdir(ms, cmd, path));
 }

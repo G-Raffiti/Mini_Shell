@@ -21,6 +21,7 @@
 # define NO_FILE			"No such file or directory"
 # define AMBIGUOUS_REDIRECT	"ambiguous redirect"
 # define MALLOC_FAILED		"Memory allocation failed"
+# define NO_PARENT "error retrieving current directory: getcwd: cannot access parent directories: No such file or directory"
 # define FUNCTION_FAILUR	255
 
 #endif

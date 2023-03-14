@@ -39,6 +39,6 @@ t_error	ft_echo(t_cmd *cmd)
 	else
 		printf("%s", str);
 	str = ft_free(str);
-	set_exit_code(0);
+	set_exit_code(EXIT_SUCCESS);
 	return (SUCCESS);
 }

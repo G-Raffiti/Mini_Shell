@@ -90,6 +90,7 @@ t_error	ft_export(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 	char	**extracted;
 
 	i = 0;
+	set_exit_code(EXIT_SUCCESS);
 	ms->exported = TRUE;
 	if (!cmd->cmd[1])
 	{

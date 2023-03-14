@@ -8,15 +8,11 @@
 
 void	execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 {
-	t_error	exit_status;
-
-	close_all_files(ms);
 	if (!cmd->cmd)
 		exit(0);
 	if (cmd->is_builtin)
 	{
-		exit_status = exec_builtin(ms, cmd, TRUE);
-		if (exit_status != MALLOC_ERROR)
+		if (exec_builtin(ms, cmd, TRUE) != MALLOC_ERROR)
 			exit(get_exit_code());
 		else
 			exit_child(ms, cmd, ENOMEM, MALLOC_FAILED);

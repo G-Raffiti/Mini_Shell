@@ -28,7 +28,7 @@ static void	loop(t_mini_shell *ms)
 			continue;
 		}
 		debug_all_cmds(ms);//delete
-		set_exit_code(0);
+		//set_exit_code(0);
 		exec_cmds(ms);
 		if (test_mode())//delete
 		{//delete

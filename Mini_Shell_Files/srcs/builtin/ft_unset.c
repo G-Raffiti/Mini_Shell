@@ -30,5 +30,6 @@ t_error	ft_unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 		return (MALLOC_ERROR);
 	if (fill_export_env(ms) == MALLOC_ERROR)
 		return (MALLOC_ERROR);
+	set_exit_code(EXIT_SUCCESS);
 	return (SUCCESS);
 }
