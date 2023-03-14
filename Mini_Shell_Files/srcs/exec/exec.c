@@ -46,7 +46,7 @@ static void	exec_one(t_mini_shell *ms, t_cmd *one)
 		return ;
 	}
 	set_exec_signals();
-	if (ft_str_cmp(one->cmd[0], "./minishell") == 0)
+	if (one->cmd && ft_str_cmp(one->cmd[0], "./minishell") == 0)
 	{
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);

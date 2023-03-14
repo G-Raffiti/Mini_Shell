@@ -51,7 +51,10 @@ t_error	export_in_envs(t_mini_shell *ms, char **extracted)
 			return (free_split(extracted), MALLOC_ERROR);
 	}
 	if (ft_str_cmp(extracted[0], "PATH") == 0)
+	{
+		ms->paths = free_split(ms->paths);
 		get_all_paths(ms, ms->env_dict);
+	}
 	return (free_split(extracted), SUCCESS);
 }
 

@@ -35,6 +35,8 @@ static t_error	exec_here_doc(t_mini_shell *ms, t_here_docs *here)
 		if (!line_read || ft_str_cmp(line_read, here->limiter) == 0
 			|| get_exit_code() == 130)
 		{
+			if (!line_read && get_exit_code() != 130)
+				write(1, "\n", 1);
 			expand_here_doc(ms, &ret, here);
 			if (!ret)
 				write(here->pipe_h[1], "", 1);
@@ -42,7 +44,6 @@ static t_error	exec_here_doc(t_mini_shell *ms, t_here_docs *here)
 				write(here->pipe_h[1], ret, ft_strlen(ret));
 			ret = ft_free(ret);
 			here->limiter = ft_free(here->limiter);
-			set_interactiv_signals();
 			return (SUCCESS);
 		}
 		ret = join_lines(&line_read, &ret);
