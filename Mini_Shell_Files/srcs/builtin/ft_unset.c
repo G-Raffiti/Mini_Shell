@@ -19,10 +19,10 @@ t_error	ft_unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 				cmd->cmd[i], find_in_dict_sorted);
 		if (current)
 			ms->env_dict = ft_lstd_first(ft_lstd_remove_and_del(current,
-						free_cmd_void));
+													(void*)free_dict));
 		if (current_sorted)
 			ms->env_sort_dict = ft_lstd_first(ft_lstd_remove_and_del
-					(current_sorted, free_cmd_void));
+							(current_sorted, (void*)free_dict));
 	}
 	if (cmd->cmd[1] && ft_str_cmp(cmd->cmd[1], "PATH") == 0)
 		ms->paths = free_split(ms->paths);
