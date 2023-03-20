@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_docs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:59:20 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 17:42:48 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:46:39 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static char	*join_lines(char **line_read, char **ret)
 	return (line);
 }
 
-static void	write_in_pipe(const t_here_docs *here, const char *ret) {
+static void	write_in_pipe(const t_here_docs *here, const char *ret)
+{
 	if (!ret)
 		write(here->pipe_h[1], "", 1);
 	else
@@ -67,7 +68,7 @@ static t_error	exec_here_doc(t_mini_shell *ms, t_here_docs *here)
 t_error	here_docs(t_mini_shell *ms, t_lstd *current)
 {
 	t_cmd	*cmd;
-	t_lstd 	*cur_h;
+	t_lstd	*cur_h;
 
 	while (current)
 	{
@@ -75,7 +76,7 @@ t_error	here_docs(t_mini_shell *ms, t_lstd *current)
 		cur_h = cmd->input->here_docs;
 		while (cur_h)
 		{
-			if (exec_here_doc(ms, (t_here_docs *)cur_h->content) ==
+			if (exec_here_doc(ms, (t_here_docs *)cur_h->content) == \
 			MALLOC_ERROR)
 				return (MALLOC_ERROR);
 			if (cur_h->next || cmd->input->type == IN_REDIR)

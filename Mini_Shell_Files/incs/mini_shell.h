@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_shell.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:00:59 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 16:39:14 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:00:11 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_dollar
 {
 	char			quote;
 	char			*raw_cmd;
-	char 			*here_doc;
+	char			*here_doc;
 	int				prev_is_arg;
 	int				start_dol;
 	int				len_prev;
@@ -75,8 +75,8 @@ typedef struct s_dollar
 
 typedef struct s_here_docs
 {
-	int 			pipe_h[2];
-	char 			*limiter;
+	int				pipe_h[2];
+	char			*limiter;
 	t_bool			have_to_expand;
 }					t_here_docs;
 
@@ -171,7 +171,8 @@ void		exec_handler(int signum);
 t_error		here_docs(t_mini_shell *ms, t_lstd *current);
 
 // EXPAND_HERE_DOC /////////////////////////////////////////////////////////////
-t_error		expand_here_doc(t_mini_shell *ms, char **here_doc, t_here_docs *here);
+t_error		expand_here_doc(t_mini_shell *ms, char **here_doc, \
+														t_here_docs *here);
 int			check_and_count_prev_h_doc(t_dollar *dlr, int which_function,
 				int *split_len, int i);
 void		check_special_char_h_doc(char *quote, int *prev_is_arg,

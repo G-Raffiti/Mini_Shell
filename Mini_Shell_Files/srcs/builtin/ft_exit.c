@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:00:35 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 14:00:35 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:47:09 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_error	ft_exit(t_mini_shell *ms, t_cmd *cmd)
 		&& (!ft_is_digit_signed(str)
 			|| !ft_isdigit(str + 1)
 			|| (str[0] != '-'
-				&& (ft_strlen(str) > 19
-						|| ft_str_cmp(str, "9223372036854775807") > 0))
+				&& (ft_strlen(str) > 19 \
+				|| ft_str_cmp(str, "9223372036854775807") > 0))
 			|| (str[0] == '-'
 				&& (ft_strlen(str) > 20
 					|| ft_str_cmp(str, "-9223372036854775808") > 0))))
