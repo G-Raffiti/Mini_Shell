@@ -57,7 +57,6 @@ t_error	fill_cmds(t_mini_shell *ms)
 		is_open_possible = open_files(ms, get(current));
 		if (is_open_possible != SUCCESS)
 			return (is_open_possible);
-		debug(1, "open_Files"GREEN" DONE "GREY"| "WHITE);//delete
 		if (replace_tilde(ms, get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		replace_dollar_before_quotes(get(current));
@@ -65,11 +64,9 @@ t_error	fill_cmds(t_mini_shell *ms)
 			return (MALLOC_ERROR);
 		if (get_cmd(get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
-		debug(1, "get_cmd"GREEN" DONE "GREY"| "WHITE);//delete
 		set_builtin(get(current));
 		if (need_path(current) && get_path(ms, get(current)) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
-		debug(1, "get_path"GREEN" DONE "GREY"| "WHITE);//delete
 		current = current->next;
 	}
 	return (SUCCESS);
@@ -82,18 +79,15 @@ t_error	parse_line(t_mini_shell *ms, char *line)
 
 	if (check_line(ms, line) == ERROR)
 		return (ERROR);
-	debug(1, "check"GREEN" DONE "GREY"| "WHITE);//delete
 	raw_cmds = split_pipe(line);
 	if (!raw_cmds)
 		return (MALLOC_ERROR);
 	if (create_cmds(ms, raw_cmds) == MALLOC_ERROR)
 		return (free(line), exit_malloc(ms, "parsing: crete_cmds"));
-	debug(1, "create cmds"GREEN" DONE "GREY"| "WHITE);//delete
 	status = fill_cmds(ms);
 	if (status == MALLOC_ERROR)
 		return (free(line), exit_malloc(ms, "parsing: fill_cmds"));
 	else if (status == ERROR)
 		return (ERROR);
-	debug(1, "fill cmds"GREEN" DONE "GREY"\n"WHITE);//delete
 	return (SUCCESS);
 }

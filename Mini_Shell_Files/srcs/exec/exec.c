@@ -82,8 +82,5 @@ t_error	exec_cmds(t_mini_shell *ms)
 	wait_exit_status(ms, ms->cmds);
 	safe_dup2(ms, ms->stds[0], STDIN_FILENO, "exec: exec");
 	safe_dup2(ms, ms->stds[1], STDOUT_FILENO, "exec: exec");
-	if (debug_mod())
-		dprintf(2, YELLOW"-▶ %s%d"YELLOW" ◀-"WHITE"\n",
-			get_exit_code() == 0 ? GREEN : RED,get_exit_code());
 	return (SUCCESS);
 }

@@ -1,6 +1,6 @@
 #include "../../../Lib_FT/incs/libft.h"
 #include "mini_shell.h"
-
+/*
 //
 // Created by rbonneva on 17/02/23.
 //
@@ -25,3 +25,4 @@ int test_minishell(char *line, t_mini_shell *ms)
 	exec_cmds(ms);
 	return get_exit_code();
 }
+ */

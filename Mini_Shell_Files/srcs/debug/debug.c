@@ -2,6 +2,7 @@
 // Created by rbonneva on 30/01/23.
 //
 
+/*
 #include <stdarg.h>
 #include "../../incs/mini_shell.h"
 #include "../../incs/debug.h"
@@ -129,3 +130,4 @@ void debug_fd(t_mini_shell *ms, t_cmd *cmd)
 			cmd->output->name == NULL ? "Pipe" : cmd->output->name,
 			cmd->output->fd, ms->pipe[0], ms->pipe[1]);
 }
+ */
