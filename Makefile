@@ -1,4 +1,4 @@
-.PHONY:			all clean fclean re cleanlib fcleanlib
+.PHONY:			all clean fclean re cleanlib fcleanlib force
 
 #***********************************************************************#
 #								FILES									#
@@ -21,6 +21,8 @@ INC_LIB =		-I ./Lib_FT/incs/ \
 				-I ./Lib_List_Double/incs/
 FILE_LIB =		./Lib_FT/incs/libft.h \
 				./Lib_List_Double/incs/ft_lstd.h
+LIB_A =			./Lib_FT/libft.a \
+				./Lib_List_Double/liblstd.a
 
 FILES =			\
 				builtin/builtin \
@@ -95,41 +97,39 @@ SRCS =			$(addprefix $(PATH_SRC), $(addsuffix .c, $(FILES)))
 
 all:			$(NAME)
 
-$(NAME):		$(PATH_OBJ) $(OBJS)
-				@$(MAKE) -C ./Lib_FT
-				@echo "\033[1mLIB FT\t\t\tCOMPILED\033[0m"
-				@$(MAKE) -C ./Lib_List_Double
-				@echo "\033[1mLIB List Double\t\tCOMPILED\033[0m"
-				@$(CC) $(CC_FLAGS) $(LINK_LIB) $(OBJS) $(MAIN) -o $(NAME) -I $(PATH_INC) $(INC_LIB) $(ADD_LIB)
-				@echo "\033[1mBINARY\t\t\tCOMPILED\033[0m"
+$(LIB_A):		force
+				$(MAKE) -C ./Lib_FT
+				$(MAKE) -C ./Lib_List_Double
 
-$(PATH_OBJ)%.o:	$(PATH_SRC)%.c $(FILES_INC) $(FILE_LIB)
-				@printf %b " \033[1m$<\033[0m -> \033[1m$@\033[0m..."
-				@$(CC) $(CC_FLAGS) -o $@ -c $< -I $(PATH_INC)
+$(NAME):		$(PATH_OBJ) $(OBJS)
+				$(CC) $(CC_FLAGS) $(LINK_LIB) $(OBJS) $(MAIN) -o $(NAME) -I $(PATH_INC) $(INC_LIB) $(ADD_LIB)
+
+$(PATH_OBJ)%.o:	$(PATH_SRC)%.c $(LIB_A) $(FILES_INC) $(FILE_LIB)
+				$(CC) $(CC_FLAGS) -o $@ -c $< -I $(PATH_INC)
 				@printf "\r"
 				@printf "                                                                                            \r"
 
 $(PATH_OBJ):
-				@mkdir $@
-				@mkdir $(PATH_OBJ)/builtin
-				@mkdir $(PATH_OBJ)/debug
-				@mkdir $(PATH_OBJ)/env
-				@mkdir $(PATH_OBJ)/exec
-				@mkdir $(PATH_OBJ)/parsing
-				@mkdir $(PATH_OBJ)/utils
+				mkdir $@
+				mkdir $(PATH_OBJ)/builtin
+				mkdir $(PATH_OBJ)/debug
+				mkdir $(PATH_OBJ)/env
+				mkdir $(PATH_OBJ)/exec
+				mkdir $(PATH_OBJ)/parsing
+				mkdir $(PATH_OBJ)/utils
 
 clean:
-				@rm -rf $(PATH_OBJ)
+				rm -rf $(PATH_OBJ)
 
 cleanlib:
-				@$(MAKE) -C ./Lib_FT clean
-				@$(MAKE) -C ./Lib_List_Double clean
+				$(MAKE) -C ./Lib_FT clean
+				$(MAKE) -C ./Lib_List_Double clean
 
 fcleanlib:
-				@$(MAKE) -C ./Lib_FT fclean
-				@$(MAKE) -C ./Lib_List_Double fclean
+				$(MAKE) -C ./Lib_FT fclean
+				$(MAKE) -C ./Lib_List_Double fclean
 
 fclean:			clean fcleanlib
-				@rm -f $(NAME)
+				rm -f $(NAME)
 
 re:				fclean all
