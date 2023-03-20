@@ -1,5 +1,14 @@
-// Created by Raphael Bonneval on 1/24/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/20 13:59:39 by rbonneva          #+#    #+#             */
+/*   Updated: 2023/03/20 16:39:14 by rbonneva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <errno.h>
 #include <signal.h>
@@ -26,27 +35,14 @@ static void	exec_one(t_mini_shell *ms, t_cmd *one)
 {
 	if (permission_denied(ms, one) == ERROR)
 		return ;
-	if (one->input->fd > 0 && one->input->type != HERE_DOC_REDIR)
-		safe_dup2(ms, one->input->fd, STDIN_FILENO, "exec_one");
-	else if (one->input->type == HERE_DOC_REDIR)
-	{
-		safe_dup2(ms, ((t_here_docs *)(ft_lstd_last(one->input->here_docs)
-				->content))->pipe_h[0], STDIN_FILENO, "exec_one");
-		safe_close(ms,((t_here_docs *)(ft_lstd_last(one->input->here_docs)
-				->content))->pipe_h[1], "exec_one");
-	}
+	dup_input(ms, one, "exec_one");
 	if (one->is_builtin && !one->need_fork)
 	{
 		if (exec_builtin(ms, one, FALSE) == MALLOC_ERROR)
 			exit_malloc(ms, "execve_cmd");
 		return ;
 	}
-	set_exec_signals();
-	if (one->cmd && ft_str_cmp(one->cmd[0], "./minishell") == 0)
-	{
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
-	}
+	set_signals(one);
 	safe_fork(ms, one, "exec_one");
 	if (one->pid)
 	{

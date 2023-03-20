@@ -1,6 +1,14 @@
-//
-// Created by aurel on 2/18/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   here_docs.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/20 13:59:20 by rbonneva          #+#    #+#             */
+/*   Updated: 2023/03/20 17:42:48 by rbonneva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../incs/mini_shell.h"
 #include <readline/readline.h>
@@ -22,6 +30,13 @@ static char	*join_lines(char **line_read, char **ret)
 	return (line);
 }
 
+static void	write_in_pipe(const t_here_docs *here, const char *ret) {
+	if (!ret)
+		write(here->pipe_h[1], "", 1);
+	else
+		write(here->pipe_h[1], ret, ft_strlen(ret));
+}
+
 static t_error	exec_here_doc(t_mini_shell *ms, t_here_docs *here)
 {
 	char	*ret;
@@ -38,10 +53,7 @@ static t_error	exec_here_doc(t_mini_shell *ms, t_here_docs *here)
 			if (!line_read && get_exit_code() != 130)
 				write(1, "\n", 1);
 			expand_here_doc(ms, &ret, here);
-			if (!ret)
-				write(here->pipe_h[1], "", 1);
-			else
-				write(here->pipe_h[1], ret, ft_strlen(ret));
+			write_in_pipe(here, ret);
 			ret = ft_free(ret);
 			here->limiter = ft_free(here->limiter);
 			return (SUCCESS);

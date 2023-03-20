@@ -32,9 +32,6 @@ FILES =			\
 				builtin/ft_env \
 				builtin/ft_unset \
 				\
-				debug/debug \
-				debug/test_mode \
-				\
 				env/env \
 				env/env_regen \
 				env/modif_env \
@@ -42,10 +39,12 @@ FILES =			\
 				exec/exec \
 				exec/exec_error \
 				exec/exec_pipeline \
+				exec/exec_utils \
 				exec/here_docs \
 				exec/signals_handler \
 				exec/signals_seter \
 				exec/here_docs_expand \
+				exec/here_docs_expand_utils \
 				\
 				parsing/check_line \
 				parsing/chevron \
@@ -54,6 +53,7 @@ FILES =			\
 				parsing/get_cmd_str_dup \
 				parsing/get_path \
 				parsing/get_raw_cmd \
+				parsing/open_file \
 				parsing/parse_error \
 				parsing/parsing \
 				parsing/read_line \

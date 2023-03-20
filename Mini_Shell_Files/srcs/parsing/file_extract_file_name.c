@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file_extract_file_name.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/20 13:58:31 by rbonneva          #+#    #+#             */
+/*   Updated: 2023/03/20 14:01:10 by rbonneva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../incs/mini_shell.h"
 
 static t_error	replace_dollar(t_mini_shell *ms, char **str, t_chevron type)
@@ -26,7 +38,7 @@ static t_error	replace_dollar(t_mini_shell *ms, char **str, t_chevron type)
 	return (SUCCESS);
 }
 
-char *find_end(char *start)
+char	*find_end(char *start)
 {
 	char	*end;
 	char	quote;
@@ -40,7 +52,7 @@ char *find_end(char *start)
 			if (set_quote_state(*end, &quote))
 			{
 				end++;
-				continue;
+				continue ;
 			}
 		}
 		set_quote_state(*end, &quote);

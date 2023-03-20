@@ -1,4 +1,15 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/20 13:55:56 by rbonneva          #+#    #+#             */
+/*   Updated: 2023/03/20 14:01:12 by rbonneva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <string.h>
 #include "../incs/mini_shell.h"
 
@@ -17,7 +28,7 @@ static void	loop(t_mini_shell *ms)
 		if (is_empty_line(line))
 			continue ;
 		if (parse_line(ms, line) == ERROR)
-			continue;
+			continue ;
 		exec_cmds(ms);
 	}
 }

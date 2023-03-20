@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mini_shell.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/20 14:00:59 by rbonneva          #+#    #+#             */
+/*   Updated: 2023/03/20 16:39:14 by rbonneva         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINI_SHELL_H
 # define MINI_SHELL_H
 # include "../../Lib_List_Double/incs/ft_lstd.h"
@@ -135,6 +147,11 @@ void		execve_cmd(t_mini_shell *ms, t_cmd *cmd);
 // EXEC PIPELINE ///////////////////////////////////////////////////////////////
 void		exec_pipeline(t_mini_shell *ms, t_lstd *current);
 
+// EXEC UTILS //////////////////////////////////////////////////////////////////
+void		dup_input(t_mini_shell *ms, t_cmd *cmd, char *msg);
+void		set_signals(const t_cmd *cmd);
+void		close_parents_fd(t_mini_shell *ms, t_cmd *cmd, char *msg);
+
 // EXEC_ERROR //////////////////////////////////////////////////////////////////
 t_error		permission_denied(t_mini_shell *ms, t_cmd *cmd);
 void		error_exec(t_mini_shell *ms, t_cmd *cmd);
@@ -155,6 +172,12 @@ t_error		here_docs(t_mini_shell *ms, t_lstd *current);
 
 // EXPAND_HERE_DOC /////////////////////////////////////////////////////////////
 t_error		expand_here_doc(t_mini_shell *ms, char **here_doc, t_here_docs *here);
+int			check_and_count_prev_h_doc(t_dollar *dlr, int which_function,
+				int *split_len, int i);
+void		check_special_char_h_doc(char *quote, int *prev_is_arg,
+				int *i, char *raw_cmd);
+t_error		create_final_raw_h_doc(char **here_doc, int final_len);
+t_error		fill_end_raw_h_doc(char **here_doc, char **splited_raw);
 
 /******************************************************************************/
 /*******************************   BUILTIN   **********************************/
@@ -199,6 +222,11 @@ char		**split_pipe(char *line);
 
 // READ_LINE ///////////////////////////////////////////////////////////////////
 char		*read_line(void);
+
+// OPEN_FILE ///////////////////////////////////////////////////////////////////
+t_error		chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type,
+				char *file_name);
+t_chevron	get_chevron_type(char *str);
 
 // REPLACE_DOLLARS /////////////////////////////////////////////////////////////
 t_error		replace_dollars(t_mini_shell *ms, t_cmd *cmds);
