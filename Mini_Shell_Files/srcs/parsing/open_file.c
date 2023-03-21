@@ -6,7 +6,7 @@
 /*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:34:37 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 15:43:30 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:49:02 by rbonneva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,12 @@ t_error	open_files(t_mini_shell *ms, t_cmd *cmd)
 			error = extract_file_name(ms, str, &chevron_type, &file_name);
 			if (error != SUCCESS)
 				return (file_name = ft_free(file_name), error);
-			if (chevron_in(ms, cmd, chevron_type, file_name) == MALLOC_ERROR)
-				return (file_name = ft_free(file_name), MALLOC_ERROR);
+			error = chevron_in(ms, cmd, chevron_type, file_name);
+			if (error != SUCCESS)
+				return (file_name = ft_free(file_name), error);
 		}
 		str++;
 	}
+	dprintf(2, "file_name = %s\nfd->input = %s\n", file_name, cmd->input->name);
 	return (error);
 }

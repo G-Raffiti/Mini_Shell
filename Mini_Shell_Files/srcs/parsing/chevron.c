@@ -6,7 +6,7 @@
 /*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:58:41 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 15:43:30 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:52:49 by rbonneva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,19 @@ t_error	chevron_in(t_mini_shell *ms, t_cmd *cmd, t_chevron type, char
 *file_name)
 {
 	if (cmd->input->fd == -1)
-		return (SUCCESS);
+		return (ERROR);
 	if (type == OUT_REDIR || type == APPEND_REDIR)
 		return (chevron_out(ms, cmd, type, file_name));
 	if (cmd->input->fd > 0)
 	{
 		safe_close(ms, cmd->input->fd, "chevron_in");
 		cmd->input->name = ft_free(cmd->input->name);
-		cmd->input->name = file_name;
 	}
 	if (type == IN_REDIR)
+	{
+		cmd->input->name = file_name;
 		cmd->input->fd = open(file_name, O_RDONLY);
+	}
 	else if ((type == HERE_DOC_REDIR || type == HERE_DOC_QUOTE_REDIR)
 		&& create_here_docs(ms, cmd, file_name, &type) == MALLOC_ERROR)
 		return (MALLOC_ERROR);
