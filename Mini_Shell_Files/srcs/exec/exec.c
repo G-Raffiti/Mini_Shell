@@ -17,6 +17,7 @@
 
 void	execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 {
+	close_all_files(ms);
 	if (!cmd->cmd)
 		exit(0);
 	if (cmd->is_builtin)
