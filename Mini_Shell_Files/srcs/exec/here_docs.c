@@ -57,6 +57,8 @@ static t_error	exec_here_doc(t_mini_shell *ms, t_here_docs *here)
 			write_in_pipe(here, ret);
 			ret = ft_free(ret);
 			here->limiter = ft_free(here->limiter);
+			if (get_exit_code() == 130)
+				return (ERROR);
 			return (SUCCESS);
 		}
 		ret = join_lines(&line_read, &ret);

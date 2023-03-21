@@ -54,6 +54,9 @@ void	error_exec(t_mini_shell *ms, t_cmd *cmd)
 	if (!file_stat)
 		exit_child(ms, cmd, ENOMEM, MALLOC_FAILED);
 	lstat(cmd->cmd[0], file_stat);
+	if ((file_stat->st_mode & S_IFMT) == S_IFREG && access(cmd->cmd[0],
+														   X_OK) != 0)
+		return (free(file_stat), exit_child(ms, cmd, 126, PERMISSION_DENIED));
 	if (ft_str_cmp(cmd->cmd[0], ".") == 0)
 		return (free(file_stat), exit_child(ms, cmd, 2, FILENAME_REQUIERED));
 	if (ft_str_cmp(cmd->cmd[0], "..") == 0)
@@ -62,9 +65,6 @@ void	error_exec(t_mini_shell *ms, t_cmd *cmd)
 		return (free(file_stat), exit_child(ms, cmd, 126, IS_DIRECTORY));
 	if (ft_contain(cmd->cmd[0], '/'))
 		return (free(file_stat), exit_child(ms, cmd, 127, NO_FILE));
-	if ((file_stat->st_mode & S_IFMT) == S_IFREG && access(cmd->cmd[0],
-			X_OK) != 0)
-		return (free(file_stat), exit_child(ms, cmd, 126, PERMISSION_DENIED));
 	return (free(file_stat), exit_child(ms, cmd, 127, COMMAND_NOT_FOUND));
 }
 

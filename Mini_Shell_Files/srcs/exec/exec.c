@@ -17,6 +17,7 @@
 
 void	execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 {
+	close_all_files(ms);
 	if (!cmd->cmd)
 		exit(0);
 	if (cmd->is_builtin)
@@ -58,13 +59,15 @@ static void	exec_one(t_mini_shell *ms, t_cmd *one)
 t_error	exec_cmds(t_mini_shell *ms)
 {
 	t_lstd	*current;
+	t_error	here_doc_status;
 
 	ms->stds[0] = safe_dup(ms, STDIN_FILENO, "exec: exec");
 	ms->stds[1] = safe_dup(ms, STDOUT_FILENO, "exec: exec");
 	current = ft_lstd_first(ms->cmds);
-	if (here_docs(ms, current) == MALLOC_ERROR)
+	here_doc_status = here_docs(ms, current);
+	if (here_doc_status == MALLOC_ERROR)
 		return (MALLOC_ERROR);
-	else if (get_exit_code() == 130)
+	else if (here_doc_status == ERROR)
 	{
 		safe_dup2(ms, ms->stds[0], STDIN_FILENO, "exec: exec");
 		safe_close(ms, ms->stds[1], "exec: exec");
