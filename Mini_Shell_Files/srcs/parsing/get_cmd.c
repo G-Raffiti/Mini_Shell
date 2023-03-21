@@ -37,18 +37,23 @@ static t_error	fill_split(char **split, char *line)
 	char	quote;
 	int		len;
 	int		block;
+	t_bool	is_export;
 
 	quote = 0;
 	block = 0;
 	while (*line && *line == ' ')
 		line++;
+	is_export = ft_strncmp("export ", line, 7) == 0;
 	while (*line)
 	{
 		len = 0;
-		while (line[len] && !(!set_quote_state(line[len], &quote) && line[len]
-				== ' '))
+		while (line[len]
+			   && !(!set_quote_state(line[len], &quote) && line[len] == ' '))
 			len++;
-		split[block] = str_dup_no_quote(line, len);
+		if (!is_export)
+			split[block] = str_dup_no_quote(line, len);
+		else
+			split[block] = ft_substr(line, 0, len);
 		if (!split[block])
 			return (MALLOC_ERROR);
 		line += len;

@@ -74,6 +74,8 @@ void	*free_mini_shell(t_mini_shell *ms)
 	clear_cmds(&ms->cmds, free_cmd);
 	close(ms->stds[0]);
 	close(ms->stds[1]);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
 	ms = ft_free(ms);
 	return (NULL);
 }
