@@ -1,0 +1,500 @@
+..$DGSDF $???S?Dgfd /v/ | $HOME > out | "$SALUT$USER" '' | <><>tututututututut|
+echo $PWD| echo $OLDPWD| cd .| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd ..| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd ../..| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd ../../..| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd ../../../..| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd ../../../../..| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd ../../../../../..| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd /| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd ''| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd '' ''| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd '' '' ''| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd ' '| pwd| echo $PWD| echo $OLDPWD
+mkdir d |  echo $PWD| echo $OLDPWD| cd d ''| pwd| echo $PWD| echo $OLDPWD
+mkdir d |  echo $PWD| echo $OLDPWD| cd d d| pwd| echo $PWD| echo $OLDPWD
+mkdir d |  echo $PWD| echo $OLDPWD| cd d ' '| pwd| echo $PWD| echo $OLDPWD
+export HOME='/home/rbonneva' |  echo $PWD| echo $OLDPWD| cd $HOME| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd /| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd /.| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd /./| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd /././././| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd //| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd ///| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd ////| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd //////////////////////////////////////////////////////| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd| echo $OLDPWD
+export HOME='/home/rbonneva' |  echo $PWD| echo $OLDPWD| cd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd ' /'| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd ' / '| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd '                  /'| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd '                  /              '| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd ' // '| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd //home| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd ' //home'| pwd| echo $PWD| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd '     //home    '| pwd| echo $PWD| echo $OLDPWD
+mkdir -m 000 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 001 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 002 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 003 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 004 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 005 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 006 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 007 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 010 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 020 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 030 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 040 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 050 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 060 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 070 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 100 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 200 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 300 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 400 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 500 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 600 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 700 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 755 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 644 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 311 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 111 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 222 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 333 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 0777 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 1000 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 2000 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 3000 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 4000 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 5000 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 6000 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 7000 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 1777 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 2777 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 3777 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 4777 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 5777 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 6777 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 7777 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+mkdir -m 0000 d |  echo $PWD| echo $OLDPWD| cd d| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd /| echo $PWD| echo $OLDPWD| unset PWD| cd /dev| echo $OLDPWD
+echo $PWD| echo $OLDPWD| cd /| echo $PWD| echo $OLDPWD| export PWD=bonjour| cd /dev| echo $OLDPWD
+Cd .
+cD .
+export PATH='/bin:/usr/bin' |  Cd .
+export PATH='/bin:/usr/bin' |  cD .
+################################################################ builtin/echo #################################################################
+echo
+echo bonjour
+echo lalalala lalalalal alalalalal alalalala
+echo lalalala                lalalalal      alalalalal alalalala
+echo Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem consequatur. Quas molestiae corporis et quibusd...
+echo -n
+echo -n bonjour
+echo -n lalalala lalalalal alalalalal alalalala
+echo -n lalalala                lalalalal      alalalalal alalalala
+echo -n Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem consequatur. Quas molestiae corporis et quib...
+echo bonjour -n
+echo -n bonjour -n
+                        echo                     bonjour             je
+                        echo       -n            bonjour             je
+echo a '' b '' c '' d
+echo a "" b "" c "" d
+echo -n a '' b '' c '' d
+echo -n a "" b "" c "" d
+echo '' '' ''
+Echo bonjour
+eCho bonjour
+ecHo bonjour
+echO bonjour
+EchO bonjour
+eCHo bonjour
+EcHo bonjour
+eChO bonjour
+export PATH='/bin:/usr/bin' |  Echo bonjour
+export PATH='/bin:/usr/bin' |  eCho bonjour
+export PATH='/bin:/usr/bin' |  ecHo bonjour
+export PATH='/bin:/usr/bin' |  echO bonjour
+export PATH='/bin:/usr/bin' |  EchO bonjour
+export PATH='/bin:/usr/bin' |  eCHo bonjour
+export PATH='/bin:/usr/bin' |  EcHo bonjour
+export PATH='/bin:/usr/bin' |  eChO bonjour
+export PATH='/bin:/usr/bin' |  eChO -e 'bonjour'
+echo -n -n -n -n bonjour
+echo -nnnnnnnnnnnnnnnnnnnnn bonjour
+echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n
+################################################################# builtin/env #################################################################
+env
+export A=a |  env
+export A=a B=b C=c |  env
+export A=a B=b C=c |  env | cat -e
+Env
+enV
+export PATH='/bin:/usr/bin' |  Env
+export PATH='/bin:/usr/bin' |  enV
+################################################################ builtin/exit #################################################################
+exit
+exit 1
+exit 2
+exit 3
+exit ' 3'
+exit '\t3'
+exit '\t\f\r 3'
+exit '3 '
+exit '3\t'
+exit '3\r'
+exit '3\t\f\r '
+exit '3     a'
+exit '3\t\t\ta'
+exit 0
+exit -0
+exit -1
+exit 255
+exit 256
+exit 2000000
+exit -2000000
+exit 2147483647
+exit -2147483648
+exit 2147483648
+exit -2147483649
+exit 3147483648
+exit -3147483649
+exit 4294967295
+exit 4294967296
+exit -9223372036854775808
+exit 9223372036854775807
+exit -9223372036854775809
+exit 9223372036854775808
+exit 18446744073709551615
+exit 18446744073709551616
+exit +1
+exit +2
+exit +3
+exit +0
+exit +255
+exit +256
+exit +2000000
+exit +2147483647
+exit ++1
+exit ++2
+exit ++3
+exit ++0
+exit ++255
+exit ++256
+exit ++2000000
+exit ++2147483647
+exit --1
+exit --2
+exit --3
+exit --0
+exit --255
+exit --256
+exit --2000000
+exit --2147483647
+exit bonjour
+exit 0_
+exit _0
+exit 0123456789
+exit -0123456789
+exit 00000000000000000000000000000000000000000000001
+exit 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001
+exit 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+exit -0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001
+exit -9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+exit 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+exit 0 bonjour
+exit bonjour 0
+exit 0 1
+exit 0 1 2 3 4 5 6 7 8 9
+exit Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem consequatur. Quas molestiae corporis et quibusd...
+exit bonjoru| echo should have exited
+exit 99999999999999999999999999999999999999999999999999999| echo should have exited
+exit 9999| echo should have exited
+Exit| echo a
+exiT| echo a
+export PATH='/bin:/usr/bin' |  Exit| echo a
+export PATH='/bin:/usr/bin' |  exiT| echo a
+############################################################### builtin/export ################################################################
+export
+export A='' |  export
+export A='"' |  export
+export A='\' |  export
+export A='$' |  export
+export A='\t' |  export
+export A=''' |  export
+export A='a' |  export
+export A=a| echo $A
+export A=a B=b C=c| echo $A$B$C
+export A=a B=b C=c D=d E=e F=f G=g H=h I=i J=j K=k L=lM=m N=n O=o P=p Q=q R=r S=s T=t U=u V=v W=w X=x Y=y Z=z| echo $A$B$C$D$E$F$G$H$...
+export BONJOURJESUIS=a| echo $BONJOURJESUIS
+export bonjourjesuis=a| echo $bonjourjesuis
+export bonjour_je_suis=a| echo $bonjour_je_suis
+export BONJOURJESUIS1=a| echo $BONJOURJESUIS1
+export bO_nJq123o__1ju_je3234sui__a=a| echo $bO_nJq123o__1ju_je3234sui__a
+export a0123456789=a| echo $a0123456789
+export abcdefghijklmnopqrstuvwxyz=a| echo $abcdefghijklmnopqrstuvwxyz
+export ABCDEFGHIJKLMNOPQRSTUVWXYZ=a| echo $ABCDEFGHIJKLMNOPQRSTUVWXYZ
+export __________________________=a| echo $__________________________
+export _bonjour_=a| echo $_bonjour_
+export _=a| echo $_a
+export 1=a
+export BONJOURJESUIS =a
+export BONJOURJESUIS= a
+export BONJOUR\\JESUIS=a
+export BONJOUR\'JESUIS=a
+export BONJOUR\"JESUIS=a
+export BONJOUR\$JESUIS=a
+export BONJOUR\&JESUIS=a
+export BONJOUR\|JESUIS=a
+export BONJOUR\|JESUIS=a
+export BONJOUR\_JESUIS=a
+export BONJOUR\0JESUIS=a
+export \B\O\N\ \ \ \ \ \ \ JOURJESUIS=a
+export A=\B\O\N\ \ \ \ \ \ \ JOURJESUIS| echo $A
+export A='bonjour je suis charles'| echo $A
+export A="bonjour je suis charles"| echo $A
+export A==a| echo $A
+export A===a| echo $A
+export A====a| echo $A
+export A=====a| echo $A
+export A======a| echo $A
+export A=a=a=a=a=a| echo $A
+export A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C| echo $A$B$C
+export 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C| echo $A$B$C
+export A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf '| echo $A$B$C
+export A B C| echo $A$B$C
+export A B C| env
+export 'AH@'=nop
+export "AH'"=nop
+export 'AH"'=nop
+export 'AH$'=nop
+export 'AH!'=nop
+export 'AH|'=nop
+export 'AH|'=nop
+export 'AH&'=nop
+export 'AH\'=nop
+export TEST='A=a' |  export $TEST
+export BONJOUR\\JESUIS
+export BONJOUR\'JESUIS
+export BONJOUR\"JESUIS
+export BONJOUR\$JESUIS
+export BONJOUR\&JESUIS
+export BONJOUR\|JESUIS
+export BONJOUR\|JESUIS
+export BONJOUR\_JESUIS
+export BONJOUR\0JESUIS
+Export B=bonjour
+exporT B=bonjour
+export PATH='/bin:/usr/bin' |  Export B=bonjour
+export PATH='/bin:/usr/bin' |  exporT B=bonjour
+################################################################# builtin/pwd #################################################################
+pwd
+cd .. |  pwd
+cd ../.. |  pwd
+cd ../../.. |  pwd
+cd / |  pwd
+cd $HOME |  pwd
+pwd | cat -e
+export PWD='/etc' |  pwd
+unset PWD| pwd| echo $PWD
+export PWD=foo| pwd| echo $PWD
+Pwd
+pwD
+export PATH='/bin:/usr/bin' |  Pwd
+export PATH='/bin:/usr/bin' |  pwD
+################################################################ builtin/unset ################################################################
+unset
+export A='a' |  unset A| echo $A
+export A='a' |  unset 'A '| echo $A
+export A='a' |  unset 'A='| echo $A
+export A='a' B='b' C='c' |  unset A B C| echo $A$B$C
+export A='a' B='b' C='c' |  unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C| echo $A$B$C
+export A='a' B='b' C='c' |  unset 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C| echo $A$B$C
+export A='a' B='b' C='c' |  unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf '| echo $A$B$C
+export A='a' B='b' C='c' |  unset A| echo $A$B$C
+export A='a' B='b' C='c' |  unset C| echo $A$B$C
+export A='a' B='b' C='c' |  unset A B C
+export A='a' B='b' C='c' |  unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C
+export A='a' B='b' C='c' |  unset 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf ' C
+export A='a' B='b' C='c' |  unset A 'asdf ' B ' asdf asdf asd f' ' asdf ' '' 'asdf '
+export A='a' B='b' C='c' |  unset A
+unset 'AH@'=nop
+unset "AH'"=nop
+unset 'AH"'=nop
+unset 'AH$'=nop
+unset 'AH!'=nop
+unset 'AH|'=nop
+unset 'AH|'=nop
+unset 'AH&'=nop
+unset 'AH\'=nop
+Unset TERM
+unseT TERM
+export PATH='/bin:/usr/bin' |  Unset TERM
+export PATH='/bin:/usr/bin' |  unseT TERM
+################################################################### cmd/cmd ###################################################################
+notfound
+notfound a b c
+echo "\"" >>a"b""c"
+echo\t\v\f\r▒▒!#$%*+,-./0123456789:|=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\ | ^_abcdefghijklmnopqrstuvwxyz{}~
+echo foo>bar
+echo foo >bar
+echo foo> bar
+echo foo > bar
+echo a as df sad f as df qw e  qwe  as df asd f as df as d fas d fasd f asd f asdf asdf  asdf  asd f asd f asd f asd f as df as df aa...
+echo Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem consequatur. Quas molestiae corporis et quibusd...
+echo Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem consequatur. Quas molestiae corporis et quibusd...
+################################################################ cmd/cmd_path #################################################################
+touch a b c |  /usr/bin/ls
+touch a b c |  /usr/bin/ls -l
+touch a b c| cp /usr/bin/ls bonjour |  ./bonjour
+touch a b c| cp /usr/bin/ls bonjour |  ./bonjour -l
+mkdir somedir| touch a b c| touch somedir/d somedir/e|cp /usr/bin/ls somedir/bonjour |  ./somedir/bonjour -l
+touch a b c| echo bonjour > a| cp /usr/bin/cat ls |  ./ls . a b c
+touch a b c| echo bonjour > a| cp /usr/bin/cat ls |  ls . a b c
+echo > somefile| chmod 000 somefile |  ./somefile
+echo > somefile| chmod 001 somefile |  ./somefile
+echo > somefile| chmod 002 somefile |  ./somefile
+echo > somefile| chmod 003 somefile |  ./somefile
+echo > somefile| chmod 004 somefile |  ./somefile
+echo > somefile| chmod 005 somefile |  ./somefile
+echo > somefile| chmod 006 somefile |  ./somefile
+echo > somefile| chmod 007 somefile |  ./somefile
+echo > somefile| chmod 010 somefile |  ./somefile
+echo > somefile| chmod 020 somefile |  ./somefile
+echo > somefile| chmod 030 somefile |  ./somefile
+echo > somefile| chmod 040 somefile |  ./somefile
+echo > somefile| chmod 050 somefile |  ./somefile
+echo > somefile| chmod 060 somefile |  ./somefile
+echo > somefile| chmod 070 somefile |  ./somefile
+echo > somefile| chmod 100 somefile |  ./somefile
+echo > somefile| chmod 200 somefile |  ./somefile
+echo > somefile| chmod 300 somefile |  ./somefile
+echo > somefile| chmod 400 somefile |  ./somefile
+echo > somefile| chmod 500 somefile |  ./somefile
+echo > somefile| chmod 600 somefile |  ./somefile
+echo > somefile| chmod 700 somefile |  ./somefile
+echo > somefile| chmod 755 somefile |  ./somefile
+echo > somefile| chmod 644 somefile |  ./somefile
+echo > somefile| chmod 311 somefile |  ./somefile
+echo > somefile| chmod 111 somefile |  ./somefile
+echo > somefile| chmod 222 somefile |  ./somefile
+echo > somefile| chmod 333 somefile |  ./somefile
+mkdir somedir |  somedir/
+mkdir somedir |  ./somedir/
+mkdir somedir |  somedir
+mkdir somedir |  ./somedir
+mkdir somedir |  somedir
+mkdir somedir| ln -s somedir somedirsoftlink |  somedirsoftlink/
+mkdir somedir| ln -s somedir somedirsoftlink |  ./somedirsoftlink/
+mkdir somedir| ln -s somedir somedirsoftlink |  somedirsoftlink
+mkdir somedir| ln -s somedir somedirsoftlink |  ./somedirsoftlink
+mkdir somedir| ln -s somedir somedirsoftlink |  somedirsoftlink
+touch somefile| ln -s somefile someremovedlink| rm -f somefile |  ./someremovedlink
+touch somefile| ln -s somefile somelink1| ln -s somelink1 somelink2 |  ./somelink2
+touch somefile| ln -s somefile somelink1| ln -s somelink1 somelink2|ln -s somelink2 somelink3 |  ./somelink3
+touch somefile| ln -s somefile somelink1| ln -s somelink1 somelink2|ln -s somelink2 somelink3| ln -s somelink3 somelink4 |  ./so...
+cp /usr/bin/ls somefile|ln -s somefile somelink1| ln -s somelink1 somelink2 |  ./somelink2ls
+cp /usr/bin/ls somefile|ln -s somefile somelink1| ln -s somelink1 somelink2|ln -s somelink2 somelink3 |  ./somelink3ls
+cp /usr/bin/ls somefile|ln -s somefile somelink1| ln -s somelink1 somelink2|ln -s somelink2 somelink3| ln -s somelink3 somelin...
+touch _ |  _
+touch - |  '-'
+touch _ |  ./_
+touch a| mv a ./- |  ./-
+touch . |  ./.
+touch .. |  ./..
+echo > somefile | chmod 0777 somefile |  ./somefile
+echo > somefile | chmod 1000 somefile |  ./somefile
+echo > somefile | chmod 2000 somefile |  ./somefile
+echo > somefile | chmod 3000 somefile |  ./somefile
+echo > somefile | chmod 4000 somefile |  ./somefile
+echo > somefile | chmod 5000 somefile |  ./somefile
+echo > somefile | chmod 6000 somefile |  ./somefile
+echo > somefile | chmod 7000 somefile |  ./somefile
+echo > somefile | chmod 1777 somefile |  ./somefile
+echo > somefile | chmod 2777 somefile |  ./somefile
+echo > somefile | chmod 3777 somefile |  ./somefile
+echo > somefile | chmod 4777 somefile |  ./somefile
+echo > somefile | chmod 5777 somefile |  ./somefile
+echo > somefile | chmod 6777 somefile |  ./somefile
+echo > somefile | chmod 7777 somefile |  ./somefile
+echo > somefile | chmod 0000 somefile |  ./somefile
+mkdir -m 0777 somedir |  ./somedir
+mkdir -m 1000 somedir |  ./somedir
+mkdir -m 2000 somedir |  ./somedir
+mkdir -m 3000 somedir |  ./somedir
+mkdir -m 4000 somedir |  ./somedir
+mkdir -m 5000 somedir |  ./somedir
+mkdir -m 6000 somedir |  ./somedir
+mkdir -m 7000 somedir |  ./somedir
+mkdir -m 1777 somedir |  ./somedir
+mkdir -m 2777 somedir |  ./somedir
+mkdir -m 3777 somedir |  ./somedir
+mkdir -m 4777 somedir |  ./somedir
+mkdir -m 5777 somedir |  ./somedir
+mkdir -m 6777 somedir |  ./somedir
+mkdir -m 0000 somedir |  ./somedir
+echo > somefile | chmod 000 somefile |  ./Somefile
+echo > somefile | chmod 000 somefile |  ./someFILE
+############################################################### cmd/redirection ###############################################################
+echo bonjour > test
+echo > test bonjour
+> test echo bonjour
+echo bonjour >> test
+echo >> test bonjour
+>> test echo bonjour
+echo bonjour > test |  cat < test
+echo bonjour > test
+echo > test'sticked' bonjour
+> test'sticked' echo bonjour
+echo bonjour >> test'sticked'
+echo >> test'sticked' bonjour
+>> test'sticked' echo bonjour
+echo bonjour > test'sticked' |  cat < test'sticked'
+echo bonjour > test'sticked' |  < test'sticked' cat
+echo > test"sticked" bonjour
+> test"sticked" echo bonjour
+echo bonjour >> test"sticked"
+echo >> test"sticked" bonjour
+>> test"sticked" echo bonjour
+echo bonjour > test"sticked" |  cat < test"sticked"
+echo bonjour > test"sticked" |  < test"sticked" cat
+echo > test'yo'"sticked" bonjour
+> test'yo'"sticked" echo bonjour
+echo bonjour >> test'yo'"sticked"
+echo >> test'yo'"sticked" bonjour
+>> test'yo'"sticked" echo bonjour
+echo bonjour > test'yo'"sticked" |  cat < test'yo'"sticked"
+echo bonjour > test'yo'"sticked" |  < test'yo'"sticked" cat
+echo bonjour > test > je > suis
+echo > test > je bonjour > suis
+> test echo bonjour > je > suis
+echo bonjour >> test > je >> suis
+echo >> test bonjour > je > suis
+>> test echo > je bonjour > suis
+echo bonjour > test| echo salut > je |  cat < test < je
+echo bonjour>test>je>suis
+>test echo bonjour>je>suis
+echo bonjour>>test>je>>suis
+echo bonjour > test| echo salut > je |  cat<test<je
+echo bonjour > a'b'c'd'e'f'g'h'i'j'k'l'm'n'o'p'q'r's't'u'v'w'x'y'z'
+echo bonjour > a"b"c"d"e"f"g"h"i"j"k"l"m"n"o"p"q"r"s"t"u"v"w"x"y"z"
+echo bonjour > a'b'c"d"e'f'g"h"i'j'k"l"m'n'o"p'q'r"s't'u"v"w"x"y'z'
+> file
+echo bonjour > file |  < file
+>
+>>
+<
+echo >
+echo >>
+echo <
+> test
+>> test
+touch test |  < test
+echo foo >>> bar
+echo foo >>>> bar
+echo foo >>>>> bar
+echo bonjour > bar |  cat << < bar
+echo bonjour > bar |  cat << << bar
+echo bonjour > bar |  cat <<<<< bar
+cat < doesnotexist
+echo a > a |  echo bonjour >> a
