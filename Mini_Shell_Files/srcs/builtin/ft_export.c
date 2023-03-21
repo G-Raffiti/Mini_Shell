@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:00:40 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/21 16:56:53 by aucaland         ###   ########.fr       */
+/*   Updated: 2023/03/21 20:36:07 by rbonneva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/mini_shell.h"
-
-void	display_export(t_mini_shell *ms)
-{
-	int	i;
-
-	i = 0;
-	while (ms->env_sort[i])
-	{
-		printf("%s\n", ms->env_sort[i]);
-		i++;
-	}
-}
 
 int	export_name_is_valid(char *arg)
 {
@@ -60,8 +48,6 @@ t_error	export_in_envs(t_mini_shell *ms, char **extracted)
 		sort_dict(&ms->env_sort_dict, ft_str_cmp);
 		if (fill_export_env(ms) == MALLOC_ERROR)
 			return (free_split(extracted), MALLOC_ERROR);
-		dprintf(2, "%s\n", get_env_dict(ms->env_sort_dict->content)->value);
-
 	}
 	if (ft_str_cmp(extracted[0], "PATH") == 0)
 	{
