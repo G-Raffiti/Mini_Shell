@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:00:40 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 14:00:40 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:56:53 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ t_error	export_in_envs(t_mini_shell *ms, char **extracted)
 		if (add_or_replace_in_chosen_env(ms, extracted[0], extracted[2], 2) \
 															== MALLOC_ERROR)
 			return (free_split(extracted), MALLOC_ERROR);
+		sort_dict(&ms->env_sort_dict, ft_str_cmp);
+		if (fill_export_env(ms) == MALLOC_ERROR)
+			return (free_split(extracted), MALLOC_ERROR);
+		dprintf(2, "%s\n", get_env_dict(ms->env_sort_dict->content)->value);
+
 	}
 	if (ft_str_cmp(extracted[0], "PATH") == 0)
 	{
