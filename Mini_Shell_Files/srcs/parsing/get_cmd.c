@@ -6,7 +6,7 @@
 /*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:58:27 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 13:58:27 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:10:57 by rbonneva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,17 @@ static int	count_blocks(char *line)
 	return (block);
 }
 
+static t_error	dup_block(t_bool is_export, char **block, int len, char *line)
+{
+	if (!is_export)
+		*block = str_dup_no_quote(line, len);
+	else
+		*block = ft_substr(line, 0, len);
+	if (!*block)
+		return (MALLOC_ERROR);
+	return (SUCCESS);
+}
+
 static t_error	fill_split(char **split, char *line)
 {
 	char	quote;
@@ -48,13 +59,9 @@ static t_error	fill_split(char **split, char *line)
 	{
 		len = 0;
 		while (line[len]
-			   && !(!set_quote_state(line[len], &quote) && line[len] == ' '))
+			&& !(!set_quote_state(line[len], &quote) && line[len] == ' '))
 			len++;
-		if (!is_export)
-			split[block] = str_dup_no_quote(line, len);
-		else
-			split[block] = ft_substr(line, 0, len);
-		if (!split[block])
+		if (dup_block(is_export, &split[block], len, line) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		line += len;
 		while (*line && *line == ' ')

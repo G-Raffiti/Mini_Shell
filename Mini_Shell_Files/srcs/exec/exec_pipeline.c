@@ -6,7 +6,7 @@
 /*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:59:24 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 17:38:44 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:41:48 by rbonneva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 static void	exec_first(t_mini_shell *ms, t_cmd *first)
 {
 	safe_pipe(ms, ms->pipe, "exec_first");
-	if (permission_denied(ms, first) == ERROR)
-		return ;
 	dup_input(ms, first, "exec_first");
 	set_signals(first);
 	safe_fork(ms, first, "exec_first");
@@ -47,8 +45,6 @@ static void	exec_cmd(t_mini_shell *ms, t_cmd *cmd)
 		close(ms->pipe[0]);
 	dup_input(ms, cmd, "exec_mid");
 	safe_pipe(ms, ms->pipe, "exec_mid");
-	if (permission_denied(ms, cmd) == ERROR)
-		return ;
 	set_signals(cmd);
 	safe_fork(ms, cmd, "exec_mid");
 	if (cmd->pid)
@@ -74,8 +70,6 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 		close(ms->pipe[0]);
 	dup_input(ms, last, "exec_last");
 	close(ms->pipe[0]);
-	if (permission_denied(ms, last) == ERROR)
-		return ;
 	set_signals(last);
 	safe_fork(ms, last, "exec_last");
 	if (last->pid)

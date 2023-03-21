@@ -53,7 +53,6 @@ t_error	exit_end_program(t_mini_shell *ms, int exit_code)
 {
 	close(ms->stds[0]);
 	close(ms->stds[1]);
-	set_exit_code(0);
 	printf("exit\n");
 	free_mini_shell(ms);
 	exit(exit_code);

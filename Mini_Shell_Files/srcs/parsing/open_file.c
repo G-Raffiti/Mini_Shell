@@ -6,7 +6,7 @@
 /*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:34:37 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/21 17:49:02 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:25:10 by rbonneva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,28 @@ t_error	valid_file(t_mini_shell *ms, char *str)
 	return (SUCCESS);
 }
 
+t_error	set_fd(t_mini_shell *ms, char *str, t_cmd *cmd)
+{
+	char		*file_name;
+	t_chevron	chevron_type;
+	t_error		error;
+
+	chevron_type = get_chevron_type(str);
+	if (valid_file(ms, str) == ERROR)
+		return (ERROR);
+	error = extract_file_name(ms, str, &chevron_type, &file_name);
+	if (error != SUCCESS)
+		return (file_name = ft_free(file_name), error);
+	error = chevron_in(ms, cmd, chevron_type, file_name);
+	if (error != SUCCESS)
+		return (file_name = ft_free(file_name), error);
+	return (error);
+}
+
 t_error	open_files(t_mini_shell *ms, t_cmd *cmd)
 {
 	char		*str;
 	char		quote;
-	char		*file_name;
-	t_chevron	chevron_type;
 	t_error		error;
 
 	error = SUCCESS;
@@ -49,18 +65,11 @@ t_error	open_files(t_mini_shell *ms, t_cmd *cmd)
 	{
 		if (!set_quote_state(*str, &quote) && ft_contain("<>", *str))
 		{
-			chevron_type = get_chevron_type(str);
-			if (valid_file(ms, str) == ERROR)
-				return (ERROR);
-			error = extract_file_name(ms, str, &chevron_type, &file_name);
+			error = set_fd(ms, str, cmd);
 			if (error != SUCCESS)
-				return (file_name = ft_free(file_name), error);
-			error = chevron_in(ms, cmd, chevron_type, file_name);
-			if (error != SUCCESS)
-				return (file_name = ft_free(file_name), error);
+				return (error);
 		}
 		str++;
 	}
-	dprintf(2, "file_name = %s\nfd->input = %s\n", file_name, cmd->input->name);
 	return (error);
 }

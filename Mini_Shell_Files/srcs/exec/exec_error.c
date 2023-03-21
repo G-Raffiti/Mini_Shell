@@ -6,7 +6,7 @@
 /*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:59:34 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 13:59:34 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:45:29 by rbonneva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_error	permission_denied(t_mini_shell *ms, t_cmd *cmd)
 {
 	if (cmd->input->fd == -1)
 	{
-		set_exit_code(cmd->input->error);
 		if (!cmd->cmd)
 			printf("%s: %s\n", cmd->input->name,
 				strerror(cmd->input->error));
@@ -28,11 +27,11 @@ t_error	permission_denied(t_mini_shell *ms, t_cmd *cmd)
 			printf("%s: %s: %s\n", cmd->cmd[0], cmd->input->name,
 				strerror(cmd->input->error));
 		safe_close(ms, ms->pipe[1], "exec_first");
+		set_exit_code(1);
 		return (ERROR);
 	}
 	if (cmd->output->fd == -1)
 	{
-		set_exit_code(cmd->output->error);
 		if (!cmd->cmd)
 			printf("%s: %s\n", cmd->output->name,
 				strerror(cmd->output->error));
@@ -40,6 +39,7 @@ t_error	permission_denied(t_mini_shell *ms, t_cmd *cmd)
 			printf("%s: %s: %s\n", cmd->cmd[0], cmd->output->name,
 				strerror(cmd->output->error));
 		safe_close(ms, ms->pipe[1], "exec_first");
+		set_exit_code(1);
 		return (ERROR);
 	}
 	return (SUCCESS);
@@ -55,7 +55,7 @@ void	error_exec(t_mini_shell *ms, t_cmd *cmd)
 		exit_child(ms, cmd, ENOMEM, MALLOC_FAILED);
 	lstat(cmd->cmd[0], file_stat);
 	if ((file_stat->st_mode & S_IFMT) == S_IFREG && access(cmd->cmd[0],
-														   X_OK) != 0)
+			X_OK) != 0)
 		return (free(file_stat), exit_child(ms, cmd, 126, PERMISSION_DENIED));
 	if (ft_str_cmp(cmd->cmd[0], ".") == 0)
 		return (free(file_stat), exit_child(ms, cmd, 2, FILENAME_REQUIERED));

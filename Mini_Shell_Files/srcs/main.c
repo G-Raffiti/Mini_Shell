@@ -13,8 +13,6 @@
 #include <string.h>
 #include "../incs/mini_shell.h"
 
-t_bool testmod = FALSE;
-
 static void	loop(t_mini_shell *ms)
 {
 	char	*line;
@@ -30,22 +28,8 @@ static void	loop(t_mini_shell *ms)
 		if (is_empty_line(line))
 			continue ;
 		if (parse_line(ms, line) == ERROR)
-		{
-			if (testmod) //delete
-			{ //delete
-				clear_cmds(&(ms->cmds), free_cmd);//delete
-				line = ft_free(line);//delete
-				exit_end_program(ms, get_exit_code());
-			}//delete
 			continue ;
-		}
 		exec_cmds(ms);
-		if (testmod)//delete
-		{//delete
-			clear_cmds(&(ms->cmds), free_cmd);//delete
-			line = ft_free(line);//delete
-			exit_end_program(ms, get_exit_code());
-		}//delete
 	}
 }
 
@@ -57,8 +41,6 @@ int	main(int argc, char **argv, char **env)
 	(void) argc;
 	(void) argv;
 	env_malloced = FALSE;
-	if (argc == 2 && ft_str_cmp(argv[1], "test") == 0)//delete
-		testmod = TRUE;//delete
 	if (new_mini_shell(&ms) == MALLOC_ERROR)
 		exit_malloc(ms, "main: new_mini_shell");
 	if (!env[0])

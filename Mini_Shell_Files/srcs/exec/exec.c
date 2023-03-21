@@ -6,7 +6,7 @@
 /*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:59:39 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 16:39:14 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:35:56 by rbonneva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 void	execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 {
 	close_all_files(ms);
+	if (permission_denied(ms, cmd) == ERROR)
+		return ;
 	if (!cmd->cmd)
 		exit(0);
 	if (cmd->is_builtin)
@@ -34,8 +36,6 @@ void	execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 
 static void	exec_one(t_mini_shell *ms, t_cmd *one)
 {
-	if (permission_denied(ms, one) == ERROR)
-		return ;
 	dup_input(ms, one, "exec_one");
 	if (one->is_builtin && !one->need_fork)
 	{
