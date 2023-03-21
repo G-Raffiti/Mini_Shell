@@ -1,0 +1,71 @@
+echo a > a |  echo bonjour > a
+echo a > a |  echo bonjour > a >> a
+################################################################# cmd/status ##################################################################
+echo $?
+echo| echo $?
+notfound| echo $?
+cat < doesntexist| echo $?
+echo bonjour > noperm| chmod 000 noperm |  cat < noperm| echo $?
+echo
+notfound
+cat < doesntexist
+echo bonjour > noperm| chmod 000 noperm |  cat < noperm
+################################################################## flow/end ###################################################################
+echo bonjour| echo je
+echo bonjour |echo je
+echo bonjour | echo je
+echo bonjour|
+echo|
+echo |
+echo |
+| echo
+ |echo
+ | echo
+echo a| echo b| echo c| echo d| echo e| echo f| echo g| echo h| echo i|echo j| echo k| echo l| echo m| echo c| echo c| echo c| echo c...
+echo a | echo b| echo c |echo d     |   echo e   |echo f|        echo g  |echo h| echo i|echo j  | echo k| echo l| echo m| echo c    ...
+ls doesnotexists | echo bonjour
+ls doesnotexists| echo bonjour
+echo bonjour| ls doesnotexists
+echo a | |
+echo a | |
+|
+| |
+| | |
+echo a | | echo b
+||
+|||
+|||||
+echo a || echo b
+echo a ||||| echo b
+touch a b c |  ls  | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls...
+touch a b c |  ls  | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls...
+touch a b c |  ls  | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls...
+touch a b c |  ls  | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls...
+################################################################## flow/pipe ##################################################################
+cat /etc/shells | head -c 10
+cat -e /etc/shells | head -c 10
+cat -e /etc/shells | cat -e | head -c 10
+cat -e /etc/shells | cat -e | cat -e | head -c 10
+cat -e /dev/random | head -c 10
+cat -e /dev/random | cat -e | head -c 10
+cat -e /dev/random | cat -e | cat -e | head -c 10
+echo bonjour | cat
+echo bonjour | cat -e
+echo bonjour | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e
+touch a b c d| mkdir m1 m2 m3 |  ls | cat -e
+touch a b c d| mkdir m1 m2 m3 |  ls -l | cat -e
+touch a b c d| mkdir m1 m2 m3 |  ls -l | cat -e | cat | cat | cat
+touch a b c d| mkdir m1 m2 m3 |  ls -l | cat -e | cat -e | cat -e | cat -e
+touch a b c d| mkdir m1 m2 m3| echo bonjour > a |  ls -l | cat -e < a
+echo|
+echo |
+echo |
+|cat
+| cat
+ | cat
+echo a | export A=a| echo $A
+export A=a | cat| echo $A
+echo bonjour | | cat -e
+echo bonjour | asdf
+asdf | echo bonjour
+echo a ||| echo b

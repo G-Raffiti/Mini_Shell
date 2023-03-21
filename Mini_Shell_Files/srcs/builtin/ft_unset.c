@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:00:50 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 14:00:50 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:47:59 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ t_error	ft_unset(t_mini_shell *ms, t_cmd *cmd, int in_pipe)
 		current_sorted = ft_lstd_find(ms->env_sort_dict,
 				cmd->cmd[i], find_in_dict_sorted);
 		if (current)
-			ms->env_dict = ft_lstd_first(ft_lstd_remove_and_del(current,
-													(void*)free_dict));
+			ms->env_dict = ft_lstd_first(ft_lstd_remove_and_del(current, \
+													(void *)free_dict));
 		if (current_sorted)
-			ms->env_sort_dict = ft_lstd_first(ft_lstd_remove_and_del
-							(current_sorted, (void*)free_dict));
+			ms->env_sort_dict = ft_lstd_first(ft_lstd_remove_and_del \
+							(current_sorted, (void *)free_dict));
 	}
 	if (cmd->cmd[1] && ft_str_cmp(cmd->cmd[1], "PATH") == 0)
 		ms->paths = free_split(ms->paths);

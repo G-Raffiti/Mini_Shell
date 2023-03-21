@@ -1,0 +1,43 @@
+==44062== Memcheck, a memory error detector
+==44062== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==44062== Using Valgrind-3.20.0-5147d671e4-20221024 and LibVEX; rerun with -h for copyright info
+==44062== Command: ./minishell
+==44062== Parent PID: 44060
+==44062== 
+--44062-- 
+--44062-- Valgrind options:
+--44062--    --show-leak-kinds=all
+--44062--    --leak-check=full
+--44062--    --track-fds=yes
+--44062--    --verbose
+--44062--    --show-mismatched-frees=yes
+--44062--    --read-var-info=yes
+--44062--    --suppressions=ignore_leaks.txt
+--44062--    --log-file=valgrind-out.log
+--44062-- Contents of /proc/version:
+--44062--   Linux version 6.1.18-200.fc37.x86_64 (mockbuild@bkernel01.iad2.fedoraproject.org) (gcc (GCC) 12.2.1 20221121 (Red Hat 12.2.1-4), GNU ld version 2.38-25.fc37) #1 SMP PREEMPT_DYNAMIC Sat Mar 11 16:09:14 UTC 2023
+--44062-- 
+--44062-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--44062-- Page sizes: currently 4096, max supported 4096
+--44062-- Valgrind library directory: /snap/valgrind/142/usr/libexec/valgrind
+--44062-- Reading syms from /home/aurel/Documents/CLionProjects/Mini_Shell/minishell
+--44062-- Reading syms from /usr/lib64/ld-linux-x86-64.so.2
+--44062-- Warning: cross-CU LIMITATION: some inlined fn names
+--44062-- might be shown as UnknownInlinedFun
+--44062-- warning: addVar: unknown size (buf)
+--44062-- warning: addVar: unknown size (buf)
+--44062-- warning: addVar: unknown size (loadcmds)
+--44062-- warning: addVar: unknown size (loadcmds)
+--44062-- warning: addVar: unknown size (loadcmds)
+--44062-- warning: addVar: unknown size (loadcmds)
+--44062-- warning: addVar: unknown size (loadcmds)
+--44062-- warning: addVar: unknown size (loadcmds)
+--44062-- warning: addVar: unknown size (loadcmds)
+--44062-- warning: addVar: unknown size (loadcmds)
+--44062-- Reading syms from /var/lib/snapd/snap/valgrind/142/usr/libexec/valgrind/memcheck-amd64-linux
+--44062--    object doesn't have a dynamic symbol table
+--44062-- Warning: inlined fn name without absori
+--44062-- is shown as UnknownInlinedFun
+--44062-- Scheduler: using generic scheduler lock implementation.
+--44062-- Reading suppressions file: ignore_leaks.txt
+==44062== FATAL: can't open suppressions file "ignore_leaks.txt"

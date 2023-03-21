@@ -40,7 +40,7 @@ t_error	ft_chdir(t_mini_shell *ms, t_cmd *cmd, char *path)
 		if (add_or_replace_in_chosen_env(ms, "OLDPWD", get_env_value(ms, "PWD"),
 				2) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
-		if (add_or_replace_in_chosen_env(ms, "PWD",
+		if (add_or_replace_in_chosen_env(ms, "PWD", \
 			getcwd(NULL, PWD_PATH_SIZE), 2) == MALLOC_ERROR)
 			return (MALLOC_ERROR);
 		return (SUCCESS);
