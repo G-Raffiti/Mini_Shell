@@ -36,22 +36,6 @@ while IFS= read -r line; do
       # Reset the counter
       counter=0
     fi
-done < minihell.txt
-
-wait
-
-counter=0
-while IFS= read -r line; do
-  testing "$line" &
-    # Increment the process counter
-    ((counter++))
-
-    # If we have reached the maximum number of processes, wait for them to finish
-    if [ $counter -eq 6 ]; then
-      wait
-      # Reset the counter
-      counter=0
-    fi
 done < minihell2.txt
 
 wait
@@ -76,4 +60,4 @@ wait
 cat all_valgrinds.log | grep lost > all_lost.log
 cat all_valgrinds.log | grep alid > inv_read.log
 cat all_valgrinds.log | grep SIG > SEGFAULT.log
-cat all_valgrinds.log | grep "open at exit" > OPENF.log
+cat all_valgrinds.log | grep "Open at exit" > OPENF.log

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:59:34 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/21 19:45:29 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/22 20:02:39 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	error_exec(t_mini_shell *ms, t_cmd *cmd)
 	if ((file_stat->st_mode & S_IFMT) == S_IFDIR)
 		return (free(file_stat), exit_child(ms, cmd, 126, IS_DIRECTORY));
 	if (ft_contain(cmd->cmd[0], '/'))
-		return (free(file_stat), exit_child(ms, cmd, 127, NO_FILE));
+		return (free(file_stat), exit_child(ms, cmd, 126, NO_FILE));
 	return (free(file_stat), exit_child(ms, cmd, 127, COMMAND_NOT_FOUND));
 }
 
