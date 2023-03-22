@@ -36,6 +36,7 @@ t_error	get_key_and_replace(char **raw, t_env_arg **key_value, char *key)
 	if (*key_value)
 	{
 		*raw = ft_strdup((*key_value)->value);
+		inv_quotes(*raw);
 		if (!*raw)
 			return (MALLOC_ERROR);
 	}
