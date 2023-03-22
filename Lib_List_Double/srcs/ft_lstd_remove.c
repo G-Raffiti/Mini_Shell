@@ -19,7 +19,12 @@ t_lstd	*ft_lstd_remove(t_lstd *elem)
 
 	if (!elem)
 		return (NULL);
-	lst = elem->next;
+	if (elem->next)
+		lst = elem->next;
+	else if (elem->previous)
+		lst = elem->previous;
+	else
+		lst = NULL;
 	if (elem->previous)
 		elem->previous->next = elem->next;
 	if (elem->next)
