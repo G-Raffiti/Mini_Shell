@@ -17,8 +17,11 @@ t_error	ft_env(t_mini_shell *ms)
 	int	i;
 
 	i = -1;
-	while (ms->env && ms->env[++i])
-		printf("%s\n", ms->env[i]);
+	while (ms->env_sort[i])
+	{
+		printf("%s\n", ms->env_sort[i]);
+		i++;
+	}
 	set_exit_code(EXIT_SUCCESS);
 	return (SUCCESS);
 }

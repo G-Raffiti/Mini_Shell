@@ -37,23 +37,18 @@ static t_error	fill_split(char **split, char *line)
 	char	quote;
 	int		len;
 	int		block;
-	t_bool	is_export;
 
 	quote = 0;
 	block = 0;
 	while (*line && *line == ' ')
 		line++;
-	is_export = ft_strncmp("export ", line, 7) == 0;
 	while (*line)
 	{
 		len = 0;
 		while (line[len]
 			   && !(!set_quote_state(line[len], &quote) && line[len] == ' '))
 			len++;
-		if (!is_export)
-			split[block] = str_dup_no_quote(line, len);
-		else
-			split[block] = ft_substr(line, 0, len);
+		split[block] = ft_substr(line, 0, len);
 		if (!split[block])
 			return (MALLOC_ERROR);
 		line += len;
@@ -80,6 +75,20 @@ static char	**split_cmd(char *raw_cmd)
 	return (split);
 }
 
+void	invert_quote(char **split)
+{
+	while (*split)
+	{
+		while (**split)
+		{
+			if (**split < 0)
+				**split = **split * -1;
+			(*split)++;
+		}
+		split++;
+	}
+}
+
 t_error	get_cmd(t_cmd *cmd)
 {
 	if (is_empty_line(cmd->raw_cmd))
@@ -90,5 +99,6 @@ t_error	get_cmd(t_cmd *cmd)
 	cmd->cmd = split_cmd(cmd->raw_cmd);
 	if (!cmd->cmd)
 		return (MALLOC_ERROR);
+	invert_quote(cmd->cmd);
 	return (SUCCESS);
 }
