@@ -6,7 +6,7 @@
 /*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:57:11 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 13:57:11 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:01:17 by rbonneva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	close_all_files(t_mini_shell *ms)
 
 	close(ms->stds[0]);
 	close(ms->stds[1]);
+	//close(ms->pipe[0]);
+	//close(ms->pipe[1]);
 	current = ft_lstd_first(ms->cmds);
 	while (current)
 	{
