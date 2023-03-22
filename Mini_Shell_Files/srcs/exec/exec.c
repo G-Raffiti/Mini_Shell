@@ -31,6 +31,7 @@ void	execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 	}
 	else
 		execve(cmd->path, cmd->cmd, ms->env);
+	error_exec(ms, cmd);
 }
 
 static void	exec_one(t_mini_shell *ms, t_cmd *one)

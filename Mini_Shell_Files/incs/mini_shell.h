@@ -179,6 +179,8 @@ void		check_special_char_h_doc(char *quote, int *prev_is_arg,
 				int *i, char *raw_cmd);
 t_error		create_final_raw_h_doc(char **here_doc, int final_len);
 t_error		fill_end_raw_h_doc(char **here_doc, char **splited_raw);
+t_error		get_key_and_replace_doc(char **raw, t_env_arg **key_value,
+				char *key);
 
 /******************************************************************************/
 /*******************************   BUILTIN   **********************************/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_dollars_split.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:57:36 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/22 16:44:30 by aucaland         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:20:58 by rbonneva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,6 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 		(*splited_raw)[dlr.nbr++] = ft_substr(dlr.raw_cmd,
 				ft_strlen(dlr.raw_cmd) - dlr.len_prev, dlr.len_prev);
 	return (SUCCESS);
-}
-
-void	inv_quotes(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == QUOTE || str[i] == S_QUOTE)
-			str[i] = str[i] * -1;
-		i++;
-	}
 }
 
 t_error	replace_in_split(t_mini_shell *ms, char **splited_raw, int *final_len)
