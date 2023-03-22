@@ -46,6 +46,7 @@ FILES =			\
 				exec/signals_handler \
 				exec/signals_seter \
 				exec/here_docs_expand \
+				exec/here_docs_expand_replace \
 				exec/here_docs_expand_utils \
 				\
 				parsing/check_line \
@@ -55,6 +56,7 @@ FILES =			\
 				parsing/get_cmd_str_dup \
 				parsing/get_path \
 				parsing/get_raw_cmd \
+				parsing/inv_quote \
 				parsing/open_file \
 				parsing/parse_error \
 				parsing/parsing \

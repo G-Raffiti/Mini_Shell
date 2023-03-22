@@ -107,7 +107,7 @@ static t_error	replace_in_split_h_doc(t_mini_shell *ms, char **splited_raw,
 		{
 			key = (&splited_raw[str_pos][c_pos]) + 1;
 			get_pair_key_value(ms, dict, &key_value, key);
-			if (get_key_and_replace(&splited_raw[str_pos], &key_value, key)
+			if (get_key_and_replace_doc(&splited_raw[str_pos], &key_value, key)
 				== MALLOC_ERROR)
 				return (MALLOC_ERROR);
 		}
