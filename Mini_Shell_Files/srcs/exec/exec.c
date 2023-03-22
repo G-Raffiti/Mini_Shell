@@ -20,6 +20,7 @@ void	execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 	close_all_files(ms);
 	if (permission_denied(ms, cmd) == ERROR)
 		return ;
+	dprintf(2, "path= %s, cmd[0]= %s, env[0]=%s\n", cmd->path, cmd->cmd[0], ms->env[0]);
 	if (!cmd->cmd)
 		exit(0);
 	if (cmd->is_builtin)

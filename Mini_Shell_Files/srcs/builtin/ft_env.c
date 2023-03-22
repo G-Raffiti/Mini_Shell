@@ -25,3 +25,15 @@ t_error	ft_env(t_mini_shell *ms)
 	set_exit_code(EXIT_SUCCESS);
 	return (SUCCESS);
 }
+
+void	display_export(t_mini_shell *ms)
+{
+	int	i;
+
+	i = 0;
+	while (ms->env_sort[i])
+	{
+		printf("%s\n", ms->env_sort[i]);
+		i++;
+	}
+}

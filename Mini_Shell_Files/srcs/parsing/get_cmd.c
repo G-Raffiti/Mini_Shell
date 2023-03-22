@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:58:27 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 13:58:27 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:01:49 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_error	fill_split(char **split, char *line)
 		while (line[len]
 			   && !(!set_quote_state(line[len], &quote) && line[len] == ' '))
 			len++;
-		split[block] = ft_substr(line, 0, len);
+		split[block] = str_dup_no_quote(line, len);
 		if (!split[block])
 			return (MALLOC_ERROR);
 		line += len;
@@ -77,15 +77,21 @@ static char	**split_cmd(char *raw_cmd)
 
 void	invert_quote(char **split)
 {
-	while (*split)
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (split[i])
 	{
-		while (**split)
+		j = 0;
+		while (split[i][j])
 		{
-			if (**split < 0)
-				**split = **split * -1;
-			(*split)++;
+			if (split[i][j] < 0)
+				split[i][j] = split[i][j] * -1;
+			j++;
 		}
-		split++;
+		i++;
 	}
 }
 
