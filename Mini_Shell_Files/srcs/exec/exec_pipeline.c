@@ -6,7 +6,7 @@
 /*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:59:24 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/22 18:14:43 by aucaland         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:48:05 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	exec_cmd(t_mini_shell *ms, t_cmd *cmd)
 		safe_close(ms, ms->pipe[1], "exec_mid");
 		safe_dup2(ms, cmd->output->fd, STDOUT_FILENO, "exec_mid");
 	}
+	close(ms->pipe[0]);
 	execve_cmd(ms, cmd);
 }
 
