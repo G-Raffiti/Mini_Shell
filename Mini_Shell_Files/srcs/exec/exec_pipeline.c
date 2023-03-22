@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aurel <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:59:24 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 17:38:44 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/22 13:22:27 by aurel            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ static void	exec_cmd(t_mini_shell *ms, t_cmd *cmd)
 {
 	if (cmd->input->fd == -2)
 		safe_dup2(ms, ms->pipe[0], STDIN_FILENO, "exec_mid");
-	else
-		close(ms->pipe[0]);
+	close(ms->pipe[0]);
 	dup_input(ms, cmd, "exec_mid");
 	safe_pipe(ms, ms->pipe, "exec_mid");
 	if (permission_denied(ms, cmd) == ERROR)
@@ -70,8 +69,6 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 {
 	if (last->input->fd == -2)
 		safe_dup2(ms, ms->pipe[0], STDIN_FILENO, "exec_last");
-	else
-		close(ms->pipe[0]);
 	dup_input(ms, last, "exec_last");
 	close(ms->pipe[0]);
 	if (permission_denied(ms, last) == ERROR)
