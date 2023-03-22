@@ -61,6 +61,5 @@ t_error	open_files(t_mini_shell *ms, t_cmd *cmd)
 		}
 		str++;
 	}
-	dprintf(2, "file_name = %s\nfd->input = %s\n", file_name, cmd->input->name);
 	return (error);
 }
