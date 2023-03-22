@@ -36,6 +36,8 @@ void	close_all_files(t_mini_shell *ms)
 		}
 		if (cmd->output->type != PIPE_REDIR && cmd->output->fd > 0)
 			close(cmd->output->fd);
+		close(ms->pipe[0]);
+		close(ms->pipe[1]);
 		current = current->next;
 	}
 }
