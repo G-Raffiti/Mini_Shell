@@ -6,7 +6,7 @@
 /*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:01:03 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 17:53:25 by aucaland         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:15:14 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define MALLOC_FAILED		"Memory allocation failed"
 # define NO_PARENT "error retrieving current directory: getcwd: cannot \
 						access parent directories: No such file or directory"
+# define QUOTE			'\"'
+# define S_QUOTE		'\''
 # define FUNCTION_FAILUR	255
 
 #endif

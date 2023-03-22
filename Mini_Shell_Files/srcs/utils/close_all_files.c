@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close_all_files.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:57:11 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 13:57:11 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:33:10 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ void	close_all_files(t_mini_shell *ms)
 		}
 		if (cmd->output->type != PIPE_REDIR && cmd->output->fd > 0)
 			close(cmd->output->fd);
-		close(ms->pipe[0]);
-		close(ms->pipe[1]);
+		//TODO: check pipe 0 or pipe 1 to close. (check for here doc)
 		current = current->next;
 	}
 }

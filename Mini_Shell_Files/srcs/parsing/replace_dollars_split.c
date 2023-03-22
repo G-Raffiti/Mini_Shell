@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_dollars_split.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:57:36 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 13:57:36 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/22 16:21:12 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,18 @@ t_error	fill_split_args(t_cmd *cmds, char ***splited_raw)
 	return (SUCCESS);
 }
 
+void	inv_quotes(t_env_arg **key_value)
+{
+	int i;
+
+	i = 0;
+	while ((*key_value)->value[i])
+	{
+		if ((*key_value)->value[i] == QUOTE || (*key_value)->value[i] == S_QUOTE)
+			(*key_value)->value[i] = (*key_value)->value[i] *= -1;
+	}
+}
+
 t_error	replace_in_split(t_mini_shell *ms, char **splited_raw, int *final_len)
 {
 	t_lstd		*dict;
@@ -105,6 +117,7 @@ t_error	replace_in_split(t_mini_shell *ms, char **splited_raw, int *final_len)
 		{
 			key = (&splited_raw[str_pos][c_pos]) + 1;
 			get_pair_key_value(ms, dict, &key_value, key);
+			inv_quotes(&key_value);
 			if (get_key_and_replace(&splited_raw[str_pos], &key_value, key)
 				== MALLOC_ERROR)
 				return (MALLOC_ERROR);
