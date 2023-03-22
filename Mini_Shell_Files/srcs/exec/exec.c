@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:59:39 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/21 19:35:56 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:59:25 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	execve_cmd(t_mini_shell *ms, t_cmd *cmd)
 	}
 	else
 		execve(cmd->path, cmd->cmd, ms->env);
-	error_exec(ms, cmd);
 }
 
 static void	exec_one(t_mini_shell *ms, t_cmd *one)

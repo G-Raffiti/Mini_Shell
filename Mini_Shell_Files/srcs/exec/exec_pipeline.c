@@ -6,7 +6,7 @@
 /*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:59:24 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/22 17:11:50 by aucaland         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:14:43 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	exec_cmd(t_mini_shell *ms, t_cmd *cmd)
 	close(ms->pipe[0]);
 	dup_input(ms, cmd, "exec_mid");
 	safe_pipe(ms, ms->pipe, "exec_mid");
-	close(ms->pipe[0]);
 	set_signals(cmd);
 	safe_fork(ms, cmd, "exec_mid");
 	if (cmd->pid)
@@ -74,10 +73,6 @@ static void	exec_last(t_mini_shell *ms, t_cmd *last)
 	{
 		if (last->output->fd > 0)
 			safe_close(ms, last->output->fd, "exec_last");
-		if (last->input->type == HERE_DOC_REDIR)
-			safe_close(ms, ((t_here_docs *) \
-			(ft_lstd_last(last->input->here_docs)->content))->pipe_h[1], \
-			"exec_last");
 		return ;
 	}
 	if (last->output->fd > 0)

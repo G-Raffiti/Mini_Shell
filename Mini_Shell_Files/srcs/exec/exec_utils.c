@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 16:36:06 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 17:39:15 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:15:21 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,4 @@ void	close_parents_fd(t_mini_shell *ms, t_cmd *cmd, char *msg)
 	safe_close(ms, ms->pipe[1], msg);
 	if (cmd->output->fd > 0)
 		safe_close(ms, cmd->output->fd, msg);
-	if (cmd->input->type == HERE_DOC_REDIR)
-		safe_close(ms, ((t_here_docs *)(ft_lstd_last(cmd->input->here_docs)
-					->content))->pipe_h[1], msg);
 }
