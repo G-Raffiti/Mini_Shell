@@ -6,7 +6,7 @@
 /*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:00:26 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 14:00:26 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/22 19:06:15 by rbonneva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 t_bool	is_n(char *str)
 {
-	if (!str[0] || (str[0] && str[0] != '-' && (!str[1] || str[1] != 'n')))
+	if (str[0] != '-')
+		return (FALSE);
+	if (str[1] != 'n')
 		return (FALSE);
 	str++;
 	while (*str)
