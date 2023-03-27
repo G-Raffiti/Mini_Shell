@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <errno.h>
-#include <signal.h>
 #include "../../../Lib_List_Double/incs/ft_lstd.h"
 #include "../../incs/mini_shell.h"
 

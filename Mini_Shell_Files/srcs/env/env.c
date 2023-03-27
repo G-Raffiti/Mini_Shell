@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:59:50 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/20 13:59:50 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/27 18:50:13 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ t_error	get_env(t_mini_shell *ms, char **env)
 	{
 		if (new_env_arg(&env_dict) == MALLOC_ERROR)
 			exit_malloc(ms, "env: new_env_arg");
-		if (get_keys(env_dict, env[key_index]) == MALLOC_ERROR)
+		if (get_keys(env_dict, ms->env[key_index]) == MALLOC_ERROR)
 			exit_malloc(ms, "env: get_keys");
-		if (get_values(env_dict, env[key_index]) == MALLOC_ERROR)
+		if (get_values(env_dict, ms->env[key_index]) == MALLOC_ERROR)
 			exit_malloc(ms, "env: get_values");
 		if (create_new_list_element(&current, env_dict) == MALLOC_ERROR)
 			exit_malloc(ms, "env: new_lstd");

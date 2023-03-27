@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbonneva <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:00:40 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/21 20:36:07 by rbonneva         ###   ########.fr       */
+/*   Updated: 2023/03/27 18:42:16 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_error	extract_key_value(char *cmd, char ***extracted)
 			return (free_split(*extracted), MALLOC_ERROR);
 	}
 	i = 0;
-	while (cmd [++j] && cmd[j] != '=')
+	while (cmd[++j] && cmd[j] != '=')
 		(*extracted)[0][j] = cmd[j];
 	if (cmd[j] && cmd[j++] == '=')
 		(*extracted)[1][0] = '=';
