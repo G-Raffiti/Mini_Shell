@@ -6,7 +6,7 @@
 /*   By: aucaland <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 16:36:06 by rbonneva          #+#    #+#             */
-/*   Updated: 2023/03/22 18:15:21 by aucaland         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:16:22 by aucaland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	dup_input(t_mini_shell *ms, t_cmd *cmd, char *msg)
 {
-	if (cmd->input->fd != -2 && cmd->input->type != HERE_DOC_REDIR)
+	if (cmd->input->fd > 0 && cmd->input->type != HERE_DOC_REDIR)
 		safe_dup2(ms, cmd->input->fd, STDIN_FILENO, msg);
 	else if (cmd->input->type == HERE_DOC_REDIR)
 	{
